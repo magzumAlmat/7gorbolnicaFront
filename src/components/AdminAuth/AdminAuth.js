@@ -34,8 +34,8 @@ const AdminAuth = () => {
       if (response.ok) {
         setSuccess(data.prompt);
         // Store token and user data if needed
-        // localStorage.setItem('token', data.token);
-        // localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
         router.push("/authorizedDashboard");
       } else {
         setError(data.error || 'Login failed');

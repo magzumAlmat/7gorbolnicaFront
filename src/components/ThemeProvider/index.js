@@ -1,7 +1,7 @@
 // src/components/ThemeProvider.js
 'use client';
 
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material/styles';
+import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 
 const theme = createTheme({
   palette: {
