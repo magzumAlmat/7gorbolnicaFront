@@ -3,10 +3,14 @@ import React, { useState } from 'react';
 import AdministrationComponent from '../../components/AdministrationComponent/AdministrationComponent';
 import AddVacancyComponent from '../../components/AddVacancy';
 import IncomeAndExpensesComponent from '../../components/AddIncomeAndExpenses';
+import FinancialReportsComponent from '../../components/FinancialReports';
+import LicensesComponent from '../../components/Licenses';
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 
 const drawerWidth = 240;
 
@@ -21,6 +25,10 @@ const AuthorizedDashboardPage = () => {
         return <AddVacancyComponent />;
       case 'income-expenses':
         return <IncomeAndExpensesComponent />;
+      case 'financial-reports':
+        return <FinancialReportsComponent />;
+      case 'licenses':
+        return <LicensesComponent />;
       default:
         return (
           <Box sx={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
@@ -67,6 +75,22 @@ const AuthorizedDashboardPage = () => {
                   <AccountBalanceWalletIcon />
                 </ListItemIcon>
                 <ListItemText primary="Доходы и расходы" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => setActiveComponent('financial-reports')}>
+                <ListItemIcon>
+                  <AssessmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Финансовые отчеты" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => setActiveComponent('licenses')}>
+                <ListItemIcon>
+                  <VerifiedUserIcon />
+                </ListItemIcon>
+                <ListItemText primary="Лицензии" />
               </ListItemButton>
             </ListItem>
           </List>
