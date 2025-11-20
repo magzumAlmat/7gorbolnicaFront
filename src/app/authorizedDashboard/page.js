@@ -5,12 +5,28 @@ import AddVacancyComponent from '../../components/AddVacancy';
 import IncomeAndExpensesComponent from '../../components/AddIncomeAndExpenses';
 import FinancialReportsComponent from '../../components/FinancialReports';
 import LicensesComponent from '../../components/Licenses';
+import AntiCorruptionComponent from '../../components/Anticorruption';
+import CertificateOfAccreditationComponent from '../../components/CertificateOfAccreditation';
+import ReportOnPublicServicesRenderedComponent from '../../components/RerportOnPublicServiceRendered';
+import CorporateDocumentComponent from '../../components/CorporateDocument';
+import PricesComponent from '../../components/Prices';
+import InformationMaterialsComponent from '../../components/InformationMaterials';
+import PublicProcurementPlanComponent from '../../components/PublicProcurementPlan';
+import PublicProcurementAnnouncementComponent from '../../components/PublicProcurementAnnouncement';
+import PublicProcurementProtocolComponent from '../../components/PublicProcurementProtocol';
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import GavelIcon from '@mui/icons-material/Gavel';
+import GppGoodIcon from '@mui/icons-material/GppGood';
+import DescriptionIcon from '@mui/icons-material/Description';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import InfoIcon from '@mui/icons-material/Info';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CampaignIcon from '@mui/icons-material/Campaign';
 
 const drawerWidth = 240;
 
@@ -29,6 +45,24 @@ const AuthorizedDashboardPage = () => {
         return <FinancialReportsComponent />;
       case 'licenses':
         return <LicensesComponent />;
+      case 'anti-corruption':
+        return <AntiCorruptionComponent />;
+      case 'certificates':
+        return <CertificateOfAccreditationComponent />;
+      case 'public-services-reports':
+        return <ReportOnPublicServicesRenderedComponent />;
+      case 'corporate-documents':
+        return <CorporateDocumentComponent />;
+      case 'prices':
+        return <PricesComponent />;
+      case 'information-materials':
+        return <InformationMaterialsComponent />;
+      case 'public-procurement-plans':
+        return <PublicProcurementPlanComponent />;
+      case 'public-procurement-announcements':
+        return <PublicProcurementAnnouncementComponent />;
+      case 'public-procurement-protocols':
+        return <PublicProcurementProtocolComponent />;
       default:
         return (
           <Box sx={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
@@ -93,6 +127,89 @@ const AuthorizedDashboardPage = () => {
                 <ListItemText primary="Лицензии" />
               </ListItemButton>
             </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => setActiveComponent('anti-corruption')}>
+                <ListItemIcon>
+                  <GavelIcon />
+                </ListItemIcon>
+                <ListItemText primary="Противодействие коррупции" />
+              </ListItemButton>
+            </ListItem>
+
+   <ListItem disablePadding>
+ <ListItemButton onClick={() => setActiveComponent('certificates')}>
+                <ListItemIcon>
+                  <GavelIcon />
+                </ListItemIcon>
+                <ListItemText primary="Cертификат об аккредитации" />
+              </ListItemButton>
+            </ListItem>
+
+
+ <ListItem disablePadding>
+ <ListItemButton onClick={() => setActiveComponent('public-services-reports')}>
+                <ListItemIcon>
+                  <GavelIcon />
+                </ListItemIcon>
+                <ListItemText primary="Отчеты о государственных услугах" />
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => setActiveComponent('corporate-documents')}>
+                <ListItemIcon>
+                  <DescriptionIcon />
+                </ListItemIcon>
+                <ListItemText primary="Корпоративные документы" />
+              </ListItemButton>
+            </ListItem>
+
+
+             <ListItem disablePadding>
+              <ListItemButton onClick={() => setActiveComponent('prices')}>
+                <ListItemIcon>
+                  <DescriptionIcon />
+                </ListItemIcon>
+                <ListItemText primary="Прейскупант цен" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => setActiveComponent('information-materials')}>
+                <ListItemIcon>
+                  <InfoIcon />
+                </ListItemIcon>
+                <ListItemText primary="Информационные материалы" />
+              </ListItemButton>
+            </ListItem>
+
+ <ListItem disablePadding>
+              <ListItemButton onClick={() => setActiveComponent('public-procurement-plans')}>
+                <ListItemIcon>
+                  <InfoIcon />
+                </ListItemIcon>
+                <ListItemText primary="Годовой план государственных закупок" />
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => setActiveComponent('public-procurement-announcements')}>
+                <ListItemIcon>
+                  <CampaignIcon />
+                </ListItemIcon>
+                <ListItemText primary="Объявления о государственных закупках" />
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => setActiveComponent('public-procurement-protocols')}>
+                <ListItemIcon>
+                  <ShoppingCartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Протоколы государственных закупок" />
+              </ListItemButton>
+            </ListItem>
+
+
           </List>
         </Box>
       </Drawer>
