@@ -291,7 +291,7 @@ const InsertImageButton = () => {
     if (file) {
       const relativeUrl = await dispatch(uploadImageAction(file));
       if (relativeUrl) {
-        const absoluteUrl = `${END_POINT}${relativeUrl}`;
+        const absoluteUrl = relativeUrl.startsWith(END_POINT) ? relativeUrl : `${END_POINT}${relativeUrl}`;
         insertImage(editor, absoluteUrl);
       } else {
         alert("Image upload failed.");
