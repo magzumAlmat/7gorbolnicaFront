@@ -14,6 +14,7 @@ import InformationMaterialsComponent from '../../components/InformationMaterials
 import PublicProcurementPlanComponent from '../../components/PublicProcurementPlan';
 import PublicProcurementAnnouncementComponent from '../../components/PublicProcurementAnnouncement';
 import PublicProcurementProtocolComponent from '../../components/PublicProcurementProtocol';
+import MajorPage from '../major/page'; // Import the MajorPage
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
@@ -27,6 +28,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import InfoIcon from '@mui/icons-material/Info';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CampaignIcon from '@mui/icons-material/Campaign';
+import NewspaperIcon from '@mui/icons-material/Newspaper'; // Import NewspaperIcon
 
 const drawerWidth = 240;
 
@@ -63,6 +65,8 @@ const AuthorizedDashboardPage = () => {
         return <PublicProcurementAnnouncementComponent />;
       case 'public-procurement-protocols':
         return <PublicProcurementProtocolComponent />;
+      case 'news-editing': // New case for news editing
+        return <MajorPage />;
       default:
         return (
           <Box sx={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
@@ -73,6 +77,10 @@ const AuthorizedDashboardPage = () => {
         );
     }
   };
+
+  if (activeComponent === 'news-editing') {
+    return <MajorPage />;
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -87,6 +95,17 @@ const AuthorizedDashboardPage = () => {
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <List>
+
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => setActiveComponent('news-editing')}>
+                <ListItemIcon>
+                  <NewspaperIcon />
+                </ListItemIcon>
+                <ListItemText primary="Редактирование Новостей" />
+              </ListItemButton>
+            </ListItem>
+
+            
             <ListItem disablePadding>
               <ListItemButton onClick={() => setActiveComponent('administration')}>
                 <ListItemIcon>
@@ -185,9 +204,9 @@ const AuthorizedDashboardPage = () => {
  <ListItem disablePadding>
               <ListItemButton onClick={() => setActiveComponent('public-procurement-plans')}>
                 <ListItemIcon>
-                  <InfoIcon />
+                  <ShoppingCartIcon />
                 </ListItemIcon>
-                <ListItemText primary="Годовой план государственных закупок" />
+                <ListItemText primary="Планы государственных закупок" />
               </ListItemButton>
             </ListItem>
 
@@ -208,6 +227,9 @@ const AuthorizedDashboardPage = () => {
                 <ListItemText primary="Протоколы государственных закупок" />
               </ListItemButton>
             </ListItem>
+
+            {/* New menu item for News Editing */}
+            
 
 
           </List>

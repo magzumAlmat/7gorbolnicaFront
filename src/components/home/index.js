@@ -33,7 +33,7 @@ import Integration from '../Integration';
 import CTA from '../CTA';
 import FAQ from '../FAQ';
 import Testimonial from '../Testimonial';
-import Pricing from '../Pricing';
+
 import Contact from '../Contact';
 import Blog from '../Blog';
 
@@ -66,7 +66,7 @@ import NewsBlog from '../newsBlog';
 // ];
 
 import Header from '../Header';
-import Map from '../map';
+
 export default function Main() {
 
 
@@ -77,7 +77,7 @@ export default function Main() {
         
       <Hero />
       <NewsBlog />
-      <Map/>
+
 
       {/* <Footer />   */}
       {/* <Brands /> */}
