@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllUserProjectsAction,
   addProjectAction,
-  getAllAdminTemplateAction,
   logout,
 } from "../../store/slices/authSlice";
-import { Modal, Box, TextField, Button, Typography } from "@mui/material";
+import { Modal, Box, TextField, Button, Typography, Grid, AppBar, Toolbar, IconButton, Divider } from "@mui/material";
 import leftArrow from "@/../../public/icons/arrow-left-solid.svg";
 import Image from "next/image";
 
@@ -18,17 +17,14 @@ const ProjectDetails = dynamic(() => import('../../components/projectdetails'), 
 
 import jwt_decode from "jwt-decode";
 
-export default function page() {
+export default function Page() {
   const allUserProjects = useSelector((state) => state.auth.allProjects);
-  const currentUser = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
   const [newProjectName, setNewProjectName] = useState("");
   const [selectedProjectId, setSelectedProjectId] = useState(null);
   const [decoded, setDecoded] = useState(null);
-
-  const router=useRouter()
-  console.log(decoded);
+  const router = useRouter();
 
   const handleProjectClick = (projectId) => {
     setSelectedProjectId(projectId);
@@ -42,25 +38,27 @@ export default function page() {
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem("token");
       if (token) {
-        const decodedToken = jwt_decode(token);
-        setDecoded(decodedToken);
-        console.log(decodedToken);
+        try {
+          const decodedToken = jwt_decode(token);
+          setDecoded(decodedToken);
+        } catch (e) {
+          console.error("Invalid token:", e);
+          dispatch(logout());
+          router.push('/');
+        }
+      } else {
+        router.push('/');
       }
     }
-  }, []);
+  }, [dispatch, router]);
 
   const handleOpenModal = () => {
-    
     setOpenModal(true);
   };
 
-  if (typeof window !== 'undefined') {
-    // Browser-specific code
-  }
-
-  const Logout=()=>{
+  const Logout = () => {
     dispatch(logout());
-    router.push('/')
+    router.push('/');
   }
 
   const handleCloseModal = () => {
@@ -68,12 +66,11 @@ export default function page() {
   };
 
   const handleCreateProject = async () => {
-    // Add your validation logic here if needed
     if (newProjectName.trim() === "") {
-      // Handle error
       return;
     }
     await dispatch(addProjectAction(newProjectName));
+    setNewProjectName("");
     handleCloseModal();
   };
 
@@ -82,102 +79,81 @@ export default function page() {
   };
 
   return (
-    <>
-      <div className="row">
-        <div className="col-2 d-flex flex-column align-items-center justify-content-between bg-light min-vh-100 ">
-          <h3 className="justify-content-start p-5 noprint">KazNIISA Editor v.0.2</h3>
-          <hr/>
-         <div className="justify-content-end p-5 noprint">{decoded ? decoded.email : 'Loading...'} <button  className="btn btn-outline-danger"
-                    type="button" onClick={()=>Logout()}>Выход</button></div>
-
-        </div>
-        <div className="col-10">
-          <nav className="navbar bg-light mb-4 noprint" >
-            <div className="container-fluid">
-              {selectedProjectId ? (
-                <div className="d-flex gap-3">
-                  <button
-                    onClick={() => handleBackClick()}
-                    className="btn btn-outline-warning"
-                  >
-                    <Image
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                      }}
-                      src={leftArrow}
-                    />
-                  </button>
-                  <div className="d-flex align-items-center">Документ</div>
-                </div>
-              ) : (
-                <>
-                  <button
-                    className="btn btn-outline-success"
-                    type="button"
-                    onClick={handleOpenModal}
-                  >
-                    + Создать Проект
-                  </button>
-                    <br/>
-                  <Modal
-                    open={openModal}
-                    onClose={handleCloseModal}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                  >
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        width: 400,
-                        bgcolor: "background.paper",
-                        boxShadow: 24,
-                        p: 4,
-                      }}
-                    >
-                      <Typography
-                        id="modal-modal-title"
-                        variant="h6"
-                        component="h2"
-                      >
-                        Новый проект
-                      </Typography>
-                      <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Название проекта"
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                        value={newProjectName}
-                        onChange={(e) => setNewProjectName(e.target.value)}
-                      />
-                      <Button onClick={handleCreateProject} color="primary">
-                        Создать
-                      </Button>
-                    </Box>
-                  </Modal>
-                </>
-              )}
-            </div>
-          </nav>
-
-          <div className="row">
+    <Grid container sx={{ height: '100vh' }}>
+      <Grid item xs={12} md={2.5} sx={{
+        display: 'flex', flexDirection: 'column', 
+        bgcolor: 'background.paper',
+        borderRight: { md: 1 }, borderColor: 'divider'
+      }}>
+        <Box sx={{ p: 2, textAlign: 'center', borderBottom: 1, borderColor: 'divider' }}>
+          <Typography variant="h6" component="h1" sx={{ fontWeight: 'bold' }}>KazNIISA Editor</Typography>
+        </Box>
+        <Box sx={{ flexGrow: 1, overflowY: 'auto' }}>
+            {/* Can add a list of main navigation items here if needed */}
+        </Box>
+        <Box sx={{ p: 2, borderTop: 1, borderColor: 'divider' }}>
+          <Typography variant="subtitle2" sx={{ textAlign: 'center' }}>{decoded ? decoded.email : 'Loading...'}</Typography>
+          <Button fullWidth variant="outlined" color="error" onClick={Logout} sx={{ mt: 1 }}>Выход</Button>
+        </Box>
+      </Grid>
+      
+      <Grid item xs={12} md={9.5}>
+        <AppBar position="static" color="default" elevation={0} sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Toolbar>
             {selectedProjectId ? (
-              <ProjectDetails projectId={selectedProjectId} />
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <IconButton onClick={handleBackClick} edge="start">
+                  <Image src={leftArrow} alt="Back" width={16} height={16} />
+                </IconButton>
+                <Typography variant="h6">Документы</Typography>
+              </Box>
             ) : (
-              <ProjectRender
-                allProjects={allUserProjects}
-                onProjectClick={handleProjectClick}
-              />
+              <Typography variant="h6">Проекты</Typography>
             )}
-          </div>
-        </div>
-      </div>
-    </>
+            <Box sx={{ flexGrow: 1 }} />
+             {!selectedProjectId && (
+                <Button variant="contained" color="primary" onClick={handleOpenModal}>
+                    + Создать Проект
+                </Button>
+             )}
+          </Toolbar>
+        </AppBar>
+        
+        <Modal
+          open={openModal}
+          onClose={handleCloseModal}
+          aria-labelledby="create-project-modal-title"
+        >
+          <Box sx={{
+            position: "absolute", top: "50%", left: "50%",
+            transform: "translate(-50%, -50%)", width: { xs: '90%', sm: 400 },
+            bgcolor: "background.paper", boxShadow: 24, p: 4, borderRadius: 2
+          }}>
+            <Typography id="create-project-modal-title" variant="h6" component="h2" sx={{ mb: 2 }}>
+              Новый проект
+            </Typography>
+            <TextField
+              autoFocus margin="dense" id="name" label="Название проекта"
+              type="text" fullWidth variant="outlined"
+              value={newProjectName} onChange={(e) => setNewProjectName(e.target.value)}
+            />
+            <Button onClick={handleCreateProject} color="primary" sx={{ mt: 3 }} variant="contained" fullWidth>
+              Создать
+            </Button>
+          </Box>
+        </Modal>
+
+        <Box sx={{ p: { xs: 2, md: 3 }, height: 'calc(100vh - 64px)', overflowY: 'auto' }}>
+          {selectedProjectId ? (
+            <ProjectDetails projectId={selectedProjectId} />
+          ) : (
+            <ProjectRender
+              allProjects={allUserProjects}
+              onProjectClick={handleProjectClick}
+            />
+          )}
+        </Box>
+      </Grid>
+    </Grid>
   );
 }

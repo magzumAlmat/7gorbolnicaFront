@@ -1,3 +1,4 @@
+'use client';
 
 import React, { useMemo, useCallback } from 'react';
 import { createEditor } from 'slate';
@@ -41,17 +42,24 @@ const Leaf = ({ attributes, children, leaf }) => {
 const Image = ({ attributes, children, element }) => {
   const selected = useSelected()
   const focused = useFocused()
+  console.log("Rendering Image:", element.url);
   return (
     <div {...attributes}>
-      <div contentEditable={false}>
+      <div contentEditable={false} style={{ marginBottom: '15px' }}>
         <img
           src={element.url}
-          alt={element.alt}
+          alt={element.alt || "News image"}
           style={{
             display: 'block',
             maxWidth: '100%',
-            maxHeight: '20em',
-            boxShadow: selected && focused ? '0 0 0 3px #B4D5FF' : 'none',
+            height: 'auto',
+            maxHeight: '500px',
+            borderRadius: '8px',
+            boxShadow: selected && focused ? '0 0 0 3px #B4D5FF' : '0 2px 8px rgba(0,0,0,0.1)',
+          }}
+          onError={(e) => {
+            console.error("Image failed to load:", element.url);
+            e.target.style.display = 'none';
           }}
         />
       </div>
@@ -64,34 +72,57 @@ const Image = ({ attributes, children, element }) => {
 const NewsViewer = ({ newsArticle }) => {
   const editor = useMemo(() => withReact(createEditor()), []);
 
-  const getInitialState = () => {
+  const initialState = useMemo(() => {
+    if (!newsArticle) return initialValue;
+    
     try {
       const content = typeof newsArticle.document_content === 'string'
         ? JSON.parse(newsArticle.document_content)
         : newsArticle.document_content;
 
-      if (Array.isArray(content) && content.length > 0 && content[0]?.children) {
+      console.log("NewsViewer Content Debug:", {
+        id: newsArticle.id,
+        name: newsArticle.document_name,
+        contentType: typeof newsArticle.document_content,
+        parsedCount: Array.isArray(content) ? content.length : 'not an array'
+      });
+
+      if (Array.isArray(content) && content.length > 0) {
         return content;
       }
     } catch (e) {
-        console.error("Failed to parse document content:", e);
+        console.error("NewsViewer - Failed to parse document content:", e);
     }
     return initialValue;
-  };
+  }, [newsArticle]);
 
   const renderElement = useCallback(props => <Element {...props} />, []);
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
 
+  if (!newsArticle) return <p>Загрузка...</p>;
+
   return (
-    <div className="container">
-        <h2>{newsArticle.document_name}</h2>
-        <Slate editor={editor} initialValue={getInitialState()}>
+    <div className="news-viewer-content" style={{ padding: '20px 0', border: '1px solid #eee', borderRadius: '8px', marginTop: '20px' }}>
+        <h2 style={{ color: '#002e5b', marginBottom: '24px', fontWeight: 700, borderBottom: '2px solid #2887B6', paddingBottom: '10px' }}>
+          {newsArticle.document_name}
+        </h2>
+        
+        {/* Slate Editor */}
+        <Slate key={newsArticle.id || 'new'} editor={editor} initialValue={initialState}>
             <Editable
                 renderElement={renderElement}
                 renderLeaf={renderLeaf}
                 readOnly
+                style={{ fontSize: '1.1rem', lineHeight: 1.7, color: '#333' }}
             />
         </Slate>
+
+        {/* Fallback rendering if Slate is empty or fails (invisible test) */}
+        {initialState === initialValue && (
+            <div style={{ color: 'red', fontSize: '0.8rem' }}>
+              Контент не найден или ошибка парсинга.
+            </div>
+        )}
     </div>
   );
 };

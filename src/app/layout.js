@@ -27,15 +27,7 @@ export default function RootLayout({ children }) {
             {!hideHeader && <Header />}
             <Box component="main" sx={{ 
               minHeight: "100vh",
-              pt: hideHeader ? 0 : { xs: '0.5rem', md: '1rem' }, 
             }}>
-              <Box sx={{ 
-                maxWidth: 'xl', 
-                mx: 'auto',
-                px: { xs: 2, md: 3 },
-              }}>
-                {!hideHeader && <Breadcrumbs />}
-              </Box>
               {children}
             </Box>
             <Footer />

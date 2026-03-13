@@ -10,6 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import isHotkey from 'is-hotkey';
+import { Paper } from '@mui/material';
 
 // Icons
 import FormatBoldIcon from '@mui/icons-material/FormatBold';
@@ -82,20 +83,20 @@ const DocumentEditor = ({ document }) => {
   };
 
   return (
-    <Box sx={{ maxWidth: 960, mx: 'auto', p: 2 }}>
+    <Paper elevation={2} sx={{ p: { xs: 2, md: 3 }, borderRadius: 2 }}>
         <Slate editor={editor} initialValue={value} onChange={setValue}>
             {/* Control Buttons */}
-            <Stack direction="row" spacing={2} sx={{ mb: 3 }} className="noprint">
+            <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
                 <Button variant="contained" color="success" onClick={handleSave}>
                 Сохранить
                 </Button>
-                <Button variant="outlined" startIcon={<DeleteIcon />} onClick={handleDelete}>
+                <Button variant="outlined" color="error" startIcon={<DeleteIcon />} onClick={handleDelete}>
                 Удалить
                 </Button>
             </Stack>
 
             {/* Toolbar */}
-            <Box className="noprint" sx={{ mb: 3, p: 2, backgroundColor: '#f8f9fa', borderRadius: 2, boxShadow: 1, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            <Paper variant="outlined" sx={{ mb: 2, p: 1, display: 'flex', flexWrap: 'wrap', gap: 1, borderRadius: 1, backgroundColor: 'action.hover' }}>
                 <MarkButton format="bold" icon={<FormatBoldIcon />} tooltip="Жирный (Ctrl+B)" />
                 <MarkButton format="italic" icon={<FormatItalicIcon />} tooltip="Курсив (Ctrl+I)" />
                 <MarkButton format="code" icon={<CodeIcon />} tooltip="Код (Ctrl+`)" />
@@ -108,38 +109,39 @@ const DocumentEditor = ({ document }) => {
                 <AlignmentButton align="center" icon={<FormatAlignCenterIcon />} />
                 <AlignmentButton align="right" icon={<FormatAlignRightIcon />} />
                 <InsertImageButton />
-            </Box>
+            </Paper>
 
             {/* Editor */}
-            <Editable
-                renderElement={renderElement}
-                renderLeaf={renderLeaf}
-                placeholder="Введите текст..."
-                onKeyDown={event => {
-                    for (const hotkey in HOTKEYS) {
-                    if (isHotkey(hotkey, event)) {
-                        event.preventDefault();
-                        const format = HOTKEYS[hotkey];
-                        if (['bold', 'italic', 'code'].includes(format)) {
-                        toggleMark(editor, format);
-                        } else {
-                        toggleBlock(editor, format);
-                        }
-                    }
-                    }
-                }}
-                style={{
-                    minHeight: '400px',
+            <Paper variant="outlined" sx={{
+                borderRadius: 1,
+                '& > div': { // Targeting the Editable component inside
+                    minHeight: '380px',
                     padding: '16px',
-                    border: '1px solid #ddd',
-                    borderRadius: '8px',
-                    backgroundColor: '#fff',
                     fontSize: '16px',
                     lineHeight: '1.6',
-                }}
-            />
+                }
+            }}>
+                <Editable
+                    renderElement={renderElement}
+                    renderLeaf={renderLeaf}
+                    placeholder="Введите текст..."
+                    onKeyDown={event => {
+                        for (const hotkey in HOTKEYS) {
+                        if (isHotkey(hotkey, event)) {
+                            event.preventDefault();
+                            const format = HOTKEYS[hotkey];
+                            if (['bold', 'italic', 'code'].includes(format)) {
+                            toggleMark(editor, format);
+                            } else {
+                            toggleBlock(editor, format);
+                            }
+                        }
+                        }
+                    }}
+                />
+            </Paper>
         </Slate>
-    </Box>
+    </Paper>
   );
 };
 
@@ -229,6 +231,7 @@ const Image = ({ attributes, children, element }) => {
             maxWidth: '100%',
             maxHeight: '20em',
             boxShadow: selected && focused ? '0 0 0 3px #B4D5FF' : 'none',
+            borderRadius: '4px'
           }}
         />
       </div>

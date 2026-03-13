@@ -136,25 +136,26 @@ function NewsCard({ news }) {
   );
 }
 
+import { mockNews } from '../../data/mockNews';
+
 // --- MAIN NEWS LIST COMPONENT ---
 
 export default function NewsList() {
   const dispatch = useDispatch();
-  const allNews = useSelector(state => state.auth.allDocuments);
+  const allDocuments = useSelector(state => state.auth.allDocuments);
 
   useEffect(() => {
     dispatch(getAllPublicDocumentsAction());
   }, [dispatch]);
 
+  // Use mock data if backend returned empty array
+  const displayNews = allDocuments && allDocuments.length > 0 ? allDocuments : mockNews;
+
   return (
     <div className="container" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
-      {allNews && allNews.length > 0 ? (
-        allNews.map(news => (
-          <NewsCard key={news.id} news={news} />
-        ))
-      ) : (
-        <Typography>No news articles found.</Typography>
-      )}
+      {displayNews.map(news => (
+        <NewsCard key={news.id} news={news} />
+      ))}
     </div>
   );
 }

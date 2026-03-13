@@ -1,5 +1,5 @@
 /* src/app/globals.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
 @import url('style/base.css');
 @import url('style/button.css');
 @import url('style/input.css');
@@ -21,8 +21,8 @@ html, body, #__next {
 }
 
 body {
-  font-family: 'Inter', 'Roboto', sans-serif;
-  background: #f8f9fa;
+  font-family: 'Open Sans', 'Roboto', sans-serif;
+  background: #ffffff;
   color: #333;
   line-height: 1.6;
 }
@@ -79,13 +79,13 @@ header.sticky {
 
 .dropdown a:hover {
   background: #f0f8ff;
-  color: #006bff;
+  color: #2887B6;
   padding-left: 24px;
 }
 
 /* Активный пункт */
 .text-primary {
-  color: #006bff !important;
+  color: #2887B6 !important;
   font-weight: 600;
 }
 
@@ -144,11 +144,11 @@ header.sticky {
   padding: 0.75rem 2.5rem;
   font-weight: 600;
   text-transform: none;
-  box-shadow: 0 4px 15px rgba(0,107,255,0.3);
+  box-shadow: 0 4px 15px rgba(40,135,182,0.3);
 }
 
 .hero-btn:hover {
-  box-shadow: 0 6px 20px rgba(0,107,255,0.4);
+  box-shadow: 0 6px 20px rgba(40,135,182,0.4);
   transform: translateY(-1px);
 }
 
