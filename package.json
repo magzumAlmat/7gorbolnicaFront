@@ -34,6 +34,7 @@
     "@mui/material-nextjs": "^7.3.5",
     "@mui/styled-engine-sc": "^7.3.5",
     "@pbe/react-yandex-maps": "^1.2.5",
+    "@react-google-maps/api": "^2.20.8",
     "@reduxjs/toolkit": "^1.9.7",
     "2gis": "^0.0.2",
     "2gis-maps": "^3.7.4",

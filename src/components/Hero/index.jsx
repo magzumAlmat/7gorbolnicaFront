@@ -9,12 +9,12 @@ import {
   ChevronLeft, ChevronRight, ArrowForward,
   LocationOn, Phone, Email, AccessTime,
   Description, LaptopMac, Business, Architecture, School, Apps,
-  KeyboardArrowDown
+  KeyboardArrowDown, Work
 } from '@mui/icons-material';
 import { Select, MenuItem, TextField as MuiTextField } from '@mui/material';
 import Link from 'next/link';
 import { styled } from '@mui/material/styles';
-
+import {KazakhstanMap} from '../Map';
 // === 1. ДАННЫЕ ===
 
 // Послание Президента
@@ -367,61 +367,62 @@ export default function Hero() {
         </Grid>
       </Container>
 
-      {/* === ПОСЛАНИЕ ПРЕЗИДЕНТА (зелёная секция) === */}
+      {/* === ЦЕНТРЫ АО «КАЗНИИСА» (Новый дизайн заголовка по Фото) === */}
       <Box sx={{ 
-         bgcolor: '#10b857',
-         py: { xs: 6, md: 10 } 
+        position: 'relative', 
+        bgcolor: '#002e5b', 
+        py: { xs: 8, md: 14 }, 
+        textAlign: 'center', 
+        color: 'white',
+        backgroundImage: 'url("https://kazniisa.kz/wp-content/uploads/2019/12/banner_4.jpg")', 
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}>
-        <Container maxWidth="lg">
-          <Grid container spacing={4}>
-            {/* {presidentialMessages.map((msg, i) => (
-              <Grid item xs={12} md={6} key={i}>
-                <Paper
-                  component={Link}
-                  href={msg.link}
-                  elevation={0}
-                  sx={{
-                    p: 3, height: '100%',
-                    bgcolor: 'rgba(255,255,255,0.15)',
-                    borderRadius: 2,
-                    textDecoration: 'none',
-                    transition: 'all 0.3s',
-                    '&:hover': { bgcolor: 'rgba(255,255,255,0.25)' },
-                  }}
-                >
-                  <Typography sx={{ color: 'white', fontWeight: 700, fontSize: '15px', lineHeight: 1.5, mb: 1 }}>
-                    {msg.title}
-                  </Typography>
-                  <Typography sx={{ color: 'rgba(255,255,255,0.7)', fontSize: '12px' }}>
-                    {msg.date}
-                  </Typography>
-                  <Typography sx={{ color: '#FDE428', fontSize: '13px', fontWeight: 600, mt: 1 }}>
-                    Далее →
-                  </Typography>
-                </Paper>
-              </Grid>
-            ))} */}
-
-            инфа
-          </Grid>
+        {/* Dark overlay */}
+        <Box sx={{ 
+          position: 'absolute', inset: 0, 
+          bgcolor: 'rgba(0, 46, 91, 0.9)', 
+          zIndex: 0 
+        }} />
+        
+        <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
+          <Stack alignItems="center" spacing={3}>
+            <Box sx={{ 
+              bgcolor: '#FDE428', 
+              p: 2, 
+              borderRadius: '16px', 
+              boxShadow: '0 8px 30px rgba(0,0,0,0.4)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center'
+            }}>
+              <Work sx={{ color: '#002e5b', fontSize: 40 }} />
+            </Box>
+            <Box>
+              <Typography variant="h2" sx={{ 
+                fontWeight: 800, 
+                fontSize: { xs: '2.2rem', md: '3.8rem' },
+                lineHeight: 1.2,
+                mb: 1.5,
+                textShadow: '0 2px 10px rgba(0,0,0,0.5)'
+              }}>
+                <Box component="span" sx={{ color: '#FDE428' }}>Центры</Box> АО «КазНИИСА»
+              </Typography>
+              <Typography sx={{ 
+                fontSize: { xs: '15px', md: '18px' }, 
+                opacity: 0.8,
+                maxWidth: 600,
+                mx: 'auto',
+                fontWeight: 500,
+                lineHeight: 1.6
+              }}>
+                В состав АО «КазНИИСА» входят 5 центров
+              </Typography>
+            </Box>
+          </Stack>
         </Container>
       </Box>
 
-
-      {/* === ЦЕНТРЫ (Редизайн по Фото 2) === */}
-      <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: '#f8f9fa' }}>
+      <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: '#f8f9fa' }}>
         <Container maxWidth="lg">
-          <Box sx={{ mb: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-             <Box sx={{ bgcolor: '#FDE428', width: 60, height: 40, borderRadius: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 3 }}>
-                <Business sx={{ color: '#002e5b' }} />
-             </Box>
-             <Typography variant="h3" sx={{ fontWeight: 800, color: '#002e5b', mb: 2, fontSize: { xs: '2rem', md: '2.8rem' } }}>
-               Центры АО «КазНИИСА»
-             </Typography>
-             <Typography variant="body1" sx={{ color: '#666', fontSize: '1.1rem', maxWidth: 600 }}>
-               В состав АО «КазНИИСА» входят 5 центров
-             </Typography>
-          </Box>
 
           <Grid container spacing={0} sx={{ border: '1px solid #eee', borderRadius: 2, overflow: 'hidden', bgcolor: 'white' }}>
             {centers.map((center, i) => {
@@ -483,7 +484,7 @@ export default function Hero() {
           </Grid>
 
           <Box sx={{ textAlign: 'center', mt: 6 }}>
-            <Button
+            {/* <Button
               component={Link}
               href="/centres"
               variant="contained"
@@ -499,7 +500,7 @@ export default function Hero() {
               }}
             >
               Все центры
-            </Button>
+            </Button> */}
           </Box>
         </Container>
       </Box>
@@ -594,73 +595,122 @@ export default function Hero() {
         </Container>
       </Box>
 
-      {/* === КАРТА (заглушка) === */}
-      <Box sx={{ height: 500, bgcolor: '#eee', position: 'relative' }}>
-         <Box component="img" 
-           src="https://cloud.google.com/static/maps-platform/images/maps-customization.png" 
-           sx={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }} 
-         />
-         <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Typography variant="h5" sx={{ color: '#666', fontWeight: 700, p: 3, bgcolor: 'rgba(255,255,255,0.8)', borderRadius: 2 }}>
-               Интерактивная карта Казахстана
-            </Typography>
-         </Box>
+      {/* === ФИЛИАЛЫ АО «КАЗНИИСА» === */}
+      <Box sx={{ bgcolor: '#002e5b', py: { xs: 6, md: 8 }, textAlign: 'center', color: 'white' }}>
+        <Container maxWidth="md">
+          <Box sx={{ display: 'inline-flex', bgcolor: '#FDE428', p: 1, borderRadius: 1, mb: 3 }}>
+            <Business sx={{ color: '#002e5b', fontSize: 32 }} />
+          </Box>
+          <Typography variant="h3" sx={{ fontWeight: 800, mb: 2, fontSize: { xs: '1.8rem', md: '2.8rem' } }}>
+            <Box component="span" sx={{ color: '#FDE428' }}>Филиалы</Box> АО «КазНИИСА»
+          </Typography>
+          <Typography sx={{ opacity: 0.8, fontSize: '14px', maxWidth: 600, mx: 'auto', lineHeight: 1.6 }}>
+            Головной офис АО «КазНИИСА» находится в Алматы,<br />
+            институт также имеет филиалы в Астане, Усть-Каменогорске и Таразе.
+          </Typography>
+        </Container>
       </Box>
 
-      {/* === ФИЛИАЛЫ (как на оригинале — с фоновым изображением) === */}
-      <Box sx={{
-        py: { xs: 6, md: 10 },
-        backgroundImage: 'url(/images/Branch-locations.webp)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-        position: 'relative',
-        '&::before': {
-          content: '""',
-          position: 'absolute', inset: 0,
-          bgcolor: 'rgba(0,46,91,0.85)',
-        },
-      }}>
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-          <Typography variant="h4" sx={{ fontWeight: 700, color: 'white', mb: 1, textAlign: 'center' }}>
-            Филиалы АО «КазНИИСА»
-          </Typography>
-          <Typography sx={{ color: 'rgba(255,255,255,0.7)', textAlign: 'center', mb: 5, fontSize: '15px' }}>
-            Головной офис АО «КазНИИСА» находится в Алматы, институт также имеет филиалы в Астане, Усть-Каменогорске и Таразе.
-          </Typography>
+      {/* === СЕКЦИЯ С КАРТОЙ И КОНТАКТАМИ (Новый дизайн) === */}
+      <Box sx={{ position: 'relative', bgcolor: '#f5f5f5' }}>
+        {/* Карта (Placeholder с маркерами) */}
+        <Box sx={{ 
+          height: { xs: 400, md: 550 }, 
+          width: '100%', 
+          position: 'relative',
+          overflow: 'hidden',
+          backgroundImage: 'url("https://kazniisa.kz/wp-content/uploads/2019/12/Screenshot_1.jpg")', // Похожий фон карты
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}>
+          {/* Кастомные маркеры (как на фото) */}
+        
+        <Box
+  sx={{
+    height: { xs: 400, md: 550 },
+    width: '100%',
+    borderRadius: 2,
+    overflow: 'hidden',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+  }}
+>
+  {/* <iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6000000!2d66.8!3d48.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424b6!2sKazakhstan!5e0!3m2!1sru!2skz!4v1730000000000"
+  width="100%"
+  height="100%"
+  style={{ border: 0 }}
+  allowFullScreen=""
+  loading="lazy"
+  title="Казахстан (zoom out)"
+/> */}
 
-          <Grid container spacing={3}>
-            {offices.map((office, i) => (
-              <Grid item xs={12} sm={6} md={2.4} key={i}>
-                <Paper elevation={0} sx={{
-                  p: 2.5, height: '100%',
-                  bgcolor: 'rgba(255,255,255,0.1)',
-                  borderRadius: 2,
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                }}>
-                  <Typography sx={{ fontWeight: 700, color: '#FDE428', fontSize: '14px', mb: 1.5 }}>
-                    {office.city}
-                  </Typography>
-                  <Stack spacing={1}>
-                    <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-start' }}>
-                      <LocationOn sx={{ fontSize: 16, color: '#2887B6', mt: 0.25, flexShrink: 0 }} />
-                      <Typography sx={{ fontSize: '12px', color: 'rgba(255,255,255,0.8)' }}>{office.address}</Typography>
-                    </Box>
-                    <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-                      <Phone sx={{ fontSize: 16, color: '#2887B6', flexShrink: 0 }} />
-                      <Typography sx={{ fontSize: '12px', color: 'rgba(255,255,255,0.8)' }}>{office.phone}</Typography>
-                    </Box>
-                    <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-                      <Email sx={{ fontSize: 16, color: '#2887B6', flexShrink: 0 }} />
-                      <Typography sx={{ fontSize: '11px', color: 'rgba(255,255,255,0.8)' }}>{office.email}</Typography>
-                    </Box>
-                  </Stack>
-                </Paper>
+<Box sx={{ height: { xs: 400, md: 550 }, width: '100%', borderRadius: 2, overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
+  <KazakhstanMap />
+</Box>
+
+</Box>
+        </Box>
+
+        {/* Темно-синий ползунок с офисами */}
+        <Box sx={{ bgcolor: '#002e5b', color: 'white', py: 4, position: 'relative' }}>
+          <Container maxWidth="lg">
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Grid container spacing={0}>
+                {/* ОФИС АСТАНА */}
+                <Grid item xs={12} md={3.7}>
+                  <Box sx={{ px: 2 }}>
+                    <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, textTransform: 'uppercase', fontSize: '16px' }}>
+                      Офис Астана
+                    </Typography>
+                    <Typography sx={{ fontSize: '13px', opacity: 0.8, mb: 1 }}>
+                      р-н Сарыарқа, ул. Бейбітшілік 14, оф 1406
+                    </Typography>
+                    <Typography sx={{ fontSize: '13px', mb: 0.5 }}>8 (7172) 57-53-03</Typography>
+                    <Typography sx={{ fontSize: '13px', color: '#2887B6' }}>crn@kazniisa.kz</Typography>
+                  </Box>
+                </Grid>
+
+                <Grid item sx={{ borderLeft: '1px solid rgba(255,255,255,0.2)', height: 100, mx: 1, display: { xs: 'none', md: 'block' } }} />
+
+                {/* ОФИС ТАРАЗ */}
+                <Grid item xs={12} md={3.7}>
+                  <Box sx={{ px: 2 }}>
+                    <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, textTransform: 'uppercase', fontSize: '16px' }}>
+                      Офис Тараз
+                    </Typography>
+                    <Typography sx={{ fontSize: '13px', opacity: 0.8, mb: 1 }}>
+                      ул. Сулейманова, 19 Б
+                    </Typography>
+                    <Typography sx={{ fontSize: '13px', mb: 0.5 }}>+7 (7262) 43-63-99 | 19-20</Typography>
+                    <Typography sx={{ fontSize: '13px', color: '#2887B6' }}>mbaitemirov@kazniisa.kz</Typography>
+                  </Box>
+                </Grid>
+
+                <Grid item sx={{ borderLeft: '1px solid rgba(255,255,255,0.2)', height: 100, mx: 1, display: { xs: 'none', md: 'block' } }} />
+
+                {/* ОФИС УСТЬ-КАМЕНОГОРСК */}
+                <Grid item xs={12} md={3.7}>
+                  <Box sx={{ px: 2 }}>
+                    <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, textTransform: 'uppercase', fontSize: '16px' }}>
+                      Офис Усть-Каменогорск
+                    </Typography>
+                    <Typography sx={{ fontSize: '13px', opacity: 0.8, mb: 1 }}>
+                      ул. М.Горького, 21 офис 203
+                    </Typography>
+                    <Typography sx={{ fontSize: '13px', mb: 0.5 }}>8 (7232) 26-16-90</Typography>
+                    <Typography sx={{ fontSize: '13px', color: '#2887B6' }}>info@kazniisa.kz</Typography>
+                  </Box>
+                </Grid>
+
+                {/* Индикаторы слайдера (желтый и синий кружки) */}
+                <Grid item xs={12} md={0.5} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end' }}>
+                   <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: '#FDE428', mb: 1.5 }} />
+                   <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: '#2887B6' }} />
+                </Grid>
               </Grid>
-            ))}
-          </Grid>
-        </Container>
+            </Box>
+          </Container>
+        </Box>
       </Box>
 
       {/* === CTA / КОНТАКТНАЯ ФОРМА (как на оригинале) === */}

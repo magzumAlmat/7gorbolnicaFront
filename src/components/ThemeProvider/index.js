@@ -30,7 +30,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Open Sans", "Roboto", "Inter", sans-serif',
+    fontFamily: '"Montserrat", "Open Sans", "Roboto", "Inter", sans-serif',
     h1: { fontWeight: 700 },
     h2: { fontWeight: 700 },
     h3: { fontWeight: 700 },

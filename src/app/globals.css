@@ -1,5 +1,12 @@
 /* src/app/globals.css */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+@font-face {
+  font-family: 'Montserrat';
+  src: url('https://fonts.gstatic.com/s/montserrat/v31/JTUQjIg1_i6t8kCHKm459WxRxC7m0dR9pBOi.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import url('style/base.css');
 @import url('style/button.css');
 @import url('style/input.css');
@@ -21,7 +28,7 @@ html, body, #__next {
 }
 
 body {
-  font-family: 'Open Sans', 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: #ffffff;
   color: #333;
   line-height: 1.6;
