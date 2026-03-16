@@ -1123,6 +1123,7 @@ export const getAllPublicDocumentsAction = () => async (dispatch) => {
   try {
     const response = await axios.get(`${END_POINT}/api/documents/public`);
     dispatch(getAllProjectDocumentsReducer(response.data));
+    console.log('authSlice= ',response.data)
   } catch (error) {
     console.error("Error fetching public documents:", error);
     // dispatch an error action if needed
@@ -1133,6 +1134,7 @@ export const getPublicDocumentByIdAction = (id) => async (dispatch) => {
   try {
     const response = await axios.get(`${END_POINT}/api/documents/public/${id}`);
     dispatch(getDocumentByIdReducer(response.data));
+    console.log('authSlice= ',response.data)
   } catch (error) {
     console.error("Error fetching public document:", error);
     // dispatch an error action if needed

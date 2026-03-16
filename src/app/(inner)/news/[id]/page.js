@@ -18,10 +18,8 @@ export default function NewsArticlePage({ params }) {
 
   const newsArticleFromStore = useSelector(state => state.auth.currentDocument);
   
-  // Support mock data fallback - more robust check
-  const newsArticle = (newsArticleFromStore && (newsArticleFromStore.id || newsArticleFromStore._id)) 
-    ? newsArticleFromStore 
-    : mockNews.find(n => n.id === id);
+  // Support real data only
+  const newsArticle = newsArticleFromStore;
 
   return (
     <>

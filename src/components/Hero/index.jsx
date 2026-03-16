@@ -14,35 +14,6 @@ import { styled } from '@mui/material/styles';
 
 // === 1. ДАННЫЕ ===
 
-// Новости-слайдер (как на kazniisa.kz)
-const newsSlides = [
-  {
-    title: "В АО «КазНИИСА» состоялась рабочая встреча по вопросам реализации нового Строительного Кодекса",
-    date: "13 Январь, 2026",
-    image: "https://kazniisa.kz/wp-content/uploads/2025/01/photo_2025-01-13_10-46-47.jpg",
-    link: "/news",
-  },
-  {
-    title: "Казахстан и Япония укрепляют сотрудничество в сфере сейсмостойкого строительства",
-    date: "24 Декабрь, 2025",
-    image: "https://kazniisa.kz/wp-content/uploads/2024/12/photo_2024-12-24_10-59-24.jpg",
-    link: "/news",
-  },
-  {
-    title: "С Днём Независимости Республики Казахстан!",
-    date: "15 Декабрь, 2025",
-    image: "https://kazniisa.kz/wp-content/uploads/2024/12/photo_2024-12-13_15-07-45.jpg",
-    link: "/news",
-  },
-  {
-    title: "Состоялась двусторонняя встреча Казахстана и Таджикистана по вопросам ценообразования в строительстве",
-    date: "13 Ноябрь, 2025",
-    image: "https://kazniisa.kz/wp-content/uploads/2024/11/photo_2024-11-13_15-39-57-768x576.jpg",
-    link: "/news",
-  },
-];
-
-
 // Послание Президента
 const presidentialMessages = [
   {
@@ -75,19 +46,44 @@ const offices = [
   { city: "Усть-Каменогорск", address: "ул. М.Горького, 21 офис 203", phone: "8 (7232) 26-16-90", email: "info@kazniisa.kz" },
 ];
 
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPublicDocumentsAction } from '../../store/slices/authSlice';
+import { getFirstImage, getSnippet } from '../../utils/newsHelpers';
+import { mockNews } from '../../data/mockNews';
+
 // === 2. HERO (NEWS SLIDER как на kazniisa.kz) ===
 export default function Hero() {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const allDocuments = useSelector(state => state.auth.allDocuments);
+  
   const [slide, setSlide] = useState(0);
   const [centerSlide, setCenterSlide] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => setSlide(s => (s + 1) % newsSlides.length), 6000);
-    return () => clearInterval(timer);
-  }, []);
+    dispatch(getAllPublicDocumentsAction());
+  }, [dispatch]);
 
-  const nextSlide = () => setSlide(s => (s + 1) % newsSlides.length);
-  const prevSlide = () => setSlide(s => (s - 1 + newsSlides.length) % newsSlides.length);
+  // Transform dynamic news into newsSlides format
+  const dynamicNews = (allDocuments || []).map(news => ({
+    id: news.id,
+    title: news.document_name,
+    date: news.createdAt ? new Date(news.createdAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) : '',
+    image: getFirstImage(news.document_content) || "https://kazniisa.kz/wp-content/uploads/2025/01/photo_2025-01-13_10-46-47.jpg",
+    link: `/news/${news.id}`,
+    snippet: getSnippet(news.document_content, 150)
+  }));
+
+  const currentNewsSlides = dynamicNews.slice(0, 4); // Limit to top 4 news for the slider
+
+  useEffect(() => {
+    if (currentNewsSlides.length === 0) return;
+    const timer = setInterval(() => setSlide(s => (s + 1) % currentNewsSlides.length), 6000);
+    return () => clearInterval(timer);
+  }, [currentNewsSlides.length]);
+
+  const nextSlide = () => setSlide(s => (s + 1) % currentNewsSlides.length);
+  const prevSlide = () => setSlide(s => (s - 1 + currentNewsSlides.length) % currentNewsSlides.length);
   const nextCenter = () => setCenterSlide(s => Math.min(s + 1, centers.length - 3));
   const prevCenter = () => setCenterSlide(s => Math.max(s - 1, 0));
 
@@ -184,8 +180,21 @@ export default function Hero() {
             {/* Правая часть: новостной слайдер */}
             <Grid item xs={12} md={7}>
               <Box sx={{ position: 'relative' }}>
+                {currentNewsSlides.length === 0 && (
+                  <Box sx={{
+                    height: { xs: 250, md: 350 },
+                    bgcolor: 'rgba(255,255,255,0.1)',
+                    borderRadius: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '1px dashed rgba(255,255,255,0.3)'
+                  }}>
+                    <Typography sx={{ color: 'white' }}>Новости не найдены в базе данных</Typography>
+                  </Box>
+                )}
                 {/* Карточка новости */}
-                {newsSlides.map((news, idx) => (
+                {currentNewsSlides.map((news, idx) => (
                   <Box
                     key={idx}
                     sx={{
@@ -270,7 +279,7 @@ export default function Hero() {
 
                 {/* Навигация по точкам (thumbs) */}
                 <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 2 }}>
-                  {newsSlides.map((_, i) => (
+                  {currentNewsSlides.map((_, i) => (
                     <Box
                       key={i}
                       onClick={() => setSlide(i)}
@@ -293,7 +302,7 @@ export default function Hero() {
       {/* === МИНИ-ЛЕНТА НОВОСТЕЙ (снизу слайдера, как на оригинале) === */}
       <Container maxWidth="lg" sx={{ mt: { xs: -4, md: -6 }, position: 'relative', zIndex: 10, mb: 6 }}>
         <Grid container spacing={2}>
-          {newsSlides.map((news, i) => (
+          {currentNewsSlides.map((news, i) => (
             <Grid item xs={6} md={3} key={i}>
               <Paper
                 component={Link}
@@ -536,7 +545,7 @@ export default function Hero() {
                 <Typography sx={{ fontWeight: 700, fontSize: '16px', color: '#002e5b', mb: 2 }}>
                   Новости
                 </Typography>
-                {newsSlides.slice(0, 2).map((news, i) => (
+                {currentNewsSlides.slice(0, 2).map((news, i) => (
                   <Box key={i} sx={{ mb: i < 1 ? 2 : 0 }}>
                     <Typography
                       component={Link}

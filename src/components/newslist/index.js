@@ -30,50 +30,8 @@ import '@fontsource/roboto/700.css';
 
 // --- HELPER FUNCTIONS ---
 
-const getFirstImage = (documentContent) => {
-  try {
-    const content = typeof documentContent === 'string'
-      ? JSON.parse(documentContent)
-      : documentContent;
+import { getFirstImage, getSnippet } from '../../utils/newsHelpers';
 
-    if (Array.isArray(content)) {
-      for (const node of content) {
-        if (node.type === 'image' && node.url) {
-          return node.url;
-        }
-        if (Array.isArray(node.children)) {
-            for (const child of node.children) {
-                if (child.type === 'image' && child.url) {
-                    return child.url;
-                }
-            }
-        }
-      }
-    }
-  } catch (e) {
-    console.error("Error parsing document content for image:", e);
-  }
-  return null;
-};
-
-const getSnippet = (documentContent, maxLength = 200) => {
-    try {
-      const content = typeof documentContent === 'string' ? JSON.parse(documentContent) : documentContent;
-      if (Array.isArray(content)) {
-        for (const node of content) {
-          if (node.type === 'paragraph') {
-            const text = node.children.map(child => child.text).join('');
-            if (text) {
-              return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
-            }
-          }
-        }
-      }
-    } catch (e) {
-        console.error("Error parsing document content for snippet:", e);
-    }
-    return 'No preview available.';
-  };
 
 // --- STYLED COMPONENTS ---
 
@@ -148,8 +106,8 @@ export default function NewsList() {
     dispatch(getAllPublicDocumentsAction());
   }, [dispatch]);
 
-  // Use mock data if backend returned empty array
-  const displayNews = allDocuments && allDocuments.length > 0 ? allDocuments : mockNews;
+  // Use real data from backend
+  const displayNews = allDocuments || [];
 
   return (
     <div className="container" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
