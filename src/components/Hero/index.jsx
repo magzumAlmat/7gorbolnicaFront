@@ -12,10 +12,15 @@ import {
   KeyboardArrowDown, Work
 } from '@mui/icons-material';
 import { Select, MenuItem, TextField as MuiTextField } from '@mui/material';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { styled } from '@mui/material/styles';
-import {KazakhstanMap} from '../Map';
-// === 1. ДАННЫЕ ===
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPublicDocumentsAction } from '../../store/slices/authSlice';
+import { getFirstImage, getSnippet } from '../../utils/newsHelpers';
+import { mockNews } from '../../data/mockNews';
+const KazakhstanMap = dynamic(() => import('../Map/LeafletMap'), { ssr: false });
+
 
 // Послание Президента
 const presidentialMessages = [
@@ -79,17 +84,19 @@ const offices = [
   { city: "Усть-Каменогорск", address: "ул. М.Горького, 21 офис 203", phone: "8 (7232) 26-16-90", email: "info@kazniisa.kz" },
 ];
 
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllPublicDocumentsAction } from '../../store/slices/authSlice';
-import { getFirstImage, getSnippet } from '../../utils/newsHelpers';
-import { mockNews } from '../../data/mockNews';
-
 // === 2. HERO (NEWS SLIDER как на kazniisa.kz) ===
 export default function Hero() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const allDocuments = useSelector(state => state.auth.allDocuments);
   
+  const [mapView, setMapView] = useState({ center: [48.0, 67.0], zoom: 5 });
+
+  const handleOfficeClick = (coords) => {
+    setMapView({ center: coords, zoom: 12 });
+    window.scrollTo({ top: document.getElementById('map-section')?.offsetTop - 100, behavior: 'smooth' });
+  };
+
   const [slide, setSlide] = useState(0);
   const [centerSlide, setCenterSlide] = useState(0);
 
@@ -644,8 +651,8 @@ export default function Hero() {
   title="Казахстан (zoom out)"
 /> */}
 
-<Box sx={{ height: { xs: 400, md: 550 }, width: '100%', borderRadius: 2, overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
-  <KazakhstanMap />
+<Box id="map-section" sx={{ height: { xs: 400, md: 550 }, width: '100%', borderRadius: 2, overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
+  <KazakhstanMap center={mapView.center} zoom={mapView.zoom} />
 </Box>
 
 </Box>
@@ -658,7 +665,10 @@ export default function Hero() {
               <Grid container spacing={0}>
                 {/* ОФИС АСТАНА */}
                 <Grid item xs={12} md={3.7}>
-                  <Box sx={{ px: 2 }}>
+                  <Box 
+                    onClick={() => handleOfficeClick([51.169392, 71.449074])}
+                    sx={{ px: 2, cursor: 'pointer', transition: 'all 0.3s', '&:hover': { transform: 'translateY(-5px)', opacity: 0.9 } }}
+                  >
                     <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, textTransform: 'uppercase', fontSize: '16px' }}>
                       Офис Астана
                     </Typography>
@@ -674,7 +684,10 @@ export default function Hero() {
 
                 {/* ОФИС ТАРАЗ */}
                 <Grid item xs={12} md={3.7}>
-                  <Box sx={{ px: 2 }}>
+                  <Box 
+                    onClick={() => handleOfficeClick([42.896088, 71.398430])}
+                    sx={{ px: 2, cursor: 'pointer', transition: 'all 0.3s', '&:hover': { transform: 'translateY(-5px)', opacity: 0.9 } }}
+                  >
                     <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, textTransform: 'uppercase', fontSize: '16px' }}>
                       Офис Тараз
                     </Typography>
@@ -690,7 +703,10 @@ export default function Hero() {
 
                 {/* ОФИС УСТЬ-КАМЕНОГОРСК */}
                 <Grid item xs={12} md={3.7}>
-                  <Box sx={{ px: 2 }}>
+                  <Box 
+                    onClick={() => handleOfficeClick([49.948175, 82.628540])}
+                    sx={{ px: 2, cursor: 'pointer', transition: 'all 0.3s', '&:hover': { transform: 'translateY(-5px)', opacity: 0.9 } }}
+                  >
                     <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, textTransform: 'uppercase', fontSize: '16px' }}>
                       Офис Усть-Каменогорск
                     </Typography>
