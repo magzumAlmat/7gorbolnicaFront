@@ -7,8 +7,11 @@ import {
 } from '@mui/material';
 import {
   ChevronLeft, ChevronRight, ArrowForward,
-  LocationOn, Phone, Email, AccessTime
+  LocationOn, Phone, Email, AccessTime,
+  Description, LaptopMac, Business, Architecture, School, Apps,
+  KeyboardArrowDown
 } from '@mui/icons-material';
+import { Select, MenuItem, TextField as MuiTextField } from '@mui/material';
 import Link from 'next/link';
 import { styled } from '@mui/material/styles';
 
@@ -28,14 +31,44 @@ const presidentialMessages = [
   },
 ];
 
-// Центры
+// Центры (Обновлено по дизайну)
 const centers = [
-  { title: "Центр нормирования в строительстве", desc: "Разработка нормативных технических документов, сборников по сметному ценообразованию в строительстве", path: "/centres/center-for-regulation-in-construction" },
-  { title: "Центр науки и цифровизации строительства", desc: "Развитие нормативно-технической базы в области внедрения технологии информационного моделирования", path: "/centres/center-for-science-and-digitalization-of-construction" },
-  { title: "Центр сейсмостойкости, обследования зданий и сооружений", desc: "Техническое обследование зданий и сооружений, проведение испытаний и подтверждение их сейсмической безопасности", path: "/centres/center-for-seismic-resistance-inspection-of-buildings-and-structures" },
-  { title: "Центр типового и индивидуального проектирования", desc: "Разработка типовых проектов жилых и общественных зданий для реализации в строительстве", path: "/centres/center-for-standard-and-individual-design" },
-  { title: "Корпоративный университет", desc: "Повышение квалификации работников и проведение аттестации ИТР в области проектирования", path: "/centres/corporate-university" },
-  { title: "Центр научных исследований", desc: "Проведение передовых научных исследований в области внедрения новых материалов", path: "/centres/center-for-scientific-research-of-the-construction-industry" },
+  { 
+    title: "Центр нормирования в строительстве", 
+    desc: "Разработка нормативных технических документов, сборников по сметному ценообразованию в строительстве, энергетике и жилищно-коммунальном...", 
+    path: "/centres/center-for-regulation-in-construction",
+    icon: "document"
+  },
+  { 
+    title: "Центр науки и цифровизации строительства", 
+    desc: "Развитие нормативно-технической базы в области внедрения технологии информационного моделирования в промышленное и гражданское строительс...", 
+    path: "/centres/center-for-science-and-digitalization-of-construction",
+    icon: "laptop"
+  },
+  { 
+    title: "Центр сейсмостойкости, обследования зданий и сооружений", 
+    desc: "Техническое обследование зданий и сооружений, проведение испытаний и подтверждение их сейсмической безопасности, координация работ в обла...", 
+    path: "/centres/center-for-seismic-resistance-inspection-of-buildings-and-structures",
+    icon: "building"
+  },
+  { 
+    title: "Центр типового и индивидуального проектирования", 
+    desc: "Разработка типовых проектов жилых и общественных зданий, предназначенных для многократной реализации их в последующем строительстве, разр...", 
+    path: "/centres/center-for-standard-and-individual-design",
+    icon: "design"
+  },
+  { 
+    title: "Корпоративный университет", 
+    desc: "Повышение квалификации работников, организаций и проведение аттестации ИТР, специализирующихся в области проектных, проектно-изыскательск...", 
+    path: "/centres/corporate-university",
+    icon: "education"
+  },
+  { 
+    title: "Все центры", 
+    desc: "Перейти на страницу Все центры", 
+    path: "/centres",
+    icon: "all"
+  },
 ];
 
 const offices = [
@@ -375,85 +408,203 @@ export default function Hero() {
       </Box>
 
 
-      {/* === ЦЕНТРЫ (карусель как на оригинале) === */}
-      <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: '#f2f2f2' }}>
+      {/* === ЦЕНТРЫ (Редизайн по Фото 2) === */}
+      <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: '#f8f9fa' }}>
         <Container maxWidth="lg">
-          <Typography variant="h4" sx={{ fontWeight: 700, mb: 1, color: '#002e5b', textAlign: 'center' }}>
-            Центры АО «КазНИИСА»
-          </Typography>
-          <Typography sx={{ mb: 5, color: '#666', textAlign: 'center', fontSize: '15px' }}>
-            В состав АО «КазНИИСА» входят 5 центров
-          </Typography>
+          <Box sx={{ mb: 8, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+             <Box sx={{ bgcolor: '#FDE428', width: 60, height: 40, borderRadius: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 3 }}>
+                <Business sx={{ color: '#002e5b' }} />
+             </Box>
+             <Typography variant="h3" sx={{ fontWeight: 800, color: '#002e5b', mb: 2, fontSize: { xs: '2rem', md: '2.8rem' } }}>
+               Центры АО «КазНИИСА»
+             </Typography>
+             <Typography variant="body1" sx={{ color: '#666', fontSize: '1.1rem', maxWidth: 600 }}>
+               В состав АО «КазНИИСА» входят 5 центров
+             </Typography>
+          </Box>
 
-          <Box sx={{ position: 'relative' }}>
-            <Grid container spacing={3}>
-              {centers.slice(centerSlide, centerSlide + 3).map((center, i) => (
-                <Grid item xs={12} md={4} key={i}>
-                  <Card
+          <Grid container spacing={0} sx={{ border: '1px solid #eee', borderRadius: 2, overflow: 'hidden', bgcolor: 'white' }}>
+            {centers.map((center, i) => {
+              const IconComp = {
+                document: Description,
+                laptop: LaptopMac,
+                building: Business,
+                design: Architecture,
+                education: School,
+                all: Apps
+              }[center.icon] || Business;
+
+              return (
+                <Grid item xs={12} sm={6} md={4} key={i}>
+                  <Box
                     component={Link}
                     href={center.path}
-                    elevation={0}
                     sx={{
+                      p: 4,
                       height: '100%',
                       textDecoration: 'none',
-                      borderRadius: 2,
-                      border: '1px solid #e0e0e0',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      borderRight: { sm: (i + 1) % 2 === 0 ? 'none' : '1px solid #eee', md: (i + 1) % 3 === 0 ? 'none' : '1px solid #eee' },
+                      borderBottom: { xs: '1px solid #eee', md: i < 3 ? '1px solid #eee' : 'none' },
                       transition: 'all 0.3s',
                       '&:hover': {
-                        boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-                        transform: 'translateY(-4px)',
-                        borderColor: '#2887B6',
+                        bgcolor: i === 5 ? '#f4f4f4' : '#fff',
+                        '& .center-icon': { bgcolor: i === 5 ? '#002e5b' : '#002e5b', color: 'white' },
+                        '& .center-title': { color: '#2887B6' },
                       },
                     }}
                   >
-                    <CardContent sx={{ p: 3 }}>
-                      <Typography sx={{ fontWeight: 700, fontSize: '16px', color: '#002e5b', mb: 1.5, lineHeight: 1.3 }}>
-                        {center.title}
-                      </Typography>
-                      <Typography sx={{ fontSize: '13px', color: '#666', lineHeight: 1.6 }}>
-                        {center.desc}
-                      </Typography>
-                    </CardContent>
-                  </Card>
+                    <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+                       <Box 
+                         className="center-icon"
+                         sx={{ 
+                           width: 50, height: 50, borderRadius: '50%', 
+                           bgcolor: '#002e5b', color: 'white',
+                           display: 'flex', alignItems: 'center', justifyContent: 'center',
+                           flexShrink: 0, transition: 'all 0.3s'
+                         }}>
+                          <IconComp />
+                       </Box>
+                       <Box>
+                          <Typography className="center-title" sx={{ fontWeight: 700, fontSize: '16px', color: '#002e5b', mb: 1, lineHeight: 1.3, transition: 'all 0.3s' }}>
+                            {center.title}
+                          </Typography>
+                          <Divider sx={{ width: 40, height: 3, bgcolor: '#FDE428', border: 'none', mb: 2 }} />
+                       </Box>
+                    </Box>
+                    <Typography sx={{ fontSize: '14px', color: '#666', lineHeight: 1.6, flexGrow: 1 }}>
+                      {center.desc}
+                    </Typography>
+                  </Box>
                 </Grid>
-              ))}
-            </Grid>
+              );
+            })}
+          </Grid>
 
-            {/* Стрелки карусели */}
-            {centerSlide > 0 && (
-              <IconButton onClick={prevCenter} sx={{
-                position: 'absolute', left: -20, top: '50%', transform: 'translateY(-50%)',
-                bgcolor: 'white', boxShadow: 2, '&:hover': { bgcolor: '#f5f5f5' },
-              }}>
-                <ChevronLeft />
-              </IconButton>
-            )}
-            {centerSlide < centers.length - 3 && (
-              <IconButton onClick={nextCenter} sx={{
-                position: 'absolute', right: -20, top: '50%', transform: 'translateY(-50%)',
-                bgcolor: 'white', boxShadow: 2, '&:hover': { bgcolor: '#f5f5f5' },
-              }}>
-                <ChevronRight />
-              </IconButton>
-            )}
-          </Box>
-
-          <Box sx={{ textAlign: 'center', mt: 4 }}>
+          <Box sx={{ textAlign: 'center', mt: 6 }}>
             <Button
               component={Link}
               href="/centres"
               variant="contained"
               sx={{
                 bgcolor: '#2887B6',
-                px: 4, py: 1.2, borderRadius: '25px',
-                fontSize: '14px',
-                '&:hover': { bgcolor: '#1f6f96' },
+                px: 5, py: 1.5, borderRadius: '30px',
+                fontSize: '15px',
+                fontWeight: 700,
+                textTransform: 'none',
+                boxShadow: '0 4px 14px rgba(40, 135, 182, 0.4)',
+                '&:hover': { bgcolor: '#1f6f96', transform: 'translateY(-2px)' },
+                transition: 'all 0.3s'
               }}
             >
               Все центры
             </Button>
           </Box>
         </Container>
+      </Box>
+
+      {/* === ОБРАТНАЯ СВЯЗЬ (Фото 4) === */}
+      <Box sx={{ bgcolor: '#10b857', py: { xs: 8, md: 10 }, color: 'white' }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={6} alignItems="center">
+            <Grid item xs={12} md={5}>
+              <Typography variant="h3" sx={{ fontWeight: 800, mb: 3, lineHeight: 1.1 }}>
+                Оставьте заявку,<br />мы перезвоним
+              </Typography>
+              <Typography sx={{ opacity: 0.9, fontSize: '1.1rem', mb: 4, lineHeight: 1.6 }}>
+                Хотите поговорить с одним из наших консультантов по телефону? Просто отправьте свои данные, и мы свяжемся с вами в ближайшее время.
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={7}>
+              <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                <Box>
+                  <Typography sx={{ mb: 1.5, fontWeight: 600, fontSize: '14px' }}>Я хотел бы обсудить:</Typography>
+                  <Select
+                    fullWidth
+                    defaultValue="business"
+                    IconComponent={KeyboardArrowDown}
+                    sx={{
+                      bgcolor: 'rgba(255,255,255,0.4)',
+                      borderRadius: 1,
+                      color: 'white',
+                      '& .MuiOutlinedInput-notchedOutline': { border: 'none' },
+                      '& .MuiSelect-icon': { color: 'white' },
+                    }}
+                  >
+                    <MenuItem value="business">Бизнес-планирование</MenuItem>
+                    <MenuItem value="norm">Нормирование</MenuItem>
+                    <MenuItem value="seismic">Сейсмостойкость</MenuItem>
+                    <MenuItem value="other">Другое</MenuItem>
+                  </Select>
+                </Box>
+                
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <MuiTextField
+                      fullWidth
+                      placeholder="Имя"
+                      sx={{
+                        '& .MuiOutlinedInput-root': {
+                          bgcolor: 'rgba(255,255,255,0.4)',
+                          borderRadius: 1,
+                          '& fieldset': { border: 'none' },
+                          '& input': { color: 'white', '&::placeholder': { color: 'rgba(255,255,255,0.7)', opacity: 1 } }
+                        }
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <MuiTextField
+                      fullWidth
+                      placeholder="Номер телефона"
+                      sx={{
+                        '& .MuiOutlinedInput-root': {
+                          bgcolor: 'rgba(255,255,255,0.4)',
+                          borderRadius: 1,
+                          '& fieldset': { border: 'none' },
+                          '& input': { color: 'white', '&::placeholder': { color: 'rgba(255,255,255,0.7)', opacity: 1 } }
+                        }
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+
+                <Button
+                  variant="contained"
+                  endIcon={<ChevronRight />}
+                  sx={{
+                    bgcolor: '#002e5b',
+                    color: 'white',
+                    py: 2,
+                    px: 4,
+                    fontWeight: 700,
+                    fontSize: '15px',
+                    textTransform: 'uppercase',
+                    alignSelf: 'flex-start',
+                    borderRadius: 1,
+                    '&:hover': { bgcolor: '#001a33' },
+                  }}
+                >
+                  Отправить
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* === КАРТА (заглушка) === */}
+      <Box sx={{ height: 500, bgcolor: '#eee', position: 'relative' }}>
+         <Box component="img" 
+           src="https://cloud.google.com/static/maps-platform/images/maps-customization.png" 
+           sx={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }} 
+         />
+         <Box sx={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Typography variant="h5" sx={{ color: '#666', fontWeight: 700, p: 3, bgcolor: 'rgba(255,255,255,0.8)', borderRadius: 2 }}>
+               Интерактивная карта Казахстана
+            </Typography>
+         </Box>
       </Box>
 
       {/* === ФИЛИАЛЫ (как на оригинале — с фоновым изображением) === */}
