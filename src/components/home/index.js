@@ -8,7 +8,7 @@ export default function Main() {
   return (
     <div>
       <Hero />
-      <NewsBlog />
+      {/* <NewsBlog /> */}
     </div>
   );
 }

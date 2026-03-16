@@ -37,7 +37,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <Box component="footer">
+    <Box component="">
       {/* === ВЕРХНЯЯ ЧАСТЬ: Контактная форма + Офисы === */}
       <Box sx={{ bgcolor: '#002e5b', pt: 8, pb: 6, color: 'white' }}>
         <Container maxWidth="lg">
