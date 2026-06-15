@@ -1,84 +1,183 @@
 'use client';
-import { Typography, Box, Paper, Grid, Chip, Avatar } from '@mui/material';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import PersonIcon from '@mui/icons-material/Person';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import { Typography, Box, Divider, Table, TableBody, TableCell, TableRow } from '@mui/material';
 
 const NAVY = '#0F172A';
-const ACCENT = '#0369A1';
 const AMBER = '#F59E0B';
-const BG = '#F8FAFC';
 
 const branches = [
   {
-    name: 'Восточно-Казахстанский филиал',
-    director: 'Бегимханова А.А.',
-    city: 'Восточный Казахстан',
-    year: '2013',
-    initials: 'ВКФ',
-    color: ACCENT,
-  },
-  {
+    num: '01',
     name: 'Южно-Казахстанский филиал',
-    director: 'Байтемиров М.Н.',
     city: 'Тараз',
-    year: null,
-    initials: 'ЮКФ',
-    color: '#0891B2',
+    address: 'г. Тараз, ул. Сулейманова, 19Б',
+    phone: '+7 (7262) 43-63-99',
+    email: 'yko@kazniisa.kz',
+    hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
+    contact: 'Пак Наталия Александровна',
+    desc: 'Филиал обеспечивает научно-техническое сопровождение строительных проектов на юге Казахстана. Выполняет технические обследования, нормативные и проектные работы для предприятий и государственных заказчиков Жамбылской, Туркестанской и Кызылординской областей.',
   },
   {
+    num: '02',
+    name: 'Восточно-Казахстанский филиал',
+    city: 'Усть-Каменогорск',
+    address: 'г. Усть-Каменогорск, ул. М. Горького, 21, оф. 203',
+    phone: '8 (7232) 26-16-90',
+    email: 'vko@kazniisa.kz',
+    hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
+    desc: 'Обслуживает восток страны: техническое обследование промышленных и гражданских объектов, сейсмическая паспортизация, консультационная поддержка строительного комплекса Восточно-Казахстанской области.',
+  },
+  {
+    num: '03',
     name: 'Астанинский филиал',
-    director: 'Хасен А.А.',
     city: 'Астана',
-    year: null,
-    initials: 'АФ',
-    color: '#7C3AED',
+    address: 'г. Астана, р-н Сарыарқа, ул. Бейбітшілік, 14, оф. 1406',
+    phone: '8 (7172) 57-53-03',
+    email: 'crn@kazniisa.kz',
+    hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
+    desc: 'Столичный филиал работает в тесном взаимодействии с государственными органами и крупными застройщиками. Специализируется на нормировании, экспертизе проектной документации и сопровождении строительных проектов в г. Астана и Акмолинской области.',
   },
 ];
 
 export default function BranchesPage() {
   return (
     <Box>
-      <Chip label="Филиалы" size="small" sx={{ bgcolor: AMBER, color: NAVY, fontWeight: 700, mb: 1.5, fontFamily: '"Roboto Mono", monospace' }} />
-      <Typography variant="h4" sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}>
+      <Typography
+        variant="h3"
+        sx={{
+          fontFamily: '"Exo 2", sans-serif',
+          fontWeight: 800,
+          color: NAVY,
+          mb: 1,
+        }}
+      >
         Филиалы
       </Typography>
-      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
-      <Typography sx={{ color: '#64748B', mb: 3, fontSize: '0.95rem' }}>
-        АО «КазНИИСА» располагает тремя региональными филиалами, обеспечивающими охват научно-исследовательских и проектных услуг по всей территории Республики Казахстан.
-      </Typography>
-      <Box component="img" src="/images/kazniisa/branches-map.webp" alt="Карта филиалов КазНИИСА" sx={{ width: '100%', maxWidth: 600, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
 
-      <Grid container spacing={3}>
-        {branches.map((b, i) => (
-          <Grid item xs={12} md={4} key={i}>
-            <Paper elevation={0} sx={{ p: 3.5, border: '1px solid #E2E8F0', borderRadius: 3, bgcolor: BG, height: '100%' }}>
-              <Avatar sx={{ bgcolor: b.color, color: '#fff', fontWeight: 700, fontFamily: '"Roboto Mono", monospace', width: 52, height: 52, fontSize: '0.8rem', mb: 2 }}>
-                {b.initials}
-              </Avatar>
-              <Typography sx={{ fontWeight: 800, color: NAVY, fontSize: '1rem', mb: 2, lineHeight: 1.3, fontFamily: '"Exo 2", sans-serif' }}>
-                {b.name}
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4, maxWidth: 760 }}>
+        АО «КазНИИСА» располагает тремя региональными филиалами, обеспечивающими охват
+        научно-исследовательских и проектных услуг по всей территории Республики Казахстан.
+        Каждый филиал является полноценным структурным подразделением института и ведёт
+        самостоятельную производственную деятельность.
+      </Typography>
+
+      <Box
+        sx={{
+          borderLeft: '4px solid #F59E0B',
+          pl: 3,
+          py: 2,
+          bgcolor: '#FAFAFA',
+          mb: 5,
+          fontStyle: 'italic',
+        }}
+      >
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+          Филиалы КазНИИСА оказывают полный спектр услуг — от технического обследования зданий
+          и сооружений до нормативно-технического консультирования — непосредственно на месте,
+          без необходимости обращения в головной офис.
+        </Typography>
+      </Box>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+        {branches.map((branch, i) => (
+          <Box key={i}>
+            <Box sx={{ display: 'flex', gap: { xs: 2, md: 4 }, alignItems: 'flex-start' }}>
+              <Typography
+                sx={{
+                  fontFamily: '"Exo 2", sans-serif',
+                  fontWeight: 800,
+                  fontSize: '2.5rem',
+                  color: AMBER,
+                  lineHeight: 1,
+                  minWidth: 52,
+                  flexShrink: 0,
+                }}
+              >
+                {branch.num}
               </Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <PersonIcon sx={{ fontSize: 16, color: '#94A3B8' }} />
-                  <Typography sx={{ fontSize: '0.88rem', color: '#334155' }}>{b.director}</Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <LocationOnIcon sx={{ fontSize: 16, color: '#94A3B8' }} />
-                  <Typography sx={{ fontSize: '0.88rem', color: '#334155' }}>{b.city}</Typography>
-                </Box>
-                {b.year && (
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <CalendarTodayIcon sx={{ fontSize: 16, color: '#94A3B8' }} />
-                    <Typography sx={{ fontSize: '0.88rem', color: '#334155' }}>Создан в {b.year} г.</Typography>
-                  </Box>
-                )}
+
+              <Box sx={{ flex: 1 }}>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontFamily: '"Exo 2", sans-serif',
+                    fontWeight: 700,
+                    color: NAVY,
+                    mb: 0.5,
+                  }}
+                >
+                  {branch.name}
+                </Typography>
+                <Typography sx={{ fontSize: '0.9rem', color: '#94A3B8', fontWeight: 600, mb: 2 }}>
+                  {branch.city}
+                </Typography>
+
+                <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2.5 }}>
+                  {branch.desc}
+                </Typography>
+
+                <Table size="small" sx={{ maxWidth: 620, '& td': { border: 'none', py: 0.6, px: 0 } }}>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell sx={{ width: 140, color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600, verticalAlign: 'top' }}>
+                        Адрес
+                      </TableCell>
+                      <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+                        {branch.address}
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
+                        Телефон
+                      </TableCell>
+                      <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+                        <a
+                          href={`tel:${branch.phone.replace(/[\s\-()]/g, '')}`}
+                          style={{ color: NAVY, textDecoration: 'none', fontWeight: 600 }}
+                        >
+                          {branch.phone}
+                        </a>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
+                        E-mail
+                      </TableCell>
+                      <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+                        <a
+                          href={`mailto:${branch.email}`}
+                          style={{ color: NAVY, textDecoration: 'none', fontWeight: 600 }}
+                        >
+                          {branch.email}
+                        </a>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
+                        Режим работы
+                      </TableCell>
+                      <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+                        {branch.hours}
+                      </TableCell>
+                    </TableRow>
+                    {branch.contact && (
+                      <TableRow>
+                        <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
+                          Контакт
+                        </TableCell>
+                        <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+                          {branch.contact}
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
               </Box>
-            </Paper>
-          </Grid>
+            </Box>
+            {i < branches.length - 1 && <Divider sx={{ mt: 4 }} />}
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 }

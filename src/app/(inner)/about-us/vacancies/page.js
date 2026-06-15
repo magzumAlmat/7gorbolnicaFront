@@ -1,88 +1,134 @@
 'use client';
-import { Typography, Box, Paper, Grid, Chip } from '@mui/material';
-import WorkIcon from '@mui/icons-material/Work';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import {
+  Typography,
+  Box,
+  Divider,
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@mui/material';
 
 const NAVY = '#0F172A';
-const ACCENT = '#0369A1';
 const AMBER = '#F59E0B';
-const BG = '#F8FAFC';
 
 const vacancies = [
   {
     title: 'Юрисконсульт',
-    address: '3 мкр 44А, Алматы',
+    address: '3 мкр 44-а, Алматы',
+    department: 'Отдел правовой и кадровой работы',
     date: '3 декабря 2025',
-    desc: 'Правовое сопровождение деятельности института, подготовка договоров и юридических заключений.',
   },
   {
     title: 'Главный специалист сектора закупок',
-    address: 'Алматы',
+    address: '3 мкр 44-а, Алматы',
+    department: 'Сектор закупок',
     date: '22 апреля 2025',
-    desc: 'Организация и проведение закупочных процедур в соответствии с законодательством РК.',
   },
   {
     title: 'Специалист по охране труда',
-    address: 'Алматы',
+    address: '3 мкр 44-а, Алматы',
+    department: 'Проектный офис',
     date: '21 апреля 2025',
-    desc: 'Обеспечение соблюдения требований охраны труда и промышленной безопасности.',
   },
   {
-    title: 'Помощник системного администратора',
-    address: 'Алматы',
+    title: 'Ассистент системного администратора',
+    address: '3 мкр 44-а, Алматы',
+    department: 'АХО',
     date: '24 февраля 2025',
-    desc: 'Поддержка ИТ-инфраструктуры, администрирование серверов и рабочих станций.',
   },
 ];
 
 export default function VacanciesPage() {
   return (
     <Box>
-      <Chip label="Вакансии" size="small" sx={{ bgcolor: AMBER, color: NAVY, fontWeight: 700, mb: 1.5, fontFamily: '"Roboto Mono", monospace' }} />
-      <Typography variant="h4" sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}>
+      <Typography
+        variant="h4"
+        sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}
+      >
         Вакансии
       </Typography>
-      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
-      <Typography sx={{ color: '#64748B', mb: 4, fontSize: '0.95rem' }}>
-        Мы ищем квалифицированных специалистов, готовых развиваться вместе с нами. Отправьте резюме на электронный адрес института.
+      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4 }}>
+        АО КазНИИСА всегда ищет талантливых людей. Мы понимаем, что продуктивные люди
+        являются хорошим дополнением нашей команды. Если вы хотите работать в одной из
+        ведущих научных организаций строительной отрасли Казахстана — рассмотрите открытые
+        вакансии ниже и направьте своё резюме в отдел кадров.
       </Typography>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
-        {vacancies.map((v, i) => (
-          <Paper key={i} elevation={0} sx={{ p: 3, border: '1px solid #E2E8F0', borderRadius: 3, bgcolor: BG }}>
-            <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: 2, mb: 1.5 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                <Box sx={{ p: 1, bgcolor: `${ACCENT}15`, borderRadius: 2, display: 'flex' }}>
-                  <WorkIcon sx={{ color: ACCENT, fontSize: 22 }} />
-                </Box>
-                <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem' }}>{v.title}</Typography>
-              </Box>
-              <Chip label="Открыта" size="small" sx={{ bgcolor: '#D1FAE5', color: '#065F46', fontWeight: 600, fontSize: '0.75rem' }} />
-            </Box>
-            <Typography sx={{ color: '#475569', fontSize: '0.88rem', lineHeight: 1.6, mb: 2 }}>{v.desc}</Typography>
-            <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.7 }}>
-                <LocationOnIcon sx={{ fontSize: 15, color: '#94A3B8' }} />
-                <Typography sx={{ fontSize: '0.82rem', color: '#64748B', fontFamily: '"Roboto Mono", monospace' }}>{v.address}</Typography>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.7 }}>
-                <CalendarTodayIcon sx={{ fontSize: 15, color: '#94A3B8' }} />
-                <Typography sx={{ fontSize: '0.82rem', color: '#64748B', fontFamily: '"Roboto Mono", monospace' }}>{v.date}</Typography>
-              </Box>
-            </Box>
-          </Paper>
-        ))}
+      <Typography
+        variant="h6"
+        sx={{ fontWeight: 700, color: NAVY, mb: 2.5, fontFamily: '"Exo 2", sans-serif' }}
+      >
+        Открытые позиции
+      </Typography>
+
+      <Box sx={{ overflowX: 'auto', mb: 5 }}>
+        <Table sx={{ minWidth: 600 }}>
+          <TableBody>
+            <TableRow sx={{ bgcolor: NAVY }}>
+              <TableCell sx={{ color: '#fff', fontWeight: 700, fontFamily: '"Exo 2", sans-serif', fontSize: '0.9rem', py: 1.5 }}>
+                Должность
+              </TableCell>
+              <TableCell sx={{ color: '#fff', fontWeight: 700, fontFamily: '"Exo 2", sans-serif', fontSize: '0.9rem', py: 1.5 }}>
+                Адрес
+              </TableCell>
+              <TableCell sx={{ color: '#fff', fontWeight: 700, fontFamily: '"Exo 2", sans-serif', fontSize: '0.9rem', py: 1.5 }}>
+                Подразделение
+              </TableCell>
+              <TableCell sx={{ color: '#fff', fontWeight: 700, fontFamily: '"Exo 2", sans-serif', fontSize: '0.9rem', py: 1.5 }}>
+                Дата публикации
+              </TableCell>
+            </TableRow>
+            {vacancies.map((v, i) => (
+              <TableRow
+                key={i}
+                sx={{ bgcolor: i % 2 === 0 ? '#F8FAFC' : '#fff', '&:hover': { bgcolor: `${AMBER}10` } }}
+              >
+                <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontWeight: 600, py: 1.5 }}>
+                  {v.title}
+                </TableCell>
+                <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', py: 1.5 }}>
+                  {v.address}
+                </TableCell>
+                <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', py: 1.5 }}>
+                  {v.department}
+                </TableCell>
+                <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', py: 1.5 }}>
+                  {v.date}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </Box>
 
-      <Paper elevation={0} sx={{ mt: 4, p: 3, bgcolor: NAVY, borderRadius: 3 }}>
-        <Typography sx={{ color: '#CBD5E1', fontSize: '0.9rem', lineHeight: 1.7 }}>
-          По вопросам трудоустройства обращайтесь в отдел кадров АО «КазНИИСА» по адресу:{' '}
-          <Box component="span" sx={{ color: AMBER, fontFamily: '"Roboto Mono", monospace' }}>hr@kazniisa.kz</Box>
-          {' '}или по телефону:{' '}
-          <Box component="span" sx={{ color: AMBER, fontFamily: '"Roboto Mono", monospace' }}>+7 (727) 291-87-99</Box>
+      <Divider sx={{ mb: 4 }} />
+
+      <Box sx={{ bgcolor: NAVY, borderRadius: 3, p: 4 }}>
+        <Typography
+          sx={{
+            color: '#CBD5E1',
+            fontSize: '1rem',
+            lineHeight: 1.9,
+            mb: 1.5,
+          }}
+        >
+          По вопросам трудоустройства обращайтесь в отдел правовой и кадровой работы АО «КазНИИСА».
         </Typography>
-      </Paper>
+        <Typography sx={{ color: '#CBD5E1', fontSize: '1rem', lineHeight: 1.9 }}>
+          Адрес:{' '}
+          <Box component="span" sx={{ color: AMBER, fontWeight: 600 }}>
+            г. Алматы, 3 мкр, д. 44-а
+          </Box>
+          {'  '}|{'  '}
+          Тел.:{' '}
+          <Box component="span" sx={{ color: AMBER, fontWeight: 600 }}>
+            +7 (727) 291-87-99
+          </Box>
+        </Typography>
+      </Box>
     </Box>
   );
 }

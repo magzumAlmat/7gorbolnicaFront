@@ -1,112 +1,140 @@
 'use client';
-import { Typography, Box, Paper, Grid, Chip, Divider } from '@mui/material';
-import PublicIcon from '@mui/icons-material/Public';
-import SchoolIcon from '@mui/icons-material/School';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import { Typography, Box, Grid, Divider } from '@mui/material';
 
-const goals = [
-  'Адаптация международных BIM-стандартов к условиям Казахстана',
-  'Продвижение цифровизации строительной отрасли',
-  'Формирование экосистемы BIM в стране',
-  'Поддержка государственных инициатив в сфере ТИМСО',
-];
-
-const benefits = [
-  { icon: <PublicIcon sx={{ color: '#0369A1' }} />, title: 'Глобальное сообщество', desc: 'Доступ к международной сети специалистов buildingSMART International и мировой базе знаний.' },
-  { icon: <SchoolIcon sx={{ color: '#0369A1' }} />, title: 'Обучение и сертификация', desc: 'Участие в программах обучения, включая BuildingSMART Professional Certification-Foundation «Basic».' },
-  { icon: <AccountTreeIcon sx={{ color: '#0369A1' }} />, title: 'Организационная поддержка', desc: 'Помощь во внедрении openBIM-процессов и стандартов (IFC, IDS, bSDD, BCF, UCM, Validation).' },
-  { icon: <EmojiEventsIcon sx={{ color: '#0369A1' }} />, title: 'Статус и признание', desc: 'Официальный статус члена buildingSMART Kazakhstan, признаваемый на международном уровне.' },
-];
-
-const standards = ['IFC', 'IDS', 'bSDD', 'BCF', 'UCM', 'Validation'];
+const NAVY = '#0F172A';
+const AMBER = '#F59E0B';
 
 export default function BuildingSmartPage() {
   return (
     <Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-        <Box component="img" src="/images/kazniisa/buildingsmart-logo.webp" alt="buildingSMART logo" sx={{ height: 48, objectFit: 'contain' }} />
-      </Box>
-      <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, color: '#0F172A' }}>
-        BuildingSMART Казахстан
+      {/* Header */}
+      <Box component="img" src="/images/kazniisa/buildingsmart-logo.webp" alt="buildingSMART logo" sx={{ height: 48, objectFit: 'contain', mb: 2, display: 'block' }} />
+      <Typography variant="h3" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 0 }}>
+        buildingSMART Казахстан
       </Typography>
-      <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 3 }}>
-        <Chip label="Официальный представитель" sx={{ bgcolor: '#0369A1', color: '#fff', fontWeight: 600 }} />
-        <Chip label="buildingSMART International" sx={{ bgcolor: '#0F172A', color: '#fff', fontWeight: 600 }} />
-        <Chip label="Основан в 2024" sx={{ bgcolor: '#F59E0B', color: '#fff', fontWeight: 600 }} />
-      </Box>
+      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, mt: 1, mb: 3 }} />
 
-      <Typography sx={{ fontSize: '1.05rem', lineHeight: 1.8, color: '#334155', mb: 3 }}>
-        BuildingSMART Казахстан — официальный представитель buildingSMART International в Казахстане.
-        Профессиональное сообщество специалистов в области BIM и ТИМСО (Технология информационного
-        моделирования строительных объектов), объединяющее проектировщиков, строителей, заказчиков
-        и государственные органы.
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
+        buildingSMART Казахстан — официальный представитель buildingSMART International в Республике
+        Казахстан. Это профессиональное сообщество экспертов, проектировщиков, строителей и
+        заказчиков, объединённых общей целью — внедрением BIM (Building Information Modeling) и
+        ТИМСО (Технологии информационного моделирования строительных объектов) в строительную
+        отрасль страны. Организация создана в начале 2024 года.
       </Typography>
 
-      <Paper sx={{ p: 3, mb: 4, bgcolor: '#EFF6FF', border: '1px solid #BFDBFE', borderRadius: 2 }}>
-        <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A', mb: 1 }}>Миссия</Typography>
-        <Typography sx={{ color: '#334155', lineHeight: 1.8, fontStyle: 'italic' }}>
-          Формирование инновационной строительной отрасли Казахстана посредством широкого внедрения
-          технологий информационного моделирования (BIM/ТИМСО), адаптации международных openBIM-стандартов
-          и создания устойчивой профессиональной экосистемы.
+      <Box sx={{ borderLeft: '4px solid #F59E0B', pl: 3, py: 2, bgcolor: '#FAFAFA', mb: 4 }}>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
+          Миссия: создание инновационной и устойчивой строительной отрасли Казахстана через широкое
+          внедрение технологий информационного моделирования на всех этапах жизненного цикла
+          строительных объектов — от проектирования до эксплуатации и сноса.
         </Typography>
-      </Paper>
+      </Box>
 
-      <Typography variant="h5" sx={{ fontWeight: 700, mb: 2, color: '#0F172A' }}>Цели организации</Typography>
-      <Grid container spacing={2} sx={{ mb: 4 }}>
-        {goals.map((g, i) => (
-          <Grid item xs={12} sm={6} key={i}>
-            <Paper sx={{ p: 2, borderRadius: 2, border: '1px solid #E2E8F0', display: 'flex', gap: 2, alignItems: 'flex-start' }}>
-              <Box sx={{ width: 28, height: 28, borderRadius: '50%', bgcolor: '#0369A1', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0, mt: 0.2 }}>
-                {i + 1}
-              </Box>
-              <Typography sx={{ color: '#334155', lineHeight: 1.7 }}>{g}</Typography>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
+      <Divider sx={{ mb: 4 }} />
 
-      <Typography variant="h5" sx={{ fontWeight: 700, mb: 2, color: '#0F172A' }}>Преимущества членства</Typography>
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        {benefits.map((b) => (
-          <Grid item xs={12} sm={6} key={b.title}>
-            <Paper sx={{ p: 3, borderRadius: 2, border: '1px solid #E2E8F0', height: '100%' }}>
-              <Box sx={{ mb: 1 }}>{b.icon}</Box>
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A', mb: 0.5 }}>{b.title}</Typography>
-              <Typography sx={{ color: '#64748B', lineHeight: 1.7, fontSize: '0.95rem' }}>{b.desc}</Typography>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
-
-      <Typography variant="h5" sx={{ fontWeight: 700, mb: 2, color: '#0F172A' }}>Стандарты openBIM</Typography>
-      <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap', mb: 4 }}>
-        {standards.map((s) => (
-          <Chip key={s} label={s} sx={{ bgcolor: '#0F172A', color: '#fff', fontWeight: 700, fontSize: '0.9rem' }} />
+      {/* Goals */}
+      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+        Цели организации
+      </Typography>
+      <Box component="ul" sx={{ pl: 3, m: 0, mb: 4 }}>
+        {[
+          'Адаптация международных BIM-стандартов к условиям и нормативной базе Казахстана',
+          'Продвижение цифровизации строительной отрасли на государственном и корпоративном уровнях',
+          'Формирование национальной экосистемы BIM — от университетов до крупных девелоперов',
+          'Внедрение открытых форматов обмена данными (openBIM) в проектные и строительные организации',
+          'Представление интересов казахстанских специалистов на международной арене',
+          'Подготовка кадров в области BIM и цифрового строительства',
+        ].map((g, i) => (
+          <Box component="li" key={i} sx={{ mb: 1 }}>
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>{g}</Typography>
+          </Box>
         ))}
       </Box>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-          <Paper sx={{ p: 3, borderRadius: 2, border: '1px solid #E2E8F0', bgcolor: '#F8FAFC' }}>
-            <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A', mb: 1 }}>История</Typography>
-            <Box component="img" src="/images/kazniisa/bsmart-founder.webp" alt="Основатель buildingSMART Казахстан" sx={{ width: '100%', maxWidth: 600, borderRadius: 2, mb: 2 }} />
-            <Typography sx={{ color: '#334155', lineHeight: 1.7 }}>
-              В 2021 году КазНИИСА получил право на проведение обучения по программам buildingSMART.
-              В начале 2024 года официально создан казахстанский чаптер (глава) buildingSMART International.
-            </Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Paper sx={{ p: 3, borderRadius: 2, border: '1px solid #E2E8F0', bgcolor: '#F8FAFC' }}>
-            <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A', mb: 1 }}>Сертификация</Typography>
-            <Typography sx={{ color: '#334155', lineHeight: 1.7 }}>
-              Курс <strong>BuildingSMART Professional Certification-Foundation «Basic»</strong> —
-              базовый курс для специалистов, начинающих работу с BIM и openBIM-стандартами.
-            </Typography>
-          </Paper>
-        </Grid>
+      {/* Tasks */}
+      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+        Задачи
+      </Typography>
+      <Box component="ul" sx={{ pl: 3, m: 0, mb: 4 }}>
+        {[
+          'Локализация и адаптация стандарта IFC и других openBIM-форматов для применения в РК',
+          'Представление Казахстана в международных структурах buildingSMART International',
+          'Организация обучения и сертификации специалистов по международным программам',
+          'Создание платформы диалога между государственными органами, университетами и бизнесом',
+          'Разработка рекомендаций и методических материалов по внедрению ТИМСО',
+        ].map((t, i) => (
+          <Box component="li" key={i} sx={{ mb: 1 }}>
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>{t}</Typography>
+          </Box>
+        ))}
+      </Box>
+
+      <Divider sx={{ mb: 4 }} />
+
+      {/* Certification */}
+      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+        Программа обучения и сертификации
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        buildingSMART Казахстан реализует программу{' '}
+        <Box component="strong" sx={{ color: NAVY }}>
+          BuildingSMART Professional Certification-Foundation «Basic»
+        </Box>{' '}
+        — базовую программу обучения в области технологий информационного моделирования. Программа
+        ориентирована на специалистов, начинающих работу с BIM и openBIM-стандартами, и охватывает
+        ключевые концепции, форматы данных и процессы информационного моделирования.
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4 }}>
+        Сертификат программы признаётся в более чем 20 странах мира, что открывает выпускникам
+        возможности для работы на международных проектах. В 2021 году КазНИИСА получил право на
+        проведение обучения по программам buildingSMART. В начале 2024 года официально создан
+        казахстанский чаптер buildingSMART International.
+      </Typography>
+
+      {/* Standards */}
+      <Divider sx={{ mb: 4 }} />
+      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+        Стандарты openBIM
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        buildingSMART Kazakhstan продвигает применение открытых нейтральных форматов и стандартов
+        обмена данными в строительстве:
+      </Typography>
+      <Grid container spacing={2} sx={{ mb: 4 }}>
+        {[
+          { code: 'IFC', desc: 'Industry Foundation Classes — открытый формат хранения и обмена данными о строительном объекте' },
+          { code: 'IDS', desc: 'Information Delivery Specification — спецификация требований к составу информации' },
+          { code: 'BCF', desc: 'BIM Collaboration Format — формат совместной работы и передачи замечаний' },
+          { code: 'bSDD', desc: 'buildingSMART Data Dictionary — единый словарь строительных терминов и классификаторов' },
+          { code: 'UCM', desc: 'Use Case Management — управление сценариями применения BIM' },
+        ].map((s) => (
+          <Grid item xs={12} sm={6} key={s.code}>
+            <Box sx={{ borderLeft: `3px solid ${AMBER}`, pl: 2, py: 0.5 }}>
+              <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem' }}>{s.code}</Typography>
+              <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#334155' }}>{s.desc}</Typography>
+            </Box>
+          </Grid>
+        ))}
       </Grid>
+
+      <Divider sx={{ mb: 4 }} />
+
+      {/* About bSI */}
+      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+        buildingSMART International
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        buildingSMART International — глобальная некоммерческая организация, основанная в 1995 году.
+        Объединяет более 30 национальных отделений (чаптеров) по всему миру. Организация разрабатывает
+        и поддерживает открытые стандарты обмена данными о строительных объектах, в первую очередь
+        формат IFC.
+      </Typography>
+      <Box sx={{ borderLeft: '4px solid #F59E0B', pl: 3, py: 2, bgcolor: '#FAFAFA', mb: 2 }}>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
+          Видение buildingSMART International: беспрепятственный обмен достоверной цифровой информацией
+          об объектах на протяжении всего их жизненного цикла — от идеи до сноса.
+        </Typography>
+      </Box>
     </Box>
   );
 }

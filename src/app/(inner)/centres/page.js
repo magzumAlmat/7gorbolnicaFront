@@ -1,57 +1,45 @@
 'use client';
-import { Typography, Box, Paper, Grid, Button, Chip } from '@mui/material';
-import {
-  DomainVerification,
-  Gavel,
-  Computer,
-  Architecture,
-  School,
-  Terrain,
-  ArrowForward,
-} from '@mui/icons-material';
+import { Typography, Box, Grid, Divider } from '@mui/material';
 import Link from 'next/link';
+
+const NAVY = '#0F172A';
+const AMBER = '#F59E0B';
 
 const CENTRES = [
   {
-    icon: <Terrain sx={{ fontSize: 40, color: '#0369A1' }} />,
-    title: 'Центр по сейсмостойкости зданий и сооружений',
-    short: 'Техническое обследование объектов, сейсмическая паспортизация, структурные расчёты и испытания строительных материалов.',
-    chips: ['Обследование', 'Паспортизация', 'Испытания'],
+    num: '01',
+    title: 'Центр сейсмостойкости, обследования зданий и сооружений',
+    desc: 'Проводит техническое обследование существующих зданий и сооружений, оценку их сейсмостойкости, сейсмическую паспортизацию объектов. Выполняет структурные расчёты, испытания строительных материалов и конструкций, разрабатывает мероприятия по усилению и реконструкции.',
     href: '/centres/center-for-seismic-resistance-inspection-of-buildings-and-structures',
   },
   {
-    icon: <Gavel sx={{ fontSize: 40, color: '#0369A1' }} />,
-    title: 'Центр нормирования в строительстве',
-    short: 'Разработка нормативных документов, стандартов сметного нормирования и мониторинг цен на строительные материалы.',
-    chips: ['НТД', 'Сметное нормирование', 'Мониторинг цен'],
-    href: '/centres/center-for-regulation-in-construction',
-  },
-  {
-    icon: <Computer sx={{ fontSize: 40, color: '#0369A1' }} />,
-    title: 'Центр науки и цифровизации строительства',
-    short: 'Внедрение BIM/ТИМСО, разработка стандартов информационного моделирования и цифровая трансформация отрасли.',
-    chips: ['BIM', 'ТИМСО', 'Цифровизация'],
-    href: '/centres/center-for-science-and-digitalization-of-construction',
-  },
-  {
-    icon: <Architecture sx={{ fontSize: 40, color: '#0369A1' }} />,
+    num: '02',
     title: 'Центр типового и индивидуального проектирования',
-    short: 'Типовые проекты жилых и общественных зданий, индивидуальное проектирование, архив проектных решений 2010–2016 гг.',
-    chips: ['Типовые проекты', 'Жильё', 'Общественные здания'],
+    desc: 'Разрабатывает типовые проекты жилых и общественных зданий, ведёт архив типовых проектных решений 2010–2016 годов. Выполняет индивидуальное проектирование по заказу государственных органов и частных застройщиков с учётом требований казахстанских нормативных документов.',
     href: '/centres/center-for-standard-and-individual-design',
   },
   {
-    icon: <School sx={{ fontSize: 40, color: '#0369A1' }} />,
+    num: '03',
+    title: 'Центр науки и цифровизации строительства',
+    desc: 'Занимается внедрением технологий информационного моделирования (BIM/ТИМСО) в строительную отрасль Казахстана. Разрабатывает стандарты и методические рекомендации по цифровой трансформации, реализует научно-исследовательские проекты в области цифрового строительства.',
+    href: '/centres/center-for-science-and-digitalization-of-construction',
+  },
+  {
+    num: '04',
     title: 'Корпоративный университет',
-    short: '7 учебных курсов для специалистов строительной отрасли, аттестация ИТР, обучение 3–4 раза в месяц.',
-    chips: ['Обучение', 'Аттестация ИТР', '7 курсов'],
+    desc: 'Обеспечивает профессиональную подготовку и повышение квалификации специалистов строительной отрасли. Реализует 7 учебных курсов, проводит аттестацию инженерно-технических работников. Занятия проходят 3–4 раза в месяц в очном и дистанционном форматах.',
     href: '/centres/corporate-university',
   },
   {
-    icon: <DomainVerification sx={{ fontSize: 40, color: '#0369A1' }} />,
-    title: 'Центр научно-технической экспертизы',
-    short: 'Экспертиза проектной документации, независимая оценка технических решений, научное сопровождение строительных проектов.',
-    chips: ['Экспертиза', 'Оценка', 'НТД'],
+    num: '05',
+    title: 'Центр нормирования в строительстве',
+    desc: 'Разрабатывает и актуализирует нормативно-технические документы в сфере строительства, формирует сметные нормативы и ресурсные показатели. Ведёт систематический мониторинг цен на строительные материалы, изделия и конструкции по регионам Казахстана.',
+    href: '/centres/center-for-regulation-in-construction',
+  },
+  {
+    num: '06',
+    title: 'Центр научных исследований',
+    desc: 'Выполняет фундаментальные и прикладные научные исследования в области строительства и архитектуры. Осуществляет экспертизу проектной документации, научное сопровождение строительных проектов, подготовку научных заключений и независимую оценку технических решений.',
     href: '/centres',
   },
 ];
@@ -59,119 +47,94 @@ const CENTRES = [
 export default function CentresOverview() {
   return (
     <Box>
-      {/* Hero */}
-      <Box
+      <Typography
+        variant="h3"
         sx={{
-          background: 'linear-gradient(135deg, #0F172A 0%, #0369A1 100%)',
-          borderRadius: 3,
-          p: { xs: 3, md: 5 },
-          mb: 5,
-          color: '#fff',
+          fontFamily: '"Exo 2", sans-serif',
+          fontWeight: 800,
+          color: NAVY,
+          mb: 1,
         }}
       >
-        <Typography variant="overline" sx={{ color: '#F59E0B', fontWeight: 700, letterSpacing: 2 }}>
-          КазНИИСА
-        </Typography>
-        <Typography variant="h3" sx={{ fontWeight: 800, mt: 1, mb: 2 }}>
-          Центры компетенций
-        </Typography>
-        <Typography variant="h6" sx={{ opacity: 0.85, maxWidth: 680, fontWeight: 400 }}>
-          Шесть специализированных центров, обеспечивающих полный цикл научного, нормативного и
-          практического сопровождения строительной отрасли Казахстана.
+        Центры компетенций
+      </Typography>
+      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4, maxWidth: 760 }}>
+        АО «КазНИИСА» объединяет шесть специализированных центров, которые обеспечивают полный цикл
+        научного, нормативного и практического сопровождения строительной отрасли Республики Казахстан.
+        Каждый центр ведёт самостоятельную научную и производственную деятельность в своей области компетенций.
+      </Typography>
+
+      <Box
+        sx={{
+          borderLeft: '4px solid #F59E0B',
+          pl: 3,
+          py: 2,
+          bgcolor: '#FAFAFA',
+          mb: 5,
+          fontStyle: 'italic',
+        }}
+      >
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+          КазНИИСА — ведущая научно-исследовательская организация строительной отрасли Казахстана.
+          Все шесть центров работают в едином научном и нормативном пространстве, обеспечивая
+          синергию экспертизы, исследований, проектирования и образования.
         </Typography>
       </Box>
 
-      {/* Cards */}
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         {CENTRES.map((c, i) => (
-          <Grid item xs={12} md={6} key={i}>
-            <Paper
-              elevation={0}
-              sx={{
-                p: 3.5,
-                border: '1px solid #E2E8F0',
-                borderRadius: 3,
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                transition: 'box-shadow 0.2s, border-color 0.2s',
-                '&:hover': { boxShadow: '0 8px 32px rgba(3,105,161,0.12)', borderColor: '#0369A1' },
-              }}
-            >
-              <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, mb: 2 }}>
-                <Box
-                  sx={{
-                    p: 1.5,
-                    borderRadius: 2,
-                    background: '#EFF6FF',
-                    flexShrink: 0,
-                  }}
-                >
-                  {c.icon}
-                </Box>
-                <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A', lineHeight: 1.3 }}>
-                  {c.title}
-                </Typography>
-              </Box>
-
-              <Typography variant="body2" sx={{ color: '#475569', mb: 2.5, lineHeight: 1.7, flex: 1 }}>
-                {c.short}
-              </Typography>
-
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75, mb: 2.5 }}>
-                {c.chips.map((ch) => (
-                  <Chip
-                    key={ch}
-                    label={ch}
-                    size="small"
-                    sx={{
-                      background: '#F1F5F9',
-                      color: '#0369A1',
-                      fontWeight: 600,
-                      fontSize: 11,
-                    }}
-                  />
-                ))}
-              </Box>
-
-              <Button
-                component={Link}
-                href={c.href}
-                endIcon={<ArrowForward />}
+          <Grid item xs={12} key={i}>
+            <Box sx={{ display: 'flex', gap: { xs: 2, md: 4 }, alignItems: 'flex-start' }}>
+              <Typography
                 sx={{
-                  alignSelf: 'flex-start',
-                  color: '#0369A1',
-                  fontWeight: 700,
-                  px: 0,
-                  '&:hover': { background: 'transparent', color: '#0F172A' },
+                  fontFamily: '"Exo 2", sans-serif',
+                  fontWeight: 800,
+                  fontSize: '2.5rem',
+                  color: AMBER,
+                  lineHeight: 1,
+                  minWidth: 52,
+                  flexShrink: 0,
                 }}
               >
-                Подробнее
-              </Button>
-            </Paper>
+                {c.num}
+              </Typography>
+              <Box sx={{ flex: 1 }}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: '"Exo 2", sans-serif',
+                    fontWeight: 700,
+                    color: NAVY,
+                    mb: 1,
+                    lineHeight: 1.35,
+                  }}
+                >
+                  {c.title}
+                </Typography>
+                <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 1.5 }}>
+                  {c.desc}
+                </Typography>
+                <Link
+                  href={c.href}
+                  style={{
+                    color: NAVY,
+                    fontWeight: 700,
+                    fontSize: '0.9rem',
+                    textDecoration: 'none',
+                    borderBottom: `2px solid ${AMBER}`,
+                    paddingBottom: 1,
+                  }}
+                >
+                  Подробнее о центре →
+                </Link>
+              </Box>
+            </Box>
+            {i < CENTRES.length - 1 && <Divider sx={{ mt: 3 }} />}
           </Grid>
         ))}
       </Grid>
-
-      {/* Bottom accent */}
-      <Box
-        sx={{
-          mt: 5,
-          p: 3,
-          borderRadius: 3,
-          background: '#FFFBEB',
-          border: '1px solid #FDE68A',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 2,
-        }}
-      >
-        <Box sx={{ color: '#F59E0B', fontSize: 32, lineHeight: 1 }}>★</Box>
-        <Typography variant="body1" sx={{ color: '#78350F', fontWeight: 500 }}>
-          КазНИИСА — ведущая научно-исследовательская организация в сфере строительства Казахстана.
-          Все центры работают в едином научном и нормативном пространстве.
-        </Typography>
-      </Box>
     </Box>
   );
 }

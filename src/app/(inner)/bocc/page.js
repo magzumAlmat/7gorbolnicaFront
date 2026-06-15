@@ -1,179 +1,122 @@
 'use client';
-import { Typography, Box, Paper, Grid, List, ListItem, ListItemIcon, ListItemText, Chip, Divider, Avatar } from '@mui/material';
-import GroupsIcon from '@mui/icons-material/Groups';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import EventNoteIcon from '@mui/icons-material/EventNote';
-import GavelIcon from '@mui/icons-material/Gavel';
+import { Typography, Box, Grid, Divider, Table, TableBody, TableRow, TableCell } from '@mui/material';
+
+const NAVY = '#0F172A';
+const AMBER = '#F59E0B';
 
 const members = [
-  'Республика Казахстан', 'Российская Федерация', 'Республика Беларусь',
-  'Украина', 'Республика Узбекистан', 'Республика Кыргызстан',
-  'Республика Таджикистан', 'Азербайджанская Республика',
-  'Республика Армения', 'Республика Молдова',
-];
-
-const missions = [
-  'Координация технической политики в области технического регулирования строительной деятельности',
-  'Разработка межгосударственных строительных нормативов (МГСН) и сводов правил',
-  'Содействие взаимному признанию национальных нормативных документов стран СНГ',
-  'Обмен опытом и лучшими практиками в сфере строительной науки и нормирования',
-  'Организация совместных научно-технических исследований',
-  'Гармонизация национальных строительных норм с международными стандартами',
-];
-
-const events = [
-  { year: '2024', title: 'XLII заседание БОКС', place: 'Алматы, Казахстан', desc: 'Утверждение плана работ на 2024–2025 годы, рассмотрение проектов межгосударственных стандартов.' },
-  { year: '2023', title: 'XLI заседание БОКС', place: 'Минск, Беларусь', desc: 'Принятие резолюции о гармонизации строительных норм в рамках ЕАЭС.' },
-  { year: '2022', title: 'XL заседание БОКС', place: 'Москва, Россия', desc: 'Обсуждение вопросов сейсмобезопасности и единых подходов к оценке рисков.' },
-  { year: '2021', title: 'XXXIX заседание БОКС', place: 'Ташкент, Узбекистан', desc: 'Утверждение межгосударственных документов по тепловой защите зданий.' },
+  'Азербайджан',
+  'Армения',
+  'Беларусь',
+  'Казахстан (секретариат — АО «КазНИИСА»)',
+  'Киргизия',
+  'Молдавия',
+  'Россия',
+  'Таджикистан',
+  'Туркмения',
+  'Узбекистан',
+  'Украина',
 ];
 
 export default function BoccPage() {
   return (
     <Box>
-      <Paper
-        elevation={0}
-        sx={{
-          background: 'linear-gradient(135deg, #0F172A 0%, #1e40af 100%)',
-          color: '#fff',
-          borderRadius: 3,
-          p: { xs: 3, md: 5 },
-          mb: 4,
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-          <GroupsIcon sx={{ fontSize: 40 }} />
-          <Chip label="Межгосударственное сотрудничество" sx={{ bgcolor: '#F59E0B', color: '#0F172A', fontWeight: 700 }} />
-        </Box>
-        <Typography variant="h4" sx={{ fontWeight: 800, mb: 1 }}>
-          БОКС — Базовая организация стран СНГ
+      <Typography variant="h3" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 0 }}>
+        БОСС — Базовая организация в сейсмостойком строительстве СНГ
+      </Typography>
+      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, mt: 1, mb: 3 }} />
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
+        БОСС (Базовая организация стран СНГ в области сейсмостойкого строительства) — межгосударственная
+        структура, созданная под руководством АО «КазНИИСА». Объединяет 11 государств-членов Содружества
+        Независимых Государств с целью выработки единых подходов к развитию сейсмостойкого строительства
+        на постсоветском пространстве.
+      </Typography>
+
+      <Box sx={{ borderLeft: '4px solid #F59E0B', pl: 3, py: 2, bgcolor: '#FAFAFA', mb: 4 }}>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
+          Главная цель БОСС — создать единый подход к развитию сейсмостойкого строительства в
+          странах СНГ, при котором государства-участники совместно используют испытательные базы
+          и научные результаты, исключая дублирование дорогостоящих исследований.
         </Typography>
-        <Typography variant="body1" sx={{ opacity: 0.7, mb: 2, fontSize: '0.95rem' }}>
-          по стандартизации и нормированию в строительстве
-        </Typography>
-        <Typography variant="body1" sx={{ opacity: 0.9, maxWidth: 720 }}>
-          КазНИИСА выполняет функции секретариата Базовой организации стран СНГ по стандартизации
-          и нормированию в строительстве (БОКС). Организация координирует техническую политику
-          в области технического регулирования строительной деятельности государств — участников СНГ.
-        </Typography>
-      </Paper>
+      </Box>
 
-      <Grid container spacing={3}>
-        {/* Mission */}
-        <Grid item xs={12} md={6}>
-          <Paper elevation={1} sx={{ borderRadius: 3, p: 3, height: '100%' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-              <GavelIcon sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Миссия и задачи БОКС
-              </Typography>
+      <Divider sx={{ mb: 4 }} />
+
+      {/* Functions */}
+      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+        Функции организации
+      </Typography>
+      <Box component="ul" sx={{ pl: 3, m: 0, mb: 4 }}>
+        {[
+          'Координация экспериментальных и научных исследований в области сейсмостойкого строительства',
+          'Совместный анализ устойчивости строительных конструкций при сейсмических воздействиях',
+          'Обеспечение единой платформы сотрудничества для учёных и специалистов стран-участниц',
+          'Разработка унифицированных межгосударственных строительных норм в области сейсмостойкости',
+          'Обмен результатами испытаний и совместное использование экспериментальных стендов',
+          'Формирование общей базы знаний об особенностях сейсмических воздействий в регионе',
+          'Подготовка рекомендаций по сейсмическому районированию и категорированию территорий',
+          'Гармонизация национальных норм сейсмостойкого строительства с международными стандартами',
+        ].map((f, i) => (
+          <Box component="li" key={i} sx={{ mb: 1 }}>
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>{f}</Typography>
+          </Box>
+        ))}
+      </Box>
+
+      <Divider sx={{ mb: 4 }} />
+
+      {/* Members */}
+      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+        Государства-участники
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        В состав БОСС входят 11 государств — членов СНГ:
+      </Typography>
+      <Grid container spacing={1} sx={{ mb: 4 }}>
+        {members.map((m, i) => (
+          <Grid item xs={12} sm={6} md={4} key={i}>
+            <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5, py: 0.5 }}>
+              <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: AMBER, mt: '10px', flexShrink: 0 }} />
+              <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>{m}</Typography>
             </Box>
-            <List dense disablePadding>
-              {missions.map((item, i) => (
-                <ListItem key={i} disableGutters sx={{ alignItems: 'flex-start' }}>
-                  <ListItemIcon sx={{ minWidth: 28, mt: 0.5 }}>
-                    <CheckCircleOutlineIcon sx={{ color: '#0369A1', fontSize: 18 }} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={item}
-                    primaryTypographyProps={{ variant: 'body2', color: 'text.secondary' }}
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
-        </Grid>
-
-        {/* Members */}
-        <Grid item xs={12} md={6}>
-          <Paper elevation={1} sx={{ borderRadius: 3, p: 3, height: '100%' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-              <GroupsIcon sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Страны-участницы СНГ
-              </Typography>
-            </Box>
-            <Grid container spacing={1}>
-              {members.map((country, i) => (
-                <Grid item xs={12} sm={6} key={i}>
-                  <Box
-                    sx={{
-                      display: 'flex', alignItems: 'center', gap: 1.5,
-                      p: 1, borderRadius: 1,
-                      bgcolor: i === 0 ? '#EFF6FF' : 'transparent',
-                      border: i === 0 ? '1px solid #BFDBFE' : '1px solid transparent',
-                    }}
-                  >
-                    <Avatar sx={{ width: 28, height: 28, bgcolor: '#0369A1', fontSize: '0.75rem', fontWeight: 700 }}>
-                      {country.slice(0, 1)}
-                    </Avatar>
-                    <Typography variant="body2" color={i === 0 ? '#0369A1' : 'text.secondary'} sx={{ fontWeight: i === 0 ? 700 : 400 }}>
-                      {country}
-                      {i === 0 && <Typography component="span" variant="caption" sx={{ ml: 0.5, color: '#F59E0B', fontWeight: 700 }}>(секретариат)</Typography>}
-                    </Typography>
-                  </Box>
-                </Grid>
-              ))}
-            </Grid>
-          </Paper>
-        </Grid>
-
-        {/* Recent events */}
-        <Grid item xs={12}>
-          <Paper elevation={1} sx={{ borderRadius: 3, p: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
-              <EventNoteIcon sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Заседания БОКС
-              </Typography>
-            </Box>
-            <Grid container spacing={2}>
-              {events.map((ev, i) => (
-                <Grid item xs={12} sm={6} md={3} key={i}>
-                  <Box
-                    sx={{
-                      p: 2, borderRadius: 2,
-                      border: '1px solid #E2E8F0',
-                      height: '100%',
-                      borderTop: i === 0 ? '3px solid #F59E0B' : '3px solid #0369A1',
-                    }}
-                  >
-                    <Chip
-                      label={ev.year}
-                      size="small"
-                      sx={{ bgcolor: '#0F172A', color: '#fff', fontWeight: 700, mb: 1 }}
-                    />
-                    <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#0F172A', mb: 0.5 }}>
-                      {ev.title}
-                    </Typography>
-                    <Typography variant="caption" sx={{ color: '#0369A1', fontWeight: 600, display: 'block', mb: 1 }}>
-                      {ev.place}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.8rem' }}>
-                      {ev.desc}
-                    </Typography>
-                  </Box>
-                </Grid>
-              ))}
-            </Grid>
-          </Paper>
-        </Grid>
-
-        {/* Info box */}
-        <Grid item xs={12}>
-          <Paper elevation={0} sx={{ borderRadius: 2, p: 3, bgcolor: '#F0F9FF', border: '1px solid #BAE6FD' }}>
-            <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#0369A1', mb: 1 }}>
-              О статусе секретариата
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              КазНИИСА выполняет функции секретариата БОКС на основании решения Совета глав правительств
-              СНГ. Секретариат обеспечивает организационно-техническое сопровождение деятельности БОКС,
-              ведение архива нормативных документов, координацию рабочих групп и подготовку
-              проектов резолюций заседаний.
-            </Typography>
-          </Paper>
-        </Grid>
+          </Grid>
+        ))}
       </Grid>
+
+      <Divider sx={{ mb: 4 }} />
+
+      {/* Scientific cooperation */}
+      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+        Научное сотрудничество
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        Государства-участники БОСС ведут совместные исследования в следующих направлениях:
+      </Typography>
+      <Table sx={{ mb: 4, border: '1px solid #E2E8F0' }}>
+        <TableBody>
+          {[
+            ['Сейсмическое микрорайонирование', 'Детальное картирование сейсмической опасности для конкретных площадок строительства'],
+            ['Динамика сооружений', 'Изучение реакции зданий и конструкций на сейсмические нагрузки, разработка расчётных моделей'],
+            ['Испытания конструкций', 'Натурные и стендовые испытания строительных конструкций на сейсмических платформах'],
+            ['Нормирование', 'Разработка межгосударственных норм и правил проектирования сейсмостойких зданий'],
+            ['Мониторинг', 'Инструментальный мониторинг зданий и сооружений в сейсмически активных зонах'],
+          ].map(([area, desc], i) => (
+            <TableRow key={i} sx={{ '&:nth-of-type(odd)': { bgcolor: '#F8FAFC' } }}>
+              <TableCell sx={{ fontWeight: 700, color: NAVY, width: '35%', verticalAlign: 'top', py: 1.5 }}>{area}</TableCell>
+              <TableCell sx={{ color: '#334155', fontSize: '0.97rem', lineHeight: 1.8, py: 1.5 }}>{desc}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
+      <Box sx={{ borderLeft: '4px solid #F59E0B', pl: 3, py: 2, bgcolor: '#FAFAFA' }}>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
+          АО «КазНИИСА» выполняет функции секретариата БОСС, обеспечивая организационно-техническое
+          сопровождение деятельности организации: ведение архива нормативных документов, координацию
+          рабочих групп и подготовку материалов заседаний.
+        </Typography>
+      </Box>
     </Box>
   );
 }

@@ -1,118 +1,205 @@
 'use client';
-import { Typography, Box, Paper, Grid, Chip, Divider, Avatar } from '@mui/material';
-import StarIcon from '@mui/icons-material/Star';
-import PersonIcon from '@mui/icons-material/Person';
+import {
+  Typography,
+  Box,
+  Divider,
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+} from '@mui/material';
 
 const NAVY = '#0F172A';
-const ACCENT = '#0369A1';
 const AMBER = '#F59E0B';
-const BG = '#F8FAFC';
 
 const board = [
-  { name: 'Бесимбаев Е.Т.', role: 'Председатель Совета директоров', initials: 'БЕ', chair: true },
-  { name: 'Рысдавлетов М.Б.', role: 'Член Совета директоров', initials: 'РМ' },
-  { name: 'Карибаева М.К.', role: 'Член Совета директоров', initials: 'КМ' },
-  { name: 'Кульбаев Б.Б.', role: 'Член Совета директоров', initials: 'КБ' },
-  { name: 'Есенова К.Е.', role: 'Член Совета директоров', initials: 'ЕК' },
-  { name: 'Сатжанов К.С.', role: 'Член Совета директоров', initials: 'СК' },
-];
-
-const management = [
-  { name: 'Кульбаев Б.Б.', role: 'Генеральный директор', initials: 'КБ' },
-  { name: 'Шокбаров Е.М.', role: 'Управляющий директор по производству', initials: 'ШЕ' },
-  { name: 'Шахнович А.Ю.', role: 'Управляющий директор по развитию и цифровизации', initials: 'ША' },
+  {
+    name: 'Бесимбаев Ерик Турашович',
+    role: 'Председатель Совета директоров',
+    since: '29.07.2024',
+    note: 'Профессор КазНИТУ, род. 22.11.1958',
+    chair: true,
+  },
+  {
+    name: 'Рысдавлетов Мурат Булатович',
+    role: 'Заместитель председателя Комитета строительства',
+    since: '12.02.2026',
+    note: 'Род. 30.09.1982',
+    chair: false,
+  },
+  {
+    name: 'Карибаева Мамыр Куанышовна',
+    role: 'Главный эксперт',
+    since: '29.07.2024',
+    note: 'Род. 31.08.1970',
+    chair: false,
+  },
+  {
+    name: 'Кульбаев Бегман Бахитович',
+    role: 'Генеральный директор АО «КазНИИСА»',
+    since: '29.07.2024',
+    note: 'Род. 10.01.1982',
+    chair: false,
+  },
+  {
+    name: 'Есенова Куралай Еркебековна',
+    role: 'Независимый директор',
+    since: '29.07.2024',
+    note: 'Род. 21.04.1971',
+    chair: false,
+  },
+  {
+    name: 'Сатжанов Кенжебай Сатжанович',
+    role: 'Представитель акционера',
+    since: '29.07.2024',
+    note: 'Род. 19.08.1955',
+    chair: false,
+  },
 ];
 
 export default function GoverningBodiesPage() {
   return (
     <Box>
-      <Chip label="Управление" size="small" sx={{ bgcolor: AMBER, color: NAVY, fontWeight: 700, mb: 1.5, fontFamily: '"Roboto Mono", monospace' }} />
-      <Typography variant="h4" sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}>
+      <Typography
+        variant="h4"
+        sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}
+      >
         Органы управления
       </Typography>
-      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 3 }} />
-      <Box component="img" src="/images/kazniisa/org-structure-2025.webp" alt="Организационная структура КазНИИСА 2025" sx={{ width: '100%', maxWidth: 600, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
 
-      <Paper elevation={0} sx={{ p: 3, bgcolor: `${ACCENT}08`, border: `1px solid ${ACCENT}25`, borderRadius: 3, mb: 4 }}>
-        <Typography variant="overline" sx={{ color: ACCENT, fontFamily: '"Roboto Mono", monospace', fontWeight: 700, letterSpacing: 1, display: 'block', mb: 1 }}>
-          Единственный акционер
+      {/* Единственный акционер */}
+      <Box
+        sx={{
+          p: 3,
+          border: `2px solid ${AMBER}`,
+          borderRadius: 3,
+          bgcolor: `${AMBER}08`,
+          mb: 5,
+        }}
+      >
+        <Typography
+          sx={{
+            fontWeight: 700,
+            color: AMBER,
+            fontSize: '0.82rem',
+            textTransform: 'uppercase',
+            letterSpacing: 1,
+            mb: 1,
+            fontFamily: '"Exo 2", sans-serif',
+          }}
+        >
+          Единственный акционер — 100% акций
         </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
-          <Box component="img" src="/images/kazniisa/ministry-logo.webp" alt="Министерство промышленности и строительства РК" sx={{ height: 48, objectFit: 'contain', flexShrink: 0 }} />
-          <Typography sx={{ fontWeight: 600, color: NAVY, fontSize: '1rem' }}>
-            Комитет по делам строительства и жилищно-коммунального хозяйства Министерства промышленности и строительства Республики Казахстан
-          </Typography>
-        </Box>
-      </Paper>
-
-      <Box sx={{ mb: 4 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2.5 }}>
-          <StarIcon sx={{ color: AMBER }} />
-          <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontFamily: '"Exo 2", sans-serif' }}>
-            Совет директоров
-          </Typography>
-        </Box>
-        <Grid container spacing={2}>
-          {board.map((m, i) => (
-            <Grid item xs={12} sm={6} md={4} key={i}>
-              <Paper elevation={0} sx={{
-                p: 2.5, border: `1px solid ${m.chair ? AMBER : '#E2E8F0'}`,
-                borderRadius: 2, bgcolor: m.chair ? `${AMBER}10` : BG,
-                display: 'flex', alignItems: 'center', gap: 2,
-              }}>
-                <Avatar sx={{ bgcolor: m.chair ? AMBER : NAVY, color: m.chair ? NAVY : '#fff', fontWeight: 700, width: 44, height: 44, fontSize: '0.85rem' }}>
-                  {m.initials}
-                </Avatar>
-                <Box>
-                  <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '0.9rem' }}>{m.name}</Typography>
-                  <Typography sx={{ color: '#64748B', fontSize: '0.78rem', lineHeight: 1.4 }}>{m.role}</Typography>
-                </Box>
-              </Paper>
-            </Grid>
-          ))}
-        </Grid>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontWeight: 600 }}>
+          Комитет по делам строительства и жилищно-коммунального хозяйства Министерства
+          промышленности и строительства Республики Казахстан
+        </Typography>
       </Box>
 
-      <Divider sx={{ mb: 4 }} />
+      {/* Совет директоров */}
+      <Typography
+        variant="h6"
+        sx={{ fontWeight: 700, color: NAVY, mb: 2.5, fontFamily: '"Exo 2", sans-serif' }}
+      >
+        Совет директоров
+      </Typography>
 
-      <Box sx={{ mb: 4 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2.5 }}>
-          <PersonIcon sx={{ color: ACCENT }} />
-          <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontFamily: '"Exo 2", sans-serif' }}>
-            Руководство
-          </Typography>
-        </Box>
-        <Grid container spacing={2}>
-          {management.map((m, i) => {
-            const photos = [
-              '/images/kazniisa/kulbaev-director.webp',
-              '/images/kazniisa/shokbarov.webp',
-              '/images/kazniisa/shakhnovitch.webp',
-            ];
-            return (
-              <Grid item xs={12} sm={6} md={4} key={i}>
-                <Paper elevation={0} sx={{ p: 2.5, border: '1px solid #E2E8F0', borderRadius: 2, bgcolor: BG, display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Box component="img" src={photos[i]} alt={m.name} sx={{ width: 56, height: 56, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }} />
-                  <Box>
-                    <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '0.9rem' }}>{m.name}</Typography>
-                    <Typography sx={{ color: '#64748B', fontSize: '0.78rem', lineHeight: 1.4 }}>{m.role}</Typography>
-                  </Box>
-                </Paper>
-              </Grid>
-            );
-          })}
-        </Grid>
+      <Box sx={{ overflowX: 'auto', mb: 5 }}>
+        <Table sx={{ minWidth: 500 }}>
+          <TableBody>
+            <TableRow sx={{ bgcolor: NAVY }}>
+              <TableCell sx={{ color: '#fff', fontWeight: 700, fontFamily: '"Exo 2", sans-serif', fontSize: '0.9rem', py: 1.5 }}>
+                №
+              </TableCell>
+              <TableCell sx={{ color: '#fff', fontWeight: 700, fontFamily: '"Exo 2", sans-serif', fontSize: '0.9rem', py: 1.5 }}>
+                ФИО
+              </TableCell>
+              <TableCell sx={{ color: '#fff', fontWeight: 700, fontFamily: '"Exo 2", sans-serif', fontSize: '0.9rem', py: 1.5 }}>
+                Должность / роль
+              </TableCell>
+              <TableCell sx={{ color: '#fff', fontWeight: 700, fontFamily: '"Exo 2", sans-serif', fontSize: '0.9rem', py: 1.5 }}>
+                В составе с
+              </TableCell>
+            </TableRow>
+            {board.map((m, i) => (
+              <TableRow
+                key={i}
+                sx={{
+                  bgcolor: m.chair ? `${AMBER}12` : i % 2 === 0 ? '#F8FAFC' : '#fff',
+                }}
+              >
+                <TableCell sx={{ color: '#334155', fontSize: '1rem', py: 1.5, fontWeight: m.chair ? 700 : 400 }}>
+                  {i + 1}
+                </TableCell>
+                <TableCell sx={{ color: NAVY, fontSize: '1rem', lineHeight: 1.6, py: 1.5, fontWeight: m.chair ? 700 : 600 }}>
+                  {m.name}
+                  <Typography component="div" sx={{ fontSize: '0.82rem', color: '#64748B', fontWeight: 400 }}>
+                    {m.note}
+                  </Typography>
+                </TableCell>
+                <TableCell sx={{ color: '#334155', fontSize: '1rem', lineHeight: 1.6, py: 1.5 }}>
+                  {m.role}
+                </TableCell>
+                <TableCell sx={{ color: '#334155', fontSize: '1rem', py: 1.5 }}>
+                  {m.since}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </Box>
 
-      <Divider sx={{ mb: 3 }} />
+      <Divider sx={{ mb: 5 }} />
 
-      <Paper elevation={0} sx={{ p: 2.5, border: '1px solid #E2E8F0', borderRadius: 2, display: 'flex', alignItems: 'center', gap: 2 }}>
-        <Avatar sx={{ bgcolor: '#64748B', color: '#fff', fontWeight: 700, width: 44, height: 44, fontSize: '0.85rem' }}>ЕБ</Avatar>
-        <Box>
-          <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '0.9rem' }}>Ермекбаев Б.С.</Typography>
-          <Typography sx={{ color: '#64748B', fontSize: '0.78rem', fontFamily: '"Roboto Mono", monospace' }}>Внутренний аудитор</Typography>
-        </Box>
-      </Paper>
+      {/* Руководство */}
+      <Typography
+        variant="h6"
+        sx={{ fontWeight: 700, color: NAVY, mb: 2.5, fontFamily: '"Exo 2", sans-serif' }}
+      >
+        Исполнительное руководство
+      </Typography>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 5 }}>
+        {[
+          { label: 'Генеральный директор', value: 'Кульбаев Бегман Бахитович', note: 'в должности с 19.09.2017' },
+          { label: 'Управляющий директор по производству', value: 'Шокбаров Ералы Мейрамбекович', note: '' },
+          { label: 'Управляющий директор по развитию и цифровизации', value: 'Шахнович Александр Юльевич', note: '' },
+          { label: 'Корпоративный секретарь-омбудсмен', value: 'Суханкулов Нуркен Кунанбаевич', note: '' },
+          { label: 'Внутренний аудитор', value: 'Ермекбаев Берик Серикович', note: 'тел. 226-94-10, +7 778 705 43 65' },
+        ].map((row, i) => (
+          <Box
+            key={i}
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: { xs: 0.5, sm: 3 },
+              alignItems: 'baseline',
+              borderBottom: '1px solid #E2E8F0',
+              pb: 1.5,
+            }}
+          >
+            <Typography
+              sx={{
+                color: '#64748B',
+                fontSize: '0.88rem',
+                minWidth: { sm: 280 },
+                flexShrink: 0,
+              }}
+            >
+              {row.label}
+            </Typography>
+            <Box>
+              <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem', lineHeight: 1.6 }}>
+                {row.value}
+              </Typography>
+              {row.note && (
+                <Typography sx={{ color: '#64748B', fontSize: '0.82rem' }}>{row.note}</Typography>
+              )}
+            </Box>
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 }

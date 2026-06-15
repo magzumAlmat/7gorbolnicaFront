@@ -1,9 +1,8 @@
 'use client';
-import { Typography, Box, Paper, Grid, List, ListItem, ListItemIcon, ListItemText, Chip, Divider } from '@mui/material';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import ArticleIcon from '@mui/icons-material/Article';
-import PublicIcon from '@mui/icons-material/Public';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import { Typography, Box, Grid, Divider, Table, TableBody, TableRow, TableCell } from '@mui/material';
+
+const NAVY = '#0F172A';
+const AMBER = '#F59E0B';
 
 const eurocodes = [
   { code: 'EN 1990', title: 'Основы проектирования конструкций' },
@@ -18,148 +17,124 @@ const eurocodes = [
   { code: 'EN 1999', title: 'Проектирование алюминиевых конструкций' },
 ];
 
-const activities = [
-  'Перевод и адаптация текстов Еврокодов на русский и казахский языки',
-  'Разработка Национальных приложений (National Annexes) с учётом климатических и сейсмических условий РК',
-  'Гармонизация Еврокодов с действующими национальными нормами (СП РК)',
-  'Участие в техническом комитете ТК 32 «Строительство» по внедрению EN-стандартов',
-  'Подготовка специалистов и проведение семинаров по применению Еврокодов',
-  'Сотрудничество с европейскими комитетами CEN/TC 250',
-];
-
-const goals = [
-  {
-    title: 'Единое техническое пространство',
-    desc: 'Интеграция в общее нормативное пространство СНГ и Европы для свободного движения строительных технологий и специалистов.',
-  },
-  {
-    title: 'Повышение качества строительства',
-    desc: 'Применение передовых методов расчёта и проектирования, проверенных десятилетиями европейской практики.',
-  },
-  {
-    title: 'Привлечение инвестиций',
-    desc: 'Унификация норм снижает барьеры для иностранных инвесторов и международных строительных компаний в Казахстане.',
-  },
-  {
-    title: 'Сейсмостойкость',
-    desc: 'EN 1998 адаптируется с учётом высокой сейсмической активности территории Казахстана и накопленного отечественного опыта.',
-  },
-];
-
 export default function EurocodePage() {
   return (
     <Box>
-      <Paper
-        elevation={0}
-        sx={{
-          background: 'linear-gradient(135deg, #0F172A 0%, #0369A1 100%)',
-          color: '#fff',
-          borderRadius: 3,
-          p: { xs: 3, md: 5 },
-          mb: 4,
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-          <PublicIcon sx={{ fontSize: 40 }} />
-          <Chip label="Международные стандарты" sx={{ bgcolor: '#F59E0B', color: '#0F172A', fontWeight: 700 }} />
-        </Box>
-        <Typography variant="h4" sx={{ fontWeight: 800, mb: 2 }}>
-          Еврокоды в Казахстане
+      <Typography variant="h3" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 0 }}>
+        Еврокоды в Казахстане
+      </Typography>
+      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, mt: 1, mb: 3 }} />
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
+        Еврокоды — единый комплекс европейских технических стандартов проектирования зданий и
+        сооружений, разработанных Европейской организацией по стандартизации (CEN) на протяжении
+        более 30 лет. Казахстан перешёл на применение Еврокодов с 2020 года. КазНИИСА является
+        ведущим научным центром страны по адаптации и внедрению этих стандартов.
+      </Typography>
+
+      <Box sx={{ borderLeft: '4px solid #F59E0B', pl: 3, py: 2, bgcolor: '#FAFAFA', mb: 4 }}>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
+          Еврокоды применяются в более чем 45 странах мира. С 2016 года АО «КазНИИСА» является
+          наблюдателем в технических комитетах CEN/ТК 250 (конструкции) и CEN/ТК 340 (сейсмостойкость),
+          что позволяет участвовать в разработке и обновлении стандартов на международном уровне.
         </Typography>
-        <Typography variant="body1" sx={{ opacity: 0.9, maxWidth: 720 }}>
-          КазНИИСА является ведущим научным центром по адаптации и внедрению европейских строительных
-          стандартов (Еврокодов) в национальную нормативную базу Республики Казахстан.
-          Работа ведётся в тесном взаимодействии с Комитетом по делам строительства и жилищно-коммунального
-          хозяйства.
-        </Typography>
-      </Paper>
+      </Box>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={7}>
-          <Paper elevation={1} sx={{ borderRadius: 3, p: 3, height: '100%' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-              <AccountBalanceIcon sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Что такое Еврокоды
-              </Typography>
+      <Divider sx={{ mb: 4 }} />
+
+      {/* Why eurocodes */}
+      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+        Причины перехода на Еврокоды
+      </Typography>
+      <Box component="ul" sx={{ pl: 3, m: 0, mb: 4 }}>
+        {[
+          'Обеспечение надёжности, функциональности и долговечности строительных конструкций на основе передовых методов расчёта',
+          'Повышение конкурентоспособности казахстанских проектных и строительных организаций на международном рынке',
+          'Параметрический метод нормирования, допускающий гибкость при учёте местных условий через Национальные приложения',
+          'Упрощение совместной работы с зарубежными специалистами и привлечение иностранных инвестиций',
+          'Интеграция в единое нормативное техническое пространство Европы и ряда стран СНГ',
+        ].map((r, i) => (
+          <Box component="li" key={i} sx={{ mb: 1 }}>
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>{r}</Typography>
+          </Box>
+        ))}
+      </Box>
+
+      <Divider sx={{ mb: 4 }} />
+
+      {/* Characteristics */}
+      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+        Ключевые характеристики
+      </Typography>
+      <Grid container spacing={3} sx={{ mb: 4 }}>
+        {[
+          {
+            title: 'Универсальность',
+            desc: 'Охватывают все типы строительных конструкций: бетонные, стальные, деревянные, каменные, алюминиевые, а также геотехнику и сейсмостойкость.',
+          },
+          {
+            title: 'Гибкость',
+            desc: 'Национальные приложения позволяют учитывать климатические, сейсмические и геологические особенности каждой страны без нарушения единства стандарта.',
+          },
+          {
+            title: 'Прогрессивность',
+            desc: 'Базируются на передовых научно-технических достижениях, регулярно обновляются с учётом новых исследований и инженерной практики.',
+          },
+        ].map((c) => (
+          <Grid item xs={12} sm={4} key={c.title}>
+            <Box sx={{ borderLeft: `3px solid ${AMBER}`, pl: 2, py: 0.5, height: '100%' }}>
+              <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem', mb: 0.5 }}>{c.title}</Typography>
+              <Typography sx={{ fontSize: '0.97rem', lineHeight: 1.8, color: '#334155' }}>{c.desc}</Typography>
             </Box>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              Еврокоды — единый комплекс европейских норм проектирования строительных конструкций,
-              разработанных Европейским комитетом по стандартизации (CEN). Они охватывают все основные
-              аспекты строительного проектирования — от основ механики конструкций до сейсмостойкости
-              и геотехники.
-            </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              Внедрение Еврокодов в Казахстане позволяет строительной отрасли выйти на международный
-              уровень, привлекать иностранных инвесторов и специалистов, а также применять передовые
-              методы расчёта конструкций.
-            </Typography>
-            <Divider sx={{ my: 2 }} />
-            <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1, color: '#0F172A' }}>
-              Деятельность КазНИИСА в области Еврокодов:
-            </Typography>
-            <List dense disablePadding>
-              {activities.map((item, i) => (
-                <ListItem key={i} disableGutters sx={{ alignItems: 'flex-start' }}>
-                  <ListItemIcon sx={{ minWidth: 28, mt: 0.5 }}>
-                    <CheckCircleOutlineIcon sx={{ color: '#0369A1', fontSize: 18 }} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={item}
-                    primaryTypographyProps={{ variant: 'body2', color: 'text.secondary' }}
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12} md={5}>
-          <Paper elevation={1} sx={{ borderRadius: 3, p: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-              <ArticleIcon sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Серия стандартов EN 1990–1999
-              </Typography>
-            </Box>
-            {eurocodes.map((ec, i) => (
-              <Box key={i}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, py: 1 }}>
-                  <Chip
-                    label={ec.code}
-                    size="small"
-                    sx={{ bgcolor: '#0369A1', color: '#fff', fontWeight: 700, minWidth: 80 }}
-                  />
-                  <Typography variant="body2" color="text.secondary">
-                    {ec.title}
-                  </Typography>
-                </Box>
-                {i < eurocodes.length - 1 && <Divider />}
-              </Box>
-            ))}
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12}>
-          <Paper elevation={0} sx={{ borderRadius: 3, p: 3, bgcolor: '#F0F9FF', border: '1px solid #BAE6FD' }}>
-            <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A', mb: 2 }}>
-              Цели гармонизации строительного законодательства
-            </Typography>
-            <Grid container spacing={2}>
-              {goals.map((card, i) => (
-                <Grid item xs={12} sm={6} md={3} key={i}>
-                  <Box sx={{ p: 2, bgcolor: '#fff', borderRadius: 2, height: '100%' }}>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#0369A1', mb: 0.5 }}>
-                      {card.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">{card.desc}</Typography>
-                  </Box>
-                </Grid>
-              ))}
-            </Grid>
-          </Paper>
-        </Grid>
+          </Grid>
+        ))}
       </Grid>
+
+      <Divider sx={{ mb: 4 }} />
+
+      {/* Eurocode series */}
+      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+        Серия стандартов EN 1990–1999
+      </Typography>
+      <Table sx={{ mb: 4, border: '1px solid #E2E8F0' }}>
+        <TableBody>
+          {eurocodes.map((ec, i) => (
+            <TableRow key={i} sx={{ '&:nth-of-type(odd)': { bgcolor: '#F8FAFC' } }}>
+              <TableCell sx={{ fontWeight: 700, color: NAVY, width: '22%', py: 1.5 }}>{ec.code}</TableCell>
+              <TableCell sx={{ color: '#334155', fontSize: '0.97rem', py: 1.5 }}>{ec.title}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
+      <Divider sx={{ mb: 4 }} />
+
+      {/* KazNIISA activities */}
+      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+        Деятельность КазНИИСА в области Еврокодов
+      </Typography>
+      <Box component="ul" sx={{ pl: 3, m: 0, mb: 4 }}>
+        {[
+          'Перевод и адаптация текстов Еврокодов на русский и казахский языки',
+          'Разработка Национальных приложений (National Annexes) с учётом климатических и сейсмических условий Казахстана',
+          'Гармонизация Еврокодов с действующими национальными нормами (СП РК)',
+          'Участие в техническом комитете ТК 32 «Строительство» по внедрению EN-стандартов',
+          'Подготовка специалистов и проведение семинаров по применению Еврокодов',
+          'Сотрудничество с европейскими комитетами CEN/TC 250 и CEN/TC 340 в качестве наблюдателя',
+        ].map((a, i) => (
+          <Box component="li" key={i} sx={{ mb: 1 }}>
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>{a}</Typography>
+          </Box>
+        ))}
+      </Box>
+
+      <Box sx={{ borderLeft: '4px solid #F59E0B', pl: 3, py: 2, bgcolor: '#FAFAFA' }}>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
+          Особое внимание уделяется адаптации EN 1998 (сейсмостойкость) с учётом высокой сейсмической
+          активности территории Казахстана и богатого отечественного опыта проектирования в сложных
+          сейсмических условиях.
+        </Typography>
+      </Box>
     </Box>
   );
 }

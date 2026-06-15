@@ -1,91 +1,152 @@
 'use client';
-import { Typography, Box, Paper, Grid, Chip, Divider } from '@mui/material';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import TimelineIcon from '@mui/icons-material/Timeline';
+import { Typography, Box, Divider } from '@mui/material';
 
 const NAVY = '#0F172A';
-const ACCENT = '#0369A1';
 const AMBER = '#F59E0B';
-const BG = '#F8FAFC';
 
 const timeline = [
-  { year: '1931', text: 'Создан НИИСМиС — Научно-исследовательский институт строительных материалов и строительства' },
-  { year: '1957', text: 'Вошёл в состав Казахского филиала Академии строительства и архитектуры СССР' },
-  { year: '1964', text: 'Передан в состав КазпромстройНИИпроект' },
-  { year: '1990', text: 'Реорганизован в КазНИИССА; первый директор — Жунусов Т.Ж.' },
-  { year: '2012', text: 'Реорганизован в акционерное общество АО «КазНИИСА»' },
+  {
+    date: '7 сентября 1931',
+    text: 'Постановление №46 СНК КАССР об организации НИИСМиС — Научно-исследовательского института строительных материалов и строительства. Первый технический научный институт в Казахстане.',
+  },
+  {
+    date: '1957',
+    text: 'Институт вошёл в состав Казахского филиала Академии строительства и архитектуры СССР.',
+  },
+  {
+    date: '1964',
+    text: 'После ликвидации АСиА СССР институт передан Казпромстройпроекту. Академик Т.Ж. Жунусов возглавил научное направление.',
+  },
+  {
+    date: 'Январь 1990',
+    text: 'На базе КазпромстройНИИпроекта создан КазНИИССА. Первым директором назначен профессор Толеубай Жунусович Жунусов.',
+  },
+  {
+    date: '23 февраля 1990',
+    text: 'Институту присвоен статус головной государственной научной организации по строительному комплексу Республики Казахстан.',
+  },
+  {
+    date: '30 июля 2012',
+    text: 'Постановлением Правительства РК №922 республиканское государственное предприятие преобразовано в акционерное общество «КазНИИСА» со 100% участием государства.',
+  },
 ];
 
 const spheres = [
-  'BIM-технологии и информационное моделирование',
-  'Мониторинг и техническое обследование зданий',
+  'BIM-технологии и информационное моделирование зданий',
+  'Мониторинг и техническое обследование зданий и сооружений',
   'Сейсмические исследования и сейсмозащита',
   'Обучение и повышение квалификации специалистов',
-  'Лабораторные услуги и испытания материалов',
+  'Лабораторные услуги и испытания строительных материалов',
   'Проектные работы любой сложности',
   'Экспертные и консультационные услуги',
   'Научно-исследовательские и опытно-конструкторские работы',
-  'Специальные технические условия',
+  'Разработка специальных технических условий',
 ];
 
 export default function HistoryPage() {
   return (
     <Box>
-      <Chip label="История" size="small" sx={{ bgcolor: AMBER, color: NAVY, fontWeight: 700, mb: 1.5, fontFamily: '"Roboto Mono", monospace' }} />
-      <Typography variant="h4" sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}>
+      <Typography
+        variant="h4"
+        sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}
+      >
         История КазНИИСА
       </Typography>
-      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 3 }} />
-      <Box component="img" src="/images/kazniisa/history-banner.webp" alt="История КазНИИСА" sx={{ width: '100%', maxWidth: 600, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 5 }}>
+        АО «КазНИИСА» — старейшая техническая научная организация Казахстана в области строительства.
+        За более чем 90 лет своей истории институт прошёл путь от небольшого исследовательского
+        учреждения до ведущего национального центра строительной науки, нормирования и проектирования.
+      </Typography>
 
       {/* Timeline */}
-      <Box sx={{ mb: 5 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
-          <TimelineIcon sx={{ color: ACCENT }} />
-          <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontFamily: '"Exo 2", sans-serif' }}>
-            Хронология
-          </Typography>
-        </Box>
-        <Box sx={{ position: 'relative', pl: 3 }}>
-          <Box sx={{ position: 'absolute', left: 0, top: 8, bottom: 8, width: 3, bgcolor: `${ACCENT}30`, borderRadius: 2 }} />
-          {timeline.map((item, i) => (
-            <Box key={i} sx={{ position: 'relative', mb: 3, pl: 3 }}>
-              <Box sx={{
-                position: 'absolute', left: -24, top: 6, width: 14, height: 14,
-                borderRadius: '50%', bgcolor: i === timeline.length - 1 ? AMBER : ACCENT,
-                border: '3px solid #fff', boxShadow: '0 0 0 2px ' + (i === timeline.length - 1 ? AMBER : ACCENT),
-              }} />
-              <Paper elevation={0} sx={{ p: 2.5, border: '1px solid #E2E8F0', borderRadius: 2, bgcolor: i === timeline.length - 1 ? `${AMBER}10` : BG }}>
-                <Typography sx={{ fontFamily: '"Roboto Mono", monospace', fontWeight: 700, color: ACCENT, fontSize: '0.85rem', mb: 0.5 }}>
-                  {item.year}
-                </Typography>
-                <Typography sx={{ color: '#334155', fontSize: '0.95rem', lineHeight: 1.7 }}>
-                  {item.text}
-                </Typography>
-              </Paper>
-            </Box>
-          ))}
-        </Box>
+      <Typography
+        variant="h6"
+        sx={{ fontWeight: 700, color: NAVY, mb: 3, fontFamily: '"Exo 2", sans-serif' }}
+      >
+        Хронология
+      </Typography>
+
+      <Box sx={{ position: 'relative', pl: 4, mb: 6 }}>
+        <Box
+          sx={{
+            position: 'absolute',
+            left: 7,
+            top: 8,
+            bottom: 8,
+            width: 3,
+            bgcolor: `${AMBER}40`,
+            borderRadius: 2,
+          }}
+        />
+        {timeline.map((item, i) => (
+          <Box key={i} sx={{ position: 'relative', mb: 4 }}>
+            <Box
+              sx={{
+                position: 'absolute',
+                left: -25,
+                top: 6,
+                width: 14,
+                height: 14,
+                borderRadius: '50%',
+                bgcolor: i === timeline.length - 1 ? AMBER : NAVY,
+                border: '3px solid #fff',
+                boxShadow: `0 0 0 2px ${i === timeline.length - 1 ? AMBER : NAVY}`,
+              }}
+            />
+            <Typography
+              sx={{
+                fontWeight: 700,
+                color: AMBER,
+                fontSize: '0.9rem',
+                mb: 0.5,
+                fontFamily: '"Exo 2", sans-serif',
+              }}
+            >
+              {item.date}
+            </Typography>
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+              {item.text}
+            </Typography>
+          </Box>
+        ))}
       </Box>
 
-      <Divider sx={{ mb: 4 }} />
+      <Divider sx={{ mb: 5 }} />
 
       {/* Spheres */}
-      <Paper elevation={0} sx={{ p: 3.5, bgcolor: NAVY, borderRadius: 3 }}>
-        <Typography variant="h6" sx={{ fontWeight: 700, color: '#fff', mb: 2.5, fontFamily: '"Exo 2", sans-serif' }}>
+      <Box sx={{ bgcolor: NAVY, borderRadius: 3, p: 4 }}>
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 700,
+            color: '#fff',
+            mb: 1,
+            fontFamily: '"Exo 2", sans-serif',
+          }}
+        >
           Сфера деятельности
         </Typography>
-        <Grid container spacing={1.5}>
-          {spheres.map((s, i) => (
-            <Grid item xs={12} sm={6} key={i}>
-              <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
-                <CheckCircleIcon sx={{ color: AMBER, fontSize: 18, mt: 0.3, flexShrink: 0 }} />
-                <Typography sx={{ color: '#CBD5E1', fontSize: '0.9rem', lineHeight: 1.6 }}>{s}</Typography>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
-      </Paper>
+        <Box sx={{ width: 40, height: 3, bgcolor: AMBER, borderRadius: 2, mb: 3 }} />
+        {spheres.map((s, i) => (
+          <Box key={i} sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, mb: 1.5 }}>
+            <Box
+              sx={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                bgcolor: AMBER,
+                mt: '10px',
+                flexShrink: 0,
+              }}
+            />
+            <Typography sx={{ color: '#CBD5E1', fontSize: '1rem', lineHeight: 1.9 }}>
+              {s}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 }

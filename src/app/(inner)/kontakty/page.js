@@ -1,188 +1,178 @@
 'use client';
-import { Typography, Box, Paper, Grid, List, ListItem, ListItemIcon, ListItemText, Divider, Chip } from '@mui/material';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import PhoneIcon from '@mui/icons-material/Phone';
-import EmailIcon from '@mui/icons-material/Email';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { Typography, Box, Grid, Divider, Table, TableBody, TableCell, TableRow } from '@mui/material';
+
+const NAVY = '#0F172A';
+const AMBER = '#F59E0B';
 
 const offices = [
   {
-    city: 'Алматы',
-    label: 'Главный офис',
-    highlight: true,
-    address: '3 микрорайон, д. 44А',
-    hours: 'Пн–Пт: 9:00 – 18:30',
+    title: 'Офис Алматы №1 — Главный офис',
+    address: '3 микрорайон, д. 44А, г. Алматы',
+    phone: '8 (727) 226 94 10',
     email: 'info@kazniisa.kz',
-    phones: ['8 (727) 226 94 10'],
+    hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
+    contact: 'Пресс-секретарь: Қапезова Тоғжан Болатқанқызы',
+    primary: true,
   },
   {
-    city: 'Алматы',
-    label: 'Офис №2',
-    address: 'ул. Сатпаева, 88Г',
-    hours: 'Пн–Пт: 9:00 – 18:00',
+    title: 'Офис Алматы №2',
+    address: 'ул. Сатпаева, 88Г, г. Алматы',
+    phone: '8 (727) 338 30 22',
     email: 'info@kazniisa.kz',
-    phones: ['8 (727) 338 30 22'],
+    hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
   },
   {
-    city: 'Тараз',
-    label: 'Южный филиал',
-    address: 'ул. Сулейманова, 19Б',
-    hours: 'Пн–Пт: 9:00 – 18:00',
+    title: 'Южно-Казахстанский филиал — Тараз',
+    address: 'ул. Сулейманова, 19Б, г. Тараз',
+    phone: '+7 (7262) 43-63-99',
     email: 'yko@kazniisa.kz',
-    phones: ['+7 (7262) 43-63-99'],
+    hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
+    contact: 'Контактное лицо: Пак Наталия Александровна',
   },
   {
-    city: 'Усть-Каменогорск',
-    label: 'Восточный филиал',
-    address: 'ул. М. Горького, 21',
-    hours: 'Пн–Пт: 9:00 – 18:00',
+    title: 'Восточно-Казахстанский филиал — Усть-Каменогорск',
+    address: 'ул. М. Горького, 21, оф. 203, г. Усть-Каменогорск',
+    phone: '8 (7232) 26-16-90',
     email: 'vko@kazniisa.kz',
-    phones: ['8 (7232) 26-16-90'],
+    hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
   },
   {
-    city: 'Астана',
-    label: 'Столичный филиал',
-    address: 'ул. Бейбітшілік, 14',
-    hours: 'Пн–Пт: 9:00 – 18:00',
+    title: 'Астанинский филиал — Астана',
+    address: 'р-н Сарыарқа, ул. Бейбітшілік, 14, оф. 1406, г. Астана',
+    phone: '8 (7172) 57-53-03',
     email: 'crn@kazniisa.kz',
-    phones: ['8 (7172) 57-53-03'],
+    hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
   },
 ];
 
 export default function KontaktyPage() {
   return (
     <Box>
-      <Paper
-        elevation={0}
+      <Typography
+        variant="h3"
         sx={{
-          background: 'linear-gradient(135deg, #0F172A 0%, #0369A1 100%)',
-          color: '#fff',
-          borderRadius: 3,
-          p: { xs: 3, md: 5 },
-          mb: 4,
+          fontFamily: '"Exo 2", sans-serif',
+          fontWeight: 800,
+          color: NAVY,
+          mb: 1,
         }}
       >
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-          <LocationOnIcon sx={{ fontSize: 40 }} />
-          <Chip label="5 офисов по Казахстану" sx={{ bgcolor: '#F59E0B', color: '#0F172A', fontWeight: 700 }} />
-        </Box>
-        <Typography variant="h4" sx={{ fontWeight: 800, mb: 2 }}>
-          Контакты
-        </Typography>
-        <Typography variant="body1" sx={{ opacity: 0.9, maxWidth: 680 }}>
-          КазНИИСА располагает сетью офисов по всему Казахстану. Выберите ближайший офис
-          для обращения или воспользуйтесь общим адресом электронной почты.
-        </Typography>
-      </Paper>
+        Контакты
+      </Typography>
+      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
 
-      <Grid container spacing={3}>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4, maxWidth: 760 }}>
+        АО «КазНИИСА» располагает сетью офисов в ключевых городах Казахстана. Головной офис
+        находится в Алматы. Региональные филиалы охватывают юг, восток и столицу страны.
+        Единый режим работы всех офисов: <strong>понедельник–пятница, 9:00–18:30</strong>,
+        обеденный перерыв 13:00–14:30.
+      </Typography>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
         {offices.map((office, i) => (
-          <Grid item xs={12} sm={6} md={i === 0 ? 12 : 6} key={i}>
-            <Paper
-              elevation={2}
+          <Box key={i}>
+            <Typography
+              variant="h6"
               sx={{
-                borderRadius: 3,
-                overflow: 'hidden',
-                height: '100%',
-                border: office.highlight ? '2px solid #0369A1' : '1px solid #E2E8F0',
+                fontFamily: '"Exo 2", sans-serif',
+                fontWeight: 700,
+                color: office.primary ? NAVY : '#1E293B',
+                mb: 0.5,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
               }}
             >
-              <Box
-                sx={{
-                  bgcolor: office.highlight ? '#0369A1' : '#0F172A',
-                  px: 3, py: 1.5,
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                }}
-              >
-                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#fff' }}>
-                  {office.city}
-                </Typography>
-                <Chip
-                  label={office.label}
-                  size="small"
+              {office.primary && (
+                <Box
+                  component="span"
                   sx={{
-                    bgcolor: office.highlight ? '#F59E0B' : 'rgba(255,255,255,0.15)',
-                    color: office.highlight ? '#0F172A' : '#fff',
-                    fontWeight: 700,
+                    display: 'inline-block',
+                    width: 10,
+                    height: 10,
+                    borderRadius: '50%',
+                    bgcolor: AMBER,
+                    flexShrink: 0,
                   }}
                 />
-              </Box>
+              )}
+              {office.title}
+            </Typography>
 
-              <Box sx={{ p: 3 }}>
-                <Grid container spacing={office.highlight ? 3 : 0}>
-                  <Grid item xs={12} md={office.highlight ? 4 : 12}>
-                    <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start', mb: 2 }}>
-                      <LocationOnIcon sx={{ color: '#0369A1', mt: 0.2, flexShrink: 0 }} />
-                      <Box>
-                        <Typography variant="caption" sx={{ color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>
-                          Адрес
-                        </Typography>
-                        <Typography variant="body2" sx={{ fontWeight: 600, color: '#0F172A' }}>
-                          {office.address}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </Grid>
+            <Table size="small" sx={{ maxWidth: 680, '& td': { border: 'none', py: 0.6, px: 0 } }}>
+              <TableBody>
+                <TableRow>
+                  <TableCell sx={{ width: 140, color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600, verticalAlign: 'top' }}>
+                    Адрес
+                  </TableCell>
+                  <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+                    {office.address}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
+                    Телефон
+                  </TableCell>
+                  <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+                    <a href={`tel:${office.phone.replace(/\s|-/g, '')}`} style={{ color: NAVY, textDecoration: 'none', fontWeight: 600 }}>
+                      {office.phone}
+                    </a>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
+                    E-mail
+                  </TableCell>
+                  <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+                    <a href={`mailto:${office.email}`} style={{ color: NAVY, textDecoration: 'none', fontWeight: 600 }}>
+                      {office.email}
+                    </a>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
+                    Режим работы
+                  </TableCell>
+                  <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+                    {office.hours}
+                  </TableCell>
+                </TableRow>
+                {office.contact && (
+                  <TableRow>
+                    <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
+                      Контакт
+                    </TableCell>
+                    <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+                      {office.contact}
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
 
-                  <Grid item xs={12} md={office.highlight ? 4 : 12}>
-                    <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start', mb: 2 }}>
-                      <AccessTimeIcon sx={{ color: '#0369A1', mt: 0.2, flexShrink: 0 }} />
-                      <Box>
-                        <Typography variant="caption" sx={{ color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>
-                          Режим работы
-                        </Typography>
-                        <Typography variant="body2" sx={{ fontWeight: 600, color: '#0F172A' }}>
-                          {office.hours}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </Grid>
-
-                  <Grid item xs={12} md={office.highlight ? 4 : 12}>
-                    <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start', mb: 2 }}>
-                      <PhoneIcon sx={{ color: '#0369A1', mt: 0.2, flexShrink: 0 }} />
-                      <Box>
-                        <Typography variant="caption" sx={{ color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>
-                          Телефон
-                        </Typography>
-                        {office.phones.map((p, j) => (
-                          <Typography key={j} variant="body2" sx={{ fontWeight: 600, color: '#0F172A' }}>
-                            <a href={`tel:${p.replace(/\s/g, '')}`} style={{ color: 'inherit', textDecoration: 'none' }}>{p}</a>
-                          </Typography>
-                        ))}
-                      </Box>
-                    </Box>
-
-                    <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start' }}>
-                      <EmailIcon sx={{ color: '#0369A1', mt: 0.2, flexShrink: 0 }} />
-                      <Box>
-                        <Typography variant="caption" sx={{ color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>
-                          E-mail
-                        </Typography>
-                        <Typography variant="body2" sx={{ fontWeight: 600, color: '#0369A1' }}>
-                          <a href={`mailto:${office.email}`} style={{ color: 'inherit' }}>{office.email}</a>
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </Grid>
-                </Grid>
-              </Box>
-            </Paper>
-          </Grid>
+            {i < offices.length - 1 && <Divider sx={{ mt: 3 }} />}
+          </Box>
         ))}
-      </Grid>
+      </Box>
 
-      <Paper elevation={0} sx={{ mt: 3, p: 3, borderRadius: 3, bgcolor: '#F8FAFC', border: '1px solid #E2E8F0' }}>
-        <Typography variant="subtitle2" sx={{ fontWeight: 700, color: '#0F172A', mb: 1 }}>
-          Общие обращения
+      <Box
+        sx={{
+          borderLeft: '4px solid #F59E0B',
+          pl: 3,
+          py: 2,
+          bgcolor: '#FAFAFA',
+          mt: 5,
+          fontStyle: 'italic',
+        }}
+      >
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+          По вопросам, не связанным с конкретным филиалом, направляйте обращения на общий адрес{' '}
+          <a href="mailto:info@kazniisa.kz" style={{ color: NAVY, fontWeight: 700, textDecoration: 'none' }}>
+            info@kazniisa.kz
+          </a>
+          . Ответ предоставляется в течение 5 рабочих дней.
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Для общих вопросов и корреспонденции используйте e-mail{' '}
-          <a href="mailto:info@kazniisa.kz" style={{ color: '#0369A1', fontWeight: 600 }}>info@kazniisa.kz</a>.
-          По вопросам нормирования и стандартизации вы также можете обратиться по телефонам
-          главного офиса в Алматы в рабочее время.
-        </Typography>
-      </Paper>
+      </Box>
     </Box>
   );
 }
