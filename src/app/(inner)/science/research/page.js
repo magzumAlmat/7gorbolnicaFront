@@ -1,7 +1,11 @@
 'use client';
-import { Typography, Box, Paper, Grid, Chip, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
-import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
-import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+import {
+  Typography, Box, Grid, Divider,
+  Table, TableBody, TableCell, TableHead, TableRow,
+} from '@mui/material';
+
+const NAVY = '#0F172A';
+const AMBER = '#F59E0B';
 
 const markerTypes = [
   { type: 'Газ', color: '#EAB308', colorName: 'Жёлтый', freq: '83.0 кГц', apwa: 'Gas' },
@@ -16,64 +20,81 @@ const markerTypes = [
 export default function ResearchPage() {
   return (
     <Box>
-      <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, color: '#0F172A' }}>
+      <Typography
+        variant="h4"
+        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+      >
         Инновационные исследования
       </Typography>
-      <Chip label="Договор № 1558 от 29.12.2015" sx={{ bgcolor: '#0369A1', color: '#fff', mb: 3, fontWeight: 600 }} />
+      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
 
-      <Typography sx={{ fontSize: '1.05rem', lineHeight: 1.8, color: '#334155', mb: 4 }}>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        Договор № 1558 от 29 декабря 2015 года
+      </Typography>
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4 }}>
         В рамках договора № 1558 от 29 декабря 2015 года КазНИИСА реализует разработки в области
         электронного маркирования подземных инженерных коммуникаций. Применение пассивных электронных маркеров
         позволяет точно определять местоположение подземных трубопроводов, кабелей и других объектов
         инфраструктуры без вскрытия грунта.
       </Typography>
 
-      <Grid container spacing={3} sx={{ mb: 4 }}>
+      <Typography
+        variant="h5"
+        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 2 }}
+      >
+        Оборудование
+      </Typography>
+      <Divider sx={{ mb: 3 }} />
+
+      <Grid container spacing={4} sx={{ mb: 4 }}>
         <Grid item xs={12} md={6}>
-          <Paper sx={{ p: 3, borderRadius: 2, border: '1px solid #E2E8F0', height: '100%' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-              <SignalCellularAltIcon sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Маркер 3M™ 1421 XRiD
-              </Typography>
-            </Box>
-            <Typography sx={{ color: '#334155', lineHeight: 1.7, mb: 2 }}>
-              Программируемый электронный маркер ёмкостью <strong>192 бита</strong>.
-              Пассивное устройство, не требующее источника питания. Обеспечивает хранение информации
-              об объекте коммуникации на весь срок службы подземной инфраструктуры.
-            </Typography>
-            <Chip label="Технология 3M" sx={{ bgcolor: '#EFF6FF', color: '#0369A1', fontWeight: 600 }} />
-          </Paper>
+          <Typography
+            variant="h6"
+            sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+          >
+            Маркер 3M™ 1421 XRiD
+          </Typography>
+          <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+            Программируемый электронный маркер ёмкостью <strong>192 бита</strong>.
+            Пассивное устройство, не требующее источника питания. Обеспечивает хранение информации
+            об объекте коммуникации на весь срок службы подземной инфраструктуры.
+          </Typography>
+          <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mt: 1 }}>
+            Технология 3M.
+          </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Paper sx={{ p: 3, borderRadius: 2, border: '1px solid #E2E8F0', height: '100%' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-              <ElectricBoltIcon sx={{ color: '#F59E0B' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Прибор 3M™ 1420E EMS ID Marker Finder
-              </Typography>
-            </Box>
-            <Typography sx={{ color: '#334155', lineHeight: 1.7 }}>
-              Портативный считыватель электронных маркеров. Позволяет обнаруживать, идентифицировать
-              и считывать данные с маркеров 1421 XRiD на значительной глубине без проведения
-              земляных работ, значительно сокращая затраты на обслуживание сетей.
-            </Typography>
-          </Paper>
+          <Typography
+            variant="h6"
+            sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+          >
+            Прибор 3M™ 1420E EMS ID Marker Finder
+          </Typography>
+          <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+            Портативный считыватель электронных маркеров. Позволяет обнаруживать, идентифицировать
+            и считывать данные с маркеров 1421 XRiD на значительной глубине без проведения
+            земляных работ, значительно сокращая затраты на обслуживание сетей.
+          </Typography>
         </Grid>
       </Grid>
 
-      <Typography variant="h5" sx={{ fontWeight: 700, mb: 2, color: '#0F172A' }}>
+      <Typography
+        variant="h5"
+        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 2 }}
+      >
         Типы маркеров по стандартам APWA
       </Typography>
-      <Typography sx={{ color: '#64748B', mb: 3, fontSize: '0.95rem' }}>
+      <Divider sx={{ mb: 2 }} />
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
         Каждый тип коммуникации имеет собственный цвет и рабочую частоту согласно стандартам
         Американской ассоциации публичных работ (APWA).
       </Typography>
 
-      <Paper sx={{ borderRadius: 2, overflow: 'hidden', border: '1px solid #E2E8F0' }}>
+      <Box sx={{ overflowX: 'auto' }}>
         <Table>
           <TableHead>
-            <TableRow sx={{ bgcolor: '#0F172A' }}>
+            <TableRow sx={{ bgcolor: NAVY }}>
               <TableCell sx={{ color: '#fff', fontWeight: 700 }}>Тип коммуникации</TableCell>
               <TableCell sx={{ color: '#fff', fontWeight: 700 }}>Цвет маркера</TableCell>
               <TableCell sx={{ color: '#fff', fontWeight: 700 }}>Частота</TableCell>
@@ -83,20 +104,31 @@ export default function ResearchPage() {
           <TableBody>
             {markerTypes.map((m, i) => (
               <TableRow key={m.type} sx={{ bgcolor: i % 2 === 0 ? '#F8FAFC' : '#fff' }}>
-                <TableCell sx={{ fontWeight: 600, color: '#0F172A' }}>{m.type}</TableCell>
+                <TableCell sx={{ fontWeight: 600, color: NAVY }}>{m.type}</TableCell>
                 <TableCell>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Box sx={{ width: 16, height: 16, borderRadius: '50%', bgcolor: m.color, border: '1px solid #E2E8F0', flexShrink: 0 }} />
+                    <Box
+                      sx={{
+                        width: 16,
+                        height: 16,
+                        borderRadius: '50%',
+                        bgcolor: m.color,
+                        border: '1px solid #E2E8F0',
+                        flexShrink: 0,
+                      }}
+                    />
                     {m.colorName}
                   </Box>
                 </TableCell>
-                <TableCell sx={{ fontFamily: 'monospace', color: '#0369A1', fontWeight: 600 }}>{m.freq}</TableCell>
-                <TableCell sx={{ color: '#64748B' }}>{m.apwa}</TableCell>
+                <TableCell sx={{ fontFamily: 'monospace', color: '#334155', fontWeight: 600 }}>
+                  {m.freq}
+                </TableCell>
+                <TableCell sx={{ color: '#334155' }}>{m.apwa}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      </Paper>
+      </Box>
     </Box>
   );
 }

@@ -7,8 +7,12 @@ export const innerPageData = {
       { title: 'Контакты', path: '/about-us/contacts' },
       { title: 'Филиалы', path: '/about-us/branches' },
       { title: 'Корпоративные документы', path: '/about-us/corporate-documents' },
-      { title: 'История КазНИИСА', path: '/about-us/history-kazniisa' },
+      { title: 'Новости', path: '/about-us/news' },
+      { title: 'Награды', path: '/about-us/awards' },
       { title: 'Вакансии', path: '/about-us/vacancies' },
+      { title: 'Партнеры', path: '/about-us/partners' },
+      { title: 'История КазНИИСА', path: '/about-us/history-kazniisa' },
+      { title: 'Вопросы и ответы', path: '/about-us/frequently-asked-questions' },
     ]
   },
   '/o-klinike': {
@@ -76,10 +80,63 @@ export const innerPageData = {
     title: 'Наука',
     sidebarTitle: 'Научная деятельность',
     menuItems: [
-      { title: 'Журнал «Вестник»', path: '/science/vestnik' },
+      { title: 'Журнал «Вестник»', path: '/science/journal-bulletin' },
+      { title: 'Персоналии', path: '/science/personalities' },
+      { title: 'Инновационные исследования', path: '/science/innovative-research' },
+      { title: 'Сборники трудов', path: '/science/collections' },
       { title: 'Ученый секретарь', path: '/science/secretary' },
       { title: 'Ученый совет', path: '/science/council' },
       { title: 'Научно-исследовательская работа', path: '/science/research' },
+    ]
+  },
+  '/timso': {
+    title: 'ТИМСО',
+    sidebarTitle: 'ТИМСО',
+    menuItems: [
+      { title: 'Международное сотрудничество', path: '/timso/international-cooperation' },
+      { title: 'Нормативные документы', path: '/timso/regulatory-documents' },
+      { title: 'ЕСККС', path: '/timso/eskks' },
+      { title: 'Документы ТИМСО', path: '/timso/docs' },
+      { title: 'Реестр ТИМСО', path: '/timso/registry' },
+    ]
+  },
+  '/bocc': {
+    title: 'БОСС',
+    sidebarTitle: 'БОСС',
+    menuItems: [
+      { title: 'О БОСС', path: '/bocc/about-the-boss' },
+      { title: 'Новости БОСС', path: '/bocc/news-boss' },
+      { title: 'Заседания', path: '/bocc/meetings' },
+      { title: 'Модель единых норм', path: '/bocc/uniform-norms-model' },
+      { title: 'Нормы стран СНГ', path: '/bocc/norms-of-the-cis-countries' },
+    ]
+  },
+  '/buildingsmart': {
+    title: 'BuildingSMART',
+    sidebarTitle: 'BuildingSMART',
+    menuItems: [
+      { title: 'BuildingSMART Kazakhstan', path: '/buildingsmart' },
+      { title: 'Профессиональная сертификация', path: '/buildingsmart/certification' },
+      { title: 'Реестр участников', path: '/buildingsmart/registry' },
+      { title: 'События', path: '/buildingsmart/events-buildingsmart' },
+      { title: 'Новости', path: '/buildingsmart/news' },
+    ]
+  },
+  '/anti-corruption': {
+    title: 'Противодействие коррупции',
+    sidebarTitle: 'Противодействие коррупции',
+    menuItems: [
+      { title: 'Комплаенс', path: '/anti-corruption/compliance' },
+      { title: 'Реестр должностей', path: '/anti-corruption/register' },
+      { title: 'Перечень коррупционных рисков', path: '/anti-corruption/risks' },
+    ]
+  },
+  '/eurocode': {
+    title: 'Еврокоды',
+    sidebarTitle: 'Еврокоды',
+    menuItems: [
+      { title: 'Еврокоды', path: '/eurocode' },
+      { title: 'Документы', path: '/eurocode/docs' },
     ]
   },
   '/news': {

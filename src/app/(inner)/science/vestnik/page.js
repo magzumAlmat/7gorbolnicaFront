@@ -1,7 +1,8 @@
 'use client';
-import { Typography, Box, Paper, Grid, Chip, Divider, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
+import { Typography, Box, Grid, Divider } from '@mui/material';
+
+const NAVY = '#0F172A';
+const AMBER = '#F59E0B';
 
 const sections = ['Сейсмостойкое строительство', 'Информационные технологии', 'Ценообразование', 'Нормирование'];
 
@@ -20,45 +21,71 @@ const archive = [
 export default function VestnikPage() {
   return (
     <Box>
-      <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, color: '#0F172A' }}>
+      <Typography
+        variant="h4"
+        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+      >
         Вестник КазНИИСА
       </Typography>
-      <Chip label="Издаётся с 2011 года" sx={{ bgcolor: '#0369A1', color: '#fff', mb: 3, fontWeight: 600 }} />
+      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
 
-      <Paper sx={{ p: 3, mb: 4, bgcolor: '#EFF6FF', border: '1px solid #BFDBFE', borderRadius: 2 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-          <MenuBookIcon sx={{ color: '#0369A1' }} />
-          <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>О журнале</Typography>
-        </Box>
-        <Typography sx={{ color: '#334155', lineHeight: 1.8 }}>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 1 }}>
+        Издаётся с 2011 года
+      </Typography>
+
+      <Box
+        sx={{
+          borderLeft: '4px solid #F59E0B',
+          pl: 3,
+          py: 2,
+          bgcolor: '#FAFAFA',
+          fontStyle: 'italic',
+          mb: 4,
+        }}
+      >
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
           Научный журнал «Вестник КазНИИСА» основан в 2011 году. Публикует результаты теоретических
           и экспериментальных исследований по актуальным вопросам строительства, сейсмостойкости,
           ценообразования и нормирования в строительной отрасли Республики Казахстан.
         </Typography>
-      </Paper>
+      </Box>
 
-      <Typography variant="h5" sx={{ fontWeight: 700, mb: 2, color: '#0F172A' }}>Разделы журнала</Typography>
+      <Typography
+        variant="h5"
+        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 2 }}
+      >
+        Разделы журнала
+      </Typography>
+      <Divider sx={{ mb: 3 }} />
+
       <Grid container spacing={2} sx={{ mb: 4 }}>
         {sections.map((s, i) => (
           <Grid item xs={12} sm={6} key={s}>
-            <Paper sx={{ p: 2.5, borderRadius: 2, border: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', gap: 2 }}>
-              <Box sx={{ width: 36, height: 36, borderRadius: '50%', bgcolor: '#0369A1', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, flexShrink: 0 }}>
-                {i + 1}
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+              <Box component="span" sx={{ fontWeight: 700, color: NAVY, mr: 1 }}>
+                {i + 1}.
               </Box>
-              <Typography sx={{ fontWeight: 600, color: '#0F172A' }}>{s}</Typography>
-            </Paper>
+              {s}
+            </Typography>
           </Grid>
         ))}
       </Grid>
 
-      <Typography variant="h5" sx={{ fontWeight: 700, mb: 2, color: '#0F172A' }}>Архив выпусков</Typography>
+      <Typography
+        variant="h5"
+        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 2 }}
+      >
+        Архив выпусков
+      </Typography>
+      <Divider sx={{ mb: 3 }} />
+
       <Grid container spacing={2}>
         {archive.map((a) => (
           <Grid item xs={12} sm={6} md={4} key={a.year}>
-            <Paper sx={{ p: 2, borderRadius: 2, border: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Typography sx={{ fontWeight: 700, color: '#0F172A', fontSize: '1.1rem' }}>{a.year}</Typography>
-              <Chip label={a.issues} size="small" sx={{ bgcolor: '#F1F5F9', color: '#334155' }} />
-            </Paper>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', py: 1, borderBottom: '1px solid #E2E8F0' }}>
+              <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem' }}>{a.year}</Typography>
+              <Typography sx={{ fontSize: '1rem', color: '#334155' }}>{a.issues}</Typography>
+            </Box>
           </Grid>
         ))}
       </Grid>

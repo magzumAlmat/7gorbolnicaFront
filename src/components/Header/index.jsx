@@ -60,40 +60,47 @@ const menuData = [
   {
     title: "Наука", path: "/science",
     submenu: [
-      { title: "Журнал «Вестник»", path: "/science/vestnik" },
-      { title: "Ученый секретарь", path: "/science/secretary" },
-      { title: "Ученый совет", path: "/science/council" },
-      { title: "Научно-исследовательская работа", path: "/science/research" },
+      { title: "Журнал «Вестник»", path: "/science/journal-bulletin" },
+      { title: "Персоналии", path: "/science/personalities" },
+      { title: "Инновационные исследования", path: "/science/innovative-research" },
+      { title: "Сборники трудов", path: "/science/collections" },
     ]
   },
   {
     title: "ТИМСО", path: "/timso",
     submenu: [
-      { title: "Общая информация", path: "/timso" },
-      { title: "Реестр участников", path: "/timso/registry" },
-      { title: "Нормативные документы", path: "/timso/docs" },
+      { title: "Международное сотрудничество", path: "/timso/international-cooperation" },
+      { title: "Нормативные документы", path: "/timso/regulatory-documents" },
+      { title: "ЕСККС", path: "/timso/eskks" },
     ]
   },
   {
     title: "БОСС", path: "/bocc",
     submenu: [
-      { title: "Общая информация", path: "/bocc" },
+      { title: "О БОСС", path: "/bocc/about-the-boss" },
+      { title: "Новости БОСС", path: "/bocc/news-boss" },
+      { title: "Заседания", path: "/bocc/meetings" },
+      { title: "Модель единых норм", path: "/bocc/uniform-norms-model" },
+      { title: "Нормы стран СНГ", path: "/bocc/norms-of-the-cis-countries" },
     ]
   },
   {
     title: "BuildingSMART", path: "/buildingsmart",
     submenu: [
-      { title: "Общая информация", path: "/buildingsmart" },
+      { title: "BuildingSMART Kazakhstan", path: "/buildingsmart" },
+      { title: "Профессиональная сертификация", path: "/buildingsmart/certification" },
       { title: "Реестр участников", path: "/buildingsmart/registry" },
-      { title: "Мероприятия", path: "/buildingsmart/events" },
+      { title: "События", path: "/buildingsmart/events-buildingsmart" },
+      { title: "Новости", path: "/buildingsmart/news" },
     ]
   },
   { title: "Еврокоды", path: "/eurocode" },
   {
     title: "Противодействие коррупции", path: "/anti-corruption",
     submenu: [
-      { title: "Антикоррупционная политика", path: "/anti-corruption" },
-      { title: "Телефон доверия", path: "/anti-corruption#hotline" },
+      { title: "Комплаенс", path: "/anti-corruption/compliance" },
+      { title: "Реестр должностей", path: "/anti-corruption/register" },
+      { title: "Перечень коррупционных рисков", path: "/anti-corruption/risks" },
     ]
   },
 ];
