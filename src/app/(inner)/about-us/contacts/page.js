@@ -13,6 +13,7 @@ const offices = [
     hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
     contact: 'Пресс-секретарь: Қапезова Тоғжан Болатқанқызы',
     primary: true,
+    photo: '/images/kazniisa/office-main.webp',
   },
   {
     title: 'Офис Алматы №2',
@@ -20,6 +21,7 @@ const offices = [
     phone: '8 (727) 338 30 22',
     email: 'info@kazniisa.kz',
     hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
+    photo: '/images/kazniisa/office-satpaeva.webp',
   },
   {
     title: 'Южно-Казахстанский филиал — Тараз',
@@ -28,6 +30,7 @@ const offices = [
     email: 'yko@kazniisa.kz',
     hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
     contact: 'Контактное лицо: Пак Наталия Александровна',
+    photo: '/images/kazniisa/office-taraz.jpg',
   },
   {
     title: 'Восточно-Казахстанский филиал — Усть-Каменогорск',
@@ -35,6 +38,7 @@ const offices = [
     phone: '8 (7232) 26-16-90',
     email: 'vko@kazniisa.kz',
     hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
+    photo: '/images/kazniisa/office-vko.jpg',
   },
   {
     title: 'Астанинский филиал — Астана',
@@ -42,6 +46,7 @@ const offices = [
     phone: '8 (7172) 57-53-03',
     email: 'crn@kazniisa.kz',
     hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
+    photo: '/images/kazniisa/office-astana.jpg',
   },
 ];
 
@@ -97,6 +102,15 @@ export default function AboutUsContactsPage() {
               )}
               {office.title}
             </Typography>
+
+            {office.photo && (
+              <Box
+                component="img"
+                src={office.photo}
+                alt={office.title}
+                sx={{ width: '100%', maxWidth: 480, maxHeight: 220, objectFit: 'cover', borderRadius: 2, mb: 1.5, display: 'block' }}
+              />
+            )}
 
             <Table size="small" sx={{ maxWidth: 680, '& td': { border: 'none', py: 0.6, px: 0 } }}>
               <TableBody>
