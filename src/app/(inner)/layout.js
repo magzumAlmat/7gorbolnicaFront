@@ -6,6 +6,8 @@ import Sidebar from '../../components/Sidebar';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 import { innerPageData } from '../../data/navigation';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 // Это базовый макет для всех внутренних страниц
 export default function InnerLayout({ children }) {
@@ -39,15 +41,34 @@ export default function InnerLayout({ children }) {
     return { title: 'Страница', sidebarTitle: 'Разделы', menuItems: [], breadcrumbs: [] };
   }, [pathname]);
 
-  const latestNews = [
-    { title: 'В АО «КазНИИСА» состоялась рабочая встреча...', date: '13 Январь, 2026', link: '/news/mock-1' },
-    { title: 'Поздравляем вас с наступающим Новым годом!', date: '31 Декабрь, 2025', link: '/news/mock-2' },
-  ];
+  const [allDocuments, setAllDocuments] = useState([]);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const res = await axios.get('http://localhost:8000/api/kazniisa/news');
+        setAllDocuments(res.data);
+      } catch (err) {
+        console.error("Failed to fetch news", err);
+      }
+    };
+    fetchNews();
+  }, []);
+
+  const latestNews = useMemo(() => {
+    return allDocuments
+      .slice(0, 5)
+      .map(news => ({
+        title: news.title?.ru || 'Нет заголовка',
+        date: news.publishedAt ? new Date(news.publishedAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) : '',
+        link: `/news/${news.slug}`
+      }));
+  }, [allDocuments]);
 
   return (
     <Box>
       <PageHeader title={pageData.title} breadcrumbs={pageData.breadcrumbs} />
-      <Container maxWidth="lg" sx={{ pb: 8 }}>
+      <Container maxWidth="lg" sx={{ pt: 6, pb: 8 }}>
         <Grid container spacing={4}>
           <Grid item xs={12} md={9}>
             {children}

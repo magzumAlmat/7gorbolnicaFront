@@ -1,16 +1,7 @@
-import { Container, Typography, Box } from '@mui/material';
+'use client';
 
-export default function Rukovodstvo() {
-  return (
-    <Box sx={{ bgcolor: 'grey.50', minHeight: '100vh', py: 8 }}>
-      <Container maxWidth="lg">
-        <Typography variant="h3" sx={{ mb: 4, fontWeight: 700, color: 'primary.main' }}>
-          Руководство
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Руководство клиники...
-        </Typography>
-      </Container>
-    </Box>
-  );
+import DynamicKazniisaPage from '../../../../components/DynamicKazniisaPage';
+
+export default function Page() {
+  return <DynamicKazniisaPage />;
 }

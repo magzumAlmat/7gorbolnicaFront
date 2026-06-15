@@ -1,45 +1,47 @@
 'use client';
+import { Typography, Box, Paper, Grid, Chip } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 
-import { Typography, Box, Paper, Grid, Avatar } from '@mui/material';
+const duties = [
+  { icon: <EventNoteIcon sx={{ color: '#0369A1' }} />, title: 'Подготовка заседаний', desc: 'Организационная подготовка заседаний Учёного совета: формирование повестки, сбор материалов, уведомление членов совета.' },
+  { icon: <FolderOpenIcon sx={{ color: '#0369A1' }} />, title: 'Документооборот', desc: 'Ведение протоколов и решений Учёного совета, хранение архива научной документации института.' },
+  { icon: <PersonIcon sx={{ color: '#0369A1' }} />, title: 'Координация', desc: 'Взаимодействие с научными подразделениями, внешними организациями и государственными органами по вопросам научной деятельности.' },
+];
 
-export default function ScienceSecretaryPage() {
+export default function SecretaryPage() {
   return (
     <Box>
-      <Typography variant="h5" sx={{ fontWeight: 700, mb: 3, color: '#002e5b' }}>
-        Ученый секретарь
+      <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, color: '#0F172A' }}>
+        Учёный секретарь
       </Typography>
-      
-      <Paper elevation={0} sx={{ p: 4, bgcolor: '#f8f9fa', mb: 4 }}>
-        <Grid container spacing={4} alignItems="center">
-          <Grid item xs={12} sm={4}>
-            <Avatar 
-              sx={{ width: 200, height: 200, mx: 'auto', bgcolor: '#e0e0e0' }}
-              variant="rounded"
-            >
-              Фото
-            </Avatar>
-          </Grid>
-          <Grid item xs={12} sm={8}>
-            <Typography variant="h6" sx={{ fontWeight: 700, color: '#2887B6' }}>Имя Фамилия Отчество</Typography>
-            <Typography variant="subtitle1" sx={{ color: '#666', mb: 2 }}>Ученый секретарь АО «КазНИИСА», кандидат технических наук</Typography>
-            
-            <Typography variant="body2" sx={{ lineHeight: 1.6 }}>
-              Ученый секретарь координирует научно-организационную деятельность Института, 
-              обеспечивает работу Ученого совета и контролирует выполнение планов научно-исследовательских работ.
-            </Typography>
-          </Grid>
-        </Grid>
-      </Paper>
+      <Chip label="Организация научной деятельности" sx={{ bgcolor: '#0369A1', color: '#fff', mb: 3, fontWeight: 600 }} />
 
-      <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, color: '#002e5b' }}>Основные функции:</Typography>
-      <Typography variant="body2" component="div">
-        <ul>
-          <li>Подготовка материалов к заседаниям Ученого совета;</li>
-          <li>Координация работы по подготовке научных кадров;</li>
-          <li>Организация научных конференций и семинаров;</li>
-          <li>Контроль за внедрением результатов НИР в производство.</li>
-        </ul>
+      <Typography sx={{ fontSize: '1.05rem', lineHeight: 1.8, color: '#334155', mb: 4 }}>
+        Учёный секретарь КазНИИСА обеспечивает организационную и документационную поддержку научной
+        деятельности института. Осуществляет координацию между научными подразделениями, руководством
+        и Учёным советом, а также взаимодействие с внешними научными и государственными организациями.
       </Typography>
+
+      <Grid container spacing={3} sx={{ mb: 4 }}>
+        {duties.map((d) => (
+          <Grid item xs={12} md={4} key={d.title}>
+            <Paper sx={{ p: 3, borderRadius: 2, border: '1px solid #E2E8F0', height: '100%' }}>
+              <Box sx={{ mb: 1.5 }}>{d.icon}</Box>
+              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A', mb: 1 }}>{d.title}</Typography>
+              <Typography sx={{ color: '#64748B', lineHeight: 1.7, fontSize: '0.95rem' }}>{d.desc}</Typography>
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Paper sx={{ p: 3, bgcolor: '#EFF6FF', border: '1px solid #BFDBFE', borderRadius: 2 }}>
+        <Typography sx={{ color: '#334155', lineHeight: 1.8 }}>
+          Для получения актуальной контактной информации об учёном секретаре и записи на консультацию
+          обращайтесь в приёмную КазНИИСА по телефону или электронной почте, указанным в разделе «Контакты».
+        </Typography>
+      </Paper>
     </Box>
   );
 }

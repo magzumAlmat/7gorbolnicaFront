@@ -1,11 +1,7 @@
-import React from 'react';
-import NewsList from '../../../components/newslist';
-import { Typography, Box } from '@mui/material';
+'use client';
 
-export default function NovostiPage() {
-  return (
-    <Box>
-      <NewsList />
-    </Box>
-  );
+import DynamicKazniisaPage from '../../../components/DynamicKazniisaPage';
+
+export default function Page() {
+  return <DynamicKazniisaPage />;
 }

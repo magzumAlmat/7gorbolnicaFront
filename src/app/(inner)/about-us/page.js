@@ -1,43 +1,86 @@
 'use client';
+import { Typography, Box, Grid, Divider } from '@mui/material';
 
-import { Typography, Box, Grid, Paper } from '@mui/material';
+const NAVY = '#0F172A';
+const AMBER = '#F59E0B';
 
 export default function AboutUsPage() {
   return (
     <Box>
-      <Typography variant="h5" sx={{ fontWeight: 700, mb: 3, color: '#002e5b' }}>
-        Об АО «КазНИИСА»
+      <Typography variant="h4" sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}>
+        О нас
       </Typography>
-      
-      <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-        АО «Казахский научно-исследовательский и проектный институт строительства и архитектуры» (АО «КазНИИСА») — 
-        это единственный в Казахстане государственный научно-исследовательский и проектный институт в области строительства.
+      <Box sx={{ width: 50, height: 3, bgcolor: AMBER, mb: 3 }} />
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2.5 }}>
+        Единственный в Казахстане государственный научно-исследовательский и проектный институт в области развития строительства, включая районы с особо сложными инженерно-геологическими условиями и сейсмоопасные районы.
       </Typography>
 
-      <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-        Институт был основан в 1931 году и на протяжении более 90 лет является ведущим научным центром в строительной отрасли 
-        страны. Основная миссия КазНИИСА заключается в обеспечении надежности и безопасности зданий и сооружений, 
-        а также в развитии научно-технического потенциала строительного комплекса Казахстана.
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
+        АО «КазНИИСА» – признанный лидер ЕАЭС в области исследования и внедрения информационных технологий в строительство. Мы осуществляем проектирование зданий, сооружений и объектов любого уровня сложности. Институт выполняет полный комплекс научно-технических работ в области разработки градостроительной документации, от предпроектных исследований и обоснований до подготовки проектной документации и ведения авторского надзора. Проектная деятельность осуществляется специалистами, способными решать различные градостроительные, архитектурно-планировочные, землеустроительные и инженерные задачи с помощью современной технологической базы института.
       </Typography>
 
-      <Grid container spacing={3} sx={{ mt: 2 }}>
-        <Grid item xs={12} sm={6}>
-          <Paper elevation={0} sx={{ p: 3, bgcolor: '#f0f7fc', height: '100%', borderLeft: '4px solid #2887B6' }}>
-            <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, color: '#002e5b' }}>Наша миссия</Typography>
-            <Typography variant="body2" color="text.secondary">
-              Научное сопровождение строительной отрасли для обеспечения безопасности и комфортной среды жизнедеятельности граждан.
-            </Typography>
-          </Paper>
+      <Box sx={{ borderLeft: `4px solid ${AMBER}`, pl: 3, py: 2, mb: 4, bgcolor: '#FAFAFA' }}>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.8, color: '#334155', fontStyle: 'italic' }}>
+          АО «КазНИИСА» имеет собственную лабораторную и производственную базу, позволяющую проводить передовые научные исследования в области внедрения новых материалов и технологических инноваций в строительной отрасли.
+        </Typography>
+      </Box>
+
+      <Grid container spacing={4} sx={{ mb: 4 }}>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, mb: 2, fontFamily: '"Exo 2", sans-serif' }}>
+            Наша миссия
+          </Typography>
+          <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', textAlign: 'justify' }}>
+            Содействие научно-техническому развитию и внедрению передовых технологий в сфере строительства. Повышение качества жизни через создание условий для инновационного развития сферы строительства в соответствии с принципами устойчивого развития регионов, применение передовых программно-технических решений проектирования, и безусловную приверженность безопасности на всех стадиях жизненного цикла каждого объекта.
+          </Typography>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Paper elevation={0} sx={{ p: 3, bgcolor: '#f0f7fc', height: '100%', borderLeft: '4px solid #2887B6' }}>
-            <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, color: '#002e5b' }}>Наша задача</Typography>
-            <Typography variant="body2" color="text.secondary">
-              Разработка и внедрение инновационных технологий, нормативных документов и стандартов в области строительства и архитектуры.
-            </Typography>
-          </Paper>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, mb: 2, fontFamily: '"Exo 2", sans-serif' }}>
+            Как мы работаем
+          </Typography>
+          <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', textAlign: 'justify' }}>
+            Проводим научно-исследовательские и проектные работы и оказываем консультационные услуги для обеспечения надежности зданий и сооружений сейсмостойкого строительства.
+          </Typography>
+          <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mt: 2, textAlign: 'justify' }}>
+            Осуществляем мониторинг цен на строительные материалы, разработку технологических карт и других нормативно-технических документов, регулирующих ценообразование в строительстве.
+          </Typography>
+          <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mt: 2, textAlign: 'justify' }}>
+            Исследуем и внедряем современные информационные технологии в строительство.
+          </Typography>
         </Grid>
       </Grid>
+
+      <Box sx={{ mb: 4 }}>
+        <Box
+          component="img"
+          src="/images/kazniisa/history-banner.webp"
+          alt="КазНИИСА"
+          sx={{ width: '100%', maxWidth: 560, borderRadius: 1 }}
+        />
+      </Box>
+
+      <Divider sx={{ mb: 3 }} />
+
+      <Typography variant="overline" sx={{ color: '#64748B', fontWeight: 600, letterSpacing: 1.5 }}>
+        Руководство
+      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5, mt: 1.5 }}>
+        <Box
+          component="img"
+          src="/images/kazniisa/kulbaev-director.webp"
+          alt="Кульбаев Бегман Бахитович"
+          sx={{ width: 56, height: 56, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+        />
+        <Box>
+          <Typography sx={{ fontWeight: 700, fontSize: '1.05rem', color: NAVY }}>
+            Кульбаев Бегман Бахитович
+          </Typography>
+          <Typography sx={{ color: '#64748B', fontSize: '0.9rem' }}>
+            Генеральный директор
+          </Typography>
+        </Box>
+      </Box>
     </Box>
   );
 }
