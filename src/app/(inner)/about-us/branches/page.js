@@ -15,6 +15,8 @@ const branches = [
     hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
     contact: 'Пак Наталия Александровна',
     desc: 'Филиал обеспечивает научно-техническое сопровождение строительных проектов на юге Казахстана. Выполняет технические обследования, нормативные и проектные работы для предприятий и государственных заказчиков Жамбылской, Туркестанской и Кызылординской областей.',
+    officePhoto: '/images/kazniisa/office-taraz.jpg',
+    directorPhoto: '/images/kazniisa/begimkhanova.jpg',
   },
   {
     num: '02',
@@ -25,6 +27,8 @@ const branches = [
     email: 'vko@kazniisa.kz',
     hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
     desc: 'Обслуживает восток страны: техническое обследование промышленных и гражданских объектов, сейсмическая паспортизация, консультационная поддержка строительного комплекса Восточно-Казахстанской области.',
+    officePhoto: '/images/kazniisa/office-vko.jpg',
+    directorPhoto: '/images/kazniisa/baytemirov.jpg',
   },
   {
     num: '03',
@@ -35,6 +39,8 @@ const branches = [
     email: 'crn@kazniisa.kz',
     hours: 'Пн–Пт: 9:00 – 18:30, обед 13:00 – 14:30',
     desc: 'Столичный филиал работает в тесном взаимодействии с государственными органами и крупными застройщиками. Специализируется на нормировании, экспертизе проектной документации и сопровождении строительных проектов в г. Астана и Акмолинской области.',
+    officePhoto: '/images/kazniisa/office-astana.jpg',
+    directorPhoto: '/images/kazniisa/khasen.jpg',
   },
 ];
 
@@ -60,6 +66,13 @@ export default function BranchesPage() {
         Каждый филиал является полноценным структурным подразделением института и ведёт
         самостоятельную производственную деятельность.
       </Typography>
+
+      <Box
+        component="img"
+        src="/images/kazniisa/branches-map.webp"
+        alt="Карта филиалов КазНИИСА"
+        sx={{ width: '100%', maxHeight: 360, objectFit: 'contain', borderRadius: 2, mb: 4 }}
+      />
 
       <Box
         sx={{
@@ -111,6 +124,26 @@ export default function BranchesPage() {
                 <Typography sx={{ fontSize: '0.9rem', color: '#94A3B8', fontWeight: 600, mb: 2 }}>
                   {branch.city}
                 </Typography>
+
+                <Box sx={{ display: 'flex', gap: 2, mb: 2.5, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+                  <Box
+                    component="img"
+                    src={branch.officePhoto}
+                    alt={`Офис ${branch.city}`}
+                    sx={{ flex: 1, minWidth: 180, maxWidth: 340, borderRadius: 2, objectFit: 'cover', maxHeight: 180 }}
+                  />
+                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+                    <Box
+                      component="img"
+                      src={branch.directorPhoto}
+                      alt={`Директор филиала ${branch.city}`}
+                      sx={{ width: 100, height: 100, borderRadius: '50%', objectFit: 'cover' }}
+                    />
+                    <Typography sx={{ fontSize: '0.78rem', color: '#64748B', textAlign: 'center' }}>
+                      Директор филиала
+                    </Typography>
+                  </Box>
+                </Box>
 
                 <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2.5 }}>
                   {branch.desc}

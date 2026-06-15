@@ -21,6 +21,12 @@ const members = [
 export default function BoccPage() {
   return (
     <Box>
+      <Box
+        component="img"
+        src="/images/kazniisa/logo.webp"
+        alt="КазНИИСА"
+        sx={{ height: 56, objectFit: 'contain', mb: 2, display: 'block' }}
+      />
       <Typography variant="h3" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 0 }}>
         БОСС — Базовая организация в сейсмостойком строительстве СНГ
       </Typography>

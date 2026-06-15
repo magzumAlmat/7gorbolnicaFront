@@ -65,7 +65,14 @@ export default function CorporateDocumentsPage() {
       >
         Корпоративные документы
       </Typography>
-      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 3 }} />
+
+      <Box
+        component="img"
+        src="/images/kazniisa/corporate-docs-banner.jpg"
+        alt="Корпоративные документы КазНИИСА"
+        sx={{ width: '100%', maxHeight: 280, objectFit: 'cover', borderRadius: 2, mb: 3 }}
+      />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 5 }}>
         Корпоративная документация АО «КазНИИСА» систематизирована по категориям в соответствии

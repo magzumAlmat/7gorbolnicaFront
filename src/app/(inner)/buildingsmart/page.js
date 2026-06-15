@@ -30,6 +30,20 @@ export default function BuildingSmartPage() {
         </Typography>
       </Box>
 
+      {/* BIM Gallery */}
+      <Grid container spacing={2} sx={{ mb: 4 }}>
+        {['/images/kazniisa/bim-1.webp', '/images/kazniisa/bim-2.webp', '/images/kazniisa/bim-3.webp'].map((src, i) => (
+          <Grid item xs={12} sm={4} key={i}>
+            <Box
+              component="img"
+              src={src}
+              alt={`BIM ${i + 1}`}
+              sx={{ width: '100%', maxWidth: 340, borderRadius: 1, display: 'block' }}
+            />
+          </Grid>
+        ))}
+      </Grid>
+
       <Divider sx={{ mb: 4 }} />
 
       {/* Goals */}
@@ -68,6 +82,28 @@ export default function BuildingSmartPage() {
           </Box>
         ))}
       </Box>
+
+      <Divider sx={{ mb: 4 }} />
+
+      {/* Service images */}
+      <Grid container spacing={2} sx={{ mb: 4 }}>
+        {[
+          { src: '/images/kazniisa/service-spec-tech.webp', alt: 'Специальные технические условия' },
+          { src: '/images/kazniisa/service-bim-integration.webp', alt: 'BIM-интеграция' },
+          { src: '/images/kazniisa/service-ai-tech.webp', alt: 'AI-технологии' },
+          { src: '/images/kazniisa/service-certification.webp', alt: 'Сертификация' },
+          { src: '/images/kazniisa/service-bim-audit.webp', alt: 'BIM-аудит' },
+        ].map((img, i) => (
+          <Grid item xs={12} sm={6} md={4} key={i}>
+            <Box
+              component="img"
+              src={img.src}
+              alt={img.alt}
+              sx={{ width: '100%', maxWidth: 340, borderRadius: 1, display: 'block' }}
+            />
+          </Grid>
+        ))}
+      </Grid>
 
       <Divider sx={{ mb: 4 }} />
 

@@ -144,6 +144,26 @@ export default function UslugiPage() {
         </Typography>
       </Paper>
 
+      <Grid container spacing={2} sx={{ mb: 4 }}>
+        {[
+          { src: '/images/kazniisa/service-spec-tech.webp', alt: 'Специальные технические условия' },
+          { src: '/images/kazniisa/service-bim-integration.webp', alt: 'BIM-интеграция' },
+          { src: '/images/kazniisa/service-ai-tech.webp', alt: 'AI-технологии' },
+          { src: '/images/kazniisa/service-certification.webp', alt: 'Сертификация' },
+          { src: '/images/kazniisa/service-it-platform.webp', alt: 'IT-платформа' },
+          { src: '/images/kazniisa/service-bim-audit.webp', alt: 'BIM-аудит' },
+        ].map((img, i) => (
+          <Grid item xs={12} sm={6} md={4} key={i}>
+            <Box
+              component="img"
+              src={img.src}
+              alt={img.alt}
+              sx={{ width: '100%', maxWidth: 340, borderRadius: 1, display: 'block' }}
+            />
+          </Grid>
+        ))}
+      </Grid>
+
       <Grid container spacing={3}>
         {services.map((svc, i) => (
           <Grid item xs={12} sm={6} md={6} lg={4} key={i}>

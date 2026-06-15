@@ -20,6 +20,12 @@ const eurocodes = [
 export default function EurocodePage() {
   return (
     <Box>
+      <Box
+        component="img"
+        src="/images/kazniisa/eagle-sun.svg"
+        alt="Герб Казахстана"
+        sx={{ width: 80, height: 80, mb: 2, display: 'block' }}
+      />
       <Typography variant="h3" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 0 }}>
         Еврокоды в Казахстане
       </Typography>

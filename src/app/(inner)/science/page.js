@@ -31,6 +31,12 @@ const sections = [
 export default function SciencePage() {
   return (
     <Box>
+      <Box
+        component="img"
+        src="/images/kazniisa/logo.webp"
+        alt="КазНИИСА"
+        sx={{ height: 56, objectFit: 'contain', mb: 2, display: 'block' }}
+      />
       <Typography variant="h3" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 0 }}>
         Научная деятельность
       </Typography>

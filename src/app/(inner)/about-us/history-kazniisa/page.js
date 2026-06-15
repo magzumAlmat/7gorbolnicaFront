@@ -54,6 +54,27 @@ export default function HistoryPage() {
       </Typography>
       <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
 
+      <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+        <Box
+          component="img"
+          src="/images/kazniisa/history-left.png"
+          alt="История КазНИИСА — левый"
+          sx={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 1, flexShrink: 0 }}
+        />
+        <Box
+          component="img"
+          src="/images/kazniisa/history-kazniisa.webp"
+          alt="История КазНИИСА"
+          sx={{ flex: 1, minWidth: 200, maxWidth: '100%', width: '100%', borderRadius: 2, objectFit: 'cover', maxHeight: 320 }}
+        />
+        <Box
+          component="img"
+          src="/images/kazniisa/history-right.png"
+          alt="История КазНИИСА — правый"
+          sx={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 1, flexShrink: 0 }}
+        />
+      </Box>
+
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 5 }}>
         АО «КазНИИСА» — старейшая техническая научная организация Казахстана в области строительства.
         За более чем 90 лет своей истории институт прошёл путь от небольшого исследовательского
@@ -112,6 +133,13 @@ export default function HistoryPage() {
           </Box>
         ))}
       </Box>
+
+      <Box
+        component="img"
+        src="/images/kazniisa/history-full.webp"
+        alt="Полная история КазНИИСА"
+        sx={{ width: '100%', borderRadius: 2, mb: 5, objectFit: 'cover', maxHeight: 400 }}
+      />
 
       <Divider sx={{ mb: 5 }} />
 

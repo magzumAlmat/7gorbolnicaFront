@@ -60,6 +60,13 @@ export default function CentresOverview() {
       </Typography>
       <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
 
+      <Box
+        component="img"
+        src="/images/kazniisa/centres-banner.webp"
+        alt="Центры компетенций КазНИИСА"
+        sx={{ width: '100%', maxWidth: 600, borderRadius: 1, mb: 3, display: 'block' }}
+      />
+
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4, maxWidth: 760 }}>
         АО «КазНИИСА» объединяет шесть специализированных центров, которые обеспечивают полный цикл
         научного, нормативного и практического сопровождения строительной отрасли Республики Казахстан.
@@ -131,6 +138,14 @@ export default function CentresOverview() {
                 </Link>
               </Box>
             </Box>
+            {c.num === '03' && (
+              <Box
+                component="img"
+                src="/images/kazniisa/center-bim.webp"
+                alt="Центр науки и цифровизации"
+                sx={{ width: '100%', maxWidth: 500, borderRadius: 1, mt: 2, display: 'block' }}
+              />
+            )}
             {i < CENTRES.length - 1 && <Divider sx={{ mt: 3 }} />}
           </Grid>
         ))}

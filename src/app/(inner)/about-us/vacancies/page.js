@@ -48,7 +48,14 @@ export default function VacanciesPage() {
       >
         Вакансии
       </Typography>
-      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 3 }} />
+
+      <Box
+        component="img"
+        src="/images/kazniisa/vacancies-banner.jpg"
+        alt="Вакансии КазНИИСА"
+        sx={{ width: '100%', maxHeight: 300, objectFit: 'cover', borderRadius: 2, mb: 3 }}
+      />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4 }}>
         АО КазНИИСА всегда ищет талантливых людей. Мы понимаем, что продуктивные люди
