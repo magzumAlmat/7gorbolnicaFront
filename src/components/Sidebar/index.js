@@ -12,13 +12,6 @@ export default function Sidebar({ title, menuItems = [], latestNews = [] }) {
     <Box sx={{ position: 'sticky', top: 100 }}>
       {menuItems.length > 0 && (
         <Box sx={{ mb: 3, border: '1px solid #E2E8F0', overflow: 'hidden' }}>
-          {title && (
-            <Box sx={{ bgcolor: '#0F172A', px: 3, py: 2 }}>
-              <Typography sx={{ color: 'white', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                {title}
-              </Typography>
-            </Box>
-          )}
           <List disablePadding sx={{ bgcolor: 'white' }}>
             {menuItems.map((item, index) => {
               const active = pathname === item.path;

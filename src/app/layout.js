@@ -21,13 +21,9 @@ export default function RootLayout({ children }) {
         <AppThemeProvider>
           <Providers>
             {!hideHeader && <Header />}
-            <Box component="main" sx={{ 
+            <Box component="main" sx={{
               minHeight: "100vh",
-              backgroundImage: 'url("/bg-to-site-ao-kazniisa.jpg")',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundAttachment: 'fixed',
-              backgroundRepeat: 'no-repeat',
+              bgcolor: '#fff',
             }}>
               {children}
             </Box>
