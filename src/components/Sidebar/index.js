@@ -23,12 +23,12 @@ export default function Sidebar({ title, menuItems = [], latestNews = [] }) {
                     sx={{
                       py: 1.5,
                       px: 2.5,
-                      borderLeft: active ? '4px solid #F5A623' : '4px solid transparent',
+                      borderLeft: active ? '4px solid #0369A1' : '4px solid transparent',
                       bgcolor: 'transparent',
                       transition: 'all 0.15s ease',
                       '&:hover': {
-                        bgcolor: 'rgba(245,166,35,0.06)',
-                        borderLeftColor: '#F5A623',
+                        bgcolor: 'rgba(3,105,161,0.06)',
+                        borderLeftColor: '#0369A1',
                       },
                     }}
                   >
@@ -53,7 +53,7 @@ export default function Sidebar({ title, menuItems = [], latestNews = [] }) {
       <Box sx={{ mb: 3 }}>
         <Button
           fullWidth
-          startIcon={<PictureAsPdfIcon sx={{ color: '#F5A623' }} />}
+          startIcon={<PictureAsPdfIcon sx={{ color: '#0369A1' }} />}
           sx={{
             bgcolor: '#0F172A',
             color: 'white',
@@ -73,11 +73,11 @@ export default function Sidebar({ title, menuItems = [], latestNews = [] }) {
       </Box>
 
       {/* Help card */}
-      <Box sx={{ mb: 3, bgcolor: '#F5A623', p: 3 }}>
-        <Typography sx={{ fontWeight: 700, fontSize: '14px', color: '#0F172A', mb: 1.5 }}>
+      <Box sx={{ mb: 3, bgcolor: '#0369A1', p: 3, borderRadius: '6px' }}>
+        <Typography sx={{ fontWeight: 700, fontSize: '14px', color: 'white', mb: 1.5 }}>
           Как мы можем вам помочь?
         </Typography>
-        <Typography sx={{ fontSize: '13px', color: '#1a1a1a', mb: 2.5, lineHeight: 1.6 }}>
+        <Typography sx={{ fontSize: '13px', color: 'rgba(255,255,255,0.85)', mb: 2.5, lineHeight: 1.6 }}>
           Свяжитесь с ближайшим офисом АО КазНИИСА или отправьте заявку онлайн.
         </Typography>
         <Button
@@ -123,7 +123,7 @@ export default function Sidebar({ title, menuItems = [], latestNews = [] }) {
                     lineHeight: 1.5,
                     display: 'block',
                     transition: 'color 0.2s',
-                    '&:hover': { color: '#F5A623' },
+                    '&:hover': { color: '#0369A1' },
                   }}
                 >
                   {news.title}

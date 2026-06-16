@@ -1,8 +1,13 @@
 'use client';
 import { Typography, Box, Divider } from '@mui/material';
+import ImageLightbox, { useImageLightbox } from '../../../../components/ImageLightbox';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const timeline = [
   {
@@ -44,34 +49,38 @@ const spheres = [
 ];
 
 export default function HistoryPage() {
+  const { lightbox, openLightbox, closeLightbox } = useImageLightbox();
+
   return (
     <Box>
-      <Typography
-        variant="h4"
-        sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}
-      >
+      <ImageLightbox {...lightbox} onClose={closeLightbox} />
+
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         История КазНИИСА
       </Typography>
-      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap', alignItems: 'flex-start' }}>
         <Box
           component="img"
           src="/images/kazniisa/history-left.png"
           alt="История КазНИИСА — левый"
-          sx={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 1, flexShrink: 0 }}
+          onClick={() => openLightbox('/images/kazniisa/history-left.png', 'История КазНИИСА — левый')}
+          sx={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 1, flexShrink: 0, cursor: 'zoom-in' }}
         />
         <Box
           component="img"
           src="/images/kazniisa/history-kazniisa.webp"
           alt="История КазНИИСА"
-          sx={{ flex: 1, minWidth: 200, maxWidth: '100%', width: '100%', borderRadius: 2, objectFit: 'cover', maxHeight: 320 }}
+          onClick={() => openLightbox('/images/kazniisa/history-kazniisa.webp', 'История КазНИИСА')}
+          sx={{ flex: 1, minWidth: 200, maxWidth: '100%', width: '100%', borderRadius: 2, objectFit: 'cover', maxHeight: 320, cursor: 'zoom-in' }}
         />
         <Box
           component="img"
           src="/images/kazniisa/history-right.png"
           alt="История КазНИИСА — правый"
-          sx={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 1, flexShrink: 0 }}
+          onClick={() => openLightbox('/images/kazniisa/history-right.png', 'История КазНИИСА — правый')}
+          sx={{ width: 80, height: 80, objectFit: 'cover', borderRadius: 1, flexShrink: 0, cursor: 'zoom-in' }}
         />
       </Box>
 
@@ -82,12 +91,10 @@ export default function HistoryPage() {
       </Typography>
 
       {/* Timeline */}
-      <Typography
-        variant="h6"
-        sx={{ fontWeight: 700, color: NAVY, mb: 3, fontFamily: '"Exo 2", sans-serif' }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Хронология
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Box sx={{ position: 'relative', pl: 4, mb: 6 }}>
         <Box
@@ -97,7 +104,7 @@ export default function HistoryPage() {
             top: 8,
             bottom: 8,
             width: 3,
-            bgcolor: `${AMBER}40`,
+            bgcolor: `${BLUE}40`,
             borderRadius: 2,
           }}
         />
@@ -111,18 +118,17 @@ export default function HistoryPage() {
                 width: 14,
                 height: 14,
                 borderRadius: '50%',
-                bgcolor: i === timeline.length - 1 ? AMBER : NAVY,
+                bgcolor: i === timeline.length - 1 ? BLUE : NAVY,
                 border: '3px solid #fff',
-                boxShadow: `0 0 0 2px ${i === timeline.length - 1 ? AMBER : NAVY}`,
+                boxShadow: `0 0 0 2px ${i === timeline.length - 1 ? BLUE : NAVY}`,
               }}
             />
             <Typography
               sx={{
                 fontWeight: 700,
-                color: AMBER,
+                color: BLUE,
                 fontSize: '0.9rem',
                 mb: 0.5,
-                fontFamily: '"Exo 2", sans-serif',
               }}
             >
               {item.date}
@@ -138,25 +144,25 @@ export default function HistoryPage() {
         component="img"
         src="/images/kazniisa/history-full.webp"
         alt="Полная история КазНИИСА"
-        sx={{ width: '100%', borderRadius: 2, mb: 5, objectFit: 'cover', maxHeight: 400 }}
+        onClick={() => openLightbox('/images/kazniisa/history-full.webp', 'Полная история КазНИИСА')}
+        sx={{ width: '100%', borderRadius: 2, mb: 5, objectFit: 'cover', maxHeight: 400, cursor: 'zoom-in' }}
       />
 
       <Divider sx={{ mb: 5 }} />
 
       {/* Spheres */}
-      <Box sx={{ bgcolor: NAVY, borderRadius: 3, p: 4 }}>
+      <Box sx={{ bgcolor: NAVY, borderRadius: '6px', p: 4 }}>
         <Typography
           variant="h6"
           sx={{
             fontWeight: 700,
             color: '#fff',
             mb: 1,
-            fontFamily: '"Exo 2", sans-serif',
           }}
         >
           Сфера деятельности
         </Typography>
-        <Box sx={{ width: 40, height: 3, bgcolor: AMBER, borderRadius: 2, mb: 3 }} />
+        <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mb: 3 }} />
         {spheres.map((s, i) => (
           <Box key={i} sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, mb: 1.5 }}>
             <Box
@@ -164,7 +170,7 @@ export default function HistoryPage() {
                 width: 8,
                 height: 8,
                 borderRadius: '50%',
-                bgcolor: AMBER,
+                bgcolor: BLUE,
                 mt: '10px',
                 flexShrink: 0,
               }}

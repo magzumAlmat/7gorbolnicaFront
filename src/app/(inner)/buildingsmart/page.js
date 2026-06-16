@@ -1,18 +1,22 @@
 'use client';
-import { Typography, Box, Grid, Divider } from '@mui/material';
+import { Typography, Box, Grid } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 export default function BuildingSmartPage() {
   return (
     <Box>
       {/* Header */}
       <Box component="img" src="/images/kazniisa/buildingsmart-logo.webp" alt="buildingSMART logo" sx={{ height: 48, objectFit: 'contain', mb: 2, display: 'block' }} />
-      <Typography variant="h3" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 0 }}>
+      <Typography variant="h3" sx={{ fontWeight: 800, color: NAVY, mb: 0 }}>
         buildingSMART Казахстан
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, mt: 1, mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
         buildingSMART Казахстан — официальный представитель buildingSMART International в Республике
@@ -22,7 +26,7 @@ export default function BuildingSmartPage() {
         отрасль страны. Организация создана в начале 2024 года.
       </Typography>
 
-      <Box sx={{ borderLeft: '4px solid #F59E0B', pl: 3, py: 2, bgcolor: '#FAFAFA', mb: 4 }}>
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 4 }}>
         <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
           Миссия: создание инновационной и устойчивой строительной отрасли Казахстана через широкое
           внедрение технологий информационного моделирования на всех этапах жизненного цикла
@@ -38,18 +42,17 @@ export default function BuildingSmartPage() {
               component="img"
               src={src}
               alt={`BIM ${i + 1}`}
-              sx={{ width: '100%', maxWidth: 340, borderRadius: 1, display: 'block' }}
+              sx={{ width: '100%', maxWidth: 340, borderRadius: '6px', display: 'block' }}
             />
           </Grid>
         ))}
       </Grid>
 
-      <Divider sx={{ mb: 4 }} />
-
       {/* Goals */}
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Цели организации
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
       <Box component="ul" sx={{ pl: 3, m: 0, mb: 4 }}>
         {[
           'Адаптация международных BIM-стандартов к условиям и нормативной базе Казахстана',
@@ -66,9 +69,10 @@ export default function BuildingSmartPage() {
       </Box>
 
       {/* Tasks */}
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Задачи
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
       <Box component="ul" sx={{ pl: 3, m: 0, mb: 4 }}>
         {[
           'Локализация и адаптация стандарта IFC и других openBIM-форматов для применения в РК',
@@ -82,8 +86,6 @@ export default function BuildingSmartPage() {
           </Box>
         ))}
       </Box>
-
-      <Divider sx={{ mb: 4 }} />
 
       {/* Service images */}
       <Grid container spacing={2} sx={{ mb: 4 }}>
@@ -99,18 +101,17 @@ export default function BuildingSmartPage() {
               component="img"
               src={img.src}
               alt={img.alt}
-              sx={{ width: '100%', maxWidth: 340, borderRadius: 1, display: 'block' }}
+              sx={{ width: '100%', maxWidth: 340, borderRadius: '6px', display: 'block' }}
             />
           </Grid>
         ))}
       </Grid>
 
-      <Divider sx={{ mb: 4 }} />
-
       {/* Certification */}
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Программа обучения и сертификации
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
         buildingSMART Казахстан реализует программу{' '}
         <Box component="strong" sx={{ color: NAVY }}>
@@ -128,10 +129,10 @@ export default function BuildingSmartPage() {
       </Typography>
 
       {/* Standards */}
-      <Divider sx={{ mb: 4 }} />
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Стандарты openBIM
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
         buildingSMART Kazakhstan продвигает применение открытых нейтральных форматов и стандартов
         обмена данными в строительстве:
@@ -145,7 +146,7 @@ export default function BuildingSmartPage() {
           { code: 'UCM', desc: 'Use Case Management — управление сценариями применения BIM' },
         ].map((s) => (
           <Grid item xs={12} sm={6} key={s.code}>
-            <Box sx={{ borderLeft: `3px solid ${AMBER}`, pl: 2, py: 0.5 }}>
+            <Box sx={{ borderLeft: '3px solid ' + BLUE, pl: 2, py: 0.5 }}>
               <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem' }}>{s.code}</Typography>
               <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#334155' }}>{s.desc}</Typography>
             </Box>
@@ -153,19 +154,18 @@ export default function BuildingSmartPage() {
         ))}
       </Grid>
 
-      <Divider sx={{ mb: 4 }} />
-
       {/* About bSI */}
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         buildingSMART International
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
         buildingSMART International — глобальная некоммерческая организация, основанная в 1995 году.
         Объединяет более 30 национальных отделений (чаптеров) по всему миру. Организация разрабатывает
         и поддерживает открытые стандарты обмена данными о строительных объектах, в первую очередь
         формат IFC.
       </Typography>
-      <Box sx={{ borderLeft: '4px solid #F59E0B', pl: 3, py: 2, bgcolor: '#FAFAFA', mb: 2 }}>
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 2 }}>
         <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
           Видение buildingSMART International: беспрепятственный обмен достоверной цифровой информацией
           об объектах на протяжении всего их жизненного цикла — от идеи до сноса.

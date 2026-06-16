@@ -15,28 +15,11 @@ import { Select, MenuItem, TextField as MuiTextField } from '@mui/material';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { styled } from '@mui/material/styles';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllPublicDocumentsAction } from '../../store/slices/authSlice';
-import { getFirstImage, getSnippet } from '../../utils/newsHelpers';
-import { mockNews } from '../../data/mockNews';
+import NewsSection from '../NewsSection';
 const KazakhstanMap = dynamic(() => import('../Map/LeafletMap'), { ssr: false });
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
-// Послание Президента
-const presidentialMessages = [
-  {
-    title: "Послание Главы государства Касым-Жомарта Токаева народу Казахстана «Справедливый Казахстан: закон и порядок, экономический рост, общественный оптимизм»",
-    date: "2 Сентябрь, 2024",
-    link: "/news",
-  },
-  {
-    title: "Послание президента Касым-Жомарта Кемелевича Токаева народу Казахстана «Справедливое государство. Единая нация. Благополучное общество»",
-    date: "12 Сентябрь, 2022",
-    link: "/news",
-  },
-];
-
-// Центры (Обновлено по дизайну)
 const centers = [
   { 
     title: "Центр нормирования в строительстве", 
@@ -76,19 +59,8 @@ const centers = [
   },
 ];
 
-const offices = [
-  { city: "Алматы №1", address: "3 микрорайон 44А", phone: "8 (727) 226 94 10", email: "info@kazniisa.kz" },
-  { city: "Алматы №2", address: "Ул.Сатпаева 88Г", phone: "+7 (727) 392-75-91", email: "info@kazniisa.kz" },
-  { city: "Астана", address: "р-н Сарыарқа, ул. Бейбітшілік 14, оф 1406", phone: "8 (7172) 57-53-03", email: "crn@kazniisa.kz" },
-  { city: "Тараз", address: "ул. Сулейманова, 19 Б", phone: "+7 (7262) 43-63-99", email: "mbaitemirov@kazniisa.kz" },
-  { city: "Усть-Каменогорск", address: "ул. М.Горького, 21 офис 203", phone: "8 (7232) 26-16-90", email: "info@kazniisa.kz" },
-];
-
-// === 2. HERO (NEWS SLIDER как на kazniisa.kz) ===
 export default function Hero() {
   const theme = useTheme();
-  const dispatch = useDispatch();
-  const allDocuments = useSelector(state => state.auth.allDocuments);
   
   const [mapView, setMapView] = useState({ center: [48.0, 67.0], zoom: 5 });
 
@@ -98,34 +70,35 @@ export default function Hero() {
   };
 
   const [slide, setSlide] = useState(0);
-  const [centerSlide, setCenterSlide] = useState(0);
+  const [newsSlides, setNewsSlides] = useState([]);
 
   useEffect(() => {
-    dispatch(getAllPublicDocumentsAction());
-  }, [dispatch]);
-
-  // Transform dynamic news into newsSlides format
-  const dynamicNews = (allDocuments || []).map(news => ({
-    id: news.id,
-    title: news.document_name,
-    date: news.createdAt ? new Date(news.createdAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) : '',
-    image: getFirstImage(news.document_content) || "https://kazniisa.kz/wp-content/uploads/2025/01/photo_2025-01-13_10-46-47.jpg",
-    link: `/news/${news.id}`,
-    snippet: getSnippet(news.document_content, 150)
-  }));
-
-  const currentNewsSlides = dynamicNews.slice(0, 4); // Limit to top 4 news for the slider
+    fetch(`${API_URL}/api/kazniisa/news`)
+      .then(r => r.json())
+      .then(data => {
+        const slides = (data || []).slice(0, 4).map(item => ({
+          id: item.id,
+          title: item.title?.ru || '',
+          date: item.publishedAt
+            ? new Date(item.publishedAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })
+            : '',
+          image: item.image || '/images/kazniisa/centres-banner.webp',
+          link: `/about-us/news/${item.slug}`,
+          snippet: (item.content?.ru || '').split('\n\n')[0]?.slice(0, 150) || '',
+        }));
+        setNewsSlides(slides);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
-    if (currentNewsSlides.length === 0) return;
-    const timer = setInterval(() => setSlide(s => (s + 1) % currentNewsSlides.length), 6000);
+    if (newsSlides.length === 0) return;
+    const timer = setInterval(() => setSlide(s => (s + 1) % newsSlides.length), 6000);
     return () => clearInterval(timer);
-  }, [currentNewsSlides.length]);
+  }, [newsSlides.length]);
 
-  const nextSlide = () => setSlide(s => (s + 1) % currentNewsSlides.length);
-  const prevSlide = () => setSlide(s => (s - 1 + currentNewsSlides.length) % currentNewsSlides.length);
-  const nextCenter = () => setCenterSlide(s => Math.min(s + 1, centers.length - 3));
-  const prevCenter = () => setCenterSlide(s => Math.max(s - 1, 0));
+  const nextSlide = () => newsSlides.length > 0 && setSlide(s => (s + 1) % newsSlides.length);
+  const prevSlide = () => newsSlides.length > 0 && setSlide(s => (s - 1 + newsSlides.length) % newsSlides.length);
 
   return (
     <Box>
@@ -160,7 +133,6 @@ export default function Hero() {
               transform: 'scale(1.5)', 
               pointerEvents: 'none',
               border: 'none'
-              
             }}
           />
         </Box>
@@ -220,7 +192,7 @@ export default function Hero() {
             {/* Правая часть: новостной слайдер */}
             <Grid item xs={12} md={7}>
               <Box sx={{ position: 'relative' }}>
-                {currentNewsSlides.length === 0 && (
+                {newsSlides.length === 0 && (
                   <Box sx={{
                     height: { xs: 250, md: 350 },
                     bgcolor: 'rgba(255,255,255,0.1)',
@@ -230,11 +202,11 @@ export default function Hero() {
                     justifyContent: 'center',
                     border: '1px dashed rgba(255,255,255,0.3)'
                   }}>
-                    <Typography sx={{ color: 'white' }}>Новости не найдены в базе данных</Typography>
+                    <Typography sx={{ color: 'white' }}>Загрузка новостей...</Typography>
                   </Box>
                 )}
                 {/* Карточка новости */}
-                {currentNewsSlides.map((news, idx) => (
+                {newsSlides.map((news, idx) => (
                   <Box
                     key={idx}
                     sx={{
@@ -317,9 +289,9 @@ export default function Hero() {
                   <ChevronRight />
                 </IconButton>
 
-                {/* Навигация по точкам (thumbs) */}
+                {/* Навигация по точкам */}
                 <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 2 }}>
-                  {currentNewsSlides.map((_, i) => (
+                  {newsSlides.map((_, i) => (
                     <Box
                       key={i}
                       onClick={() => setSlide(i)}
@@ -339,10 +311,10 @@ export default function Hero() {
         </Container>
       </Box>
 
-      {/* === МИНИ-ЛЕНТА НОВОСТЕЙ (снизу слайдера, как на оригинале) === */}
+      {/* === МИНИ-ЛЕНТА НОВОСТЕЙ === */}
       <Container maxWidth="lg" sx={{ mt: { xs: -4, md: -6 }, position: 'relative', zIndex: 10, mb: 6 }}>
         <Grid container spacing={2}>
-          {currentNewsSlides.map((news, i) => (
+          {newsSlides.map((news, i) => (
             <Grid item xs={6} md={3} key={i}>
               <Paper
                 component={Link}
@@ -374,7 +346,10 @@ export default function Hero() {
         </Grid>
       </Container>
 
-      {/* === ЦЕНТРЫ АО «КАЗНИИСА» (Новый дизайн заголовка по Фото) === */}
+      {/* === МОДУЛЬ НОВОСТИ (сразу после лендинга) === */}
+      <NewsSection />
+
+      {/* === ЦЕНТРЫ АО «КАЗНИИСА» === */}
       <Box sx={{ 
         position: 'relative', 
         bgcolor: '#002e5b', 
@@ -385,7 +360,6 @@ export default function Hero() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}>
-        {/* Dark overlay */}
         <Box sx={{ 
           position: 'absolute', inset: 0, 
           bgcolor: 'rgba(0, 46, 91, 0.9)', 
@@ -430,7 +404,6 @@ export default function Hero() {
 
       <Box sx={{ py: { xs: 6, md: 10 }, bgcolor: '#f8f9fa' }}>
         <Container maxWidth="lg">
-
           <Grid container spacing={0} sx={{ border: '1px solid #eee', borderRadius: 2, overflow: 'hidden', bgcolor: 'white' }}>
             {centers.map((center, i) => {
               const IconComp = {
@@ -458,7 +431,7 @@ export default function Hero() {
                       transition: 'all 0.3s',
                       '&:hover': {
                         bgcolor: i === 5 ? '#f4f4f4' : '#fff',
-                        '& .center-icon': { bgcolor: i === 5 ? '#002e5b' : '#002e5b', color: 'white' },
+                        '& .center-icon': { bgcolor: '#002e5b', color: 'white' },
                         '& .center-title': { color: '#2887B6' },
                       },
                     }}
@@ -489,30 +462,10 @@ export default function Hero() {
               );
             })}
           </Grid>
-
-          <Box sx={{ textAlign: 'center', mt: 6 }}>
-            {/* <Button
-              component={Link}
-              href="/centres"
-              variant="contained"
-              sx={{
-                bgcolor: '#2887B6',
-                px: 5, py: 1.5, borderRadius: '30px',
-                fontSize: '15px',
-                fontWeight: 700,
-                textTransform: 'none',
-                boxShadow: '0 4px 14px rgba(40, 135, 182, 0.4)',
-                '&:hover': { bgcolor: '#1f6f96', transform: 'translateY(-2px)' },
-                transition: 'all 0.3s'
-              }}
-            >
-              Все центры
-            </Button> */}
-          </Box>
         </Container>
       </Box>
 
-      {/* === ОБРАТНАЯ СВЯЗЬ (Фото 4) === */}
+      {/* === ОБРАТНАЯ СВЯЗЬ === */}
       <Box sx={{ bgcolor: '#10b857', py: { xs: 8, md: 10 }, color: 'white' }}>
         <Container maxWidth="lg">
           <Grid container spacing={6} alignItems="center">
@@ -618,44 +571,30 @@ export default function Hero() {
         </Container>
       </Box>
 
-      {/* === СЕКЦИЯ С КАРТОЙ И КОНТАКТАМИ (Новый дизайн) === */}
+      {/* === СЕКЦИЯ С КАРТОЙ И КОНТАКТАМИ === */}
       <Box sx={{ position: 'relative', bgcolor: '#f5f5f5' }}>
-        {/* Карта (Placeholder с маркерами) */}
         <Box sx={{ 
           height: { xs: 400, md: 550 }, 
           width: '100%', 
           position: 'relative',
           overflow: 'hidden',
-          backgroundImage: 'url("https://kazniisa.kz/wp-content/uploads/2019/12/Screenshot_1.jpg")', // Похожий фон карты
+          backgroundImage: 'url("https://kazniisa.kz/wp-content/uploads/2019/12/Screenshot_1.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}>
-          {/* Кастомные маркеры (как на фото) */}
-        
         <Box
-  sx={{
-    height: { xs: 400, md: 550 },
-    width: '100%',
-    borderRadius: 2,
-    overflow: 'hidden',
-    boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-  }}
->
-  {/* <iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6000000!2d66.8!3d48.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424b6!2sKazakhstan!5e0!3m2!1sru!2skz!4v1730000000000"
-  width="100%"
-  height="100%"
-  style={{ border: 0 }}
-  allowFullScreen=""
-  loading="lazy"
-  title="Казахстан (zoom out)"
-/> */}
-
-<Box id="map-section" sx={{ height: { xs: 400, md: 550 }, width: '100%', borderRadius: 2, overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
-  <KazakhstanMap center={mapView.center} zoom={mapView.zoom} />
-</Box>
-
-</Box>
+          sx={{
+            height: { xs: 400, md: 550 },
+            width: '100%',
+            borderRadius: 2,
+            overflow: 'hidden',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+          }}
+        >
+          <Box id="map-section" sx={{ height: { xs: 400, md: 550 }, width: '100%', borderRadius: 2, overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.15)' }}>
+            <KazakhstanMap center={mapView.center} zoom={mapView.zoom} />
+          </Box>
+        </Box>
         </Box>
 
         {/* Темно-синий ползунок с офисами */}
@@ -663,7 +602,6 @@ export default function Hero() {
           <Container maxWidth="lg">
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Grid container spacing={0}>
-                {/* ОФИС АСТАНА */}
                 <Grid item xs={12} md={3.7}>
                   <Box 
                     onClick={() => handleOfficeClick([51.169392, 71.449074])}
@@ -682,7 +620,6 @@ export default function Hero() {
 
                 <Grid item sx={{ borderLeft: '1px solid rgba(255,255,255,0.2)', height: 100, mx: 1, display: { xs: 'none', md: 'block' } }} />
 
-                {/* ОФИС ТАРАЗ */}
                 <Grid item xs={12} md={3.7}>
                   <Box 
                     onClick={() => handleOfficeClick([42.896088, 71.398430])}
@@ -701,7 +638,6 @@ export default function Hero() {
 
                 <Grid item sx={{ borderLeft: '1px solid rgba(255,255,255,0.2)', height: 100, mx: 1, display: { xs: 'none', md: 'block' } }} />
 
-                {/* ОФИС УСТЬ-КАМЕНОГОРСК */}
                 <Grid item xs={12} md={3.7}>
                   <Box 
                     onClick={() => handleOfficeClick([49.948175, 82.628540])}
@@ -718,7 +654,6 @@ export default function Hero() {
                   </Box>
                 </Grid>
 
-                {/* Индикаторы слайдера (желтый и синий кружки) */}
                 <Grid item xs={12} md={0.5} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end' }}>
                    <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: '#FDE428', mb: 1.5 }} />
                    <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: '#2887B6' }} />
@@ -729,7 +664,7 @@ export default function Hero() {
         </Box>
       </Box>
 
-      {/* === CTA / КОНТАКТНАЯ ФОРМА (как на оригинале) === */}
+      {/* === CTA / КОНТАКТНАЯ ФОРМА === */}
       <Box sx={{ py: { xs: 6, md: 10 } }}>
         <Container maxWidth="lg">
           <Grid container spacing={4} alignItems="center">
@@ -757,12 +692,11 @@ export default function Hero() {
               </Button>
             </Grid>
             <Grid item xs={12} md={6}>
-              {/* Новостная лента в футере */}
               <Paper elevation={0} sx={{ p: 3, bgcolor: '#f8f8f8', borderRadius: 2 }}>
                 <Typography sx={{ fontWeight: 700, fontSize: '16px', color: '#002e5b', mb: 2 }}>
                   Новости
                 </Typography>
-                {currentNewsSlides.slice(0, 2).map((news, i) => (
+                {newsSlides.slice(0, 2).map((news, i) => (
                   <Box key={i} sx={{ mb: i < 1 ? 2 : 0 }}>
                     <Typography
                       component={Link}

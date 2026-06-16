@@ -1,8 +1,12 @@
 'use client';
-import { Typography, Box, Grid, Divider, Table, TableBody, TableCell, TableRow } from '@mui/material';
+import { Typography, Box, Grid, Table, TableBody, TableCell, TableRow } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const principles = [
   'Нулевая терпимость к коррупционным проявлениям в любой форме',
@@ -39,7 +43,6 @@ export default function AntiCorruptionPage() {
       <Typography
         variant="h3"
         sx={{
-          fontFamily: '"Exo 2", sans-serif',
           fontWeight: 800,
           color: NAVY,
           mb: 1,
@@ -47,7 +50,7 @@ export default function AntiCorruptionPage() {
       >
         Противодействие коррупции
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3, maxWidth: 760 }}>
         АО «КазНИИСА» проводит активную политику противодействия коррупции. Институт реализует
@@ -59,10 +62,10 @@ export default function AntiCorruptionPage() {
 
       <Box
         sx={{
-          borderLeft: '4px solid #F59E0B',
-          pl: 3,
-          py: 2,
-          bgcolor: '#FAFAFA',
+          bgcolor: BLUE_LIGHT,
+          borderLeft: '4px solid ' + BLUE,
+          borderRadius: '0 6px 6px 0',
+          p: 3,
           mb: 5,
           fontStyle: 'italic',
         }}
@@ -74,12 +77,10 @@ export default function AntiCorruptionPage() {
         </Typography>
       </Box>
 
-      <Typography
-        variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Горячая линия для анонимных обращений
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Table size="small" sx={{ maxWidth: 600, mb: 5, '& td': { border: 'none', py: 0.8, px: 0 } }}>
         <TableBody>
@@ -112,14 +113,10 @@ export default function AntiCorruptionPage() {
         </TableBody>
       </Table>
 
-      <Divider sx={{ mb: 4 }} />
-
-      <Typography
-        variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Комплаенс-офицер / Внутренний аудитор
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Table size="small" sx={{ maxWidth: 600, mb: 5, '& td': { border: 'none', py: 0.8, px: 0 } }}>
         <TableBody>
@@ -156,14 +153,10 @@ export default function AntiCorruptionPage() {
         </TableBody>
       </Table>
 
-      <Divider sx={{ mb: 4 }} />
-
-      <Typography
-        variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Принципы антикоррупционной политики
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, mb: 5 }}>
         {principles.map((p, i) => (
@@ -174,7 +167,7 @@ export default function AntiCorruptionPage() {
                 width: 8,
                 height: 8,
                 borderRadius: '50%',
-                bgcolor: AMBER,
+                bgcolor: BLUE,
                 flexShrink: 0,
               }}
             />
@@ -185,14 +178,10 @@ export default function AntiCorruptionPage() {
         ))}
       </Box>
 
-      <Divider sx={{ mb: 4 }} />
-
-      <Typography
-        variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Нормативные документы
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
         Антикоррупционная деятельность института регулируется следующими документами:
@@ -214,7 +203,7 @@ export default function AntiCorruptionPage() {
                 width: 8,
                 height: 8,
                 borderRadius: 0,
-                bgcolor: AMBER,
+                bgcolor: BLUE,
                 flexShrink: 0,
               }}
             />
@@ -225,14 +214,10 @@ export default function AntiCorruptionPage() {
         ))}
       </Box>
 
-      <Divider sx={{ mb: 4 }} />
-
-      <Typography
-        variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Кодекс корпоративной этики
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3, maxWidth: 760 }}>
         Кодекс корпоративной этики АО «КазНИИСА» устанавливает единые стандарты поведения для всех
@@ -243,10 +228,9 @@ export default function AntiCorruptionPage() {
       <Grid container spacing={3}>
         {ethicsValues.map((v, i) => (
           <Grid item xs={12} sm={6} key={i}>
-            <Box sx={{ borderLeft: '3px solid #F59E0B', pl: 2, py: 1 }}>
+            <Box sx={{ borderLeft: '4px solid ' + BLUE, bgcolor: BLUE_LIGHT, borderRadius: '0 6px 6px 0', pl: 2, py: 1.5, transition: 'box-shadow 0.2s ease, transform 0.2s ease', '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' } }}>
               <Typography
                 sx={{
-                  fontFamily: '"Exo 2", sans-serif',
                   fontWeight: 700,
                   color: NAVY,
                   fontSize: '1rem',

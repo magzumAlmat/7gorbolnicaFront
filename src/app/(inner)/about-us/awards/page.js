@@ -1,8 +1,13 @@
 'use client';
 import { Typography, Box, Grid, Divider } from '@mui/material';
+import ImageLightbox, { useImageLightbox } from '../../../../components/ImageLightbox';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const awards = [
   {
@@ -43,15 +48,16 @@ const awards = [
 ];
 
 export default function AwardsPage() {
+  const { lightbox, openLightbox, closeLightbox } = useImageLightbox();
+
   return (
     <Box>
-      <Typography
-        variant="h4"
-        sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}
-      >
+      <ImageLightbox {...lightbox} onClose={closeLightbox} />
+
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Награды и достижения
       </Typography>
-      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 5 }}>
         АО «КазНИИСА» удостоен ряда престижных национальных и международных наград,
@@ -65,11 +71,13 @@ export default function AwardsPage() {
             <Box
               sx={{
                 p: 3,
-                border: `1px solid ${i === 0 ? AMBER : '#E2E8F0'}`,
-                borderRadius: 3,
-                bgcolor: i === 0 ? `${AMBER}0A` : '#F8FAFC',
+                border: `1px solid ${i === 0 ? BLUE : BORDER}`,
+                borderRadius: '6px',
+                bgcolor: i === 0 ? BLUE_LIGHT : GRAY_BG,
                 height: '100%',
                 boxSizing: 'border-box',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
               }}
             >
               <Box sx={{ display: 'flex', gap: 1.5, mb: 2, flexWrap: 'wrap' }}>
@@ -87,7 +95,6 @@ export default function AwardsPage() {
                       color: '#fff',
                       fontSize: '0.78rem',
                       fontWeight: 700,
-                      fontFamily: '"Exo 2", sans-serif',
                     }}
                   >
                     {a.year}
@@ -97,13 +104,13 @@ export default function AwardsPage() {
                   sx={{
                     px: 1.5,
                     py: 0.4,
-                    bgcolor: `${AMBER}20`,
+                    bgcolor: BLUE_LIGHT,
                     borderRadius: 1,
                     display: 'inline-block',
                   }}
                 >
                   <Typography
-                    sx={{ color: '#92400E', fontSize: '0.78rem', fontWeight: 600 }}
+                    sx={{ color: BLUE, fontSize: '0.78rem', fontWeight: 600 }}
                   >
                     {a.location}
                   </Typography>
@@ -116,7 +123,6 @@ export default function AwardsPage() {
                   fontSize: '1rem',
                   mb: 1.5,
                   lineHeight: 1.4,
-                  fontFamily: '"Exo 2", sans-serif',
                 }}
               >
                 {a.title}
@@ -129,7 +135,8 @@ export default function AwardsPage() {
                   component="img"
                   src={a.img}
                   alt={a.title}
-                  sx={{ width: '100%', maxHeight: 200, objectFit: 'contain', borderRadius: 1, mt: 2 }}
+                  onClick={() => openLightbox(a.img, a.title)}
+                  sx={{ width: '100%', maxHeight: 200, objectFit: 'contain', borderRadius: 1, mt: 2, cursor: 'zoom-in' }}
                 />
               )}
             </Box>
@@ -139,7 +146,7 @@ export default function AwardsPage() {
 
       <Divider sx={{ my: 5 }} />
 
-      <Box sx={{ bgcolor: NAVY, borderRadius: 3, p: 4 }}>
+      <Box sx={{ bgcolor: NAVY, borderRadius: '6px', p: 4 }}>
         <Typography
           sx={{
             color: '#CBD5E1',

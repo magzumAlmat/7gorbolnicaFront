@@ -1,11 +1,15 @@
 'use client';
 import {
-  Typography, Box, Grid, Divider,
+  Typography, Box, Grid,
   Table, TableBody, TableCell, TableHead, TableRow,
 } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const markerTypes = [
   { type: 'Газ', color: '#EAB308', colorName: 'Жёлтый', freq: '83.0 кГц', apwa: 'Gas' },
@@ -22,11 +26,11 @@ export default function ResearchPage() {
     <Box>
       <Typography
         variant="h4"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+        sx={{ fontWeight: 800, color: NAVY, mb: 1 }}
       >
         Инновационные исследования
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
         Договор № 1558 от 29 декабря 2015 года
@@ -41,51 +45,74 @@ export default function ResearchPage() {
 
       <Typography
         variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 2 }}
+        sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}
       >
         Оборудование
       </Typography>
-      <Divider sx={{ mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Grid container spacing={4} sx={{ mb: 4 }}>
         <Grid item xs={12} md={6}>
-          <Typography
-            variant="h6"
-            sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+          <Box
+            sx={{
+              p: 3,
+              border: '1px solid ' + BORDER,
+              borderRadius: '6px',
+              height: '100%',
+              transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+              '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
+            }}
           >
-            Маркер 3M™ 1421 XRiD
-          </Typography>
-          <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
-            Программируемый электронный маркер ёмкостью <strong>192 бита</strong>.
-            Пассивное устройство, не требующее источника питания. Обеспечивает хранение информации
-            об объекте коммуникации на весь срок службы подземной инфраструктуры.
-          </Typography>
-          <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mt: 1 }}>
-            Технология 3M.
-          </Typography>
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: 800, color: NAVY, mb: 1 }}
+            >
+              Маркер 3M™ 1421 XRiD
+            </Typography>
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+              Программируемый электронный маркер ёмкостью <strong>192 бита</strong>.
+              Пассивное устройство, не требующее источника питания. Обеспечивает хранение информации
+              об объекте коммуникации на весь срок службы подземной инфраструктуры.
+            </Typography>
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mt: 1 }}>
+              Технология 3M.
+            </Typography>
+          </Box>
         </Grid>
         <Grid item xs={12} md={6}>
-          <Typography
-            variant="h6"
-            sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+          <Box
+            sx={{
+              p: 3,
+              border: '1px solid ' + BORDER,
+              borderRadius: '6px',
+              height: '100%',
+              transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+              '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
+            }}
           >
-            Прибор 3M™ 1420E EMS ID Marker Finder
-          </Typography>
-          <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
-            Портативный считыватель электронных маркеров. Позволяет обнаруживать, идентифицировать
-            и считывать данные с маркеров 1421 XRiD на значительной глубине без проведения
-            земляных работ, значительно сокращая затраты на обслуживание сетей.
-          </Typography>
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: 800, color: NAVY, mb: 1 }}
+            >
+              Прибор 3M™ 1420E EMS ID Marker Finder
+            </Typography>
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+              Портативный считыватель электронных маркеров. Позволяет обнаруживать, идентифицировать
+              и считывать данные с маркеров 1421 XRiD на значительной глубине без проведения
+              земляных работ, значительно сокращая затраты на обслуживание сетей.
+            </Typography>
+          </Box>
         </Grid>
       </Grid>
 
       <Typography
         variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 2 }}
+        sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}
       >
         Типы маркеров по стандартам APWA
       </Typography>
-      <Divider sx={{ mb: 2 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
         Каждый тип коммуникации имеет собственный цвет и рабочую частоту согласно стандартам
         Американской ассоциации публичных работ (APWA).
@@ -103,7 +130,7 @@ export default function ResearchPage() {
           </TableHead>
           <TableBody>
             {markerTypes.map((m, i) => (
-              <TableRow key={m.type} sx={{ bgcolor: i % 2 === 0 ? '#F8FAFC' : '#fff' }}>
+              <TableRow key={m.type} sx={{ bgcolor: i % 2 === 0 ? GRAY_BG : '#fff' }}>
                 <TableCell sx={{ fontWeight: 600, color: NAVY }}>{m.type}</TableCell>
                 <TableCell>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -113,7 +140,7 @@ export default function ResearchPage() {
                         height: 16,
                         borderRadius: '50%',
                         bgcolor: m.color,
-                        border: '1px solid #E2E8F0',
+                        border: '1px solid ' + BORDER,
                         flexShrink: 0,
                       }}
                     />

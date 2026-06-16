@@ -1,41 +1,114 @@
 'use client';
-import { Typography, Box, Paper, Chip, Button } from '@mui/material';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
+import { useState, useEffect } from 'react';
+import { Typography, Box, Paper, Chip, Grid, CircularProgress } from '@mui/material';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Link from 'next/link';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const NAVY = '#0F172A';
-const ACCENT = '#0369A1';
-const AMBER = '#F59E0B';
-const BG = '#F8FAFC';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
-export default function NewsRedirectPage() {
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+export default function NewsListingPage() {
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/kazniisa/news`)
+      .then(r => r.json())
+      .then(data => setNews(data))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <Box sx={{ textAlign: 'center', py: 8 }}><CircularProgress sx={{ color: BLUE }} /></Box>;
+
   return (
     <Box>
-      <Chip label="Новости" size="small" sx={{ bgcolor: AMBER, color: NAVY, fontWeight: 700, mb: 1.5, fontFamily: '"Roboto Mono", monospace' }} />
-      <Typography variant="h4" sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}>
+      <Chip label="Пресс-центр" size="small" sx={{ bgcolor: BLUE_LIGHT, color: BLUE, fontWeight: 700, mb: 1.5 }} />
+      <Typography variant="h4" sx={{ fontWeight: 800, color: NAVY, letterSpacing: '-0.02em' }}>
         Новости
       </Typography>
-      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 1 }} />
+      <Typography sx={{ color: GRAY_TEXT, fontSize: '0.95rem', mb: 4, maxWidth: 600 }}>
+        Актуальные события, пресс-релизы и объявления АО «КазНИИСА»
+      </Typography>
 
-      <Paper elevation={0} sx={{ p: 5, border: '1px solid #E2E8F0', borderRadius: 3, bgcolor: BG, textAlign: 'center' }}>
-        <NewspaperIcon sx={{ fontSize: 56, color: `${ACCENT}50`, mb: 2 }} />
-        <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1.1rem', mb: 1 }}>
-          Актуальные новости института
-        </Typography>
-        <Typography sx={{ color: '#64748B', fontSize: '0.95rem', mb: 3, maxWidth: 480, mx: 'auto' }}>
-          Новости АО «КазНИИСА» публикуются в разделе Новости. Там вы найдёте актуальные события, пресс-релизы и объявления.
-        </Typography>
-        <Button
-          component={Link}
-          href="/news"
-          variant="contained"
-          endIcon={<ArrowForwardIcon />}
-          sx={{ bgcolor: ACCENT, textTransform: 'none', fontWeight: 600, borderRadius: 2, px: 3 }}
-        >
-          Перейти к новостям
-        </Button>
-      </Paper>
+      <Grid container spacing={3}>
+        {news.map((item) => (
+          <Grid item xs={12} sm={6} md={4} key={item.slug}>
+            <Paper
+              component={Link}
+              href={`/about-us/news/${item.slug}`}
+              elevation={0}
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+                border: '1px solid ' + BORDER,
+                borderRadius: '8px',
+                overflow: 'hidden',
+                textDecoration: 'none',
+                transition: 'all 0.25s ease',
+                '&:hover': {
+                  transform: 'translateY(-3px)',
+                  boxShadow: '0 8px 24px rgba(3,105,161,0.12)',
+                  borderColor: BLUE,
+                  '& .news-arrow': { opacity: 1, transform: 'translateX(0)' },
+                  '& .news-image': { transform: 'scale(1.04)' },
+                },
+              }}
+            >
+              <Box sx={{ overflow: 'hidden', height: 180 }}>
+                <Box
+                  className="news-image"
+                  component="img"
+                  src={item.image}
+                  alt={item.title?.ru || ''}
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    transition: 'transform 0.4s ease',
+                  }}
+                />
+              </Box>
+              <Box sx={{ p: 2.5, display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 1 }}>
+                  <CalendarTodayIcon sx={{ fontSize: 13, color: GRAY_TEXT }} />
+                  <Typography sx={{ fontSize: '0.75rem', color: GRAY_TEXT, fontWeight: 500 }}>
+                    {formatDate(item.publishedAt)}
+                  </Typography>
+                </Box>
+                <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '0.95rem', lineHeight: 1.4, mb: 1, flex: 1 }}>
+                  {item.title?.ru || ''}
+                </Typography>
+                <Typography sx={{ color: GRAY_TEXT, fontSize: '0.82rem', lineHeight: 1.5, mb: 1.5, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                  {(item.content?.ru || '').split('\n\n')[0]}
+                </Typography>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mt: 'auto' }}>
+                  <Typography sx={{ color: BLUE, fontWeight: 600, fontSize: '0.82rem' }}>
+                    Читать
+                  </Typography>
+                  <ArrowForwardIcon
+                    className="news-arrow"
+                    sx={{ color: BLUE, fontSize: 14, opacity: 0, transform: 'translateX(-6px)', transition: 'all 0.25s' }}
+                  />
+                </Box>
+              </Box>
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 }

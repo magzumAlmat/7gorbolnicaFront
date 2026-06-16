@@ -1,9 +1,13 @@
 'use client';
-import { Typography, Box, Grid, Divider } from '@mui/material';
+import { Typography, Box, Grid } from '@mui/material';
 import Link from 'next/link';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const sections = [
   {
@@ -37,10 +41,10 @@ export default function SciencePage() {
         alt="КазНИИСА"
         sx={{ height: 56, objectFit: 'contain', mb: 2, display: 'block' }}
       />
-      <Typography variant="h3" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 0 }}>
+      <Typography variant="h3" sx={{ fontWeight: 800, color: NAVY, mb: 0 }}>
         Научная деятельность
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, mt: 1, mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
         Казахский научно-исследовательский институт строительства и архитектуры (КазНИИСА) ведёт
@@ -50,7 +54,7 @@ export default function SciencePage() {
         норм и стандартов.
       </Typography>
 
-      <Box sx={{ borderLeft: '4px solid #F59E0B', pl: 3, py: 2, bgcolor: '#FAFAFA', mb: 4 }}>
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 4 }}>
         <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
           КазНИИСА регулярно выпускает сборники научных трудов по проблемам сейсмостойкого
           строительства. В сборниках публикуются результаты экспериментальных исследований,
@@ -59,11 +63,10 @@ export default function SciencePage() {
         </Typography>
       </Box>
 
-      <Divider sx={{ mb: 4 }} />
-
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 3 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Разделы научной деятельности
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Grid container spacing={3}>
         {sections.map((s) => (
@@ -73,14 +76,15 @@ export default function SciencePage() {
                 sx={{
                   p: 3,
                   height: '100%',
-                  border: `1px solid #E2E8F0`,
-                  borderTop: `3px solid ${AMBER}`,
-                  transition: 'border-color 0.2s',
-                  '&:hover': { borderColor: NAVY, borderTopColor: AMBER },
+                  border: '1px solid ' + BORDER,
+                  borderTop: '3px solid ' + BLUE,
+                  borderRadius: '6px',
+                  transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                  '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
                   cursor: 'pointer',
                 }}
               >
-                <Typography variant="h6" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 1 }}>
+                <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, mb: 1 }}>
                   {s.title}
                 </Typography>
                 <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>{s.desc}</Typography>

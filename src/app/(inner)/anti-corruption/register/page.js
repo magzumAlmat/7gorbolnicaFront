@@ -1,21 +1,25 @@
 'use client';
-import { Typography, Box, Divider, Paper } from '@mui/material';
+import { Typography, Box, Paper } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 export default function RegisterPage() {
   return (
     <Box>
       <Typography
         variant="h3"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+        sx={{ fontWeight: 800, color: NAVY, mb: 1 }}
       >
         Реестр должностей, подверженных коррупционным рискам
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4 }}>
         В соответствии с требованиями антикоррупционного законодательства Республики Казахстан
@@ -26,13 +30,12 @@ export default function RegisterPage() {
 
       <Box
         sx={{
-          borderLeft: '4px solid #F59E0B',
-          pl: 3,
-          py: 2,
-          bgcolor: '#FAFAFA',
+          bgcolor: BLUE_LIGHT,
+          borderLeft: '4px solid ' + BLUE,
+          borderRadius: '0 6px 6px 0',
+          p: 3,
           fontStyle: 'italic',
           mb: 4,
-          borderRadius: '0 8px 8px 0',
         }}
       >
         <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
@@ -42,27 +45,26 @@ export default function RegisterPage() {
         </Typography>
       </Box>
 
-      <Typography
-        variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Документ
       </Typography>
-      <Divider sx={{ mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Paper
         sx={{
           p: 3,
-          borderRadius: 2,
-          border: '1px solid #E2E8F0',
-          borderLeft: `4px solid ${AMBER}`,
+          borderRadius: '6px',
+          border: '1px solid ' + BORDER,
+          borderLeft: '4px solid ' + BLUE,
           mb: 4,
           display: 'flex',
           alignItems: 'center',
           gap: 2,
+          transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+          '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
         }}
       >
-        <AssignmentIcon sx={{ color: AMBER, fontSize: 40 }} />
+        <AssignmentIcon sx={{ color: BLUE, fontSize: 40 }} />
         <Box sx={{ flex: 1 }}>
           <Typography sx={{ fontWeight: 700, color: NAVY, mb: 0.5 }}>
             Реестр должностей, подверженных коррупционным рискам
@@ -76,7 +78,7 @@ export default function RegisterPage() {
             display: 'flex',
             alignItems: 'center',
             gap: 1,
-            color: AMBER,
+            color: BLUE,
             fontWeight: 600,
             fontSize: '0.9rem',
             cursor: 'pointer',
@@ -88,13 +90,10 @@ export default function RegisterPage() {
         </Box>
       </Paper>
 
-      <Typography
-        variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         О реестре
       </Typography>
-      <Divider sx={{ mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
         Реестр должностей, подверженных коррупционным рискам, является одним из ключевых инструментов

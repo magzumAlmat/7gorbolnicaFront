@@ -1,8 +1,12 @@
 'use client';
-import { Typography, Box, Grid, Divider } from '@mui/material';
+import { Typography, Box, Grid } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const norms = [
   { country: 'Азербайджан', document: null },
@@ -21,34 +25,25 @@ const norms = [
 export default function NormsOfCisCountries() {
   return (
     <Box>
-      <Typography variant="h3" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}>
+      <Typography variant="h3" sx={{ fontWeight: 800, color: NAVY, mb: 1 }}>
         Нормы стран СНГ
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 4 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
         В рамках деятельности Базовой организации ведётся работа по разработке единых норм сейсмостойкого строительства для всех государств — членов СНГ. Проведена оценка действующих национальных нормативных документов. Следующий этап предусматривает установление гармонизированных единых стандартов и национальных приложений.
       </Typography>
 
-      <Box
-        sx={{
-          borderLeft: '4px solid #F59E0B',
-          pl: 3,
-          py: 2,
-          bgcolor: '#FAFAFA',
-          fontStyle: 'italic',
-          mb: 4,
-        }}
-      >
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 4 }}>
         <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
           Единые нормы направлены на совершенствование сейсмостойкого строительства в странах СНГ и устранение существующих законодательных пробелов в строительном надзоре.
         </Typography>
       </Box>
 
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Нормативные документы по странам
       </Typography>
-      <Divider sx={{ borderColor: AMBER, mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Grid container spacing={2}>
         {norms.map(({ country, document }) => (
@@ -56,10 +51,12 @@ export default function NormsOfCisCountries() {
             <Box
               sx={{
                 p: 2,
-                border: '1px solid #E2E8F0',
-                borderRadius: 2,
+                border: '1px solid ' + BORDER,
+                borderRadius: '6px',
                 height: '100%',
-                borderLeft: document ? '4px solid #F59E0B' : '4px solid #CBD5E1',
+                borderLeft: document ? '4px solid ' + BLUE : '4px solid #CBD5E1',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
               }}
             >
               <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem', mb: 0.5 }}>

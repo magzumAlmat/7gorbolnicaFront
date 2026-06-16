@@ -1,8 +1,12 @@
 'use client';
-import { Typography, Box, Grid, Divider } from '@mui/material';
+import { Typography, Box, Grid } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const functions = [
   { title: 'Утверждение программ', desc: 'Рассмотрение и утверждение планов научно-исследовательских работ института на текущий и перспективный периоды.' },
@@ -15,11 +19,11 @@ export default function CouncilPage() {
     <Box>
       <Typography
         variant="h4"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+        sx={{ fontWeight: 800, color: NAVY, mb: 1 }}
       >
         Учёный совет
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4 }}>
         Учёный совет КазНИИСА является постоянно действующим коллегиальным органом научного управления
@@ -29,10 +33,10 @@ export default function CouncilPage() {
 
       <Box
         sx={{
-          borderLeft: '4px solid #F59E0B',
-          pl: 3,
-          py: 2,
-          bgcolor: '#FAFAFA',
+          bgcolor: BLUE_LIGHT,
+          borderLeft: '4px solid ' + BLUE,
+          borderRadius: '0 6px 6px 0',
+          p: 3,
           fontStyle: 'italic',
           mb: 4,
         }}
@@ -46,24 +50,35 @@ export default function CouncilPage() {
 
       <Typography
         variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 2 }}
+        sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}
       >
         Основные функции
       </Typography>
-      <Divider sx={{ mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Grid container spacing={4}>
         {functions.map((f, i) => (
           <Grid item xs={12} md={4} key={f.title}>
-            <Typography
-              variant="h6"
-              sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+            <Box
+              sx={{
+                p: 3,
+                border: '1px solid ' + BORDER,
+                borderRadius: '6px',
+                height: '100%',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
+              }}
             >
-              {i + 1}. {f.title}
-            </Typography>
-            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
-              {f.desc}
-            </Typography>
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: 800, color: NAVY, mb: 1 }}
+              >
+                {i + 1}. {f.title}
+              </Typography>
+              <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+                {f.desc}
+              </Typography>
+            </Box>
           </Grid>
         ))}
       </Grid>

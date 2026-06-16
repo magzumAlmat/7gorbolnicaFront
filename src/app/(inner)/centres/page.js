@@ -1,9 +1,14 @@
 'use client';
 import { Typography, Box, Grid, Divider } from '@mui/material';
 import Link from 'next/link';
+import ImageLightbox, { useImageLightbox } from '../../../components/ImageLightbox';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const CENTRES = [
   {
@@ -45,26 +50,23 @@ const CENTRES = [
 ];
 
 export default function CentresOverview() {
+  const { lightbox, openLightbox, closeLightbox } = useImageLightbox();
+
   return (
     <Box>
-      <Typography
-        variant="h3"
-        sx={{
-          fontFamily: '"Exo 2", sans-serif',
-          fontWeight: 800,
-          color: NAVY,
-          mb: 1,
-        }}
-      >
+      <ImageLightbox {...lightbox} onClose={closeLightbox} />
+
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Центры компетенций
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Box
         component="img"
         src="/images/kazniisa/centres-banner.webp"
         alt="Центры компетенций КазНИИСА"
-        sx={{ width: '100%', maxWidth: 600, borderRadius: 1, mb: 3, display: 'block' }}
+        onClick={() => openLightbox('/images/kazniisa/centres-banner.webp', 'Центры компетенций КазНИИСА')}
+        sx={{ width: '100%', maxWidth: 600, borderRadius: 1, mb: 3, display: 'block', cursor: 'zoom-in' }}
       />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4, maxWidth: 760 }}>
@@ -75,10 +77,10 @@ export default function CentresOverview() {
 
       <Box
         sx={{
-          borderLeft: '4px solid #F59E0B',
-          pl: 3,
-          py: 2,
-          bgcolor: '#FAFAFA',
+          bgcolor: BLUE_LIGHT,
+          borderLeft: '4px solid ' + BLUE,
+          borderRadius: '0 6px 6px 0',
+          p: 3,
           mb: 5,
           fontStyle: 'italic',
         }}
@@ -96,10 +98,9 @@ export default function CentresOverview() {
             <Box sx={{ display: 'flex', gap: { xs: 2, md: 4 }, alignItems: 'flex-start' }}>
               <Typography
                 sx={{
-                  fontFamily: '"Exo 2", sans-serif',
                   fontWeight: 800,
                   fontSize: '2.5rem',
-                  color: AMBER,
+                  color: BLUE,
                   lineHeight: 1,
                   minWidth: 52,
                   flexShrink: 0,
@@ -111,7 +112,6 @@ export default function CentresOverview() {
                 <Typography
                   variant="h6"
                   sx={{
-                    fontFamily: '"Exo 2", sans-serif',
                     fontWeight: 700,
                     color: NAVY,
                     mb: 1,
@@ -130,7 +130,7 @@ export default function CentresOverview() {
                     fontWeight: 700,
                     fontSize: '0.9rem',
                     textDecoration: 'none',
-                    borderBottom: `2px solid ${AMBER}`,
+                    borderBottom: `2px solid ${BLUE}`,
                     paddingBottom: 1,
                   }}
                 >
@@ -143,7 +143,8 @@ export default function CentresOverview() {
                 component="img"
                 src="/images/kazniisa/center-bim.webp"
                 alt="Центр науки и цифровизации"
-                sx={{ width: '100%', maxWidth: 500, borderRadius: 1, mt: 2, display: 'block' }}
+                onClick={() => openLightbox('/images/kazniisa/center-bim.webp', 'Центр науки и цифровизации')}
+                sx={{ width: '100%', maxWidth: 500, borderRadius: 1, mt: 2, display: 'block', cursor: 'zoom-in' }}
               />
             )}
             {i < CENTRES.length - 1 && <Divider sx={{ mt: 3 }} />}

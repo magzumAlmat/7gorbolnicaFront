@@ -1,7 +1,14 @@
 'use client';
-import { Typography, Box, Paper, Grid, Chip, Divider } from '@mui/material';
+import { Typography, Box, Paper, Grid, Chip } from '@mui/material';
 import DescriptionIcon from '@mui/icons-material/Description';
 import GavelIcon from '@mui/icons-material/Gavel';
+
+const NAVY = '#0F172A';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const docs2017 = [
   { code: 'Концепция', title: 'Концепция внедрения ТИМСО в Республике Казахстан', year: 2017 },
@@ -24,10 +31,12 @@ const docs2019 = [
 export default function DocsPage() {
   return (
     <Box>
-      <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, color: '#0F172A' }}>
+      <Typography variant="h4" sx={{ fontWeight: 800, mb: 1, color: NAVY }}>
         Нормативные документы ТИМСО
       </Typography>
-      <Chip label="Приказ Министра № 197 от 11.04.2017" sx={{ bgcolor: '#0369A1', color: '#fff', mb: 3, fontWeight: 600 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+
+      <Chip label="Приказ Министра № 197 от 11.04.2017" sx={{ bgcolor: BLUE, color: '#fff', mb: 3, fontWeight: 600 }} />
 
       <Typography sx={{ fontSize: '1.05rem', lineHeight: 1.8, color: '#334155', mb: 4 }}>
         Документы разработаны в соответствии с Планом, утверждённым приказом Министра по делам
@@ -38,19 +47,28 @@ export default function DocsPage() {
 
       <Box sx={{ mb: 4 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-          <GavelIcon sx={{ color: '#0369A1' }} />
-          <Typography variant="h5" sx={{ fontWeight: 700, color: '#0F172A' }}>Документы 2017–2018</Typography>
+          <GavelIcon sx={{ color: BLUE }} />
+          <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>Документы 2017–2018</Typography>
         </Box>
         <Grid container spacing={2}>
           {docs2017.map((d) => (
             <Grid item xs={12} key={d.code}>
-              <Paper sx={{ p: 2.5, borderRadius: 2, border: '1px solid #E2E8F0', display: 'flex', gap: 2, alignItems: 'flex-start' }}>
-                <DescriptionIcon sx={{ color: '#0369A1', mt: 0.2, flexShrink: 0 }} />
+              <Paper sx={{
+                p: 2.5,
+                borderRadius: '6px',
+                border: '1px solid ' + BORDER,
+                display: 'flex',
+                gap: 2,
+                alignItems: 'flex-start',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
+              }}>
+                <DescriptionIcon sx={{ color: BLUE, mt: 0.2, flexShrink: 0 }} />
                 <Box>
-                  <Chip label={d.code} size="small" sx={{ bgcolor: '#0F172A', color: '#fff', fontFamily: 'monospace', fontWeight: 600, mb: 0.5 }} />
+                  <Chip label={d.code} size="small" sx={{ bgcolor: NAVY, color: '#fff', fontFamily: 'monospace', fontWeight: 600, mb: 0.5 }} />
                   <Typography sx={{ color: '#334155', lineHeight: 1.6 }}>{d.title}</Typography>
                 </Box>
-                <Chip label={d.year} size="small" sx={{ bgcolor: '#F1F5F9', color: '#64748B', ml: 'auto', flexShrink: 0 }} />
+                <Chip label={d.year} size="small" sx={{ bgcolor: GRAY_BG, color: GRAY_TEXT, ml: 'auto', flexShrink: 0 }} />
               </Paper>
             </Grid>
           ))}
@@ -59,19 +77,28 @@ export default function DocsPage() {
 
       <Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-          <GavelIcon sx={{ color: '#059669' }} />
-          <Typography variant="h5" sx={{ fontWeight: 700, color: '#0F172A' }}>Документы 2019</Typography>
+          <GavelIcon sx={{ color: BLUE }} />
+          <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>Документы 2019</Typography>
         </Box>
         <Grid container spacing={2}>
           {docs2019.map((d) => (
             <Grid item xs={12} key={d.code}>
-              <Paper sx={{ p: 2.5, borderRadius: 2, border: '1px solid #E2E8F0', display: 'flex', gap: 2, alignItems: 'flex-start' }}>
-                <DescriptionIcon sx={{ color: '#059669', mt: 0.2, flexShrink: 0 }} />
+              <Paper sx={{
+                p: 2.5,
+                borderRadius: '6px',
+                border: '1px solid ' + BORDER,
+                display: 'flex',
+                gap: 2,
+                alignItems: 'flex-start',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
+              }}>
+                <DescriptionIcon sx={{ color: BLUE, mt: 0.2, flexShrink: 0 }} />
                 <Box>
-                  <Chip label={d.code} size="small" sx={{ bgcolor: '#064E3B', color: '#fff', fontFamily: 'monospace', fontWeight: 600, mb: 0.5 }} />
+                  <Chip label={d.code} size="small" sx={{ bgcolor: NAVY, color: '#fff', fontFamily: 'monospace', fontWeight: 600, mb: 0.5 }} />
                   <Typography sx={{ color: '#334155', lineHeight: 1.6 }}>{d.title}</Typography>
                 </Box>
-                <Chip label={d.year} size="small" sx={{ bgcolor: '#F0FDF4', color: '#166534', ml: 'auto', flexShrink: 0 }} />
+                <Chip label={d.year} size="small" sx={{ bgcolor: BLUE_LIGHT, color: BLUE, ml: 'auto', flexShrink: 0 }} />
               </Paper>
             </Grid>
           ))}

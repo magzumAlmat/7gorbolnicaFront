@@ -1,8 +1,12 @@
 'use client';
-import { Typography, Box, Grid, Divider } from '@mui/material';
+import { Typography, Box, Grid } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const sections = ['Сейсмостойкое строительство', 'Информационные технологии', 'Ценообразование', 'Нормирование'];
 
@@ -23,11 +27,11 @@ export default function VestnikPage() {
     <Box>
       <Typography
         variant="h4"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+        sx={{ fontWeight: 800, color: NAVY, mb: 1 }}
       >
         Вестник КазНИИСА
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 1 }}>
         Издаётся с 2011 года
@@ -35,10 +39,10 @@ export default function VestnikPage() {
 
       <Box
         sx={{
-          borderLeft: '4px solid #F59E0B',
-          pl: 3,
-          py: 2,
-          bgcolor: '#FAFAFA',
+          bgcolor: BLUE_LIGHT,
+          borderLeft: '4px solid ' + BLUE,
+          borderRadius: '0 6px 6px 0',
+          p: 3,
           fontStyle: 'italic',
           mb: 4,
         }}
@@ -52,11 +56,11 @@ export default function VestnikPage() {
 
       <Typography
         variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 2 }}
+        sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}
       >
         Разделы журнала
       </Typography>
-      <Divider sx={{ mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Grid container spacing={2} sx={{ mb: 4 }}>
         {sections.map((s, i) => (
@@ -73,16 +77,16 @@ export default function VestnikPage() {
 
       <Typography
         variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 2 }}
+        sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}
       >
         Архив выпусков
       </Typography>
-      <Divider sx={{ mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Grid container spacing={2}>
         {archive.map((a) => (
           <Grid item xs={12} sm={6} md={4} key={a.year}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', py: 1, borderBottom: '1px solid #E2E8F0' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', py: 1, borderBottom: '1px solid ' + BORDER }}>
               <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem' }}>{a.year}</Typography>
               <Typography sx={{ fontSize: '1rem', color: '#334155' }}>{a.issues}</Typography>
             </Box>

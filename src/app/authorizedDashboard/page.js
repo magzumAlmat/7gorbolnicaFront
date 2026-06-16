@@ -14,7 +14,7 @@ import InformationMaterialsComponent from '../../components/InformationMaterials
 import PublicProcurementPlanComponent from '../../components/PublicProcurementPlan';
 import PublicProcurementAnnouncementComponent from '../../components/PublicProcurementAnnouncement';
 import PublicProcurementProtocolComponent from '../../components/PublicProcurementProtocol';
-import MajorPage from '../major/page'; // Import the MajorPage
+import NewsManager from '../../components/NewsManager'; // Полноценный модуль управления новостями
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
@@ -65,8 +65,8 @@ const AuthorizedDashboardPage = () => {
         return <PublicProcurementAnnouncementComponent />;
       case 'public-procurement-protocols':
         return <PublicProcurementProtocolComponent />;
-      case 'news-editing': // New case for news editing
-        return <MajorPage />;
+      case 'news-editing': // Управление новостями (создание/редактирование)
+        return <NewsManager />;
       default:
         return (
           <Box sx={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
@@ -77,10 +77,6 @@ const AuthorizedDashboardPage = () => {
         );
     }
   };
-
-  if (activeComponent === 'news-editing') {
-    return <MajorPage />;
-  }
 
   return (
     <Box sx={{ display: 'flex' }}>

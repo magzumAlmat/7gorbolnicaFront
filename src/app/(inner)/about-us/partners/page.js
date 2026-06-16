@@ -2,7 +2,11 @@
 import { Typography, Box, Grid, Divider } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const partners = [
   {
@@ -52,13 +56,10 @@ const partners = [
 export default function PartnersPage() {
   return (
     <Box>
-      <Typography
-        variant="h4"
-        sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Партнёрские организации
       </Typography>
-      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Box
         component="img"
@@ -79,11 +80,13 @@ export default function PartnersPage() {
             <Box
               sx={{
                 p: 3,
-                border: '1px solid #E2E8F0',
-                borderRadius: 3,
-                bgcolor: '#F8FAFC',
+                border: '1px solid ' + BORDER,
+                borderRadius: '6px',
+                bgcolor: GRAY_BG,
                 height: '100%',
                 boxSizing: 'border-box',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
               }}
             >
               <Box sx={{ display: 'flex', gap: 1.5, mb: 2, flexWrap: 'wrap' }}>
@@ -101,7 +104,6 @@ export default function PartnersPage() {
                       color: '#fff',
                       fontSize: '0.78rem',
                       fontWeight: 700,
-                      fontFamily: '"Exo 2", sans-serif',
                     }}
                   >
                     {p.tag}
@@ -112,12 +114,12 @@ export default function PartnersPage() {
                     sx={{
                       px: 1.5,
                       py: 0.4,
-                      bgcolor: `${AMBER}20`,
+                      bgcolor: BLUE_LIGHT,
                       borderRadius: 1,
                       display: 'inline-block',
                     }}
                   >
-                    <Typography sx={{ color: '#92400E', fontSize: '0.78rem', fontWeight: 600 }}>
+                    <Typography sx={{ color: BLUE, fontSize: '0.78rem', fontWeight: 600 }}>
                       осн. {p.founded}
                     </Typography>
                   </Box>
@@ -130,7 +132,6 @@ export default function PartnersPage() {
                   fontSize: '1rem',
                   mb: 1.5,
                   lineHeight: 1.4,
-                  fontFamily: '"Exo 2", sans-serif',
                 }}
               >
                 {p.name}
@@ -153,7 +154,7 @@ export default function PartnersPage() {
 
       <Divider sx={{ my: 5 }} />
 
-      <Box sx={{ bgcolor: NAVY, borderRadius: 3, p: 4 }}>
+      <Box sx={{ bgcolor: NAVY, borderRadius: '6px', p: 4 }}>
         <Typography
           sx={{ color: '#CBD5E1', fontSize: '1rem', lineHeight: 1.9 }}
         >

@@ -10,7 +10,11 @@ import {
 } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const vacancies = [
   {
@@ -42,13 +46,10 @@ const vacancies = [
 export default function VacanciesPage() {
   return (
     <Box>
-      <Typography
-        variant="h4"
-        sx={{ fontWeight: 800, color: NAVY, mb: 1, fontFamily: '"Exo 2", sans-serif' }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Вакансии
       </Typography>
-      <Box sx={{ width: 60, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Box
         component="img"
@@ -64,34 +65,32 @@ export default function VacanciesPage() {
         вакансии ниже и направьте своё резюме в отдел кадров.
       </Typography>
 
-      <Typography
-        variant="h6"
-        sx={{ fontWeight: 700, color: NAVY, mb: 2.5, fontFamily: '"Exo 2", sans-serif' }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Открытые позиции
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Box sx={{ overflowX: 'auto', mb: 5 }}>
         <Table sx={{ minWidth: 600 }}>
           <TableBody>
             <TableRow sx={{ bgcolor: NAVY }}>
-              <TableCell sx={{ color: '#fff', fontWeight: 700, fontFamily: '"Exo 2", sans-serif', fontSize: '0.9rem', py: 1.5 }}>
+              <TableCell sx={{ color: '#fff', fontWeight: 700, fontSize: '0.9rem', py: 1.5 }}>
                 Должность
               </TableCell>
-              <TableCell sx={{ color: '#fff', fontWeight: 700, fontFamily: '"Exo 2", sans-serif', fontSize: '0.9rem', py: 1.5 }}>
+              <TableCell sx={{ color: '#fff', fontWeight: 700, fontSize: '0.9rem', py: 1.5 }}>
                 Адрес
               </TableCell>
-              <TableCell sx={{ color: '#fff', fontWeight: 700, fontFamily: '"Exo 2", sans-serif', fontSize: '0.9rem', py: 1.5 }}>
+              <TableCell sx={{ color: '#fff', fontWeight: 700, fontSize: '0.9rem', py: 1.5 }}>
                 Подразделение
               </TableCell>
-              <TableCell sx={{ color: '#fff', fontWeight: 700, fontFamily: '"Exo 2", sans-serif', fontSize: '0.9rem', py: 1.5 }}>
+              <TableCell sx={{ color: '#fff', fontWeight: 700, fontSize: '0.9rem', py: 1.5 }}>
                 Дата публикации
               </TableCell>
             </TableRow>
             {vacancies.map((v, i) => (
               <TableRow
                 key={i}
-                sx={{ bgcolor: i % 2 === 0 ? '#F8FAFC' : '#fff', '&:hover': { bgcolor: `${AMBER}10` } }}
+                sx={{ bgcolor: i % 2 === 0 ? GRAY_BG : '#fff', '&:hover': { bgcolor: BLUE_LIGHT } }}
               >
                 <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontWeight: 600, py: 1.5 }}>
                   {v.title}
@@ -113,7 +112,7 @@ export default function VacanciesPage() {
 
       <Divider sx={{ mb: 4 }} />
 
-      <Box sx={{ bgcolor: NAVY, borderRadius: 3, p: 4 }}>
+      <Box sx={{ bgcolor: NAVY, borderRadius: '6px', p: 4 }}>
         <Typography
           sx={{
             color: '#CBD5E1',
@@ -126,12 +125,12 @@ export default function VacanciesPage() {
         </Typography>
         <Typography sx={{ color: '#CBD5E1', fontSize: '1rem', lineHeight: 1.9 }}>
           Адрес:{' '}
-          <Box component="span" sx={{ color: AMBER, fontWeight: 600 }}>
+          <Box component="span" sx={{ color: BLUE_LIGHT, fontWeight: 600 }}>
             г. Алматы, 3 мкр, д. 44-а
           </Box>
           {'  '}|{'  '}
           Тел.:{' '}
-          <Box component="span" sx={{ color: AMBER, fontWeight: 600 }}>
+          <Box component="span" sx={{ color: BLUE_LIGHT, fontWeight: 600 }}>
             +7 (727) 291-87-99
           </Box>
         </Typography>

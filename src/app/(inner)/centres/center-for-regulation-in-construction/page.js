@@ -1,130 +1,125 @@
 'use client';
-import { Typography, Box, Paper, Grid, List, ListItem, ListItemIcon, ListItemText, Chip } from '@mui/material';
-import { Gavel, CheckCircle, TrendingUp, MenuBook, BarChart } from '@mui/icons-material';
+import { Typography, Box, Grid, Divider } from '@mui/material';
+import Link from 'next/link';
 
-const ACTIVITIES = [
-  'Разработка государственных нормативно-технических документов (НТД) в строительстве',
-  'Актуализация строительных норм и правил (СНиП, СП)',
-  'Разработка стандартов сметного нормирования',
-  'Формирование ресурсных сметных норм (РСН)',
-  'Методологическое обеспечение сметного ценообразования',
-  'Мониторинг цен на строительные материалы, изделия и конструкции',
-  'Подготовка индексов удорожания строительства',
-  'Разработка территориальных единичных расценок (ТЕР)',
-  'Экспертиза нормативных документов сторонних организаций',
+const NAVY = '#0F172A';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
+
+const services = [
+  'Разработка нормативных документов по ценообразованию и сметам',
+  'Формирование сметных норм на строительно-монтажные и ремонтные работы',
+  'Подготовка технологических карт для строительно-монтажных операций',
+  'Разработка справочников сметных цен на материалы, конструкции и оборудование',
+  'Сборники цен на грузоперевозки и эксплуатацию механизмов',
+  'Ведомственные нормативы по смете и методические документы',
+  'Переработка нормативно-технических документов в области архитектуры и градостроительства',
+  'Анализ направлений развития технического нормирования',
+  'Внедрение европейских норм проектирования (Еврокодов)',
 ];
 
-const NTD_TYPES = [
-  { label: 'СНиП / СП', desc: 'Строительные нормы и правила, своды правил' },
-  { label: 'РСН', desc: 'Ресурсные сметные нормы' },
-  { label: 'ТЕР', desc: 'Территориальные единичные расценки' },
-  { label: 'МДС', desc: 'Методические документы в строительстве' },
-  { label: 'ГОСТ / СТ РК', desc: 'Государственные и национальные стандарты' },
+const documents2026 = [
+  { code: 'УСН РК 8.02-03', title: 'Укрупнённые показатели сметной стоимости учебных заведений' },
+  { code: 'ССЦ РК 8.04-09', title: 'Сметные цены на инженерное оборудование' },
+  { code: 'ССЦ РК 8.04-08', title: 'Сметные цены на строительные материалы и конструкции' },
+  { code: 'СЦЗТ РК 8.04-13', title: 'Сметные цены на затраты труда' },
+  { code: 'СЦЭМ РК 8.04-11', title: 'Сметные цены на эксплуатацию машин' },
+  { code: 'СЦПГ РК 8.04-12', title: 'Сметные цены на грузоперевозки' },
+  { code: 'НДЦС РК 8.04-07', title: 'Индексы стоимости для строительства' },
 ];
 
-const MONITORING = [
-  'Цены на бетон и железобетонные изделия',
-  'Стоимость металлопроката и арматуры',
-  'Цены на кирпич, блоки и кладочные материалы',
-  'Стоимость тепло- и гидроизоляционных материалов',
-  'Цены на отделочные материалы',
-  'Стоимость инженерного оборудования',
-  'Тарифы на строительные машины и механизмы',
-  'Цены на перевозку грузов',
+const monitoringCategories = [
+  'Асфальтобетон и дорожные материалы',
+  'Бетон, растворы, железобетонные изделия',
+  'Вяжущие материалы и цемент',
+  'Кабельно-проводниковая продукция',
+  'Кирпич и камень',
+  'Кровельные материалы',
+  'Оборудование систем водо-, газо-, теплоснабжения',
+  'Отделочные материалы',
+  'Металлопрокат и конструкции',
+  'Трубы и фитинги',
+  'Электротехнические изделия',
 ];
 
-export default function RegulationCentre() {
+export default function RegulationCenterPage() {
   return (
     <Box>
-      {/* Hero */}
-      <Box sx={{ background: 'linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%)', borderRadius: 3, p: { xs: 3, md: 5 }, mb: 4, color: '#fff' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-          <Gavel sx={{ fontSize: 48, color: '#F59E0B' }} />
-          <Box>
-            <Typography variant="overline" sx={{ color: '#F59E0B', fontWeight: 700, letterSpacing: 2 }}>
-              КазНИИСА — Центр
-            </Typography>
-            <Typography variant="h4" sx={{ fontWeight: 800, lineHeight: 1.2 }}>
-              Центр нормирования в строительстве
-            </Typography>
-          </Box>
-        </Box>
-        <Typography variant="body1" sx={{ opacity: 0.85, maxWidth: 700, lineHeight: 1.8 }}>
-          Разработка нормативно-технической документации, стандартов сметного нормирования и
-          систематический мониторинг цен на строительные материалы и ресурсы.
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
+        Центр нормирования в строительстве
+      </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        Центр разрабатывает и актуализирует нормативно-технические документы в сфере строительства,
+        формирует сметные нормативы и ресурсные показатели. Координирует мониторинг цен на строительные
+        материалы с участием более 2000 производителей и поставщиков из всех регионов Казахстана.
+      </Typography>
+
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 5, fontStyle: 'italic' }}>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+          Базовый офис центра расположен в Астане (ул. Бейбитшилик, 14, БЦ «MARDEN»).
+          Контактный email: crn@kazniisa.kz, тел.: 8 (7172) 57-53-03.
         </Typography>
       </Box>
 
-      <Grid container spacing={3}>
-        {/* Main activities */}
-        <Grid item xs={12} md={6}>
-          <Paper elevation={0} sx={{ border: '1px solid #E2E8F0', borderRadius: 3, p: 3.5, height: '100%' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-              <MenuBook sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Направления деятельности
-              </Typography>
-            </Box>
-            <List dense>
-              {ACTIVITIES.map((a, i) => (
-                <ListItem key={i} sx={{ px: 0 }}>
-                  <ListItemIcon sx={{ minWidth: 32 }}>
-                    <CheckCircle sx={{ color: '#0369A1', fontSize: 18 }} />
-                  </ListItemIcon>
-                  <ListItemText primary={a} primaryTypographyProps={{ variant: 'body2', color: '#334155' }} />
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
-        </Grid>
+      <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.15rem', mb: 3 }}>
+        Основные услуги
+      </Typography>
+      {services.map((s, i) => (
+        <Box key={i} sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5, mb: 1.5 }}>
+          <Typography sx={{ fontWeight: 800, fontSize: '0.8rem', color: BLUE, minWidth: 24, mt: 0.2 }}>
+            {String(i + 1).padStart(2, '0')}
+          </Typography>
+          <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#334155' }}>{s}</Typography>
+        </Box>
+      ))}
 
-        <Grid item xs={12} md={6}>
-          {/* NTD types */}
-          <Paper elevation={0} sx={{ border: '1px solid #E2E8F0', borderRadius: 3, p: 3.5, mb: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-              <Gavel sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Виды разрабатываемых НТД
-              </Typography>
-            </Box>
-            {NTD_TYPES.map((n, i) => (
-              <Box key={i} sx={{ display: 'flex', gap: 2, alignItems: 'flex-start', mb: 1.5 }}>
-                <Chip label={n.label} size="small" sx={{ background: '#0369A1', color: '#fff', fontWeight: 700, minWidth: 60, flexShrink: 0 }} />
-                <Typography variant="body2" sx={{ color: '#475569', lineHeight: 1.6 }}>{n.desc}</Typography>
-              </Box>
-            ))}
-          </Paper>
+      <Divider sx={{ my: 5 }} />
 
-          {/* Price monitoring */}
-          <Paper elevation={0} sx={{ border: '1px solid #E2E8F0', borderRadius: 3, p: 3.5 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-              <BarChart sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Мониторинг цен
-              </Typography>
+      <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.15rem', mb: 3 }}>
+        Нормативные документы 2026
+      </Typography>
+      <Grid container spacing={2} sx={{ mb: 5 }}>
+        {documents2026.map((d, i) => (
+          <Grid item xs={12} sm={6} key={i}>
+            <Box sx={{ p: 2, border: '1px solid ' + BORDER, borderRadius: '6px', display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+              <Typography sx={{ fontWeight: 700, color: BLUE, fontSize: '0.78rem', minWidth: 100, flexShrink: 0 }}>{d.code}</Typography>
+              <Typography sx={{ fontSize: '0.88rem', lineHeight: 1.6, color: '#334155' }}>{d.title}</Typography>
             </Box>
-            <Typography variant="body2" sx={{ color: '#64748B', mb: 2 }}>
-              Ежеквартальный мониторинг по следующим позициям:
-            </Typography>
-            <List dense>
-              {MONITORING.map((m, i) => (
-                <ListItem key={i} sx={{ px: 0 }}>
-                  <ListItemIcon sx={{ minWidth: 28 }}>
-                    <TrendingUp sx={{ color: '#F59E0B', fontSize: 16 }} />
-                  </ListItemIcon>
-                  <ListItemText primary={m} primaryTypographyProps={{ variant: 'body2', color: '#334155' }} />
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
-        </Grid>
+          </Grid>
+        ))}
       </Grid>
 
-      <Box sx={{ mt: 3, p: 3, borderRadius: 3, background: '#FFFBEB', border: '1px solid #FDE68A' }}>
-        <Typography variant="body2" sx={{ color: '#78350F', fontWeight: 500 }}>
-          Центр является головной организацией по разработке нормативно-технической документации
-          в строительстве Республики Казахстан и обеспечивает актуальность ценовой базы отрасли.
+      <Box sx={{ bgcolor: NAVY, borderRadius: '6px', p: 4, mb: 5 }}>
+        <Typography variant="h6" sx={{ fontWeight: 700, color: '#fff', mb: 1 }}>Мониторинг цен на стройматериалы</Typography>
+        <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mb: 2 }} />
+        <Typography sx={{ color: '#CBD5E1', fontSize: '0.92rem', lineHeight: 1.8, mb: 2 }}>
+          Центр координирует участие более 2000 производителей и поставщиков из всех регионов республики.
+          Категории мониторинга:
         </Typography>
+        <Grid container spacing={1}>
+          {monitoringCategories.map((c, i) => (
+            <Grid item xs={12} sm={6} key={i}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: BLUE, flexShrink: 0 }} />
+                <Typography sx={{ color: '#94A3B8', fontSize: '0.85rem' }}>{c}</Typography>
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+
+      <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
+        <Link href="/centres/center-for-regulation-in-construction/document-submission-procedure" style={{ color: BLUE, fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none', borderBottom: '2px solid ' + BLUE, paddingBottom: 1 }}>
+          Порядок представления документов →
+        </Link>
+        <Link href="/centres" style={{ color: NAVY, fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none', borderBottom: '2px solid ' + BORDER, paddingBottom: 1 }}>
+          ← Все центры
+        </Link>
       </Box>
     </Box>
   );

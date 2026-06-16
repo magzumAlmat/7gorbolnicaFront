@@ -1,12 +1,16 @@
 'use client';
-import { Typography, Box, Grid, Divider, Paper, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Typography, Box, Grid, Paper, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ArticleIcon from '@mui/icons-material/Article';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const documents = [
   'Антикоррупционный стандарт',
@@ -27,11 +31,11 @@ export default function CompliancePage() {
     <Box>
       <Typography
         variant="h3"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+        sx={{ fontWeight: 800, color: NAVY, mb: 1 }}
       >
         Комплаенс и противодействие коррупции
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4 }}>
         АО «КазНИИСА» проводит последовательную политику по предупреждению и противодействию коррупции.
@@ -42,13 +46,12 @@ export default function CompliancePage() {
 
       <Box
         sx={{
-          borderLeft: '4px solid #F59E0B',
-          pl: 3,
-          py: 2,
-          bgcolor: '#FAFAFA',
+          bgcolor: BLUE_LIGHT,
+          borderLeft: '4px solid ' + BLUE,
+          borderRadius: '0 6px 6px 0',
+          p: 3,
           fontStyle: 'italic',
           mb: 4,
-          borderRadius: '0 8px 8px 0',
         }}
       >
         <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
@@ -59,19 +62,16 @@ export default function CompliancePage() {
       </Box>
 
       {/* Hotline */}
-      <Typography
-        variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Горячая линия
       </Typography>
-      <Divider sx={{ mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
-      <Paper sx={{ p: 3, borderRadius: 2, border: '1px solid #E2E8F0', mb: 4 }}>
+      <Paper sx={{ p: 3, borderRadius: '6px', border: '1px solid ' + BORDER, mb: 4, transition: 'box-shadow 0.2s ease, transform 0.2s ease', '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' } }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-              <PhoneIcon sx={{ color: AMBER }} />
+              <PhoneIcon sx={{ color: BLUE }} />
               <Box>
                 <Typography sx={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 600 }}>Телефон</Typography>
                 <Typography sx={{ fontWeight: 700, color: NAVY }}>+7 (727) 226 94 11 доб. 188</Typography>
@@ -80,7 +80,7 @@ export default function CompliancePage() {
           </Grid>
           <Grid item xs={12} sm={4}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-              <EmailIcon sx={{ color: AMBER }} />
+              <EmailIcon sx={{ color: BLUE }} />
               <Box>
                 <Typography sx={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 600 }}>Электронная почта</Typography>
                 <Typography sx={{ fontWeight: 700, color: NAVY }}>anticor_comp@kazniisa.kz</Typography>
@@ -89,7 +89,7 @@ export default function CompliancePage() {
           </Grid>
           <Grid item xs={12} sm={4}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-              <LocationOnIcon sx={{ color: AMBER }} />
+              <LocationOnIcon sx={{ color: BLUE }} />
               <Box>
                 <Typography sx={{ fontSize: '0.8rem', color: '#64748B', fontWeight: 600 }}>Адрес</Typography>
                 <Typography sx={{ fontWeight: 700, color: NAVY }}>3 микрорайон 44А, г. Алматы</Typography>
@@ -100,13 +100,10 @@ export default function CompliancePage() {
       </Paper>
 
       {/* Documents */}
-      <Typography
-        variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Документы и регламенты
       </Typography>
-      <Divider sx={{ mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <List disablePadding>
         {documents.map((doc) => (
@@ -120,7 +117,7 @@ export default function CompliancePage() {
             }}
           >
             <ListItemIcon sx={{ minWidth: 36 }}>
-              <ArticleIcon sx={{ color: AMBER, fontSize: 20 }} />
+              <ArticleIcon sx={{ color: BLUE, fontSize: 20 }} />
             </ListItemIcon>
             <ListItemText
               primary={doc}

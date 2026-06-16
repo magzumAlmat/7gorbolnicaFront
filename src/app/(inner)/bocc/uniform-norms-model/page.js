@@ -1,40 +1,35 @@
 'use client';
-import { Typography, Box, Divider } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 export default function UniformNormsModel() {
   return (
     <Box>
-      <Typography variant="h3" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}>
+      <Typography variant="h3" sx={{ fontWeight: 800, color: NAVY, mb: 1 }}>
         Модель единых норм
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 4 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
         АО «КазНИИСА» представило проект модели единых норм для стран СНГ в области сейсмостойкого строительства. Презентация состоялась на III Международной научно-практической конференции в г. Бишкек.
       </Typography>
 
-      <Box
-        sx={{
-          borderLeft: '4px solid #F59E0B',
-          pl: 3,
-          py: 2,
-          bgcolor: '#FAFAFA',
-          fontStyle: 'italic',
-          mb: 4,
-        }}
-      >
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 4 }}>
         <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
           Проект модели единых норм для стран СНГ в области сейсмостойкого строительства разработан в рамках деятельности Базовой организации государств — участников СНГ по сейсмостойкому строительству.
         </Typography>
       </Box>
 
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Ключевые направления исследований
       </Typography>
-      <Divider sx={{ borderColor: AMBER, mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Box component="ul" sx={{ pl: 3, mb: 4 }}>
         {[
@@ -50,10 +45,10 @@ export default function UniformNormsModel() {
         ))}
       </Box>
 
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         О разработке
       </Typography>
-      <Divider sx={{ borderColor: AMBER, mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
         В рамках разработки модели единых норм проведена оценка действующих национальных нормативных документов стран СНГ. Следующим этапом является установление гармонизированных единых стандартов и национальных приложений к ним.

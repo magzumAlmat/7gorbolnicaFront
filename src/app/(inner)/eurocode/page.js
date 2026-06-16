@@ -1,8 +1,12 @@
 'use client';
-import { Typography, Box, Grid, Divider, Table, TableBody, TableRow, TableCell } from '@mui/material';
+import { Typography, Box, Grid, Table, TableBody, TableRow, TableCell } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const eurocodes = [
   { code: 'EN 1990', title: 'Основы проектирования конструкций' },
@@ -26,10 +30,10 @@ export default function EurocodePage() {
         alt="Герб Казахстана"
         sx={{ width: 80, height: 80, mb: 2, display: 'block' }}
       />
-      <Typography variant="h3" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 0 }}>
+      <Typography variant="h3" sx={{ fontWeight: 800, color: NAVY, mb: 0 }}>
         Еврокоды в Казахстане
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, mt: 1, mb: 3 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
         Еврокоды — единый комплекс европейских технических стандартов проектирования зданий и
@@ -38,7 +42,7 @@ export default function EurocodePage() {
         ведущим научным центром страны по адаптации и внедрению этих стандартов.
       </Typography>
 
-      <Box sx={{ borderLeft: '4px solid #F59E0B', pl: 3, py: 2, bgcolor: '#FAFAFA', mb: 4 }}>
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 4 }}>
         <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
           Еврокоды применяются в более чем 45 странах мира. С 2016 года АО «КазНИИСА» является
           наблюдателем в технических комитетах CEN/ТК 250 (конструкции) и CEN/ТК 340 (сейсмостойкость),
@@ -46,12 +50,11 @@ export default function EurocodePage() {
         </Typography>
       </Box>
 
-      <Divider sx={{ mb: 4 }} />
-
       {/* Why eurocodes */}
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Причины перехода на Еврокоды
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
       <Box component="ul" sx={{ pl: 3, m: 0, mb: 4 }}>
         {[
           'Обеспечение надёжности, функциональности и долговечности строительных конструкций на основе передовых методов расчёта',
@@ -66,12 +69,11 @@ export default function EurocodePage() {
         ))}
       </Box>
 
-      <Divider sx={{ mb: 4 }} />
-
       {/* Characteristics */}
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Ключевые характеристики
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
       <Grid container spacing={3} sx={{ mb: 4 }}>
         {[
           {
@@ -88,7 +90,7 @@ export default function EurocodePage() {
           },
         ].map((c) => (
           <Grid item xs={12} sm={4} key={c.title}>
-            <Box sx={{ borderLeft: `3px solid ${AMBER}`, pl: 2, py: 0.5, height: '100%' }}>
+            <Box sx={{ borderLeft: '4px solid ' + BLUE, bgcolor: BLUE_LIGHT, borderRadius: '0 6px 6px 0', pl: 2, py: 1.5, height: '100%', transition: 'box-shadow 0.2s ease, transform 0.2s ease', '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' } }}>
               <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem', mb: 0.5 }}>{c.title}</Typography>
               <Typography sx={{ fontSize: '0.97rem', lineHeight: 1.8, color: '#334155' }}>{c.desc}</Typography>
             </Box>
@@ -96,16 +98,15 @@ export default function EurocodePage() {
         ))}
       </Grid>
 
-      <Divider sx={{ mb: 4 }} />
-
       {/* Eurocode series */}
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Серия стандартов EN 1990–1999
       </Typography>
-      <Table sx={{ mb: 4, border: '1px solid #E2E8F0' }}>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+      <Table sx={{ mb: 4, border: '1px solid ' + BORDER, borderRadius: '6px', overflow: 'hidden' }}>
         <TableBody>
           {eurocodes.map((ec, i) => (
-            <TableRow key={i} sx={{ '&:nth-of-type(odd)': { bgcolor: '#F8FAFC' } }}>
+            <TableRow key={i} sx={{ '&:nth-of-type(odd)': { bgcolor: GRAY_BG } }}>
               <TableCell sx={{ fontWeight: 700, color: NAVY, width: '22%', py: 1.5 }}>{ec.code}</TableCell>
               <TableCell sx={{ color: '#334155', fontSize: '0.97rem', py: 1.5 }}>{ec.title}</TableCell>
             </TableRow>
@@ -113,12 +114,11 @@ export default function EurocodePage() {
         </TableBody>
       </Table>
 
-      <Divider sx={{ mb: 4 }} />
-
       {/* KazNIISA activities */}
-      <Typography variant="h5" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Деятельность КазНИИСА в области Еврокодов
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
       <Box component="ul" sx={{ pl: 3, m: 0, mb: 4 }}>
         {[
           'Перевод и адаптация текстов Еврокодов на русский и казахский языки',
@@ -134,7 +134,7 @@ export default function EurocodePage() {
         ))}
       </Box>
 
-      <Box sx={{ borderLeft: '4px solid #F59E0B', pl: 3, py: 2, bgcolor: '#FAFAFA' }}>
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3 }}>
         <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
           Особое внимание уделяется адаптации EN 1998 (сейсмостойкость) с учётом высокой сейсмической
           активности территории Казахстана и богатого отечественного опыта проектирования в сложных

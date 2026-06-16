@@ -20,7 +20,7 @@ export default function PageHeader({ title, breadcrumbs = [] }) {
               fontSize: '13px',
               fontWeight: 500,
               transition: 'color 0.2s',
-              '&:hover': { color: '#F5A623' },
+              '&:hover': { color: '#60A5FA' },
             }}>
               Главная
             </MuiLink>
@@ -36,7 +36,7 @@ export default function PageHeader({ title, breadcrumbs = [] }) {
                       fontSize: '13px',
                       fontWeight: 500,
                       transition: 'color 0.2s',
-                      '&:hover': { color: '#F5A623' },
+                      '&:hover': { color: '#60A5FA' },
                     }}
                   >
                     {crumb.title}
@@ -48,7 +48,7 @@ export default function PageHeader({ title, breadcrumbs = [] }) {
                 )}
               </Box>
             ))}
-            <Typography sx={{ color: '#F5A623', fontSize: '13px', fontWeight: 600 }}>
+            <Typography sx={{ color: '#60A5FA', fontSize: '13px', fontWeight: 600 }}>
               {title}
             </Typography>
           </MuiBreadcrumbs>
@@ -79,18 +79,18 @@ export default function PageHeader({ title, breadcrumbs = [] }) {
             href="/contacts"
             variant="contained"
             sx={{
-              bgcolor: '#F5A623',
-              color: '#0F172A',
+              bgcolor: '#0369A1',
+              color: 'white',
               fontWeight: 700,
               fontSize: '13px',
               textTransform: 'uppercase',
               letterSpacing: '0.06em',
               px: 4,
               py: 1.5,
-              borderRadius: 0,
+              borderRadius: '4px',
               boxShadow: 'none',
               '&:hover': {
-                bgcolor: '#e09610',
+                bgcolor: '#075985',
                 boxShadow: 'none',
               },
             }}

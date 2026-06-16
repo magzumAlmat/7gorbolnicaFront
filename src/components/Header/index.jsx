@@ -50,8 +50,12 @@ const menuData = [
   {
     title: "Центры", path: "/centres",
     submenu: [
-      { title: "Центр науки и цифровизации", path: "/centres/center-for-science-and-digitalization-of-construction" },
-      { title: "Центр нормирования", path: "/centres/center-for-regulation-in-construction" },
+      { title: "Центр науки и цифровизации", path: "/centres/center-for-science-and-digitalization-of-construction", submenu: [
+        { title: "Проекты", path: "/centres/center-for-science-and-digitalization-of-construction/projects" },
+      ]},
+      { title: "Центр нормирования", path: "/centres/center-for-regulation-in-construction", submenu: [
+        { title: "Порядок представления документов", path: "/centres/center-for-regulation-in-construction/document-submission-procedure" },
+      ]},
       { title: "Центр типового проектирования", path: "/centres/center-for-standard-and-individual-design" },
       { title: "Центр сейсмостойкости", path: "/centres/center-for-seismic-resistance-inspection-of-buildings-and-structures" },
       { title: "Корпоративный университет", path: "/centres/corporate-university" },
@@ -82,6 +86,7 @@ const menuData = [
       { title: "Заседания", path: "/bocc/meetings" },
       { title: "Модель единых норм", path: "/bocc/uniform-norms-model" },
       { title: "Нормы стран СНГ", path: "/bocc/norms-of-the-cis-countries" },
+      { title: "НИОКР", path: "/bocc/niokr" },
     ]
   },
   {
@@ -168,8 +173,14 @@ const DropdownMenu = styled(Box)(({ theme }) => ({
   borderTop: '3px solid #2887B6',
   zIndex: 1000,
   padding: '8px 0',
-  '& a': {
-    display: 'block',
+}));
+
+const DropdownItem = styled(Box)({
+  position: 'relative',
+  '& > a': {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     padding: '8px 20px',
     fontSize: '13px',
     color: '#333',
@@ -181,7 +192,35 @@ const DropdownMenu = styled(Box)(({ theme }) => ({
       paddingLeft: '24px',
     },
   },
-}));
+  '& > .flyout': {
+    display: 'none',
+    position: 'absolute',
+    left: '100%',
+    top: 0,
+    minWidth: '240px',
+    backgroundColor: '#ffffff',
+    boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
+    borderLeft: '3px solid #2887B6',
+    padding: '8px 0',
+    zIndex: 1001,
+    '& a': {
+      display: 'block',
+      padding: '8px 20px',
+      fontSize: '13px',
+      color: '#333',
+      textDecoration: 'none',
+      transition: 'all 0.2s',
+      '&:hover': {
+        backgroundColor: '#f5f5f5',
+        color: '#2887B6',
+        paddingLeft: '24px',
+      },
+    },
+  },
+  '&:hover > .flyout': {
+    display: 'block',
+  },
+});
 
 // === МОБИЛЬНОЕ МЕНЮ ===
 const MobileMenuItem = ({ item, depth = 0, toggleDrawer }) => {
@@ -390,9 +429,21 @@ export default function Header() {
                   {item.submenu && activeDropdown === item.title && (
                     <DropdownMenu>
                       {item.submenu.map(sub => (
-                        <Link key={sub.path + sub.title} href={sub.path} onClick={() => setActiveDropdown(null)}>
-                          {sub.title}
-                        </Link>
+                        <DropdownItem key={sub.path + sub.title}>
+                          <Link href={sub.path} onClick={() => setActiveDropdown(null)}>
+                            {sub.title}
+                            {sub.submenu && <KeyboardArrowDown sx={{ fontSize: 14, transform: 'rotate(-90deg)', ml: 0.5, opacity: 0.5 }} />}
+                          </Link>
+                          {sub.submenu && (
+                            <Box className="flyout">
+                              {sub.submenu.map(nested => (
+                                <Link key={nested.path} href={nested.path} onClick={() => setActiveDropdown(null)}>
+                                  {nested.title}
+                                </Link>
+                              ))}
+                            </Box>
+                          )}
+                        </DropdownItem>
                       ))}
                     </DropdownMenu>
                   )}

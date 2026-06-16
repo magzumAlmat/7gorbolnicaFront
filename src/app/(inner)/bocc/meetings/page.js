@@ -2,7 +2,11 @@
 import { Typography, Box, Divider } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const meetings = [
   {
@@ -34,10 +38,10 @@ const meetings = [
 export default function Meetings() {
   return (
     <Box>
-      <Typography variant="h3" sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}>
+      <Typography variant="h3" sx={{ fontWeight: 800, color: NAVY, mb: 1 }}>
         Заседания
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 4 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4 }}>
         В рамках деятельности Базовой организации государств — участников СНГ по сейсмостойкому строительству (БОСС) проводятся регулярные заседания с участием представителей стран СНГ.
@@ -49,14 +53,15 @@ export default function Meetings() {
           sx={{
             mb: 3,
             p: 3,
-            border: '1px solid #E2E8F0',
-            borderRadius: 2,
-            borderLeft: '4px solid #F59E0B',
+            border: '1px solid ' + BORDER,
+            borderRadius: '6px',
+            borderLeft: '4px solid ' + BLUE,
+            transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+            '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
           }}
         >
           <Typography
             sx={{
-              fontFamily: '"Exo 2", sans-serif',
               fontWeight: 700,
               fontSize: '1.1rem',
               color: NAVY,

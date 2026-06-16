@@ -1,135 +1,97 @@
 'use client';
-import { Typography, Box, Paper, Grid, List, ListItem, ListItemIcon, ListItemText, Chip } from '@mui/material';
-import { Architecture, CheckCircle, Apartment, Business, Park } from '@mui/icons-material';
+import { Typography, Box, Grid, Divider } from '@mui/material';
+import Link from 'next/link';
 
-const DEPARTMENTS = [
-  {
-    icon: <Apartment sx={{ color: '#0369A1', fontSize: 28 }} />,
-    title: 'Отдел жилых зданий',
-    desc: 'Типовые проекты жилых домов различной этажности — от малоэтажных до многоквартирных высотных зданий.',
-    types: ['Малоэтажные дома', 'Среднеэтажные здания', 'Многоквартирные дома', 'Блокированная застройка'],
-  },
-  {
-    icon: <Business sx={{ color: '#0369A1', fontSize: 28 }} />,
-    title: 'Отдел общественных зданий',
-    desc: 'Проекты школ, детских садов, медицинских учреждений, административных и культурных объектов.',
-    types: ['Школы и детсады', 'Больницы и поликлиники', 'Административные здания', 'Культурные объекты'],
-  },
-  {
-    icon: <Park sx={{ color: '#0369A1', fontSize: 28 }} />,
-    title: 'Отдел индивидуального проектирования',
-    desc: 'Разработка индивидуальных проектных решений с учётом специфики площадки и требований заказчика.',
-    types: ['Уникальные объекты', 'Адаптация типовых проектов', 'Привязка к местности', 'Авторский надзор'],
-  },
+const NAVY = '#0F172A';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
+
+const departments = [
+  { title: 'Отдел архитектуры', desc: 'Разработка архитектурных решений жилых, общественных и промышленных зданий. Генеральные планы, благоустройство территорий.' },
+  { title: 'Конструкторский отдел', desc: 'Проектирование несущих и ограждающих конструкций, расчёты на сейсмостойкость, разработка узлов и деталей.' },
+  { title: 'Отдел инженерного проектирования', desc: 'Проектирование систем водоснабжения, канализации, отопления, вентиляции и кондиционирования.' },
+  { title: 'Отдел электроснабжения', desc: 'Проектирование электрических сетей, освещения, слаботочных систем, автоматики и диспетчеризации.' },
+  { title: 'Сметный отдел', desc: 'Составление сметной документации, определение стоимости строительства, ресурсные расчёты.' },
+  { title: 'Отдел обработки информации', desc: 'Оцифровка проектной документации, ведение архива типовых проектов, BIM-моделирование.' },
 ];
 
-const ARCHIVE_PROJECTS = [
-  { year: '2010–2012', desc: 'Серия типовых жилых домов для массовой застройки' },
-  { year: '2012–2014', desc: 'Типовые проекты школ на 300, 600, 900 мест' },
-  { year: '2013–2015', desc: 'Детские сады на 120, 240 мест — серия «Болашак»' },
-  { year: '2014–2016', desc: 'Поликлиники и районные больницы' },
-  { year: '2015–2016', desc: 'Административные здания акиматов районного уровня' },
+const services = [
+  'Типовое проектирование жилых и общественных зданий',
+  'Индивидуальное проектирование по заказу государственных органов',
+  'Разработка проектно-сметной документации',
+  'Привязка типовых проектов к конкретным площадкам',
+  'Архив типовых проектных решений 2010–2016',
+  'Авторский надзор за строительством',
+  'Техническое обследование зданий (совместно с Центром сейсмостойкости)',
+  'BIM-моделирование зданий и инженерных систем',
 ];
 
-const SERVICES = [
-  'Разработка типовых проектных решений для государственных программ',
-  'Адаптация и привязка типовых проектов к конкретным площадкам',
-  'Индивидуальное проектирование по заданию заказчика',
-  'Актуализация ранее разработанных типовых проектов',
-  'Авторский надзор за строительством по проектам центра',
-  'Разработка альбомов унифицированных узлов и деталей',
-  'Технико-экономическое сравнение проектных вариантов',
-];
-
-export default function StandardDesignCentre() {
+export default function StandardDesignPage() {
   return (
     <Box>
-      {/* Hero */}
-      <Box sx={{ background: 'linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%)', borderRadius: 3, p: { xs: 3, md: 5 }, mb: 4, color: '#fff' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-          <Architecture sx={{ fontSize: 48, color: '#F59E0B' }} />
-          <Box>
-            <Typography variant="overline" sx={{ color: '#F59E0B', fontWeight: 700, letterSpacing: 2 }}>
-              КазНИИСА — Центр
-            </Typography>
-            <Typography variant="h4" sx={{ fontWeight: 800, lineHeight: 1.2 }}>
-              Центр типового и индивидуального проектирования
-            </Typography>
-          </Box>
-        </Box>
-        <Typography variant="body1" sx={{ opacity: 0.85, maxWidth: 700, lineHeight: 1.8 }}>
-          Разработка типовых проектов жилых и общественных зданий, индивидуальное проектирование,
-          архив типовых решений 2010–2016 годов для государственных строительных программ.
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
+        Центр типового и индивидуального проектирования
+      </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        Центр выполняет полный цикл проектных работ — от разработки типовых проектов жилых и
+        общественных зданий до индивидуального проектирования по заказу государственных органов
+        и частных застройщиков. В составе центра шесть специализированных отделов.
+      </Typography>
+
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 5 }}>
+        <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#334155' }}>
+          Центр ведёт архив типовых проектных решений 2010–2016 годов, включая жилые дома,
+          школы, детские сады и объекты здравоохранения для различных сейсмических зон Казахстана.
         </Typography>
       </Box>
 
-      {/* Departments */}
-      <Grid container spacing={3} sx={{ mb: 3 }}>
-        {DEPARTMENTS.map((d, i) => (
-          <Grid item xs={12} md={4} key={i}>
-            <Paper elevation={0} sx={{ border: '1px solid #E2E8F0', borderRadius: 3, p: 3, height: '100%' }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
-                <Box sx={{ p: 1, borderRadius: 2, background: '#EFF6FF' }}>{d.icon}</Box>
-                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#0F172A' }}>{d.title}</Typography>
+      <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.15rem', mb: 3 }}>
+        Отделы центра
+      </Typography>
+
+      <Grid container spacing={3} sx={{ mb: 5 }}>
+        {departments.map((d, i) => (
+          <Grid item xs={12} sm={6} key={i}>
+            <Box sx={{ p: 2.5, border: '1px solid ' + BORDER, borderRadius: '6px', height: '100%', transition: 'box-shadow 0.2s', '&:hover': { boxShadow: '0 4px 16px rgba(0,0,0,0.06)' } }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1 }}>
+                <Typography sx={{ fontWeight: 800, fontSize: '0.8rem', color: BLUE }}>{String(i + 1).padStart(2, '0')}</Typography>
+                <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '0.95rem' }}>{d.title}</Typography>
               </Box>
-              <Typography variant="body2" sx={{ color: '#64748B', mb: 2, lineHeight: 1.7 }}>{d.desc}</Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75 }}>
-                {d.types.map(t => (
-                  <Chip key={t} label={t} size="small" sx={{ background: '#F1F5F9', color: '#334155', fontSize: 11 }} />
-                ))}
-              </Box>
-            </Paper>
+              <Typography sx={{ fontSize: '0.88rem', lineHeight: 1.8, color: '#334155' }}>{d.desc}</Typography>
+            </Box>
           </Grid>
         ))}
       </Grid>
 
-      <Grid container spacing={3}>
-        {/* Services */}
-        <Grid item xs={12} md={7}>
-          <Paper elevation={0} sx={{ border: '1px solid #E2E8F0', borderRadius: 3, p: 3.5 }}>
-            <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A', mb: 2 }}>
-              Перечень услуг
-            </Typography>
-            <List dense>
-              {SERVICES.map((s, i) => (
-                <ListItem key={i} sx={{ px: 0 }}>
-                  <ListItemIcon sx={{ minWidth: 32 }}>
-                    <CheckCircle sx={{ color: '#0369A1', fontSize: 18 }} />
-                  </ListItemIcon>
-                  <ListItemText primary={s} primaryTypographyProps={{ variant: 'body2', color: '#334155' }} />
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
-        </Grid>
+      <Divider sx={{ mb: 4 }} />
 
-        {/* Archive 2010-2016 */}
-        <Grid item xs={12} md={5}>
-          <Paper elevation={0} sx={{ border: '1px solid #E2E8F0', borderRadius: 3, p: 3.5 }}>
-            <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A', mb: 0.5 }}>
-              Архив проектов 2010–2016
-            </Typography>
-            <Typography variant="caption" sx={{ color: '#64748B', display: 'block', mb: 2 }}>
-              Типовые проекты, разработанные в рамках государственных программ
-            </Typography>
-            {ARCHIVE_PROJECTS.map((p, i) => (
-              <Box key={i} sx={{ display: 'flex', gap: 2, mb: 2 }}>
-                <Box sx={{ minWidth: 80 }}>
-                  <Chip label={p.year} size="small" sx={{ background: '#0369A1', color: '#fff', fontWeight: 700, fontSize: 10 }} />
-                </Box>
-                <Typography variant="body2" sx={{ color: '#475569', lineHeight: 1.6 }}>{p.desc}</Typography>
-              </Box>
-            ))}
-          </Paper>
-        </Grid>
-      </Grid>
+      <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.15rem', mb: 3 }}>
+        Услуги
+      </Typography>
+      {services.map((s, i) => (
+        <Box key={i} sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5, mb: 1.5 }}>
+          <Box sx={{ width: 7, height: 7, borderRadius: '50%', bgcolor: BLUE, mt: '9px', flexShrink: 0 }} />
+          <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#334155' }}>{s}</Typography>
+        </Box>
+      ))}
 
-      <Box sx={{ mt: 3, p: 3, borderRadius: 3, background: '#FFFBEB', border: '1px solid #FDE68A' }}>
-        <Typography variant="body2" sx={{ color: '#78350F', fontWeight: 500 }}>
-          Типовые проекты центра применяются в государственных программах жилищного строительства
-          и возведения объектов социальной инфраструктуры по всему Казахстану.
-        </Typography>
+      <Divider sx={{ my: 4 }} />
+
+      <Box sx={{ bgcolor: NAVY, borderRadius: '6px', p: 4, mb: 4 }}>
+        <Typography variant="h6" sx={{ fontWeight: 700, color: '#fff', mb: 1 }}>Контакты центра</Typography>
+        <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mb: 2 }} />
+        <Typography sx={{ color: '#CBD5E1', fontSize: '0.92rem', mb: 0.5 }}>Email: elvira_kazniisa@mail.ru</Typography>
+        <Typography sx={{ color: '#CBD5E1', fontSize: '0.92rem', mb: 0.5 }}>Тел.: 8 (727) 226 94 10</Typography>
+        <Typography sx={{ color: '#94A3B8', fontSize: '0.85rem' }}>3 микрорайон 44А, г. Алматы</Typography>
       </Box>
+
+      <Link href="/centres" style={{ color: NAVY, fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none', borderBottom: '2px solid ' + BORDER, paddingBottom: 1 }}>
+        ← Все центры
+      </Link>
     </Box>
   );
 }

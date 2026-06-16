@@ -132,7 +132,7 @@ export default function UslugiPage() {
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
           <EngineeringIcon sx={{ fontSize: 40 }} />
-          <Chip label={`${services.length} направлений`} sx={{ bgcolor: '#F59E0B', color: '#0F172A', fontWeight: 700 }} />
+          <Chip label={`${services.length} направлений`} sx={{ bgcolor: '#60A5FA', color: 'white', fontWeight: 700 }} />
         </Box>
         <Typography variant="h4" sx={{ fontWeight: 800, mb: 2 }}>
           Услуги КазНИИСА

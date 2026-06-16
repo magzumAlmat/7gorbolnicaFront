@@ -1,8 +1,12 @@
 'use client';
-import { Typography, Box, Grid, Divider } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 const TEXT = '#334155';
 
 const markerTypes = [
@@ -20,11 +24,11 @@ export default function InnovativeResearchPage() {
     <Box>
       <Typography
         variant="h3"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+        sx={{ fontWeight: 800, color: NAVY, mb: 1 }}
       >
         Инновационные исследования
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 3 }}>
         По договору № 1558 от 29 декабря 2015 года выполнено инновационное исследование на тему
@@ -41,14 +45,13 @@ export default function InnovativeResearchPage() {
         идентификации подземных коммуникаций.
       </Typography>
 
-      <Divider sx={{ mb: 4 }} />
-
       <Typography
         variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
+        sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}
       >
         3M™ 1421 XRiD — Электронные маркёры
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 3 }}>
         Программируемый маркёр со встроенной памятью. Предназначен для облегчения
@@ -58,14 +61,13 @@ export default function InnovativeResearchPage() {
         принадлежность.
       </Typography>
 
-      <Divider sx={{ mb: 4 }} />
-
       <Typography
         variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 3 }}
+        sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}
       >
         Типы маркёров по виду коммуникаций (стандарт APWA)
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Box sx={{ overflowX: 'auto', mb: 4 }}>
         <Box
@@ -82,9 +84,8 @@ export default function InnovativeResearchPage() {
                     p: 1.5,
                     textAlign: 'left',
                     color: '#fff',
-                    fontFamily: '"Exo 2", sans-serif',
                     fontWeight: 700,
-                    borderBottom: `2px solid ${AMBER}`,
+                    borderBottom: '2px solid ' + BLUE,
                   }}
                 >
                   {h}
@@ -97,7 +98,7 @@ export default function InnovativeResearchPage() {
               <Box
                 component="tr"
                 key={row.type}
-                sx={{ bgcolor: i % 2 === 0 ? '#F8FAFC' : '#fff' }}
+                sx={{ bgcolor: i % 2 === 0 ? GRAY_BG : '#fff' }}
               >
                 <Box component="td" sx={{ p: 1.5, color: TEXT, fontWeight: 600 }}>
                   {row.type}
@@ -114,14 +115,14 @@ export default function InnovativeResearchPage() {
         </Box>
       </Box>
 
-      <Divider sx={{ mb: 4 }} />
-
       <Typography
         variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
+        sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}
       >
         1420E EMS ID — Локатор маркёров
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT }}>
         Прибор предназначен для определения местоположения подземных коммуникаций, оснащённых
         электронными маркёрами. Отличается лёгкостью, надёжностью и интуитивно понятным меню с

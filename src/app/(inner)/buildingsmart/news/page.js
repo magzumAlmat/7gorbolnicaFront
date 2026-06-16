@@ -1,154 +1,112 @@
 'use client';
-import { Typography, Box, Grid, Divider, Paper, Chip } from '@mui/material';
+import { Typography, Box, Grid, Paper, Chip } from '@mui/material';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PublicIcon from '@mui/icons-material/Public';
+import HandshakeIcon from '@mui/icons-material/Handshake';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 
 const news = [
+  {
+    title: '«Цифровое будущее строительства» — стратегическая сессия BuildingSMART Казахстан',
+    date: '5 июня 2026',
+    category: 'Стратегическая сессия',
+    color: BLUE,
+    icon: <GroupsIcon />,
+    desc: 'В Алматы состоялась стратегическая сессия «Цифровое будущее строительства», организованная BuildingSMART Казахстан. Обсуждались приоритеты внедрения BIM и цифровых технологий в строительную отрасль.',
+  },
+  {
+    title: 'Укрепление сотрудничества с Китаем по стандартам строительства',
+    date: '2 июня 2026',
+    category: 'Сотрудничество',
+    color: '#059669',
+    icon: <HandshakeIcon />,
+    desc: 'АО «КазНИИСА» развивает партнёрство с Китаем в области нормирования и ценообразования в строительстве. Обсуждены вопросы гармонизации стандартов и обмена опытом.',
+  },
+  {
+    title: 'XVII Международная конференция «Инновации и передовые решения» (Бишкек)',
+    date: '28–29 мая 2026',
+    category: 'Конференция',
+    color: '#0284C7',
+    icon: <PublicIcon />,
+    desc: 'Специалисты АО «КазНИИСА» приняли участие в XVII Международной научно-практической конференции «Инновации и передовые решения» в Бишкеке.',
+  },
+  {
+    title: 'Project Professionals Summit 2026',
+    date: '18 мая 2026',
+    category: 'Саммит',
+    color: BLUE,
+    icon: <PublicIcon />,
+    desc: 'Мероприятие прошло в Executive Education Center Университета КИМЭП. Обсуждались современные подходы к управлению проектами и цифровизации строительной отрасли.',
+  },
   {
     title: 'buildingSMART Kazakhstan Awards & StudentSMART Cup 2025',
     date: 'Октябрь 2025',
     category: 'Событие года',
-    color: AMBER,
+    color: BLUE,
     icon: <EmojiEventsIcon />,
     desc: 'Одно из важнейших событий года в области цифрового строительства — buildingSMART Kazakhstan Awards & StudentSMART Cup 2025 — состоялось в Алматы. Мероприятие объединило ведущих специалистов отрасли, молодых инженеров и представителей государственных структур.',
   },
   {
-    title: 'Делегация КазНИИСА на 19-й Всемирной конференции по сейсмоизоляции (США)',
-    date: '2025',
-    category: 'Международное участие',
-    color: '#0369A1',
-    icon: <PublicIcon />,
-    desc: 'Делегация АО «КазНИИСА» приняла участие в 19-й Всемирной конференции по сейсмической изоляции, состоявшейся в США. Участие позволило обменяться опытом с ведущими мировыми экспертами в области сейсмостойкого строительства.',
-  },
-  {
-    title: 'Engineering Center LTD — первый корпоративный участник-член BuildingSMART Казахстан',
+    title: 'Engineering Center LTD — первый корпоративный участник BuildingSMART Казахстан',
     date: '2025',
     category: 'Членство',
     color: '#059669',
     icon: <GroupsIcon />,
-    desc: 'Компания Engineering Center LTD стала первым корпоративным участником-членом BuildingSMART Казахстан. Это знаменательное событие отражает растущий интерес казахстанского строительного бизнеса к международным openBIM-стандартам.',
+    desc: 'Компания Engineering Center LTD стала первым корпоративным участником-членом BuildingSMART Казахстан, что отражает растущий интерес строительного бизнеса к международным openBIM-стандартам.',
   },
-];
-
-const upcomingEvents = [
-  { title: 'buildingSMART International Summit', date: '18 марта 2025', location: 'Сингапур' },
-  { title: 'BIM Клуб Центральной Азии', date: '7 апреля 2025', location: 'Алматы' },
-  { title: 'BuildingSMART Kazakhstan Conference & Awards', date: '23 октября 2025', location: 'Алматы' },
 ];
 
 export default function NewsBuildingsmartPage() {
   return (
     <Box>
-      <Typography
-        variant="h3"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Новости BuildingSMART Казахстан
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
-      <Chip label="BuildingSMART Казахстан" sx={{ bgcolor: '#0369A1', color: '#fff', fontWeight: 600, mb: 4 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 2 }} />
+      <Chip label="BuildingSMART Казахстан" sx={{ bgcolor: BLUE, color: '#fff', fontWeight: 600, mb: 4 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4 }}>
         Актуальные новости и события BuildingSMART Казахстан — официального представителя
         международной организации buildingSMART в Республике Казахстан с марта 2024 года.
-        Следите за достижениями, мероприятиями и развитием openBIM-сообщества в стране.
       </Typography>
 
-      {/* News */}
-      <Typography
-        variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
-      >
-        Последние новости
-      </Typography>
-      <Divider sx={{ mb: 3 }} />
-
-      <Grid container spacing={3} sx={{ mb: 5 }}>
+      <Grid container spacing={3}>
         {news.map((item) => (
           <Grid item xs={12} key={item.title}>
             <Paper
               sx={{
                 p: 3,
-                borderRadius: 2,
-                border: '1px solid #E2E8F0',
+                borderRadius: '6px',
+                border: '1px solid ' + BORDER,
                 borderLeft: `4px solid ${item.color}`,
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
               }}
             >
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  flexWrap: 'wrap',
-                  gap: 1,
-                  mb: 1.5,
-                }}
-              >
-                <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 1, mb: 1.5 }}>
+                <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.05rem' }}>
                   {item.title}
                 </Typography>
-                <Chip
-                  label={item.category}
-                  size="small"
-                  sx={{ bgcolor: item.color, color: '#fff', fontWeight: 600 }}
-                />
+                <Chip label={item.category} size="small" sx={{ bgcolor: item.color, color: '#fff', fontWeight: 600 }} />
               </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: '#64748B', mb: 1.5 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: GRAY_TEXT, mb: 1.5 }}>
                 <CalendarTodayIcon sx={{ fontSize: 16 }} />
                 <Typography sx={{ fontSize: '0.9rem', fontWeight: 600 }}>{item.date}</Typography>
               </Box>
-              <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+              <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#334155' }}>
                 {item.desc}
               </Typography>
             </Paper>
           </Grid>
         ))}
       </Grid>
-
-      {/* Upcoming events */}
-      <Typography
-        variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
-      >
-        Предстоящие мероприятия
-      </Typography>
-      <Divider sx={{ mb: 3 }} />
-
-      <Box
-        sx={{
-          borderLeft: '4px solid #F59E0B',
-          pl: 3,
-          py: 2,
-          bgcolor: '#FAFAFA',
-          mb: 3,
-          borderRadius: '0 8px 8px 0',
-        }}
-      >
-        {upcomingEvents.map((ev, i) => (
-          <Box
-            key={ev.title}
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              gap: 1,
-              py: 1,
-              borderBottom: i < upcomingEvents.length - 1 ? '1px solid #E2E8F0' : 'none',
-            }}
-          >
-            <Typography sx={{ fontWeight: 600, color: NAVY }}>{ev.title}</Typography>
-            <Box sx={{ display: 'flex', gap: 2 }}>
-              <Typography sx={{ fontSize: '0.9rem', color: '#64748B' }}>{ev.date}</Typography>
-              <Typography sx={{ fontSize: '0.9rem', color: '#64748B' }}>{ev.location}</Typography>
-            </Box>
-          </Box>
-        ))}
-      </Box>
     </Box>
   );
 }

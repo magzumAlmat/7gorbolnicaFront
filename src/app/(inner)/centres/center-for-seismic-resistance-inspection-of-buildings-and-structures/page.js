@@ -1,172 +1,102 @@
 'use client';
-import { Typography, Box, Paper, Grid, List, ListItem, ListItemIcon, ListItemText, Chip, Divider } from '@mui/material';
-import { Terrain, CheckCircle, Description, Group, Science, Build } from '@mui/icons-material';
+import { Typography, Box, Grid, Divider } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
+import GroupsIcon from '@mui/icons-material/Groups';
+import ScienceIcon from '@mui/icons-material/Science';
+import Link from 'next/link';
 
-const SERVICES = [
-  'Техническое обследование зданий и сооружений',
-  'Сейсмическая паспортизация объектов',
-  'Структурные расчёты несущих конструкций',
-  'Испытания строительных материалов и конструкций',
-  'Оценка остаточного ресурса зданий',
-  'Экспертиза проектных решений по сейсмостойкости',
-  'Мониторинг деформаций и осадок',
+const NAVY = '#0F172A';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
+
+const services = [
+  { title: 'Экспериментальные исследования', desc: 'Статические и вибродинамические испытания строительных конструкций. Более 60 вибродинамических испытаний выполнено в 2005–2019 гг.' },
+  { title: 'Оперативное обследование', desc: 'Обследование зданий, пострадавших от землетрясений и техногенных катастроф, оценка пригодности к дальнейшей эксплуатации.' },
+  { title: 'Оценка сейсмостойкости', desc: 'Комплексная оценка сейсмостойкости существующих зданий с разработкой рекомендаций по усилению конструкций.' },
+  { title: 'Расчётные работы', desc: 'Разработка конструктивных решений, расчёт несущих конструкций на различные виды нагрузок, включая сейсмические воздействия.' },
+  { title: 'Нормативная деятельность', desc: 'Совершенствование нормативно-технических документов в области сейсмостойкого строительства Казахстана.' },
+  { title: 'Специальные технические условия', desc: 'Разработка СТУ для объектов повышенной этажности в сейсмичных зонах (9+ баллов).' },
 ];
 
-const TEMPLATES = [
-  'Акт обследования несущих конструкций',
-  'Технический паспорт здания',
-  'Протокол испытания бетона',
-  'Заключение о сейсмостойкости',
-  'Акт визуального осмотра фасадов',
-  'Протокол испытания арматурной стали',
-  'Дефектная ведомость',
-  'Акт обследования кровли',
-  'Протокол ультразвукового контроля',
-  'Акт обследования подвала',
-  'Протокол испытания кирпичной кладки',
-  'Заключение по инженерным сетям',
-  'Акт обследования фундамента',
-  'Протокол динамических испытаний',
-  'Ведомость дефектов перекрытий',
-  'Акт обследования лестничных клеток',
-  'Протокол испытания сварных соединений',
-  'Заключение по огнестойкости',
-  'Акт обследования балконов и лоджий',
-  'Протокол геодезической съёмки',
-  'Акт обследования деревянных конструкций',
-  'Протокол испытания на срез',
-  'Заключение о категории технического состояния',
-  'Акт обследования металлических конструкций',
-  'Протокол испытания оснований',
-  'Акт по результатам тепловизионного контроля',
-  'Сводное техническое заключение',
+const stats = [
+  { value: '55', label: 'сотрудников' },
+  { value: '9', label: 'с учёными степенями' },
+  { value: '29', label: 'аттестованных экспертов по тех. обследованию' },
+  { value: '4', label: 'лаборатории' },
+  { value: '10', label: 'секторов' },
+  { value: '17', label: 'натурных испытаний зданий' },
 ];
 
-const STAFF_ROLES = [
-  { role: 'Инженеры-конструкторы', count: 'Расчёт несущих систем и сейсмостойкости' },
-  { role: 'Учёные-исследователи', count: 'Научное сопровождение и методология' },
-  { role: 'Специалисты по испытаниям', count: 'Лабораторные и натурные испытания' },
-  { role: 'Технические эксперты', count: 'Выдача заключений и паспортов' },
-];
-
-export default function SeismicCentre() {
+export default function SeismicCenterPage() {
   return (
     <Box>
-      {/* Hero */}
-      <Box sx={{ background: 'linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%)', borderRadius: 3, p: { xs: 3, md: 5 }, mb: 4, color: '#fff' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-          <Terrain sx={{ fontSize: 48, color: '#F59E0B' }} />
-          <Box>
-            <Typography variant="overline" sx={{ color: '#F59E0B', fontWeight: 700, letterSpacing: 2 }}>
-              КазНИИСА — Центр
-            </Typography>
-            <Typography variant="h4" sx={{ fontWeight: 800, lineHeight: 1.2 }}>
-              Центр по сейсмостойкости зданий и сооружений
-            </Typography>
-          </Box>
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
+        Центр сейсмостойкости, обследования зданий и сооружений
+      </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        Центр создан в 2010 году для координации работ в области сейсмостойкого строительства.
+        Организация известна развитием науки сейсмостойкого строительства, основанной на инженерной
+        сейсмологии и динамике сооружений.
+      </Typography>
+
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 4, p: 2, bgcolor: BLUE_LIGHT, borderRadius: '6px', borderLeft: '4px solid ' + BLUE }}>
+        <PersonIcon sx={{ color: BLUE, fontSize: 22 }} />
+        <Box>
+          <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '0.95rem' }}>Алдахов Еркен Сериков</Typography>
+          <Typography sx={{ fontSize: '0.82rem', color: GRAY_TEXT }}>Директор центра</Typography>
         </Box>
-        <Typography variant="body1" sx={{ opacity: 0.85, maxWidth: 700, lineHeight: 1.8 }}>
-          Комплексное техническое обследование объектов строительства, сейсмическая паспортизация,
-          структурные расчёты и экспериментальные испытания строительных материалов и конструкций.
+      </Box>
+
+      <Grid container spacing={2} sx={{ mb: 5 }}>
+        {stats.map((s, i) => (
+          <Grid item xs={6} sm={4} md={2} key={i}>
+            <Box sx={{ textAlign: 'center', p: 2, bgcolor: GRAY_BG, borderRadius: '6px', border: '1px solid ' + BORDER }}>
+              <Typography sx={{ fontWeight: 800, fontSize: '1.8rem', color: BLUE, lineHeight: 1 }}>{s.value}</Typography>
+              <Typography sx={{ fontSize: '0.72rem', color: GRAY_TEXT, mt: 0.5, lineHeight: 1.3 }}>{s.label}</Typography>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.15rem', mb: 3 }}>
+        Услуги центра
+      </Typography>
+
+      <Grid container spacing={3} sx={{ mb: 5 }}>
+        {services.map((s, i) => (
+          <Grid item xs={12} sm={6} key={i}>
+            <Box sx={{ p: 2.5, border: '1px solid ' + BORDER, borderRadius: '6px', height: '100%', transition: 'box-shadow 0.2s', '&:hover': { boxShadow: '0 4px 16px rgba(0,0,0,0.06)' } }}>
+              <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '0.95rem', mb: 1 }}>{s.title}</Typography>
+              <Typography sx={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#334155' }}>{s.desc}</Typography>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
+
+      <Divider sx={{ mb: 4 }} />
+
+      <Box sx={{ bgcolor: NAVY, borderRadius: '6px', p: 4, mb: 4 }}>
+        <Typography variant="h6" sx={{ fontWeight: 700, color: '#fff', mb: 1 }}>Экспериментальная база</Typography>
+        <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mb: 2 }} />
+        <Typography sx={{ color: '#CBD5E1', fontSize: '1rem', lineHeight: 1.9, mb: 1 }}>
+          Специальный экспериментальный стенд — двухэтажный стальной каркас размером 6×6×6,6 м
+          для проведения натурных динамических испытаний строительных конструкций.
+        </Typography>
+        <Typography sx={{ color: '#94A3B8', fontSize: '0.88rem', lineHeight: 1.8 }}>
+          17 натурных испытаний построенных зданий в Алматы, Шымкенте и Капшагае.
+          Более 60 вибродинамических испытаний конструкций в период 2005–2019 гг.
         </Typography>
       </Box>
 
-      <Grid container spacing={3}>
-        {/* Services */}
-        <Grid item xs={12} md={7}>
-          <Paper elevation={0} sx={{ border: '1px solid #E2E8F0', borderRadius: 3, p: 3.5, mb: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-              <Build sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Виды работ и услуг
-              </Typography>
-            </Box>
-            <List dense>
-              {SERVICES.map((s, i) => (
-                <ListItem key={i} sx={{ px: 0 }}>
-                  <ListItemIcon sx={{ minWidth: 32 }}>
-                    <CheckCircle sx={{ color: '#0369A1', fontSize: 18 }} />
-                  </ListItemIcon>
-                  <ListItemText primary={s} primaryTypographyProps={{ variant: 'body2', color: '#334155' }} />
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
-
-          {/* Experimental work */}
-          <Paper elevation={0} sx={{ border: '1px solid #E2E8F0', borderRadius: 3, p: 3.5 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-              <Science sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Экспериментальные работы
-              </Typography>
-            </Box>
-            <Typography variant="body2" sx={{ color: '#475569', lineHeight: 1.8, mb: 2 }}>
-              Центр проводит натурные и лабораторные испытания строительных материалов: бетона,
-              арматурной стали, кирпичной кладки, металлических и деревянных конструкций.
-              Применяются методы ультразвуковой дефектоскопии, динамических испытаний, тепловизионного
-              контроля и геодезической съёмки.
-            </Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-              {['Ультразвуковой контроль', 'Динамические испытания', 'Тепловизионный контроль', 'Геодезия', 'Лабораторные испытания'].map(c => (
-                <Chip key={c} label={c} size="small" sx={{ background: '#EFF6FF', color: '#0369A1', fontWeight: 600, fontSize: 11 }} />
-              ))}
-            </Box>
-          </Paper>
-        </Grid>
-
-        {/* Right column */}
-        <Grid item xs={12} md={5}>
-          {/* Staff */}
-          <Paper elevation={0} sx={{ border: '1px solid #E2E8F0', borderRadius: 3, p: 3.5, mb: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-              <Group sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                Состав специалистов
-              </Typography>
-            </Box>
-            {STAFF_ROLES.map((s, i) => (
-              <Box key={i}>
-                <Box sx={{ py: 1.5 }}>
-                  <Typography variant="body2" sx={{ fontWeight: 700, color: '#0F172A' }}>{s.role}</Typography>
-                  <Typography variant="caption" sx={{ color: '#64748B' }}>{s.count}</Typography>
-                </Box>
-                {i < STAFF_ROLES.length - 1 && <Divider />}
-              </Box>
-            ))}
-          </Paper>
-
-          {/* 27 templates */}
-          <Paper elevation={0} sx={{ border: '1px solid #E2E8F0', borderRadius: 3, p: 3.5 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1 }}>
-              <Description sx={{ color: '#0369A1' }} />
-              <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-                27 шаблонов документов
-              </Typography>
-            </Box>
-            <Typography variant="caption" sx={{ color: '#64748B', display: 'block', mb: 2 }}>
-              Стандартизированные формы для всех типов обследований
-            </Typography>
-            <Box sx={{ maxHeight: 320, overflowY: 'auto', pr: 0.5 }}>
-              {TEMPLATES.map((t, i) => (
-                <Box key={i} sx={{ display: 'flex', alignItems: 'flex-start', gap: 1, py: 0.75, borderBottom: i < TEMPLATES.length - 1 ? '1px solid #F1F5F9' : 'none' }}>
-                  <Box sx={{ minWidth: 24, height: 24, borderRadius: '50%', background: '#F1F5F9', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <Typography variant="caption" sx={{ fontWeight: 700, color: '#0369A1', fontSize: 10 }}>{i + 1}</Typography>
-                  </Box>
-                  <Typography variant="caption" sx={{ color: '#334155', lineHeight: 1.6 }}>{t}</Typography>
-                </Box>
-              ))}
-            </Box>
-          </Paper>
-        </Grid>
-      </Grid>
-
-      {/* Accent bottom */}
-      <Box sx={{ mt: 3, p: 3, borderRadius: 3, background: '#FFFBEB', border: '1px solid #FDE68A' }}>
-        <Typography variant="body2" sx={{ color: '#78350F', fontWeight: 500 }}>
-          Центр аккредитован на проведение технических обследований и выдачу сейсмических паспортов
-          в соответствии с требованиями нормативных документов Республики Казахстан.
-        </Typography>
+      <Box sx={{ display: 'flex', gap: 2 }}>
+        <Link href="/centres" style={{ color: NAVY, fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none', borderBottom: '2px solid ' + BLUE, paddingBottom: 1 }}>
+          ← Все центры
+        </Link>
       </Box>
     </Box>
   );

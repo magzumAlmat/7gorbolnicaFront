@@ -1,8 +1,12 @@
 'use client';
-import { Typography, Box, Divider } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
 const TEXT = '#334155';
 
 const meetings = [
@@ -37,11 +41,11 @@ export default function InternationalCooperationPage() {
     <Box>
       <Typography
         variant="h3"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 800, color: NAVY, mb: 1 }}
+        sx={{ fontWeight: 800, color: NAVY, mb: 1 }}
       >
         Международное сотрудничество
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 4 }} />
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 3 }}>
         АО «КазНИИСА» является базовой организацией государств-участников СНГ в сфере
@@ -52,10 +56,10 @@ export default function InternationalCooperationPage() {
 
       <Box
         sx={{
-          borderLeft: '4px solid #F59E0B',
-          pl: 3,
-          py: 2,
-          bgcolor: '#FAFAFA',
+          bgcolor: BLUE_LIGHT,
+          borderLeft: '4px solid ' + BLUE,
+          borderRadius: '0 6px 6px 0',
+          p: 3,
           fontStyle: 'italic',
           mb: 4,
         }}
@@ -66,14 +70,14 @@ export default function InternationalCooperationPage() {
         </Typography>
       </Box>
 
-      <Divider sx={{ mb: 4 }} />
-
       <Typography
         variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
+        sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}
       >
         Комиссия по BIM-технологиям СНГ
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 4 }}>
         АО «КазНИИСА» инициировало и организовало работу Комиссии по разработке технических
         регламентов в области технологий информационного моделирования зданий (BIM) для
@@ -83,10 +87,11 @@ export default function InternationalCooperationPage() {
 
       <Typography
         variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 3 }}
+        sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}
       >
         Хроника заседаний
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 4 }}>
         {meetings.map((m, i) => (
@@ -96,14 +101,16 @@ export default function InternationalCooperationPage() {
               display: 'flex',
               gap: 2,
               p: 2.5,
-              bgcolor: '#FAFAFA',
-              border: '1px solid #E2E8F0',
-              borderRadius: 1,
+              bgcolor: BLUE_LIGHT,
+              border: '1px solid ' + BORDER,
+              borderRadius: '6px',
+              transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+              '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
             }}
           >
             <Box sx={{ minWidth: 130 }}>
               <Typography
-                sx={{ fontSize: '0.85rem', fontWeight: 700, color: AMBER, lineHeight: 1.4 }}
+                sx={{ fontSize: '0.85rem', fontWeight: 700, color: BLUE, lineHeight: 1.4 }}
               >
                 {m.date}
               </Typography>
@@ -118,14 +125,14 @@ export default function InternationalCooperationPage() {
         ))}
       </Box>
 
-      <Divider sx={{ mb: 4 }} />
-
       <Typography
         variant="h5"
-        sx={{ fontFamily: '"Exo 2", sans-serif', fontWeight: 700, color: NAVY, mb: 2 }}
+        sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}
       >
         Направления сотрудничества
       </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+
       <Box component="ul" sx={{ pl: 3 }}>
         {[
           'Координация политики технического регулирования в строительстве стран СНГ',

@@ -1,135 +1,125 @@
 'use client';
-import { Typography, Box, Paper, Grid, List, ListItem, ListItemIcon, ListItemText, Chip, Divider } from '@mui/material';
-import { Computer, CheckCircle, School, Code, Hub, Star } from '@mui/icons-material';
+import { Typography, Box, Grid, Divider } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
+import Link from 'next/link';
 
-const DIRECTIONS = [
-  {
-    icon: <Code sx={{ color: '#0369A1' }} />,
-    title: 'Разработка BIM-стандартов',
-    items: [
-      'Национальные стандарты информационного моделирования зданий',
-      'Протоколы обмена данными (IFC, CDE)',
-      'Требования к BIM-моделям на различных стадиях проектирования',
-      'Классификаторы строительной информации',
-    ],
-  },
-  {
-    icon: <Hub sx={{ color: '#0369A1' }} />,
-    title: 'Цифровая трансформация отрасли',
-    items: [
-      'Внедрение ТИМСО (технологии информационного моделирования)',
-      'Разработка дорожных карт цифровизации строительства',
-      'Пилотные BIM-проекты на объектах Казахстана',
-      'Формирование цифровых двойников зданий',
-      'Интеграция с ГИС и геопространственными данными',
-    ],
-  },
-  {
-    icon: <School sx={{ color: '#0369A1' }} />,
-    title: 'Обучение и компетенции',
-    items: [
-      'Подготовка BIM-специалистов и BIM-менеджеров',
-      'Семинары и тренинги по цифровым технологиям',
-      'Методические пособия по BIM для проектировщиков',
-      'Аккредитация учебных программ по ТИМСО',
-    ],
-  },
+const NAVY = '#0F172A';
+const BLUE = '#0369A1';
+const BLUE_LIGHT = '#EFF6FF';
+const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
+const BORDER = '#E2E8F0';
+
+const directions = [
+  { title: 'Цифровизация (ТИМСО/BIM)', desc: 'Разработка стандартов, аудит проектов, внедрение BIM, участие в инициативах buildingSMART International.' },
+  { title: 'Научные исследования', desc: 'Научно-исследовательские работы, аналитика, издание журнала по цифровому строительству.' },
+  { title: 'Техническая экспертиза', desc: 'Обследование зданий, расчёты конструкций, разработка специальных технических условий.' },
+  { title: 'Инженерно-сейсмометрическая служба', desc: 'Мониторинг, анализ сейсмоданных, отчёты о сейсмобезопасности объектов.' },
+  { title: 'Информационные системы', desc: 'Сопровождение отраслевых IT-платформ (e-qurylys) и информационных систем строительной отрасли.' },
+  { title: 'Обучение и коммуникации', desc: 'Курсы, сертификация buildingSMART Foundation, сотрудничество с вузами Казахстана.' },
 ];
 
-const COMPETENCIES = [
-  'Autodesk Revit / Civil 3D',
-  'IFC / OpenBIM',
-  'Navisworks (коллизии)',
-  'CDE-платформы',
-  'Dynamo / Python-скриптинг',
-  'GIS-интеграция',
-  'Цифровые двойники',
-  'Лазерное сканирование',
+const services = [
+  'Разработка специальных технических условий',
+  'Оценка готовности организации к внедрению ТИМСО',
+  'Научно-техническое сопровождение проектов',
+  'Обучение и сертификация buildingSMART Foundation',
+  'Сопровождение IT-проектов строительной отрасли',
+  'Аудит BIM-проектов',
 ];
 
-export default function ScienceDigitalizationCentre() {
+const standards = [
+  'СПРК «Применение информационного моделирования в проектной организации»',
+  'СП РК — Жизненный цикл строительных объектов (части 1, 2, 3, 4, 5)',
+  'РДС РК «Информационное моделирование в строительстве»',
+  'СП РК — Требования к оформлению проектной документации',
+  'СП РК — Порядок проведения экспертизы информационных моделей',
+  'СП РК — Применение ИМ в строительной и эксплуатирующей организации',
+  'ТИМСО (BIM)-ориентированный классификатор',
+];
+
+export default function ScienceDigitalizationPage() {
   return (
     <Box>
-      {/* Hero */}
-      <Box sx={{ background: 'linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%)', borderRadius: 3, p: { xs: 3, md: 5 }, mb: 4, color: '#fff' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-          <Computer sx={{ fontSize: 48, color: '#F59E0B' }} />
-          <Box>
-            <Typography variant="overline" sx={{ color: '#F59E0B', fontWeight: 700, letterSpacing: 2 }}>
-              КазНИИСА — Центр
-            </Typography>
-            <Typography variant="h4" sx={{ fontWeight: 800, lineHeight: 1.2 }}>
-              Центр науки и цифровизации строительства
-            </Typography>
-          </Box>
-        </Box>
-        <Typography variant="body1" sx={{ opacity: 0.85, maxWidth: 700, lineHeight: 1.8 }}>
-          Внедрение BIM/ТИМСО в строительную отрасль Казахстана: разработка стандартов,
-          цифровая трансформация процессов проектирования и строительства, подготовка специалистов.
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 1.5, mt: 2.5, flexWrap: 'wrap' }}>
-          {['BIM', 'ТИМСО', 'OpenBIM', 'IFC', 'Цифровые двойники'].map(t => (
-            <Chip key={t} label={t} size="small" sx={{ background: 'rgba(255,255,255,0.15)', color: '#fff', fontWeight: 700, border: '1px solid rgba(255,255,255,0.3)' }} />
-          ))}
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
+        Центр науки и цифровизации строительства
+      </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        Подразделение, объединяющее экспертизу в области научных исследований, нормативно-технического
+        регулирования и цифровых технологий. Сопровождает проекты на всех этапах жизненного цикла —
+        от научных разработок до внедрения BIM-технологий.
+      </Typography>
+
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2, p: 2, bgcolor: BLUE_LIGHT, borderRadius: '6px', borderLeft: '4px solid ' + BLUE }}>
+        <PersonIcon sx={{ color: BLUE, fontSize: 22 }} />
+        <Box>
+          <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '0.95rem' }}>Косым Ансатбаев</Typography>
+          <Typography sx={{ fontSize: '0.82rem', color: GRAY_TEXT }}>Заместитель директора центра</Typography>
         </Box>
       </Box>
 
-      {/* 3 directions */}
-      <Grid container spacing={3} sx={{ mb: 3 }}>
-        {DIRECTIONS.map((d, i) => (
-          <Grid item xs={12} md={4} key={i}>
-            <Paper elevation={0} sx={{ border: '1px solid #E2E8F0', borderRadius: 3, p: 3, height: '100%' }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-                <Box sx={{ p: 1, borderRadius: 2, background: '#EFF6FF' }}>{d.icon}</Box>
-                <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#0F172A', lineHeight: 1.3 }}>
-                  {d.title}
-                </Typography>
-              </Box>
-              <List dense>
-                {d.items.map((item, j) => (
-                  <ListItem key={j} sx={{ px: 0 }}>
-                    <ListItemIcon sx={{ minWidth: 28 }}>
-                      <CheckCircle sx={{ color: '#0369A1', fontSize: 16 }} />
-                    </ListItemIcon>
-                    <ListItemText primary={item} primaryTypographyProps={{ variant: 'body2', color: '#475569' }} />
-                  </ListItem>
-                ))}
-              </List>
-            </Paper>
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 5, fontStyle: 'italic' }}>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+          Миссия: способствовать цифровизации объектов промышленного и гражданского назначения,
+          чтобы сократить риски при реализации строительных проектов.
+        </Typography>
+      </Box>
+
+      <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.15rem', mb: 3 }}>
+        Направления деятельности
+      </Typography>
+
+      <Grid container spacing={3} sx={{ mb: 5 }}>
+        {directions.map((d, i) => (
+          <Grid item xs={12} sm={6} key={i}>
+            <Box sx={{ p: 2.5, border: '1px solid ' + BORDER, borderRadius: '6px', height: '100%', transition: 'box-shadow 0.2s', '&:hover': { boxShadow: '0 4px 16px rgba(0,0,0,0.06)' } }}>
+              <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '0.95rem', mb: 1 }}>{d.title}</Typography>
+              <Typography sx={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#334155' }}>{d.desc}</Typography>
+            </Box>
           </Grid>
         ))}
       </Grid>
 
-      {/* Competencies */}
-      <Paper elevation={0} sx={{ border: '1px solid #E2E8F0', borderRadius: 3, p: 3.5 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 2 }}>
-          <Star sx={{ color: '#F59E0B' }} />
-          <Typography variant="h6" sx={{ fontWeight: 700, color: '#0F172A' }}>
-            Технологические компетенции
-          </Typography>
-        </Box>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5 }}>
-          {COMPETENCIES.map(c => (
-            <Chip
-              key={c}
-              label={c}
-              sx={{
-                background: '#F8FAFC',
-                border: '1px solid #CBD5E1',
-                color: '#0F172A',
-                fontWeight: 600,
-                '&:hover': { background: '#EFF6FF', borderColor: '#0369A1' },
-              }}
-            />
+      <Grid container spacing={4} sx={{ mb: 5 }}>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.05rem', mb: 2 }}>Услуги</Typography>
+          {services.map((s, i) => (
+            <Box key={i} sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5, mb: 1.2 }}>
+              <Box sx={{ width: 7, height: 7, borderRadius: '50%', bgcolor: BLUE, mt: '9px', flexShrink: 0 }} />
+              <Typography sx={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#334155' }}>{s}</Typography>
+            </Box>
           ))}
-        </Box>
-      </Paper>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.05rem', mb: 2 }}>Разработанные стандарты</Typography>
+          {standards.map((s, i) => (
+            <Box key={i} sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5, mb: 1.2 }}>
+              <Box sx={{ width: 7, height: 7, borderRadius: '50%', bgcolor: NAVY, mt: '9px', flexShrink: 0 }} />
+              <Typography sx={{ fontSize: '0.88rem', lineHeight: 1.8, color: '#334155' }}>{s}</Typography>
+            </Box>
+          ))}
+        </Grid>
+      </Grid>
 
-      <Box sx={{ mt: 3, p: 3, borderRadius: 3, background: '#FFFBEB', border: '1px solid #FDE68A' }}>
-        <Typography variant="body2" sx={{ color: '#78350F', fontWeight: 500 }}>
-          Центр координирует внедрение ТИМСО на государственном уровне и обеспечивает
-          методологическую поддержку BIM-перехода строительных организаций Казахстана.
-        </Typography>
+      <Divider sx={{ mb: 4 }} />
+
+      <Box sx={{ bgcolor: NAVY, borderRadius: '6px', p: 4, mb: 4 }}>
+        <Typography variant="h6" sx={{ fontWeight: 700, color: '#fff', mb: 1 }}>Контакты центра</Typography>
+        <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mb: 2 }} />
+        <Typography sx={{ color: '#CBD5E1', fontSize: '0.92rem', mb: 0.5 }}>Тел.: 8 (727) 226 94 10 (вн. 118)</Typography>
+        <Typography sx={{ color: '#CBD5E1', fontSize: '0.92rem', mb: 0.5 }}>Email: cim@kazniisa.kz</Typography>
+        <Typography sx={{ color: '#94A3B8', fontSize: '0.85rem' }}>3 микрорайон 44А, г. Алматы</Typography>
+      </Box>
+
+      <Box sx={{ display: 'flex', gap: 3 }}>
+        <Link href="/centres/center-for-science-and-digitalization-of-construction/projects" style={{ color: BLUE, fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none', borderBottom: '2px solid ' + BLUE, paddingBottom: 1 }}>
+          Проекты центра →
+        </Link>
+        <Link href="/centres" style={{ color: NAVY, fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none', borderBottom: '2px solid ' + BORDER, paddingBottom: 1 }}>
+          ← Все центры
+        </Link>
       </Box>
     </Box>
   );

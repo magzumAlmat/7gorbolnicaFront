@@ -2,7 +2,7 @@
 import { Typography, Box, Grid, Divider, Table, TableBody, TableCell, TableRow } from '@mui/material';
 
 const NAVY = '#0F172A';
-const AMBER = '#F59E0B';
+const BLUE = '#0369A1';
 
 const offices = [
   {
@@ -56,7 +56,7 @@ export default function KontaktyPage() {
       <Typography
         variant="h3"
         sx={{
-          fontFamily: '"Exo 2", sans-serif',
+
           fontWeight: 800,
           color: NAVY,
           mb: 1,
@@ -64,7 +64,7 @@ export default function KontaktyPage() {
       >
         Контакты
       </Typography>
-      <Box sx={{ width: 64, height: 4, bgcolor: AMBER, borderRadius: 2, mb: 2 }} />
+      <Box sx={{ width: 64, height: 4, bgcolor: BLUE, borderRadius: 2, mb: 2 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4, maxWidth: 760 }}>
         АО «КазНИИСА» располагает сетью офисов в ключевых городах Казахстана. Головной офис
@@ -87,7 +87,7 @@ export default function KontaktyPage() {
             <Typography
               variant="h6"
               sx={{
-                fontFamily: '"Exo 2", sans-serif',
+      
                 fontWeight: 700,
                 color: office.primary ? NAVY : '#1E293B',
                 mb: 0.5,
@@ -104,7 +104,7 @@ export default function KontaktyPage() {
                     width: 10,
                     height: 10,
                     borderRadius: '50%',
-                    bgcolor: AMBER,
+                    bgcolor: BLUE,
                     flexShrink: 0,
                   }}
                 />
@@ -170,7 +170,7 @@ export default function KontaktyPage() {
 
       <Box
         sx={{
-          borderLeft: '4px solid #F59E0B',
+          borderLeft: '4px solid #0369A1',
           pl: 3,
           py: 2,
           bgcolor: '#FAFAFA',

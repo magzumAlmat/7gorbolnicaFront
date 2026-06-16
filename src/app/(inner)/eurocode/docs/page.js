@@ -48,14 +48,14 @@ export default function EurocopeDocsPage() {
         sx={{
           background: 'linear-gradient(135deg, #0F172A 0%, #0369A1 100%)',
           color: '#fff',
-          borderRadius: 3,
+          borderRadius: '6px',
           p: { xs: 3, md: 5 },
           mb: 4,
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
           <FolderOpenIcon sx={{ fontSize: 40 }} />
-          <Chip label="Нормативные документы" sx={{ bgcolor: '#F59E0B', color: '#0F172A', fontWeight: 700 }} />
+          <Chip label="Нормативные документы" sx={{ bgcolor: '#0369A1', color: '#fff', fontWeight: 700 }} />
         </Box>
         <Typography variant="h4" sx={{ fontWeight: 800, mb: 2 }}>
           Документы по Еврокодам
@@ -79,7 +79,7 @@ export default function EurocopeDocsPage() {
       <Grid container spacing={3}>
         {docGroups.map((group, gi) => (
           <Grid item xs={12} key={gi}>
-            <Paper elevation={1} sx={{ borderRadius: 3, overflow: 'hidden' }}>
+            <Paper elevation={1} sx={{ borderRadius: '6px', overflow: 'hidden', transition: 'box-shadow 0.2s ease, transform 0.2s ease', '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' } }}>
               <Box sx={{ bgcolor: '#0F172A', px: 3, py: 1.5 }}>
                 <Typography variant="subtitle1" sx={{ fontWeight: 700, color: '#fff' }}>
                   {group.category}
