@@ -1,4 +1,5 @@
 'use client';
+import { useState, useEffect } from 'react';
 import {
   Typography,
   Box,
@@ -9,6 +10,8 @@ import {
   TableCell,
 } from '@mui/material';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 const NAVY = '#0F172A';
 const BLUE = '#0369A1';
 const BLUE_LIGHT = '#EFF6FF';
@@ -16,34 +19,16 @@ const GRAY_BG = '#F8FAFC';
 const GRAY_TEXT = '#64748B';
 const BORDER = '#E2E8F0';
 
-const vacancies = [
-  {
-    title: 'Юрисконсульт',
-    address: '3 мкр 44-а, Алматы',
-    department: 'Отдел правовой и кадровой работы',
-    date: '3 декабря 2025',
-  },
-  {
-    title: 'Главный специалист сектора закупок',
-    address: '3 мкр 44-а, Алматы',
-    department: 'Сектор закупок',
-    date: '22 апреля 2025',
-  },
-  {
-    title: 'Специалист по охране труда',
-    address: '3 мкр 44-а, Алматы',
-    department: 'Проектный офис',
-    date: '21 апреля 2025',
-  },
-  {
-    title: 'Ассистент системного администратора',
-    address: '3 мкр 44-а, Алматы',
-    department: 'АХО',
-    date: '24 февраля 2025',
-  },
-];
-
 export default function VacanciesPage() {
+  const [vacancies, setVacancies] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/vacancies/public`)
+      .then((r) => r.json())
+      .then((d) => setVacancies(Array.isArray(d) ? d : []))
+      .catch(() => {});
+  }, []);
+
   return (
     <Box>
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
