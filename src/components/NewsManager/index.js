@@ -53,6 +53,35 @@ const getAuthHeaders = () => {
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
+// Контент новости хранится либо как EditorJS JSON ({ blocks: [...] }),
+// либо (у импортированных новостей) как обычный текст. Приводим оба формата
+// к структуре EditorJS, чтобы текст подгружался и в редактор, и в предпросмотр.
+const textToBlocks = (text) => ({
+  blocks: String(text)
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => ({ type: 'paragraph', data: { text: p.replace(/\n/g, '<br>') } })),
+});
+const parseEditorContent = (content) => {
+  if (!content) return { blocks: [] };
+  if (typeof content === 'object') {
+    return Array.isArray(content.blocks) ? content : { blocks: [] };
+  }
+  if (typeof content === 'string') {
+    const s = content.trim();
+    if (!s) return { blocks: [] };
+    if (s.startsWith('{')) {
+      try {
+        const parsed = JSON.parse(s);
+        if (parsed && Array.isArray(parsed.blocks)) return parsed;
+      } catch { /* не JSON — трактуем как обычный текст */ }
+    }
+    return textToBlocks(s);
+  }
+  return { blocks: [] };
+};
+
 export default function NewsManager() {
   const [newsList, setNewsList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -114,34 +143,7 @@ export default function NewsManager() {
   };
 
   const handleEdit = (news) => {
-    // Контент из редактора хранится как EditorJS JSON ({ blocks: [...] }),
-    // а импортированные новости — как обычный текст. Поддерживаем оба формата,
-    // чтобы текст существующих новостей подгружался в редактор, а не терялся.
-    const textToBlocks = (text) => ({
-      blocks: String(text)
-        .split(/\n{2,}/)
-        .map((p) => p.trim())
-        .filter(Boolean)
-        .map((p) => ({ type: 'paragraph', data: { text: p.replace(/\n/g, '<br>') } })),
-    });
-    const parseContent = (content) => {
-      if (!content) return { blocks: [] };
-      if (typeof content === 'object') {
-        return Array.isArray(content.blocks) ? content : { blocks: [] };
-      }
-      if (typeof content === 'string') {
-        const s = content.trim();
-        if (!s) return { blocks: [] };
-        if (s.startsWith('{')) {
-          try {
-            const parsed = JSON.parse(s);
-            if (parsed && Array.isArray(parsed.blocks)) return parsed;
-          } catch { /* не JSON — трактуем как обычный текст */ }
-        }
-        return textToBlocks(s);
-      }
-      return { blocks: [] };
-    };
+    const parseContent = parseEditorContent;
 
     setForm({
       titleRu: news.title?.ru || '',
@@ -492,14 +494,7 @@ export default function NewsManager() {
             <Box component="img" src={previewDialog.item.image} alt=""
               sx={{ width: '100%', maxHeight: 300, objectFit: 'cover', borderRadius: 2, mb: 3 }} />
           )}
-          <EditorJSRenderer data={
-            (() => {
-              const c = previewDialog.item?.content?.ru;
-              if (!c) return { blocks: [] };
-              if (typeof c === 'string') { try { return JSON.parse(c); } catch { return { blocks: [] }; } }
-              return c;
-            })()
-          } />
+          <EditorJSRenderer data={parseEditorContent(previewDialog.item?.content?.ru)} />
         </DialogContent>
       </Dialog>
 
