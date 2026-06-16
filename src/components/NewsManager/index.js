@@ -114,12 +114,33 @@ export default function NewsManager() {
   };
 
   const handleEdit = (news) => {
+    // Контент из редактора хранится как EditorJS JSON ({ blocks: [...] }),
+    // а импортированные новости — как обычный текст. Поддерживаем оба формата,
+    // чтобы текст существующих новостей подгружался в редактор, а не терялся.
+    const textToBlocks = (text) => ({
+      blocks: String(text)
+        .split(/\n{2,}/)
+        .map((p) => p.trim())
+        .filter(Boolean)
+        .map((p) => ({ type: 'paragraph', data: { text: p.replace(/\n/g, '<br>') } })),
+    });
     const parseContent = (content) => {
       if (!content) return { blocks: [] };
-      if (typeof content === 'string') {
-        try { return JSON.parse(content); } catch { return { blocks: [] }; }
+      if (typeof content === 'object') {
+        return Array.isArray(content.blocks) ? content : { blocks: [] };
       }
-      return content;
+      if (typeof content === 'string') {
+        const s = content.trim();
+        if (!s) return { blocks: [] };
+        if (s.startsWith('{')) {
+          try {
+            const parsed = JSON.parse(s);
+            if (parsed && Array.isArray(parsed.blocks)) return parsed;
+          } catch { /* не JSON — трактуем как обычный текст */ }
+        }
+        return textToBlocks(s);
+      }
+      return { blocks: [] };
     };
 
     setForm({
