@@ -21,6 +21,9 @@ import END_POINT from '../config/index';
 const NewsEditorJS = ({ data, onChange, holderId = 'editorjs' }) => {
   const editorRef = useRef(null);
   const holderRef = useRef(null);
+  // Храним последний onChange в ref, чтобы не пересоздавать редактор при каждом вводе.
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
 
   const getToken = () => {
     if (typeof window !== 'undefined') return localStorage.getItem('token');
@@ -29,6 +32,11 @@ const NewsEditorJS = ({ data, onChange, holderId = 'editorjs' }) => {
 
   const initEditor = useCallback(() => {
     if (editorRef.current) return;
+
+    // Очищаем холдер на случай, если предыдущий экземпляр (например, при двойном
+    // монтировании в React StrictMode) оставил DOM — иначе редактор отрисуется дважды.
+    const holderEl = typeof document !== 'undefined' ? document.getElementById(holderId) : null;
+    if (holderEl) holderEl.innerHTML = '';
 
     const editor = new EditorJS({
       holder: holderId,
@@ -107,8 +115,13 @@ const NewsEditorJS = ({ data, onChange, holderId = 'editorjs' }) => {
         },
       },
       onChange: async (api) => {
-        const savedData = await api.saver.save();
-        if (onChange) onChange(savedData);
+        if (!editorRef.current) return; // редактор уничтожен — не сохраняем
+        try {
+          const savedData = await api.saver.save();
+          if (onChangeRef.current) onChangeRef.current(savedData);
+        } catch (e) {
+          /* холдер мог быть удалён при размонтировании — игнорируем */
+        }
       },
       i18n: {
         messages: {
@@ -170,14 +183,19 @@ const NewsEditorJS = ({ data, onChange, holderId = 'editorjs' }) => {
     });
 
     editorRef.current = editor;
-  }, [data, holderId, onChange]);
+    // ВАЖНО: зависим только от holderId. data берётся при инициализации один раз;
+    // onChange читается через ref. Иначе редактор пересоздаётся на каждый ввод и
+    // падает с «element with ID ... is missing».
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [holderId]);
 
   useEffect(() => {
     initEditor();
     return () => {
-      if (editorRef.current && typeof editorRef.current.destroy === 'function') {
-        editorRef.current.destroy();
-        editorRef.current = null;
+      const inst = editorRef.current;
+      editorRef.current = null; // помечаем как уничтоженный до асинхронного destroy
+      if (inst && typeof inst.destroy === 'function') {
+        try { inst.destroy(); } catch (e) { /* холдер уже удалён React-ом */ }
       }
     };
   }, [initEditor]);
