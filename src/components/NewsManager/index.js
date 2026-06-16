@@ -82,7 +82,7 @@ const parseEditorContent = (content) => {
   return { blocks: [] };
 };
 
-export default function NewsManager() {
+export default function NewsManager({ section = 'site' }) {
   const [newsList, setNewsList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState('list');
@@ -111,7 +111,7 @@ export default function NewsManager() {
   const fetchNews = useCallback(async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${END_POINT}/api/kazniisa/news`);
+      const res = await axios.get(`${END_POINT}/api/kazniisa/news?section=${section}`);
       setNewsList(res.data);
     } catch (err) {
       console.error('Fetch news error:', err);
@@ -119,7 +119,7 @@ export default function NewsManager() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [section]);
 
   useEffect(() => { fetchNews(); }, [fetchNews]);
 
@@ -198,6 +198,7 @@ export default function NewsManager() {
           en: form.contentEn || { blocks: [] },
         }),
         category: form.category,
+        section,
         image: imageUrl,
         publishedAt: form.publishedAt ? new Date(form.publishedAt).toISOString() : new Date().toISOString(),
         slug: editingNews?.slug || generateSlug(form.titleRu),

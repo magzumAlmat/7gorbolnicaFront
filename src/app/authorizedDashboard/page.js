@@ -29,6 +29,7 @@ import FinancialReportsComponent from '../../components/FinancialReports';
 import ReportOnPublicServicesRenderedComponent from '../../components/RerportOnPublicServiceRendered';
 
 import NewspaperIcon from '@mui/icons-material/Newspaper';
+import FeedIcon from '@mui/icons-material/Feed';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import InfoIcon from '@mui/icons-material/Info';
@@ -46,12 +47,16 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 const drawerWidth = 280;
 
+// «Новости БОСС» — тот же модуль NewsManager, но раздел 'boss'.
+const BossNewsManager = () => <NewsManager section="boss" />;
+
 // Конфигурация разделов админ-панели, сгруппированных по тирам.
 const GROUPS = [
   {
     title: null,
     items: [
       { key: 'news', label: 'Новости', icon: <NewspaperIcon />, Component: NewsManager },
+      { key: 'boss-news', label: 'Новости БОСС', icon: <FeedIcon />, Component: BossNewsManager },
     ],
   },
   {

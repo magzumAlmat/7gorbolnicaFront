@@ -1,5 +1,7 @@
 'use client';
-import { Typography, Box, Divider, Chip } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { Typography, Box, Divider, Chip, CircularProgress } from '@mui/material';
+import { getExcerpt } from '../../../../lib/newsContent';
 
 const NAVY = '#0F172A';
 const BLUE = '#0369A1';
@@ -7,40 +9,26 @@ const BLUE_LIGHT = '#EFF6FF';
 const GRAY_TEXT = '#64748B';
 const BORDER = '#E2E8F0';
 
-const news = [
-  {
-    date: 'Ноябрь 2025',
-    title: 'Заседание БОСС состоялось в Алматы',
-    description: 'В Алматы прошло очередное заседание Базовой организации государств — участников СНГ по сейсмостойкому строительству. На заседании обсуждались вопросы гармонизации нормативной базы и планы совместной научной деятельности.',
-  },
-  {
-    date: 'Ноябрь 2025',
-    title: 'Двустороннее совещание Казахстана и Таджикистана',
-    description: 'Представители АО «КазНИИСА» и профильных ведомств Таджикистана провели двустороннее совещание по вопросам строительного ценообразования и нормирования в сейсмостойком строительстве.',
-  },
-  {
-    date: 'Ноябрь 2025',
-    title: 'Обсуждение деятельности базовых организаций СНГ',
-    description: 'Состоялось совещание Исполнительного комитета СНГ, посвящённое вопросам экономической деятельности базовых организаций государств — участников СНГ.',
-  },
-  {
-    date: 'Май 2025',
-    title: 'Отчёт о деятельности БОСС за 2019–2024 годы',
-    description: 'АО «КазНИИСА» представило отчёт о деятельности Базовой организации за 5 лет. Документ охватывает совместные научные исследования, заседания, конференции и выпуск нормативных документов.',
-  },
-  {
-    date: 'Июнь 2024',
-    title: 'Поздравление У. Бегалиеву',
-    description: 'Коллектив поздравил президента Международной ассоциации экспертов по сейсмостойкому строительству с юбилеем.',
-  },
-  {
-    date: 'Апрель 2023',
-    title: 'Совещание по деятельности базовых организаций СНГ',
-    description: 'Обсуждение вопросов экономической деятельности базовых организаций государств — участников СНГ в различных отраслях экономики.',
-  },
-];
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' });
+}
 
 export default function NewsBoss() {
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/kazniisa/news?section=boss`)
+      .then((r) => r.json())
+      .then((data) => setNews(Array.isArray(data) ? data : []))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <Box>
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
@@ -53,31 +41,39 @@ export default function NewsBoss() {
         по сейсмостойкому строительству (БОСС).
       </Typography>
 
-      {news.map((item, idx) => (
-        <Box
-          key={idx}
-          sx={{
-            mb: 3,
-            p: 3,
-            border: '1px solid ' + BORDER,
-            borderRadius: '6px',
-            borderLeft: '4px solid ' + BLUE,
-            transition: 'box-shadow 0.2s ease, transform 0.2s ease',
-            '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
-          }}
-        >
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.5 }}>
-            <Typography sx={{ fontWeight: 700, fontSize: '1.05rem', color: NAVY }}>
-              {item.title}
+      {loading ? (
+        <Box sx={{ textAlign: 'center', py: 6 }}><CircularProgress /></Box>
+      ) : news.length === 0 ? (
+        <Typography sx={{ color: GRAY_TEXT, py: 4 }}>Новостей пока нет.</Typography>
+      ) : (
+        news.map((item) => (
+          <Box
+            key={item.id || item.slug}
+            sx={{
+              mb: 3,
+              p: 3,
+              border: '1px solid ' + BORDER,
+              borderRadius: '6px',
+              borderLeft: '4px solid ' + BLUE,
+              transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+              '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
+            }}
+          >
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1.5, gap: 2 }}>
+              <Typography sx={{ fontWeight: 700, fontSize: '1.05rem', color: NAVY }}>
+                {item.title?.ru || ''}
+              </Typography>
+              {item.publishedAt && (
+                <Chip label={formatDate(item.publishedAt)} size="small" sx={{ bgcolor: BLUE_LIGHT, color: BLUE, fontWeight: 600, fontSize: '0.75rem', flexShrink: 0 }} />
+              )}
+            </Box>
+            <Divider sx={{ mb: 1.5 }} />
+            <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#334155' }}>
+              {getExcerpt(item.content?.ru)}
             </Typography>
-            <Chip label={item.date} size="small" sx={{ bgcolor: BLUE_LIGHT, color: BLUE, fontWeight: 600, fontSize: '0.75rem' }} />
           </Box>
-          <Divider sx={{ mb: 1.5 }} />
-          <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#334155' }}>
-            {item.description}
-          </Typography>
-        </Box>
-      ))}
+        ))
+      )}
     </Box>
   );
 }
