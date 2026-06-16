@@ -4,6 +4,7 @@ import { Typography, Box, Paper, Chip, Grid, CircularProgress } from '@mui/mater
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Link from 'next/link';
+import { getExcerpt } from '../../../../lib/newsContent';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const NAVY = '#0F172A';
@@ -93,7 +94,7 @@ export default function NewsListingPage() {
                   {item.title?.ru || ''}
                 </Typography>
                 <Typography sx={{ color: GRAY_TEXT, fontSize: '0.82rem', lineHeight: 1.5, mb: 1.5, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                  {(item.content?.ru || '').split('\n\n')[0]}
+                  {getExcerpt(item.content?.ru)}
                 </Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mt: 'auto' }}>
                   <Typography sx={{ color: BLUE, fontWeight: 600, fontSize: '0.82rem' }}>

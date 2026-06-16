@@ -6,6 +6,7 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Link from 'next/link';
 import ImageLightbox, { useImageLightbox } from '../../../../../components/ImageLightbox';
+import { getParagraphs } from '../../../../../lib/newsContent';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const NAVY = '#0F172A';
@@ -50,8 +51,7 @@ export default function NewsArticlePage() {
   }
 
   const title = article.title?.ru || '';
-  const body = article.content?.ru || '';
-  const paragraphs = body.split('\n\n').filter(Boolean);
+  const paragraphs = getParagraphs(article.content?.ru);
 
   return (
     <Box>

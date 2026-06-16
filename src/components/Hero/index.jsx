@@ -12,6 +12,7 @@ import {
   KeyboardArrowDown, Work
 } from '@mui/icons-material';
 import { Select, MenuItem, TextField as MuiTextField } from '@mui/material';
+import { getExcerpt } from '../../lib/newsContent';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { styled } from '@mui/material/styles';
@@ -84,7 +85,7 @@ export default function Hero() {
             : '',
           image: item.image || '/images/kazniisa/centres-banner.webp',
           link: `/about-us/news/${item.slug}`,
-          snippet: (item.content?.ru || '').split('\n\n')[0]?.slice(0, 150) || '',
+          snippet: getExcerpt(item.content?.ru, 150),
         }));
         setNewsSlides(slides);
       })

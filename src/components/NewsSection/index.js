@@ -5,6 +5,7 @@ import { Box, Container, Typography, Grid, Paper, Stack } from '@mui/material';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Link from 'next/link';
+import { getExcerpt } from '../../lib/newsContent';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const NAVY = '#0F172A';
@@ -100,7 +101,7 @@ export default function NewsSection() {
                       overflow: 'hidden',
                     }}
                   >
-                    {(item.content?.ru || '').split('\n\n')[0]}
+                    {getExcerpt(item.content?.ru)}
                   </Typography>
                   <Stack direction="row" alignItems="center" spacing={0.5} sx={{ mt: 'auto' }}>
                     <Typography sx={{ color: BLUE, fontWeight: 600, fontSize: '0.82rem' }}>
