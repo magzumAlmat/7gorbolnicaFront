@@ -13,21 +13,21 @@ import { usePathname } from 'next/navigation';
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-  const hideHeader = pathname === '/authorizedDashboard';
+  const isDashboard = pathname === '/authorizedDashboard';
 
   return (
     <html lang="ru" suppressHydrationWarning={true}>
       <body>
         <AppThemeProvider>
           <Providers>
-            {!hideHeader && <Header />}
+            {!isDashboard && <Header />}
             <Box component="main" sx={{
               minHeight: "100vh",
               bgcolor: '#fff',
             }}>
               {children}
             </Box>
-            <Footer />
+            {!isDashboard && <Footer />}
           </Providers>
         </AppThemeProvider>
       </body>
