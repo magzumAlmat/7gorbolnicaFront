@@ -1,6 +1,9 @@
 'use client';
+import { useState, useEffect } from 'react';
 import { Typography, Box, Grid } from '@mui/material';
 import ImageLightbox, { useImageLightbox } from '../../../../components/ImageLightbox';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 const NAVY = '#0F172A';
 const BLUE = '#0369A1';
@@ -9,62 +12,10 @@ const GRAY_BG = '#F8FAFC';
 const GRAY_TEXT = '#64748B';
 const BORDER = '#E2E8F0';
 
-const chairman = {
-  name: 'Бесимбаев Ерик Турашович',
-  role: 'Председатель Совета директоров',
-  since: '29.07.2024',
-  note: 'Профессор КазНИТУ, род. 22.11.1958',
-  photo: '/images/kazniisa/besimbaev.webp',
-};
-
-const boardMembers = [
-  {
-    name: 'Рысдавлетов Мурат Булатович',
-    role: 'Заместитель председателя Комитета строительства',
-    since: '12.02.2026',
-    note: 'Род. 30.09.1982',
-    photo: '/images/kazniisa/rysdavletov.jpeg',
-  },
-  {
-    name: 'Карибаева Мамыр Куанышовна',
-    role: 'Главный эксперт',
-    since: '29.07.2024',
-    note: 'Род. 31.08.1970',
-    photo: '/images/kazniisa/karibaeva.webp',
-  },
-  {
-    name: 'Кульбаев Бегман Бахитович',
-    role: 'Генеральный директор АО «КазНИИСА»',
-    since: '29.07.2024',
-    note: 'Род. 10.01.1982',
-    photo: '/images/kazniisa/kulbaev-400.webp',
-  },
-  {
-    name: 'Есенова Куралай Еркебековна',
-    role: 'Независимый директор',
-    since: '29.07.2024',
-    note: 'Род. 21.04.1971',
-    photo: '/images/kazniisa/esenova.webp',
-  },
-  {
-    name: 'Сатжанов Кенжебай Сатжанович',
-    role: 'Представитель акционера',
-    since: '29.07.2024',
-    note: 'Род. 19.08.1955',
-    photo: '/images/kazniisa/satzhanov.webp',
-  },
-];
-
-const executives = [
-  { name: 'Кульбаев Бегман Бахитович', role: 'Генеральный директор', note: 'в должности с 19.09.2017', photo: '/images/kazniisa/kulbaev-400.webp' },
-  { name: 'Шокбаров Ералы Мейрамбекович', role: 'Управляющий директор по производству', note: '', photo: '/images/kazniisa/shokbarov-400.jpg' },
-  { name: 'Шахнович Александр Юльевич', role: 'Управляющий директор по развитию и цифровизации', note: '', photo: '/images/kazniisa/shakhnovitch-400.webp' },
-];
-
-const otherOfficials = [
-  { label: 'Корпоративный секретарь-омбудсмен', value: 'Суханкулов Нуркен Кунанбаевич' },
-  { label: 'Внутренний аудитор', value: 'Ермекбаев Берик Серикович', note: 'тел. 226-94-10, +7 778 705 43 65' },
-];
+// Фото из сидов лежат в публичных ассетах фронта ("/images/..."),
+// загруженные через админку — относительный путь на бэке.
+const photoUrl = (p) => (p ? (p.startsWith('/') ? p : `${API_URL}/${p}`) : '');
+const toPerson = (r) => ({ name: r.fio, role: r.position, since: r.since, note: r.note, photo: photoUrl(r.path) });
 
 function SectionTitle({ children }) {
   return (
@@ -149,6 +100,22 @@ function PersonCard({ person, featured, onImageClick }) {
 
 export default function GoverningBodiesPage() {
   const { lightbox, openLightbox, closeLightbox } = useImageLightbox();
+  const [people, setPeople] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/administration/public`)
+      .then((r) => r.json())
+      .then((d) => setPeople(Array.isArray(d) ? d : []))
+      .catch(() => {});
+  }, []);
+
+  const sorted = [...people].sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+  const chairman = sorted.filter((p) => p.group === 'chairman').map(toPerson)[0] || null;
+  const boardMembers = sorted.filter((p) => p.group === 'board').map(toPerson);
+  const executives = sorted.filter((p) => p.group === 'executive').map(toPerson);
+  const otherOfficials = sorted
+    .filter((p) => p.group === 'official')
+    .map((p) => ({ label: p.position, value: p.fio, note: p.phone || p.note }));
 
   return (
     <Box>
@@ -193,9 +160,11 @@ export default function GoverningBodiesPage() {
       <SectionTitle>Совет директоров</SectionTitle>
 
       <Grid container spacing={2.5} sx={{ mb: 5 }}>
-        <Grid item xs={12} sm={6} md={4}>
-          <PersonCard person={chairman} featured onImageClick={openLightbox} />
-        </Grid>
+        {chairman && (
+          <Grid item xs={12} sm={6} md={4}>
+            <PersonCard person={chairman} featured onImageClick={openLightbox} />
+          </Grid>
+        )}
         {boardMembers.map((m, i) => (
           <Grid item xs={12} sm={6} md={4} key={i}>
             <PersonCard person={m} onImageClick={openLightbox} />
