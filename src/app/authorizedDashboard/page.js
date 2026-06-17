@@ -5,28 +5,14 @@ import {
   ListSubheader, Toolbar, Divider,
 } from '@mui/material';
 
-// Модуль новостей (полноценный CRUD)
+// Новости (полноценный CRUD)
 import NewsManager from '../../components/NewsManager';
-
-// Tier 1 — часто обновляемый контент
+// Особые формы (текст / люди)
 import AddVacancyComponent from '../../components/AddVacancy';
-import PricesComponent from '../../components/Prices';
-import InformationMaterialsComponent from '../../components/InformationMaterials';
-
-// Tier 2 — документы и реестры
 import AdministrationComponent from '../../components/AdministrationComponent/AdministrationComponent';
-import LicensesComponent from '../../components/Licenses';
-import CertificateOfAccreditationComponent from '../../components/CertificateOfAccreditation';
-import CorporateDocumentComponent from '../../components/CorporateDocument';
-import AntiCorruptionComponent from '../../components/Anticorruption';
-
-// Tier 3 — раскрытие (закупки/финансы) — юридически значимые записи
-import PublicProcurementPlanComponent from '../../components/PublicProcurementPlan';
-import PublicProcurementAnnouncementComponent from '../../components/PublicProcurementAnnouncement';
-import PublicProcurementProtocolComponent from '../../components/PublicProcurementProtocol';
-import IncomeAndExpensesComponent from '../../components/AddIncomeAndExpenses';
-import FinancialReportsComponent from '../../components/FinancialReports';
-import ReportOnPublicServicesRenderedComponent from '../../components/RerportOnPublicServiceRendered';
+// Единый компонент для файловых реестров + конфиги ресурсов
+import FileRegistry from '../../components/FileRegistry';
+import { REGISTRIES } from '../../components/FileRegistry/configs';
 
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import FeedIcon from '@mui/icons-material/Feed';
@@ -47,10 +33,11 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 const drawerWidth = 280;
 
-// «Новости БОСС» — тот же модуль NewsManager, но раздел 'boss'.
+// «Новости БОСС» — тот же NewsManager, раздел 'boss'.
 const BossNewsManager = () => <NewsManager section="boss" />;
+// Файловый реестр по ключу конфига (стабильная ссылка на компонент).
+const registry = (key) => () => <FileRegistry {...REGISTRIES[key]} />;
 
-// Конфигурация разделов админ-панели, сгруппированных по тирам.
 const GROUPS = [
   {
     title: null,
@@ -63,29 +50,29 @@ const GROUPS = [
     title: 'Tier 1 · Контент',
     items: [
       { key: 'vacancies', label: 'Вакансии', icon: <WorkOutlineIcon />, Component: AddVacancyComponent },
-      { key: 'prices', label: 'Прейскурант цен', icon: <AttachMoneyIcon />, Component: PricesComponent },
-      { key: 'information-materials', label: 'Информационные материалы', icon: <InfoIcon />, Component: InformationMaterialsComponent },
+      { key: 'prices', label: 'Прейскурант цен', icon: <AttachMoneyIcon />, Component: registry('prices') },
+      { key: 'information-materials', label: 'Информационные материалы', icon: <InfoIcon />, Component: registry('information-materials') },
     ],
   },
   {
     title: 'Tier 2 · Документы и реестры',
     items: [
       { key: 'administration', label: 'Руководство', icon: <GroupsIcon />, Component: AdministrationComponent },
-      { key: 'licenses', label: 'Лицензии', icon: <VerifiedUserIcon />, Component: LicensesComponent },
-      { key: 'certificates', label: 'Сертификат об аккредитации', icon: <GppGoodIcon />, Component: CertificateOfAccreditationComponent },
-      { key: 'corporate-documents', label: 'Корпоративные документы', icon: <DescriptionIcon />, Component: CorporateDocumentComponent },
-      { key: 'anti-corruption', label: 'Противодействие коррупции', icon: <GavelIcon />, Component: AntiCorruptionComponent },
+      { key: 'licenses', label: 'Лицензии', icon: <VerifiedUserIcon />, Component: registry('licenses') },
+      { key: 'certificates', label: 'Сертификат об аккредитации', icon: <GppGoodIcon />, Component: registry('certificates') },
+      { key: 'corporate-documents', label: 'Корпоративные документы', icon: <DescriptionIcon />, Component: registry('corporate-documents') },
+      { key: 'anti-corruption', label: 'Противодействие коррупции', icon: <GavelIcon />, Component: registry('anti-corruption') },
     ],
   },
   {
     title: 'Tier 3 · Раскрытие (закупки / финансы)',
     items: [
-      { key: 'pp-plans', label: 'Планы госзакупок', icon: <ShoppingCartIcon />, Component: PublicProcurementPlanComponent },
-      { key: 'pp-announcements', label: 'Объявления о госзакупках', icon: <CampaignIcon />, Component: PublicProcurementAnnouncementComponent },
-      { key: 'pp-protocols', label: 'Протоколы госзакупок', icon: <ReceiptLongIcon />, Component: PublicProcurementProtocolComponent },
-      { key: 'income-expenses', label: 'Доходы и расходы', icon: <AccountBalanceWalletIcon />, Component: IncomeAndExpensesComponent },
-      { key: 'financial-reports', label: 'Финансовые отчёты', icon: <AssessmentIcon />, Component: FinancialReportsComponent },
-      { key: 'public-services', label: 'Отчёты о госуслугах', icon: <SupportAgentIcon />, Component: ReportOnPublicServicesRenderedComponent },
+      { key: 'pp-plans', label: 'Планы госзакупок', icon: <ShoppingCartIcon />, Component: registry('pp-plans') },
+      { key: 'pp-announcements', label: 'Объявления о госзакупках', icon: <CampaignIcon />, Component: registry('pp-announcements') },
+      { key: 'pp-protocols', label: 'Протоколы госзакупок', icon: <ReceiptLongIcon />, Component: registry('pp-protocols') },
+      { key: 'income-expenses', label: 'Доходы и расходы', icon: <AccountBalanceWalletIcon />, Component: registry('income-expenses') },
+      { key: 'financial-reports', label: 'Финансовые отчёты', icon: <AssessmentIcon />, Component: registry('financial-reports') },
+      { key: 'public-services', label: 'Отчёты о госуслугах', icon: <SupportAgentIcon />, Component: registry('public-services') },
     ],
   },
 ];
