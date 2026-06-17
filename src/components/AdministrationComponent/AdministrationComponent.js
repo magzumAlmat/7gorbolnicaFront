@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
     Container, Paper, Typography, Grid, TextField, Button, List, ListItem,
-    ListItemText, IconButton, Box, CircularProgress, Avatar
+    ListItemText, IconButton, Box, CircularProgress, Avatar, MenuItem
 } from '@mui/material';
 import { Edit, Delete, Add, CloudUpload } from '@mui/icons-material';
 import { useDropzone } from 'react-dropzone';
@@ -13,6 +13,9 @@ const AdministrationComponent = () => {
     const [position, setPosition] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [group, setGroup] = useState('board');
+    const [since, setSince] = useState('');
+    const [note, setNote] = useState('');
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
     const [editingId, setEditingId] = useState(null);
@@ -74,6 +77,9 @@ const AdministrationComponent = () => {
         formData.append('position', position);
         formData.append('email', email);
         formData.append('phone', phone);
+        formData.append('group', group);
+        formData.append('since', since);
+        formData.append('note', note);
         if (file) {
             formData.append('file', file);
         }
@@ -101,10 +107,13 @@ const AdministrationComponent = () => {
 
     const handleEdit = (admin) => {
         setEditingId(admin.id);
-        setFio(admin.fio);
-        setPosition(admin.position);
-        setEmail(admin.email);
-        setPhone(admin.phone);
+        setFio(admin.fio || '');
+        setPosition(admin.position || '');
+        setEmail(admin.email || '');
+        setPhone(admin.phone || '');
+        setGroup(admin.group || 'board');
+        setSince(admin.since || '');
+        setNote(admin.note || '');
         setFile(null);
         if (admin.path) {
             setPreview(`http://localhost:8000/${admin.path}`);
@@ -137,6 +146,9 @@ const AdministrationComponent = () => {
         setPosition('');
         setEmail('');
         setPhone('');
+        setGroup('board');
+        setSince('');
+        setNote('');
         setFile(null);
         setPreview(null);
     };
@@ -162,6 +174,20 @@ const AdministrationComponent = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField fullWidth label="Телефон" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <TextField fullWidth select label="Группа" value={group} onChange={(e) => setGroup(e.target.value)}>
+                                        <MenuItem value="chairman">Председатель Совета</MenuItem>
+                                        <MenuItem value="board">Член Совета директоров</MenuItem>
+                                        <MenuItem value="executive">Исполнительное руководство</MenuItem>
+                                        <MenuItem value="official">Должностное лицо</MenuItem>
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <TextField fullWidth label="В должности с" placeholder="напр. 29.07.2024" value={since} onChange={(e) => setSince(e.target.value)} />
+                                </Grid>
+                                <Grid item xs={12} sm={4}>
+                                    <TextField fullWidth label="Примечание" placeholder="напр. Род. 22.11.1958" value={note} onChange={(e) => setNote(e.target.value)} />
                                 </Grid>
                             </Grid>
                         </Grid>

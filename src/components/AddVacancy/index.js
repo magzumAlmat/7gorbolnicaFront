@@ -10,6 +10,9 @@ const AddVacancyComponent = () => {
     const [vacancies, setVacancies] = useState([]);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const [address, setAddress] = useState('');
+    const [department, setDepartment] = useState('');
+    const [date, setDate] = useState('');
     const [editingId, setEditingId] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -54,7 +57,7 @@ const AddVacancyComponent = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ title, description })
+                body: JSON.stringify({ title, description, address, department, date })
             });
 
             if (response.ok) {
@@ -71,8 +74,11 @@ const AddVacancyComponent = () => {
 
     const handleEdit = (vacancy) => {
         setEditingId(vacancy.id);
-        setTitle(vacancy.title);
-        setDescription(vacancy.description);
+        setTitle(vacancy.title || '');
+        setDescription(vacancy.description || '');
+        setAddress(vacancy.address || '');
+        setDepartment(vacancy.department || '');
+        setDate(vacancy.date || '');
     };
 
     const handleDelete = async (id) => {
@@ -97,6 +103,9 @@ const AddVacancyComponent = () => {
         setEditingId(null);
         setTitle('');
         setDescription('');
+        setAddress('');
+        setDepartment('');
+        setDate('');
     };
 
     return (
@@ -124,6 +133,31 @@ const AddVacancyComponent = () => {
                                 onChange={(e) => setDescription(e.target.value)}
                                 multiline
                                 rows={4}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                fullWidth
+                                label="Подразделение"
+                                value={department}
+                                onChange={(e) => setDepartment(e.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                fullWidth
+                                label="Адрес"
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                fullWidth
+                                label="Дата публикации"
+                                placeholder="напр. 3 декабря 2025"
+                                value={date}
+                                onChange={(e) => setDate(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -175,7 +209,7 @@ const AddVacancyComponent = () => {
                             >
                                 <ListItemText
                                     primary={vacancy.title}
-                                    secondary={vacancy.description}
+                                    secondary={[vacancy.department, vacancy.address, vacancy.date].filter(Boolean).join(' · ') || vacancy.description}
                                 />
                             </ListItem>
                         ))}
