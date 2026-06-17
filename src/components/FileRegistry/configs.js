@@ -1,6 +1,7 @@
 // Конфигурация файловых реестров для единого компонента FileRegistry.
-// Имена полей (name/Name/title/licenseName/reportName, year/expiryDate/issueDate)
-// взяты из существующих бэкенд-моделей и совпадают с тем, что шлют формы.
+// Имена полей (name/Name/title/licenseName/reportName, year/expiryDate/issueDate,
+// urlOfFile) взяты из бэкенд-моделей. fileRequired:true — у моделей, где path
+// обязателен (создание без файла даёт 500), поэтому файл требуем в UI.
 
 export const REGISTRIES = {
   prices: {
@@ -17,7 +18,7 @@ export const REGISTRIES = {
     file: false,
     fields: [
       { key: 'title', label: 'Заголовок', required: true },
-      { key: 'urloffile', label: 'URL файла' },
+      { key: 'urlOfFile', label: 'URL файла', required: true },
     ],
   },
   licenses: {
@@ -39,32 +40,37 @@ export const REGISTRIES = {
   'corporate-documents': {
     endpoint: '/api/corporate-documents',
     entity: { one: 'документ', list: 'Корпоративные документы' },
+    fileRequired: true,
     fields: [{ key: 'Name', label: 'Название документа', required: true }],
   },
   'anti-corruption': {
     endpoint: '/api/anti-corruption',
     entity: { one: 'документ', list: 'Документы по противодействию коррупции' },
+    fileRequired: true,
     fields: [{ key: 'title', label: 'Название документа', required: true }],
   },
   'pp-plans': {
     endpoint: '/api/public-procurement-plans',
     entity: { one: 'план закупок', list: 'Планы госзакупок' },
+    fileRequired: true,
     fields: [{ key: 'Name', label: 'Название плана', required: true }],
   },
   'pp-announcements': {
     endpoint: '/api/public-procurement-announcements',
     entity: { one: 'объявление', list: 'Объявления о госзакупках' },
+    fileRequired: true,
     fields: [
       { key: 'Name', label: 'Название объявления', required: true },
-      { key: 'year', label: 'Год' },
+      { key: 'year', label: 'Год', required: true },
     ],
   },
   'pp-protocols': {
     endpoint: '/api/public-procurement-protocols',
     entity: { one: 'протокол', list: 'Протоколы госзакупок' },
+    fileRequired: true,
     fields: [
       { key: 'Name', label: 'Название протокола', required: true },
-      { key: 'year', label: 'Год' },
+      { key: 'year', label: 'Год', required: true },
     ],
   },
   'financial-reports': {
@@ -83,9 +89,10 @@ export const REGISTRIES = {
   'public-services': {
     endpoint: '/api/report-on-public-services-rendered',
     entity: { one: 'отчёт', list: 'Отчёты о госуслугах' },
+    fileRequired: true,
     fields: [
       { key: 'reportName', label: 'Название отчёта', required: true },
-      { key: 'year', label: 'Год' },
+      { key: 'year', label: 'Год', required: true },
     ],
   },
 };

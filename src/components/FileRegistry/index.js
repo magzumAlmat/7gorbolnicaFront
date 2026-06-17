@@ -17,7 +17,7 @@ const API = 'http://localhost:8000';
  *   fields     — [{ key, label, required }] (первое поле — основное название)
  *   file       — показывать ли загрузку файла (по умолчанию true)
  */
-const FileRegistry = ({ endpoint, entity = {}, fields = [], file = true }) => {
+const FileRegistry = ({ endpoint, entity = {}, fields = [], file = true, fileRequired = false }) => {
     const [items, setItems] = useState([]);
     const [editingId, setEditingId] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -63,6 +63,12 @@ const FileRegistry = ({ endpoint, entity = {}, fields = [], file = true }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // Файл обязателен у моделей с NOT NULL path; на создании требуем его,
+        // чтобы не получить 500. На редактировании прежний файл сохраняется.
+        if (fileRequired && !editingId && !fileObj) {
+            setError('Прикрепите файл — он обязателен для этого раздела.');
+            return;
+        }
         const url = editingId ? `${API}${endpoint}/${editingId}` : `${API}${endpoint}`;
         const method = editingId ? 'PUT' : 'POST';
         const fd = new FormData();
