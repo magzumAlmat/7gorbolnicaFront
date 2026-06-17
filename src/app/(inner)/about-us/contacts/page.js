@@ -1,4 +1,5 @@
 'use client';
+import { useState, useEffect } from 'react';
 import { Typography, Box, Grid, Divider } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -13,58 +14,33 @@ const GRAY_BG = '#F8FAFC';
 const GRAY_TEXT = '#64748B';
 const BORDER = '#E2E8F0';
 
-const offices = [
-  {
-    city: 'Офис Алматы №1',
-    address: '3 микрорайон 44А, г. Алматы',
-    phone: '8 (727) 226 94 10',
-    email: 'info@kazniisa.kz',
-    hours: 'Пн-Пт 9:00-18:30, обед 13:00-14:30',
-    contact: 'Қапезова Тоғжан Болатқанқызы',
-    contactRole: 'Пресс-секретарь',
-    contactPhone: '8 (727) 226 94 10, 11',
-    contactEmail: 't.kapezova@kazniisa.kz',
-  },
-  {
-    city: 'Офис Алматы №2',
-    address: 'Ул. Сатпаева 88Г, г. Алматы',
-    phone: '8 (727) 338 30 22',
-    email: 'info@kazniisa.kz',
-    hours: 'Пн-Пт 9:00-18:30, обед 13:00-14:30',
-    contact: 'Қапезова Тоғжан Болатқанқызы',
-    contactRole: 'Пресс-секретарь',
-  },
-  {
-    city: 'Южно-Казахстанский филиал (Тараз)',
-    address: 'ул. Сулейманова, 19 Б, г. Тараз, 080000',
-    phone: '+7 (7262) 43-63-99',
-    email: 'yko@kazniisa.kz',
-    hours: 'Пн-Пт 9:00-18:30, обед 13:00-14:30',
-    contact: 'Пак Наталия Александровна',
-    contactRole: 'Ст. инженер',
-    contactPhone: '+7 777 745 4709',
-  },
-  {
-    city: 'Восточно-Казахстанский филиал (Усть-Каменогорск)',
-    address: 'ул. М. Горького, 21, оф. 203, г. Усть-Каменогорск, 070004',
-    phone: '8 (7232) 26-16-90',
-    email: 'vko@kazniisa.kz',
-    hours: 'Пн-Пт 9:00-18:30, обед 13:00-14:30',
-    contact: 'Амангелдинова Анель',
-    contactPhone: '+7 777 633 9420',
-  },
-  {
-    city: 'Филиал в Астане',
-    address: 'р-н Сарыарқа, ул. Бейбітшілік 14, БЦ «MARDEN», оф. 1406, г. Астана, 010000',
-    phone: '8 (7172) 57-53-03',
-    email: 'crn@kazniisa.kz',
-    hours: 'Пн-Пт 9:00-18:30, обед 13:00-14:30',
-    contact: 'Бикеева Айжан',
-    contactRole: 'Главный специалист',
-  },
-];
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 export default function ContactsPage() {
+  const [offices, setOffices] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/kazniisa/contacts`)
+      .then((r) => r.json())
+      .then((d) => setOffices(
+        (Array.isArray(d) ? d : [])
+          .slice()
+          .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
+          .map((o) => ({
+            city: o.officeName?.ru || '',
+            address: o.address?.ru || '',
+            phone: o.phone,
+            email: o.email,
+            hours: o.workHours?.ru || '',
+            contact: o.contactName,
+            contactRole: o.contactRole,
+            contactPhone: o.contactPhone,
+            contactEmail: o.contactEmail,
+          }))
+      ))
+      .catch(() => {});
+  }, []);
+
   return (
     <Box>
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>

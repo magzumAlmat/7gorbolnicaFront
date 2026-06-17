@@ -10,6 +10,7 @@ import NewsManager from '../../components/NewsManager';
 // Особые формы (текст / люди)
 import AddVacancyComponent from '../../components/AddVacancy';
 import AdministrationComponent from '../../components/AdministrationComponent/AdministrationComponent';
+import ContactsManager from '../../components/ContactsManager';
 // Единый компонент для файловых реестров + конфиги ресурсов
 import FileRegistry from '../../components/FileRegistry';
 import { REGISTRIES } from '../../components/FileRegistry/configs';
@@ -30,6 +31,7 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 
 const drawerWidth = 280;
 
@@ -58,6 +60,7 @@ const GROUPS = [
     title: 'Tier 2 · Документы и реестры',
     items: [
       { key: 'administration', label: 'Руководство', icon: <GroupsIcon />, Component: AdministrationComponent },
+      { key: 'contacts', label: 'Контакты и филиалы', icon: <ContactPhoneIcon />, Component: ContactsManager },
       { key: 'licenses', label: 'Лицензии', icon: <VerifiedUserIcon />, Component: registry('licenses') },
       { key: 'certificates', label: 'Сертификат об аккредитации', icon: <GppGoodIcon />, Component: registry('certificates') },
       { key: 'corporate-documents', label: 'Корпоративные документы', icon: <DescriptionIcon />, Component: registry('corporate-documents') },

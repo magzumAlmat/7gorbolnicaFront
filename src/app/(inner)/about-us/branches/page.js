@@ -1,4 +1,5 @@
 'use client';
+import { useState, useEffect } from 'react';
 import { Typography, Box, Grid, Divider } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -13,64 +14,48 @@ const GRAY_BG = '#F8FAFC';
 const GRAY_TEXT = '#64748B';
 const BORDER = '#E2E8F0';
 
-const branches = [
-  {
-    name: 'Головной офис — Алматы №1',
-    address: '3 микрорайон 44А, г. Алматы',
-    zip: '',
-    phone: '8 (727) 226 94 10',
-    email: 'info@kazniisa.kz',
-    hours: 'Пн-Пт 9:00-18:30, обед 13:00-14:30',
-    director: null,
-    desc: 'Головной офис АО «КазНИИСА» — административный центр, научные лаборатории, Центр науки и цифровизации.',
-    main: true,
-  },
-  {
-    name: 'Офис Алматы №2',
-    address: 'Ул. Сатпаева 88Г, г. Алматы',
-    zip: '',
-    phone: '8 (727) 338 30 22',
-    email: 'info@kazniisa.kz',
-    hours: 'Пн-Пт 9:00-18:30, обед 13:00-14:30',
-    director: null,
-    desc: 'Центр сейсмостойкости, Центр типового проектирования, Корпоративный университет.',
-  },
-  {
-    name: 'Южно-Казахстанский филиал (Тараз)',
-    address: 'ул. Сулейманова, 19 Б, г. Тараз',
-    zip: '080000',
-    phone: '+7 (7262) 43-63-99',
-    email: 'yko@kazniisa.kz',
-    hours: 'Пн-Пт 9:00-18:30, обед 13:00-14:30',
-    director: 'Байтемиров Мухан Назарович',
-    directorRole: 'Директор филиала',
-    desc: 'Обследование зданий, проектные работы и экспертиза в Жамбылской, Туркестанской и Кызылординской областях.',
-  },
-  {
-    name: 'Восточно-Казахстанский филиал (Усть-Каменогорск)',
-    address: 'ул. М. Горького, 21, оф. 203, г. Усть-Каменогорск',
-    zip: '070004',
-    phone: '8 (7232) 26-16-90',
-    email: 'vko@kazniisa.kz',
-    hours: 'Пн-Пт 9:00-18:30, обед 13:00-14:30',
-    director: 'Бегимханова Асфира Акзамовна',
-    directorRole: 'Директор филиала',
-    desc: 'Обследование зданий, испытания стройматериалов в Восточно-Казахстанской и Абайской областях.',
-  },
-  {
-    name: 'Филиал в Астане',
-    address: 'ул. Бейбитшилик, 14, БЦ «MARDEN», оф. 1406, г. Астана',
-    zip: '010000',
-    phone: '+7 (7172) 57-53-03',
-    email: 'crn@kazniisa.kz',
-    hours: 'Пн-Пт 9:00-18:30, обед 13:00-14:30',
-    director: 'Хасен Арман Ақылбекұлы',
-    directorRole: 'Руководитель филиала',
-    desc: 'Центр нормирования в строительстве, мониторинг цен на стройматериалы, разработка сметных нормативов.',
-  },
-];
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+// Описания филиалов (чем занимается офис) меняются крайне редко — оставляем
+// статикой; волатильные данные (адрес/телефон/руководитель) берём из БД.
+function descFor(name = '') {
+  if (name.includes('Головной') || name.includes('Алматы №1')) return 'Головной офис АО «КазНИИСА» — административный центр, научные лаборатории, Центр науки и цифровизации.';
+  if (name.includes('Алматы №2')) return 'Центр сейсмостойкости, Центр типового проектирования, Корпоративный университет.';
+  if (name.includes('Тараз')) return 'Обследование зданий, проектные работы и экспертиза в Жамбылской, Туркестанской и Кызылординской областях.';
+  if (name.includes('Усть-Каменогорск')) return 'Обследование зданий, испытания стройматериалов в Восточно-Казахстанской и Абайской областях.';
+  if (name.includes('Астан')) return 'Центр нормирования в строительстве, мониторинг цен на стройматериалы, разработка сметных нормативов.';
+  return '';
+}
 
 export default function BranchesPage() {
+  const [branches, setBranches] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}/api/kazniisa/contacts`)
+      .then((r) => r.json())
+      .then((d) => setBranches(
+        (Array.isArray(d) ? d : [])
+          .slice()
+          .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0))
+          .map((o, i) => {
+            const name = o.officeName?.ru || '';
+            return {
+              name,
+              address: o.address?.ru || '',
+              zip: '',
+              phone: o.phone,
+              email: o.email,
+              hours: o.workHours?.ru || '',
+              director: o.director,
+              directorRole: o.directorRole,
+              desc: descFor(name),
+              main: name.includes('Головной') || i === 0,
+            };
+          })
+      ))
+      .catch(() => {});
+  }, []);
+
   return (
     <Box>
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
