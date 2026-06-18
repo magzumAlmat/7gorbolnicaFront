@@ -48,7 +48,7 @@ export default function AntiCorruptionPage() {
           mb: 1,
         }}
       >
-        Противодействие коррупции
+        Комплаенс и противодействие коррупции
       </Typography>
       <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
@@ -89,8 +89,8 @@ export default function AntiCorruptionPage() {
               Телефон горячей линии
             </TableCell>
             <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontWeight: 700 }}>
-              <a href="tel:87272269410" style={{ color: NAVY, textDecoration: 'none' }}>
-                8 (727) 226 94 10
+              <a href="tel:+77272269411" style={{ color: NAVY, textDecoration: 'none' }}>
+                8 (727) 226 94 11 (доб. 188)
               </a>
             </TableCell>
           </TableRow>
@@ -114,7 +114,7 @@ export default function AntiCorruptionPage() {
       </Table>
 
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
-        Комплаенс-офицер / Внутренний аудитор
+        Служба антикоррупционного комплаенса
       </Typography>
       <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
@@ -122,18 +122,12 @@ export default function AntiCorruptionPage() {
         <TableBody>
           <TableRow>
             <TableCell sx={{ width: 180, color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
-              ФИО
+              Электронная почта
             </TableCell>
             <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontWeight: 600 }}>
-              Ермекбаев Берик Серикович
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
-              Должность
-            </TableCell>
-            <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
-              Внутренний аудитор
+              <a href="mailto:anticor_comp@kazniisa.kz" style={{ color: NAVY, textDecoration: 'none' }}>
+                anticor_comp@kazniisa.kz
+              </a>
             </TableCell>
           </TableRow>
           <TableRow>
@@ -141,12 +135,8 @@ export default function AntiCorruptionPage() {
               Телефон
             </TableCell>
             <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
-              <a href="tel:87272269410" style={{ color: NAVY, textDecoration: 'none', fontWeight: 600 }}>
-                226-94-10
-              </a>
-              {' / '}
-              <a href="tel:+77787054365" style={{ color: NAVY, textDecoration: 'none', fontWeight: 600 }}>
-                +7 778 705 43 65
+              <a href="tel:+77272269411" style={{ color: NAVY, textDecoration: 'none', fontWeight: 600 }}>
+                +7 (727) 226 94 11 (доб. 188)
               </a>
             </TableCell>
           </TableRow>

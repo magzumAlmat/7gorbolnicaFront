@@ -3,6 +3,7 @@ import { Typography, Box, Paper, List, ListItem, ListItemIcon, ListItemText } fr
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import DownloadIcon from '@mui/icons-material/Download';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import PublicDownloadList from '../../../../components/PublicDownloadList';
 
 const NAVY = '#0F172A';
 const BLUE = '#0369A1';
@@ -58,51 +59,8 @@ export default function RisksPage() {
         </Typography>
       </Box>
 
-      {/* Document download */}
-      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
-        Документ
-      </Typography>
-      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
-
-      <Paper
-        sx={{
-          p: 3,
-          borderRadius: '6px',
-          border: '1px solid ' + BORDER,
-          borderLeft: '4px solid ' + BLUE,
-          mb: 4,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 2,
-          transition: 'box-shadow 0.2s ease, transform 0.2s ease',
-          '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
-        }}
-      >
-        <AssignmentIcon sx={{ color: BLUE, fontSize: 40 }} />
-        <Box sx={{ flex: 1 }}>
-          <Typography sx={{ fontWeight: 700, color: NAVY, mb: 0.5 }}>
-            Перечень коррупционных рисков, выявленных по результатам анализа коррупционных рисков
-          </Typography>
-          <Typography sx={{ fontSize: '0.9rem', color: '#64748B' }}>
-            АО «КазНИИСА» — актуальная редакция
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 1,
-            color: BLUE,
-            fontWeight: 600,
-            fontSize: '0.9rem',
-            cursor: 'pointer',
-            '&:hover': { opacity: 0.8 },
-          }}
-        >
-          <DownloadIcon />
-          Скачать
-        </Box>
-      </Paper>
+      {/* Реальные документы реестра рисков из админки (если загружены) */}
+      <PublicDownloadList endpoint="/api/anti-corruption/public" heading="Документ" />
 
       {/* Risk categories */}
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>

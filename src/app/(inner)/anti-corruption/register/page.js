@@ -47,51 +47,6 @@ export default function RegisterPage() {
       </Box>
 
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
-        Документ
-      </Typography>
-      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
-
-      <Paper
-        sx={{
-          p: 3,
-          borderRadius: '6px',
-          border: '1px solid ' + BORDER,
-          borderLeft: '4px solid ' + BLUE,
-          mb: 4,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 2,
-          transition: 'box-shadow 0.2s ease, transform 0.2s ease',
-          '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
-        }}
-      >
-        <AssignmentIcon sx={{ color: BLUE, fontSize: 40 }} />
-        <Box sx={{ flex: 1 }}>
-          <Typography sx={{ fontWeight: 700, color: NAVY, mb: 0.5 }}>
-            Реестр должностей, подверженных коррупционным рискам
-          </Typography>
-          <Typography sx={{ fontSize: '0.9rem', color: '#64748B' }}>
-            АО «КазНИИСА» — актуальная редакция
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 1,
-            color: BLUE,
-            fontWeight: 600,
-            fontSize: '0.9rem',
-            cursor: 'pointer',
-            '&:hover': { opacity: 0.8 },
-          }}
-        >
-          <DownloadIcon />
-          Скачать
-        </Box>
-      </Paper>
-
-      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         О реестре
       </Typography>
       <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
