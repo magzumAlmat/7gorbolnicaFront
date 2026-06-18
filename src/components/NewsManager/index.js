@@ -25,12 +25,14 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const NewsEditorJS = dynamic(() => import('../NewsEditorJS'), { ssr: false });
 
+// Категории выровнены под реальные данные БД и архивы оригинала kazniisa.kz:
+// «События»/«Выступления» — рубрики из меню (/archives/category/*),
+// «BIM»/«Поздравления» — реально присутствуют в новостях.
 const CATEGORIES = [
   { value: 'События', label: 'События' },
   { value: 'Выступления', label: 'Выступления' },
-  { value: 'Наука', label: 'Наука' },
-  { value: 'Объявления', label: 'Объявления' },
-  { value: 'Пресс-релизы', label: 'Пресс-релизы' },
+  { value: 'BIM', label: 'BIM' },
+  { value: 'Поздравления', label: 'Поздравления' },
 ];
 
 const generateSlug = (text) => {

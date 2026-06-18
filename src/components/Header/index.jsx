@@ -42,6 +42,11 @@ const menuData = [
       { title: "Руководство", path: "/about-us/governing-bodies" },
       { title: "Контакты", path: "/about-us/contacts" },
       { title: "Филиалы", path: "/about-us/branches" },
+      { title: "Новости", path: "/about-us/news", submenu: [
+        { title: "Все новости", path: "/about-us/news" },
+        { title: "События", path: "/archives/category/events" },
+        { title: "Выступления", path: "/archives/category/speeches" },
+      ]},
       { title: "Корпоративные документы", path: "/about-us/corporate-documents" },
       { title: "История КазНИИСА", path: "/about-us/history-kazniisa" },
       { title: "Вакансии", path: "/about-us/vacancies" },
