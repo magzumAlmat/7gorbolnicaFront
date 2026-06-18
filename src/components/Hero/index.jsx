@@ -1,68 +1,69 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import {
-  Box, Container, Typography, Button, Stack, Grid, Card, CardContent, CardMedia,
-  IconButton, Paper, useTheme, alpha, Divider
+  Box, Container, Typography, Button, Stack, Grid, Paper, Divider
 } from '@mui/material';
 import {
-  ChevronLeft, ChevronRight, ArrowForward,
-  LocationOn, Phone, Email, AccessTime,
+  ChevronRight, ArrowForward,
   Description, LaptopMac, Business, Architecture, School, Apps,
   KeyboardArrowDown, Work
 } from '@mui/icons-material';
 import { Select, MenuItem, TextField as MuiTextField } from '@mui/material';
-import { getExcerpt } from '../../lib/newsContent';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { styled } from '@mui/material/styles';
 import NewsSection from '../NewsSection';
 const KazakhstanMap = dynamic(() => import('../Map/LeafletMap'), { ssr: false });
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
+// Точные токены оригинала kazniisa.kz: navy rgb(0,46,91), yellow rgb(253,228,40),
+// green rgb(16,184,87), шрифт Montserrat (уже в теме). Фон героя — оригинальный
+// ассет с флагом-солнцем и силуэтом города.
+const NAVY = '#002e5b';
+const YELLOW = '#FDE428';
+const HERO_BG = '/images/kazniisa/hero-bg.jpg';
+
 const centers = [
-  { 
-    title: "Центр нормирования в строительстве", 
-    desc: "Разработка нормативных технических документов, сборников по сметному ценообразованию в строительстве, энергетике и жилищно-коммунальном...", 
+  {
+    title: "Центр нормирования в строительстве",
+    desc: "Разработка нормативных технических документов, сборников по сметному ценообразованию в строительстве, энергетике и жилищно-коммунальном...",
     path: "/centres/center-for-regulation-in-construction",
     icon: "document"
   },
-  { 
-    title: "Центр науки и цифровизации строительства", 
-    desc: "Развитие нормативно-технической базы в области внедрения технологии информационного моделирования в промышленное и гражданское строительс...", 
+  {
+    title: "Центр науки и цифровизации строительства",
+    desc: "Развитие нормативно-технической базы в области внедрения технологии информационного моделирования в промышленное и гражданское строительс...",
     path: "/centres/center-for-science-and-digitalization-of-construction",
     icon: "laptop"
   },
-  { 
-    title: "Центр сейсмостойкости, обследования зданий и сооружений", 
-    desc: "Техническое обследование зданий и сооружений, проведение испытаний и подтверждение их сейсмической безопасности, координация работ в обла...", 
+  {
+    title: "Центр сейсмостойкости, обследования зданий и сооружений",
+    desc: "Техническое обследование зданий и сооружений, проведение испытаний и подтверждение их сейсмической безопасности, координация работ в обла...",
     path: "/centres/center-for-seismic-resistance-inspection-of-buildings-and-structures",
     icon: "building"
   },
-  { 
-    title: "Центр типового и индивидуального проектирования", 
-    desc: "Разработка типовых проектов жилых и общественных зданий, предназначенных для многократной реализации их в последующем строительстве, разр...", 
+  {
+    title: "Центр типового и индивидуального проектирования",
+    desc: "Разработка типовых проектов жилых и общественных зданий, предназначенных для многократной реализации их в последующем строительстве, разр...",
     path: "/centres/center-for-standard-and-individual-design",
     icon: "design"
   },
-  { 
-    title: "Корпоративный университет", 
-    desc: "Повышение квалификации работников, организаций и проведение аттестации ИТР, специализирующихся в области проектных, проектно-изыскательск...", 
+  {
+    title: "Корпоративный университет",
+    desc: "Повышение квалификации работников, организаций и проведение аттестации ИТР, специализирующихся в области проектных, проектно-изыскательск...",
     path: "/centres/corporate-university",
     icon: "education"
   },
-  { 
-    title: "Все центры", 
-    desc: "Перейти на страницу Все центры", 
+  {
+    title: "Все центры",
+    desc: "Перейти на страницу Все центры",
     path: "/centres",
     icon: "all"
   },
 ];
 
 export default function Hero() {
-  const theme = useTheme();
-  
   const [mapView, setMapView] = useState({ center: [48.0, 67.0], zoom: 5 });
 
   const handleOfficeClick = (coords) => {
@@ -70,9 +71,8 @@ export default function Hero() {
     window.scrollTo({ top: document.getElementById('map-section')?.offsetTop - 100, behavior: 'smooth' });
   };
 
-  const [slide, setSlide] = useState(0);
+  // Новости для блока «Нужна консультация?» внизу (NewsSection тянет свои отдельно).
   const [newsSlides, setNewsSlides] = useState([]);
-
   useEffect(() => {
     fetch(`${API_URL}/api/kazniisa/news`)
       .then(r => r.json())
@@ -83,313 +83,136 @@ export default function Hero() {
           date: item.publishedAt
             ? new Date(item.publishedAt).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })
             : '',
-          image: item.image || '/images/kazniisa/centres-banner.webp',
           link: `/about-us/news/${item.slug}`,
-          snippet: getExcerpt(item.content?.ru, 150),
         }));
         setNewsSlides(slides);
       })
       .catch(() => {});
   }, []);
 
-  useEffect(() => {
-    if (newsSlides.length === 0) return;
-    const timer = setInterval(() => setSlide(s => (s + 1) % newsSlides.length), 6000);
-    return () => clearInterval(timer);
-  }, [newsSlides.length]);
-
-  const nextSlide = () => newsSlides.length > 0 && setSlide(s => (s + 1) % newsSlides.length);
-  const prevSlide = () => newsSlides.length > 0 && setSlide(s => (s - 1 + newsSlides.length) % newsSlides.length);
-
   return (
     <Box>
-      <Box sx={{
-        position: 'relative',
-        overflow: 'hidden',
-        pt: { xs: 6, md: 10 },
-        pb: { xs: 8, md: 14 },
-        mt: '-1px',
-      }}>
-        {/* Background Video */}
+      {/* === ГЕРО: фоновый видеоролик + центр. жёлтый CTA + синяя плашка === */}
+      <Box sx={{ position: 'relative', display: 'flex', flexDirection: 'column', mt: '-1px' }}>
+        {/* Верхняя часть с фоновым видеороликом (как на kazniisa.kz) */}
         <Box sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: 0,
-          pointerEvents: 'none',
-          '& iframe': {
-            width: '100%',
-            height: '100%',
-          }
+          position: 'relative',
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          minHeight: { xs: 340, md: 480 },
+          py: { xs: 6, md: 10 },
+          backgroundImage: `url("${HERO_BG}")`, // постер-кадр, пока грузится видео
+          backgroundSize: 'cover',
+          backgroundPosition: 'center top',
+          backgroundColor: '#002e5b',
         }}>
-          <iframe
-            src="https://www.youtube.com/embed/l86MTWdN19c?playlist=l86MTWdN19c&iv_load_policy=3&enablejsapi=1&disablekb=1&autoplay=1&controls=0&showinfo=0&rel=0&loop=1&mute=1&wmode=transparent&origin=https%3A%2F%2Fkazniisa.kz&widgetid=1&forigin=https%3A%2F%2Fkazniisa.kz%2F&aoriginsup=1&vf=6"
-            frameBorder="2"
-            allow="autoplay; encrypted-media"
-            style={{ 
-              width: '100%', 
-              height: '100%', 
-              transform: 'scale(1.5)', 
-              pointerEvents: 'none',
-              border: 'none'
-            }}
-          />
+          {/* Фоновое видео */}
+          <Box sx={{
+            position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+            '& iframe': { width: '100%', height: '100%' },
+          }}>
+            <iframe
+              src="https://www.youtube.com/embed/l86MTWdN19c?playlist=l86MTWdN19c&iv_load_policy=3&enablejsapi=1&disablekb=1&autoplay=1&controls=0&showinfo=0&rel=0&loop=1&mute=1&wmode=transparent&origin=https%3A%2F%2Fkazniisa.kz&widgetid=1&forigin=https%3A%2F%2Fkazniisa.kz%2F&aoriginsup=1&vf=6"
+              title="KazNIISA hero video"
+              allow="autoplay; encrypted-media"
+              style={{ width: '100%', height: '100%', transform: 'scale(1.5)', pointerEvents: 'none', border: 'none' }}
+            />
+          </Box>
+          {/* Затемняющий navy-оверлей */}
+          <Box sx={{
+            position: 'absolute', inset: 0, zIndex: 1,
+            background: 'linear-gradient(135deg, rgba(0,46,91,0.85) 0%, rgba(4,57,89,0.6) 50%, rgba(0,46,91,0.85) 100%)',
+          }} />
+          {/* Контент поверх видео */}
+          <Box sx={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Box sx={{ width: 60, height: 4, bgcolor: YELLOW, mb: { xs: 3, md: 4 } }} />
+            <Button
+              component={Link}
+              href="/about-us/contacts"
+              endIcon={<ArrowForward sx={{ color: NAVY }} />}
+              sx={{
+                bgcolor: YELLOW,
+                color: NAVY,
+                px: { xs: 3, md: 4 },
+                py: 1.4,
+                fontSize: { xs: '13px', md: '15px' },
+                fontWeight: 700,
+                borderRadius: 0,
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+                boxShadow: '0 6px 20px rgba(0,0,0,0.25)',
+                '&:hover': { bgcolor: '#f5d800', boxShadow: '0 8px 24px rgba(0,0,0,0.3)' },
+              }}
+            >
+              Получить консультацию
+            </Button>
+          </Box>
         </Box>
 
-        {/* Overlay */}
-        <Box sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'linear-gradient(135deg, rgba(0,46,91,0.9) 0%, rgba(4,57,89,0.7) 50%, rgba(0,46,91,0.9) 100%)',
-          zIndex: 1,
-        }} />
-
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
-          <Grid container spacing={4} alignItems="center">
-            {/* Левая часть: текст */}
-            <Grid item xs={12} md={5}>
-              <Box sx={{ color: 'white' }}>
-                <Typography variant="h3" sx={{
-                  fontWeight: 800, mb: 2,
-                  fontSize: { xs: '1.8rem', md: '2.4rem' },
-                  lineHeight: 1.2,
-                }}>
-                  АО «КазНИИСА»
-                </Typography>
-                <Typography variant="body1" sx={{
-                  opacity: 0.8, mb: 4,
-                  fontSize: { xs: '0.95rem', md: '1.05rem' },
-                  lineHeight: 1.7,
-                }}>
-                  АО «КазНИИСА» - государственный научно-исследовательский и проектный институт в области строительства
-                </Typography>
-                <Button
-                  component={Link}
-                  href="/about-us/contacts"
-                  variant="outlined"
-                  sx={{
-                    color: 'white',
-                    borderColor: '#2887B6',
-                    px: 4, py: 1.2,
-                    fontSize: '14px',
-                    fontWeight: 600,
-                    borderRadius: '25px',
-                    '&:hover': {
-                      bgcolor: '#2887B6',
-                      borderColor: '#2887B6',
-                    },
-                  }}
-                >
-                  Получить консультацию
-                </Button>
-              </Box>
-            </Grid>
-
-            {/* Правая часть: новостной слайдер */}
-            <Grid item xs={12} md={7}>
-              <Box sx={{ position: 'relative' }}>
-                {newsSlides.length === 0 && (
-                  <Box sx={{
-                    height: { xs: 250, md: 350 },
-                    bgcolor: 'rgba(255,255,255,0.1)',
-                    borderRadius: 2,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    border: '1px dashed rgba(255,255,255,0.3)'
-                  }}>
-                    <Typography sx={{ color: 'white' }}>Загрузка новостей...</Typography>
-                  </Box>
-                )}
-                {/* Карточка новости */}
-                {newsSlides.map((news, idx) => (
-                  <Box
-                    key={idx}
-                    sx={{
-                      display: idx === slide ? 'block' : 'none',
-                      borderRadius: 2,
-                      overflow: 'hidden',
-                      boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-                    }}
-                  >
-                    <Box sx={{
-                      position: 'relative',
-                      height: { xs: 250, md: 350 },
-                      backgroundImage: `url(${news.image})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                    }}>
-                      <Box sx={{
-                        position: 'absolute', bottom: 0, left: 0, right: 0,
-                        background: 'linear-gradient(transparent, rgba(0,0,0,0.85))',
-                        p: { xs: 2, md: 3 },
-                      }}>
-                        <Typography
-                          component={Link}
-                          href={news.link}
-                          sx={{
-                            color: 'white',
-                            fontWeight: 700,
-                            fontSize: { xs: '14px', md: '16px' },
-                            lineHeight: 1.4,
-                            textDecoration: 'none',
-                            display: 'block',
-                            mb: 1,
-                            '&:hover': { color: '#FDE428' },
-                          }}
-                        >
-                          {news.title}
-                        </Typography>
-                        <Typography sx={{ color: 'rgba(255,255,255,0.6)', fontSize: '12px' }}>
-                          {news.date}
-                        </Typography>
-                        <Button
-                          component={Link}
-                          href={news.link}
-                          size="small"
-                          sx={{
-                            color: '#FDE428',
-                            fontSize: '12px',
-                            fontWeight: 600,
-                            mt: 0.5,
-                            p: 0,
-                            '&:hover': { bgcolor: 'transparent', textDecoration: 'underline' },
-                          }}
-                        >
-                          Далее →
-                        </Button>
-                      </Box>
-                    </Box>
-                  </Box>
-                ))}
-
-                {/* Стрелки */}
-                <IconButton
-                  onClick={prevSlide}
-                  sx={{
-                    position: 'absolute', left: -20, top: '50%', transform: 'translateY(-50%)',
-                    bgcolor: 'rgba(255,255,255,0.2)', color: 'white',
-                    '&:hover': { bgcolor: 'rgba(255,255,255,0.4)' },
-                  }}
-                >
-                  <ChevronLeft />
-                </IconButton>
-                <IconButton
-                  onClick={nextSlide}
-                  sx={{
-                    position: 'absolute', right: -20, top: '50%', transform: 'translateY(-50%)',
-                    bgcolor: 'rgba(255,255,255,0.2)', color: 'white',
-                    '&:hover': { bgcolor: 'rgba(255,255,255,0.4)' },
-                  }}
-                >
-                  <ChevronRight />
-                </IconButton>
-
-                {/* Навигация по точкам */}
-                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 2 }}>
-                  {newsSlides.map((_, i) => (
-                    <Box
-                      key={i}
-                      onClick={() => setSlide(i)}
-                      sx={{
-                        width: i === slide ? 28 : 10, height: 10,
-                        borderRadius: 5,
-                        bgcolor: i === slide ? '#2887B6' : 'rgba(255,255,255,0.4)',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s',
-                      }}
-                    />
-                  ))}
-                </Box>
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
+        {/* Синяя плашка с описанием института (как бегущая строка оригинала) */}
+        <Box sx={{ width: '100%', bgcolor: NAVY, py: { xs: 2, md: 2.5 } }}>
+          <Container maxWidth="lg">
+            <Typography sx={{
+              color: 'white',
+              textAlign: 'center',
+              fontSize: { xs: '13px', md: '18px' },
+              fontWeight: 500,
+              letterSpacing: '0.3px',
+              lineHeight: 1.5,
+            }}>
+              АО «КазНИИСА» — государственный научно-исследовательский и проектный институт в области строительства
+            </Typography>
+          </Container>
+        </Box>
       </Box>
 
-      {/* === МИНИ-ЛЕНТА НОВОСТЕЙ === */}
-      <Container maxWidth="lg" sx={{ mt: { xs: -4, md: -6 }, position: 'relative', zIndex: 10, mb: 6 }}>
-        <Grid container spacing={2}>
-          {newsSlides.map((news, i) => (
-            <Grid item xs={6} md={3} key={i}>
-              <Paper
-                component={Link}
-                href={news.link}
-                elevation={0}
-                sx={{
-                  p: 2, height: '100%',
-                  border: '1px solid #e8e8e8',
-                  borderRadius: 1,
-                  textDecoration: 'none',
-                  display: 'block',
-                  bgcolor: i === slide ? '#2887B6' : 'white',
-                  color: i === slide ? 'white' : '#333',
-                  transition: 'all 0.3s',
-                  '&:hover': { borderColor: '#2887B6', transform: 'translateY(-2px)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' },
-                }}
-              >
-                <Typography sx={{ fontWeight: 700, fontSize: '13px', lineHeight: 1.4, mb: 1,
-                  display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden',
-                }}>
-                  {news.title}
-                </Typography>
-                <Typography sx={{ fontSize: '11px', opacity: 0.6 }}>
-                  {news.date}
-                </Typography>
-              </Paper>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-
-      {/* === МОДУЛЬ НОВОСТИ (сразу после лендинга) === */}
+      {/* === МОДУЛЬ НОВОСТИ === */}
       <NewsSection />
 
       {/* === ЦЕНТРЫ АО «КАЗНИИСА» === */}
-      <Box sx={{ 
-        position: 'relative', 
-        bgcolor: '#002e5b', 
-        py: { xs: 8, md: 14 }, 
-        textAlign: 'center', 
+      <Box sx={{
+        position: 'relative',
+        bgcolor: NAVY,
+        py: { xs: 8, md: 14 },
+        textAlign: 'center',
         color: 'white',
-        backgroundImage: 'url("https://kazniisa.kz/wp-content/uploads/2019/12/banner_4.jpg")', 
+        backgroundImage: 'url("/images/kazniisa/site-bg.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}>
-        <Box sx={{ 
-          position: 'absolute', inset: 0, 
-          bgcolor: 'rgba(0, 46, 91, 0.9)', 
-          zIndex: 0 
+        <Box sx={{
+          position: 'absolute', inset: 0,
+          bgcolor: 'rgba(0, 46, 91, 0.9)',
+          zIndex: 0
         }} />
-        
+
         <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
           <Stack alignItems="center" spacing={3}>
-            <Box sx={{ 
-              bgcolor: '#FDE428', 
-              p: 2, 
-              borderRadius: '16px', 
+            <Box sx={{
+              bgcolor: YELLOW,
+              p: 2,
+              borderRadius: '16px',
               boxShadow: '0 8px 30px rgba(0,0,0,0.4)',
               display: 'flex', alignItems: 'center', justifyContent: 'center'
             }}>
-              <Work sx={{ color: '#002e5b', fontSize: 40 }} />
+              <Work sx={{ color: NAVY, fontSize: 40 }} />
             </Box>
             <Box>
-              <Typography variant="h2" sx={{ 
-                fontWeight: 800, 
+              <Typography variant="h2" sx={{
+                fontWeight: 800,
                 fontSize: { xs: '2.2rem', md: '3.8rem' },
                 lineHeight: 1.2,
                 mb: 1.5,
                 textShadow: '0 2px 10px rgba(0,0,0,0.5)'
               }}>
-                <Box component="span" sx={{ color: '#FDE428' }}>Центры</Box> АО «КазНИИСА»
+                <Box component="span" sx={{ color: YELLOW }}>Центры</Box> АО «КазНИИСА»
               </Typography>
-              <Typography sx={{ 
-                fontSize: { xs: '15px', md: '18px' }, 
+              <Typography sx={{
+                fontSize: { xs: '15px', md: '18px' },
                 opacity: 0.8,
                 maxWidth: 600,
                 mx: 'auto',
@@ -432,27 +255,27 @@ export default function Hero() {
                       transition: 'all 0.3s',
                       '&:hover': {
                         bgcolor: i === 5 ? '#f4f4f4' : '#fff',
-                        '& .center-icon': { bgcolor: '#002e5b', color: 'white' },
+                        '& .center-icon': { bgcolor: NAVY, color: 'white' },
                         '& .center-title': { color: '#2887B6' },
                       },
                     }}
                   >
                     <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
-                       <Box 
+                       <Box
                          className="center-icon"
-                         sx={{ 
-                           width: 50, height: 50, borderRadius: '50%', 
-                           bgcolor: '#002e5b', color: 'white',
+                         sx={{
+                           width: 50, height: 50, borderRadius: '50%',
+                           bgcolor: NAVY, color: 'white',
                            display: 'flex', alignItems: 'center', justifyContent: 'center',
                            flexShrink: 0, transition: 'all 0.3s'
                          }}>
                           <IconComp />
                        </Box>
                        <Box>
-                          <Typography className="center-title" sx={{ fontWeight: 700, fontSize: '16px', color: '#002e5b', mb: 1, lineHeight: 1.3, transition: 'all 0.3s' }}>
+                          <Typography className="center-title" sx={{ fontWeight: 700, fontSize: '16px', color: NAVY, mb: 1, lineHeight: 1.3, transition: 'all 0.3s' }}>
                             {center.title}
                           </Typography>
-                          <Divider sx={{ width: 40, height: 3, bgcolor: '#FDE428', border: 'none', mb: 2 }} />
+                          <Divider sx={{ width: 40, height: 3, bgcolor: YELLOW, border: 'none', mb: 2 }} />
                        </Box>
                     </Box>
                     <Typography sx={{ fontSize: '14px', color: '#666', lineHeight: 1.6, flexGrow: 1 }}>
@@ -500,7 +323,7 @@ export default function Hero() {
                     <MenuItem value="other">Другое</MenuItem>
                   </Select>
                 </Box>
-                
+
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <MuiTextField
@@ -536,7 +359,7 @@ export default function Hero() {
                   variant="contained"
                   endIcon={<ChevronRight />}
                   sx={{
-                    bgcolor: '#002e5b',
+                    bgcolor: NAVY,
                     color: 'white',
                     py: 2,
                     px: 4,
@@ -557,13 +380,13 @@ export default function Hero() {
       </Box>
 
       {/* === ФИЛИАЛЫ АО «КАЗНИИСА» === */}
-      <Box sx={{ bgcolor: '#002e5b', py: { xs: 6, md: 8 }, textAlign: 'center', color: 'white' }}>
+      <Box sx={{ bgcolor: NAVY, py: { xs: 6, md: 8 }, textAlign: 'center', color: 'white' }}>
         <Container maxWidth="md">
-          <Box sx={{ display: 'inline-flex', bgcolor: '#FDE428', p: 1, borderRadius: 1, mb: 3 }}>
-            <Business sx={{ color: '#002e5b', fontSize: 32 }} />
+          <Box sx={{ display: 'inline-flex', bgcolor: YELLOW, p: 1, borderRadius: 1, mb: 3 }}>
+            <Business sx={{ color: NAVY, fontSize: 32 }} />
           </Box>
           <Typography variant="h3" sx={{ fontWeight: 800, mb: 2, fontSize: { xs: '1.8rem', md: '2.8rem' } }}>
-            <Box component="span" sx={{ color: '#FDE428' }}>Филиалы</Box> АО «КазНИИСА»
+            <Box component="span" sx={{ color: YELLOW }}>Филиалы</Box> АО «КазНИИСА»
           </Typography>
           <Typography sx={{ opacity: 0.8, fontSize: '14px', maxWidth: 600, mx: 'auto', lineHeight: 1.6 }}>
             Головной офис АО «КазНИИСА» находится в Алматы,<br />
@@ -574,12 +397,12 @@ export default function Hero() {
 
       {/* === СЕКЦИЯ С КАРТОЙ И КОНТАКТАМИ === */}
       <Box sx={{ position: 'relative', bgcolor: '#f5f5f5' }}>
-        <Box sx={{ 
-          height: { xs: 400, md: 550 }, 
-          width: '100%', 
+        <Box sx={{
+          height: { xs: 400, md: 550 },
+          width: '100%',
           position: 'relative',
           overflow: 'hidden',
-          backgroundImage: 'url("https://kazniisa.kz/wp-content/uploads/2019/12/Screenshot_1.jpg")',
+          backgroundImage: 'url("/images/kazniisa/site-bg.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}>
@@ -599,12 +422,12 @@ export default function Hero() {
         </Box>
 
         {/* Темно-синий ползунок с офисами */}
-        <Box sx={{ bgcolor: '#002e5b', color: 'white', py: 4, position: 'relative' }}>
+        <Box sx={{ bgcolor: NAVY, color: 'white', py: 4, position: 'relative' }}>
           <Container maxWidth="lg">
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Grid container spacing={0}>
                 <Grid item xs={12} md={3.7}>
-                  <Box 
+                  <Box
                     onClick={() => handleOfficeClick([51.169392, 71.449074])}
                     sx={{ px: 2, cursor: 'pointer', transition: 'all 0.3s', '&:hover': { transform: 'translateY(-5px)', opacity: 0.9 } }}
                   >
@@ -622,7 +445,7 @@ export default function Hero() {
                 <Grid item sx={{ borderLeft: '1px solid rgba(255,255,255,0.2)', height: 100, mx: 1, display: { xs: 'none', md: 'block' } }} />
 
                 <Grid item xs={12} md={3.7}>
-                  <Box 
+                  <Box
                     onClick={() => handleOfficeClick([42.896088, 71.398430])}
                     sx={{ px: 2, cursor: 'pointer', transition: 'all 0.3s', '&:hover': { transform: 'translateY(-5px)', opacity: 0.9 } }}
                   >
@@ -640,7 +463,7 @@ export default function Hero() {
                 <Grid item sx={{ borderLeft: '1px solid rgba(255,255,255,0.2)', height: 100, mx: 1, display: { xs: 'none', md: 'block' } }} />
 
                 <Grid item xs={12} md={3.7}>
-                  <Box 
+                  <Box
                     onClick={() => handleOfficeClick([49.948175, 82.628540])}
                     sx={{ px: 2, cursor: 'pointer', transition: 'all 0.3s', '&:hover': { transform: 'translateY(-5px)', opacity: 0.9 } }}
                   >
@@ -656,7 +479,7 @@ export default function Hero() {
                 </Grid>
 
                 <Grid item xs={12} md={0.5} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end' }}>
-                   <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: '#FDE428', mb: 1.5 }} />
+                   <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: YELLOW, mb: 1.5 }} />
                    <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: '#2887B6' }} />
                 </Grid>
               </Grid>
@@ -670,7 +493,7 @@ export default function Hero() {
         <Container maxWidth="lg">
           <Grid container spacing={4} alignItems="center">
             <Grid item xs={12} md={6}>
-              <Typography variant="h5" sx={{ fontWeight: 700, color: '#002e5b', mb: 2 }}>
+              <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, mb: 2 }}>
                 Нужна консультация?
               </Typography>
               <Typography sx={{ color: '#666', mb: 3, lineHeight: 1.7 }}>
@@ -694,7 +517,7 @@ export default function Hero() {
             </Grid>
             <Grid item xs={12} md={6}>
               <Paper elevation={0} sx={{ p: 3, bgcolor: '#f8f8f8', borderRadius: 2 }}>
-                <Typography sx={{ fontWeight: 700, fontSize: '16px', color: '#002e5b', mb: 2 }}>
+                <Typography sx={{ fontWeight: 700, fontSize: '16px', color: NAVY, mb: 2 }}>
                   Новости
                 </Typography>
                 {newsSlides.slice(0, 2).map((news, i) => (

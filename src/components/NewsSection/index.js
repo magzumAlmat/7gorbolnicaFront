@@ -2,14 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import { Box, Container, Typography, Grid, Paper, Stack } from '@mui/material';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Link from 'next/link';
 import { getExcerpt } from '../../lib/newsContent';
 
+// Палитра оригинала kazniisa.kz: navy #002e5b, жёлтый акцент #FDE428.
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-const NAVY = '#0F172A';
-const BLUE = '#0369A1';
+const NAVY = '#002e5b';
+const BLUE = '#2887B6';
+const YELLOW = '#FDE428';
 const GRAY_TEXT = '#64748B';
 const BORDER = '#E2E8F0';
 
@@ -33,7 +35,7 @@ export default function NewsSection() {
     <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: '#ffffff' }}>
       <Container maxWidth="lg">
         <Box sx={{ textAlign: 'center', mb: 7 }}>
-          <Box sx={{ display: 'inline-block', width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mb: 2 }} />
+          <Box sx={{ display: 'inline-block', width: 48, height: 3, bgcolor: YELLOW, borderRadius: 1, mb: 2 }} />
           <Typography
             variant="h3"
             sx={{ fontWeight: 800, color: NAVY, mt: 1, fontSize: { xs: '1.8rem', md: '2.4rem' }, letterSpacing: '-0.03em' }}
@@ -80,8 +82,9 @@ export default function NewsSection() {
                   />
                 </Box>
                 <Box sx={{ p: 2.5, display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <Box sx={{ width: 36, height: 3, bgcolor: YELLOW, borderRadius: 1, mb: 1.5 }} />
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 1 }}>
-                    <CalendarTodayIcon sx={{ fontSize: 13, color: GRAY_TEXT }} />
+                    <AccessTimeIcon sx={{ fontSize: 14, color: YELLOW }} />
                     <Typography sx={{ fontSize: '0.75rem', color: GRAY_TEXT, fontWeight: 500 }}>
                       {formatDate(item.publishedAt)}
                     </Typography>
