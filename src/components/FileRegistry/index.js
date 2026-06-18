@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
     Container, Paper, Typography, Grid, TextField, Button, List, ListItem,
-    ListItemText, IconButton, Box, CircularProgress, Link
+    ListItemText, IconButton, Box, CircularProgress, Link, Alert
 } from '@mui/material';
 import { Edit, Delete, Add, CloudUpload } from '@mui/icons-material';
 import { useDropzone } from 'react-dropzone';
@@ -17,7 +17,7 @@ const API = 'http://localhost:8000';
  *   fields     — [{ key, label, required }] (первое поле — основное название)
  *   file       — показывать ли загрузку файла (по умолчанию true)
  */
-const FileRegistry = ({ endpoint, entity = {}, fields = [], file = true, fileRequired = false }) => {
+const FileRegistry = ({ endpoint, entity = {}, fields = [], file = true, fileRequired = false, publicPage = false }) => {
     const [items, setItems] = useState([]);
     const [editingId, setEditingId] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -117,6 +117,12 @@ const FileRegistry = ({ endpoint, entity = {}, fields = [], file = true, fileReq
                 <Typography variant="h4" component="h1" gutterBottom>
                     {editingId ? `Редактировать: ${entity.one || 'запись'}` : `Добавить: ${entity.one || 'запись'}`}
                 </Typography>
+                {!publicPage && (
+                    <Alert severity="warning" sx={{ mb: 3 }}>
+                        Загрузки сохраняются в базе, но публичная страница для этого раздела пока не подключена —
+                        добавленный контент НЕ отображается на сайте.
+                    </Alert>
+                )}
                 <Box component="form" onSubmit={handleSubmit} sx={{ mb: 4 }}>
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={file ? 8 : 12}>

@@ -2,6 +2,7 @@
 import { Typography, Box, Grid, Divider } from '@mui/material';
 import DescriptionIcon from '@mui/icons-material/Description';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import PublicDownloadList from '../../../../components/PublicDownloadList';
 
 const NAVY = '#0F172A';
 const BLUE = '#0369A1';
@@ -145,6 +146,8 @@ export default function CorporateDocumentsPage() {
           тел. +7 701 747 68 30, email: nsukhankulov@mail.ru
         </Typography>
       </Box>
+
+      <PublicDownloadList endpoint="/api/corporate-documents/public" heading="Документы для скачивания" />
     </Box>
   );
 }

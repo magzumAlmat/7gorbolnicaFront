@@ -2,6 +2,7 @@
 import { Typography, Box, Paper } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import PublicDownloadList from '../../../../components/PublicDownloadList';
 
 const NAVY = '#0F172A';
 const BLUE = '#0369A1';
@@ -110,6 +111,8 @@ export default function RegisterPage() {
         антикоррупционного комплаенса: <strong>anticor_comp@kazniisa.kz</strong>,
         тел. <strong>+7 (727) 226 94 11 доб. 188</strong>.
       </Typography>
+
+      <PublicDownloadList endpoint="/api/anti-corruption/public" heading="Документы реестра" />
     </Box>
   );
 }

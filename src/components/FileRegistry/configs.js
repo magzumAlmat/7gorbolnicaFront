@@ -41,12 +41,14 @@ export const REGISTRIES = {
     endpoint: '/api/corporate-documents',
     entity: { one: 'документ', list: 'Корпоративные документы' },
     fileRequired: true,
+    publicPage: true, // /about-us/corporate-documents показывает список
     fields: [{ key: 'Name', label: 'Название документа', required: true }],
   },
   'anti-corruption': {
     endpoint: '/api/anti-corruption',
     entity: { one: 'документ', list: 'Документы по противодействию коррупции' },
     fileRequired: true,
+    publicPage: true, // /anti-corruption/register показывает список
     fields: [{ key: 'title', label: 'Название документа', required: true }],
   },
   'pp-plans': {
