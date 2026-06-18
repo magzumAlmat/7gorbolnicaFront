@@ -10,14 +10,7 @@ const GRAY_BG = '#F8FAFC';
 const GRAY_TEXT = '#64748B';
 const BORDER = '#E2E8F0';
 
-const members = [
-  {
-    name: 'BI-GROUP',
-    type: 'Корпоративный член',
-    desc: 'Крупнейший строительный холдинг Казахстана. 29 лет на рынке строительства. Девелопер № 1 в Центральной Азии. Реализует жилые, коммерческие и инфраструктурные проекты с применением BIM-технологий.',
-    color: BLUE,
-  },
-];
+const members = [];
 
 export default function RegistryPage() {
   return (
@@ -33,38 +26,48 @@ export default function RegistryPage() {
         в развитие строительной отрасли страны.
       </Typography>
 
-      <Grid container spacing={3}>
-        {members.map((m) => (
-          <Grid item xs={12} key={m.name}>
-            <Paper sx={{
-              p: 3,
-              borderRadius: '6px',
-              border: '2px solid ' + m.color,
-              position: 'relative',
-              overflow: 'hidden',
-              transition: 'box-shadow 0.2s ease, transform 0.2s ease',
-              '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
-            }}>
-              <Box sx={{ position: 'absolute', top: 0, left: 0, width: 6, height: '100%', bgcolor: m.color }} />
-              <Box sx={{ pl: 2 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
-                  <BusinessIcon sx={{ color: m.color, fontSize: 32 }} />
-                  <Box>
-                    <Typography variant="h5" sx={{ fontWeight: 800, color: NAVY }}>{m.name}</Typography>
-                    <Chip label={m.type} size="small" sx={{ bgcolor: m.color, color: '#fff', fontWeight: 600, mt: 0.5 }} />
+      {members.length > 0 ? (
+        <Grid container spacing={3}>
+          {members.map((m) => (
+            <Grid item xs={12} key={m.name}>
+              <Paper sx={{
+                p: 3,
+                borderRadius: '6px',
+                border: '2px solid ' + m.color,
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'box-shadow 0.2s ease, transform 0.2s ease',
+                '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' },
+              }}>
+                <Box sx={{ position: 'absolute', top: 0, left: 0, width: 6, height: '100%', bgcolor: m.color }} />
+                <Box sx={{ pl: 2 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
+                    <BusinessIcon sx={{ color: m.color, fontSize: 32 }} />
+                    <Box>
+                      <Typography variant="h5" sx={{ fontWeight: 800, color: NAVY }}>{m.name}</Typography>
+                      <Chip label={m.type} size="small" sx={{ bgcolor: m.color, color: '#fff', fontWeight: 600, mt: 0.5 }} />
+                    </Box>
                   </Box>
+                  <Typography sx={{ color: '#334155', lineHeight: 1.7 }}>{m.desc}</Typography>
                 </Box>
-                <Typography sx={{ color: '#334155', lineHeight: 1.7 }}>{m.desc}</Typography>
-                <Box sx={{ display: 'flex', gap: 1, mt: 2, flexWrap: 'wrap' }}>
-                  <Chip icon={<StarIcon />} label="29 лет на рынке" size="small" sx={{ bgcolor: GRAY_BG }} />
-                  <Chip label="№1 в Центральной Азии" size="small" sx={{ bgcolor: GRAY_BG }} />
-                  <Chip label="BIM-пионер" size="small" sx={{ bgcolor: GRAY_BG }} />
-                </Box>
-              </Box>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+      ) : (
+        <Paper sx={{
+          p: 4,
+          borderRadius: '6px',
+          border: '1px dashed ' + BORDER,
+          bgcolor: GRAY_BG,
+          textAlign: 'center',
+        }}>
+          <Typography sx={{ color: GRAY_TEXT, lineHeight: 1.7 }}>
+            Реестр участников формируется. Информация о членах BuildingSMART Казахстан
+            будет опубликована по мере регистрации организаций.
+          </Typography>
+        </Paper>
+      )}
 
       <Paper sx={{
         p: 3,
