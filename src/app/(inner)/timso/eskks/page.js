@@ -125,6 +125,47 @@ export default function EskksPage() {
           </Box>
         ))}
       </Box>
+
+      <Box sx={{ my: 4 }} />
+
+      <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.15rem', mb: 2 }}>
+        Новости
+      </Typography>
+
+      <Box
+        sx={{
+          p: 2.5,
+          bgcolor: BLUE_LIGHT,
+          border: '1px solid ' + BORDER,
+          borderLeft: '4px solid ' + BLUE,
+          borderRadius: '0 6px 6px 0',
+          mb: 4,
+        }}
+      >
+        <Typography sx={{ fontSize: '0.8rem', color: GRAY_TEXT, mb: 0.75 }}>16 июня, 2026</Typography>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT }}>
+          С 1 августа 2026 года в Республике Казахстан начинается этап обязательного применения
+          BIM/ТИМСО для отдельных категорий объектов строительства в соответствии с Приказом №114.
+        </Typography>
+      </Box>
+
+      <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.15rem', mb: 2 }}>
+        Модератор ЕСККС
+      </Typography>
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 4 }}>
+        Модератор ЕСККС обеспечивает рассмотрение и согласование предложений по дополнению и
+        изменению классификаторов системы.
+      </Typography>
+
+      <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.15rem', mb: 2 }}>
+        Администратор ЕСККС
+      </Typography>
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT }}>
+        Администратор ЕСККС отвечает за техническое сопровождение платформы и управление доступом
+        пользователей системы.
+      </Typography>
     </Box>
   );
 }
