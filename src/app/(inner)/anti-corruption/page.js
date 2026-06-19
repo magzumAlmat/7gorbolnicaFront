@@ -8,35 +8,6 @@ const GRAY_BG = '#F8FAFC';
 const GRAY_TEXT = '#64748B';
 const BORDER = '#E2E8F0';
 
-const principles = [
-  'Нулевая терпимость к коррупционным проявлениям в любой форме',
-  'Прозрачность при принятии управленческих и финансовых решений',
-  'Соблюдение Закона Республики Казахстан «О противодействии коррупции» от 18 ноября 2015 года № 410-V',
-  'Конфиденциальность обращений и защита лиц, сообщивших о нарушениях',
-  'Независимость и беспристрастность при рассмотрении жалоб и обращений',
-  'Регулярное обучение сотрудников антикоррупционным стандартам и нормам этики',
-  'Проведение внутреннего мониторинга и аудита коррупционных рисков',
-];
-
-const ethicsValues = [
-  {
-    title: 'Честность',
-    desc: 'Правдивость и открытость в профессиональной деятельности, отчётности и коммуникациях.',
-  },
-  {
-    title: 'Прозрачность',
-    desc: 'Открытость процессов принятия решений, закупок и распределения ресурсов.',
-  },
-  {
-    title: 'Ответственность',
-    desc: 'Соблюдение обязательств перед государством, партнёрами и обществом.',
-  },
-  {
-    title: 'Профессионализм',
-    desc: 'Высокое качество работы, непрерывное развитие и соблюдение норм деловой этики.',
-  },
-];
-
 export default function AntiCorruptionPage() {
   return (
     <Box>
@@ -144,31 +115,6 @@ export default function AntiCorruptionPage() {
       </Table>
 
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
-        Принципы антикоррупционной политики
-      </Typography>
-      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
-
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, mb: 5 }}>
-        {principles.map((p, i) => (
-          <Box key={i} sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
-            <Box
-              sx={{
-                mt: '10px',
-                width: 8,
-                height: 8,
-                borderRadius: '50%',
-                bgcolor: BLUE,
-                flexShrink: 0,
-              }}
-            />
-            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
-              {p}
-            </Typography>
-          </Box>
-        ))}
-      </Box>
-
-      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Нормативные документы
       </Typography>
       <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
@@ -204,38 +150,6 @@ export default function AntiCorruptionPage() {
         ))}
       </Box>
 
-      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
-        Кодекс корпоративной этики
-      </Typography>
-      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
-
-      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3, maxWidth: 760 }}>
-        Кодекс корпоративной этики АО «КазНИИСА» устанавливает единые стандарты поведения для всех
-        сотрудников института. Он определяет ценности, которыми руководствуются работники в
-        профессиональной деятельности, и закрепляет механизмы предотвращения конфликта интересов.
-      </Typography>
-
-      <Grid container spacing={3}>
-        {ethicsValues.map((v, i) => (
-          <Grid item xs={12} sm={6} key={i}>
-            <Box sx={{ borderLeft: '4px solid ' + BLUE, bgcolor: BLUE_LIGHT, borderRadius: '0 6px 6px 0', pl: 2, py: 1.5, transition: 'box-shadow 0.2s ease, transform 0.2s ease', '&:hover': { boxShadow: '0 4px 20px rgba(0,0,0,0.08)', transform: 'translateY(-2px)' } }}>
-              <Typography
-                sx={{
-                  fontWeight: 700,
-                  color: NAVY,
-                  fontSize: '1rem',
-                  mb: 0.5,
-                }}
-              >
-                {v.title}
-              </Typography>
-              <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#334155' }}>
-                {v.desc}
-              </Typography>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
     </Box>
   );
 }

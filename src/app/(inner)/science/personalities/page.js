@@ -9,43 +9,17 @@ const GRAY_TEXT = '#64748B';
 const BORDER = '#E2E8F0';
 const TEXT = '#334155';
 
+// Описания убраны — в оригинале kazniisa.kz их нет (кроме должности гендиректора).
 const personalities = [
-  {
-    name: 'Кульбаев Бегман Бахитович',
-    description: 'Генеральный директор АО «КазНИИСА».',
-  },
-  {
-    name: 'Ержанов Сырымгали Ержанович',
-    description: 'Выдающийся учёный в области строительной науки Казахстана.',
-  },
-  {
-    name: 'Тастанбеков Ахылбек Тастанбекович',
-    description: 'Специалист в области сейсмостойкого строительства.',
-  },
-  {
-    name: 'Абаканов Миркен Сейткасымович',
-    description: 'Исследователь в области строительных технологий.',
-  },
-  {
-    name: 'Есенберлина Дилфруза Ильясовна',
-    description: 'Вклад в развитие нормативной базы строительства Казахстана.',
-  },
-  {
-    name: 'Тулеев Турсынбай Дуйсенбаевич',
-    description: 'Специалист в области комплексного строительства.',
-  },
-  {
-    name: 'Лапин Владимир Алексеевич',
-    description: 'Учёный в области строительной науки и проектирования.',
-  },
-  {
-    name: 'Ицков Игорь Эфроимович',
-    description: 'Исследователь в области инженерно-геологических изысканий.',
-  },
-  {
-    name: 'Шахович Юлий Гедалевич',
-    description: 'Специалист в области строительного нормирования.',
-  },
+  { name: 'Кульбаев Бегман Бахитович', description: 'Генеральный директор АО «КазНИИСА».' },
+  { name: 'Ержанов Сырымгали Ержанович', description: '' },
+  { name: 'Тастанбеков Ахылбек Тастанбекович', description: '' },
+  { name: 'Абаканов Миркен Сейткасымович', description: '' },
+  { name: 'Есенберлина Дилфруза Ильясовна', description: '' },
+  { name: 'Тулеев Турсынбай Дуйсенбаевич', description: '' },
+  { name: 'Лапин Владимир Алексеевич', description: '' },
+  { name: 'Ицков Игорь Ефроимович', description: '' },
+  { name: 'Шахнович Юлий Гедалевич', description: '' },
 ];
 
 export default function PersonalitiesPage() {
@@ -90,9 +64,11 @@ export default function PersonalitiesPage() {
               >
                 {person.name}
               </Typography>
-              <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.7, color: TEXT }}>
-                {person.description}
-              </Typography>
+              {person.description && (
+                <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.7, color: TEXT }}>
+                  {person.description}
+                </Typography>
+              )}
             </Box>
           </Grid>
         ))}

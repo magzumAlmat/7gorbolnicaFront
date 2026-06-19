@@ -205,9 +205,8 @@ export default function CorporateDocumentsPage() {
           Запрос документов
         </Typography>
         <Typography sx={{ color: '#CBD5E1', fontSize: '1rem', lineHeight: 1.9 }}>
-          Для получения копий корпоративных документов обращайтесь к корпоративному
-          секретарю АО «КазНИИСА» — Суханкулов Нуркен Кунанбаевич,
-          тел. +7 701 747 68 30, email: nsukhankulov@mail.ru
+          Для получения копий корпоративных документов обращайтесь в канцелярию
+          АО «КазНИИСА»: email info@kazniisa.kz, тел. 8 (727) 226 94 10.
         </Typography>
       </Box>
 

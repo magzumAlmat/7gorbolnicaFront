@@ -12,16 +12,6 @@ const GRAY_BG = '#F8FAFC';
 const GRAY_TEXT = '#64748B';
 const BORDER = '#E2E8F0';
 
-const riskCategories = [
-  'Риски в сфере закупок товаров, работ и услуг',
-  'Риски при принятии управленческих решений',
-  'Риски при взаимодействии с государственными органами',
-  'Риски при распоряжении имуществом организации',
-  'Риски в кадровой деятельности',
-  'Риски при осуществлении финансово-хозяйственной деятельности',
-  'Риски при оказании платных услуг и выполнении работ',
-];
-
 export default function RisksPage() {
   return (
     <Box>
@@ -86,34 +76,6 @@ export default function RisksPage() {
 
       {/* Реальные документы реестра рисков из админки (если загружены) */}
       <PublicDownloadList endpoint="/api/anti-corruption/public" heading="Документ" />
-
-      {/* Risk categories */}
-      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
-        Основные категории коррупционных рисков
-      </Typography>
-      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
-
-      <List disablePadding sx={{ mb: 4 }}>
-        {riskCategories.map((risk) => (
-          <ListItem
-            key={risk}
-            sx={{
-              px: 0,
-              py: 1.5,
-              borderBottom: '1px solid #F1F5F9',
-              '&:last-child': { borderBottom: 'none' },
-            }}
-          >
-            <ListItemIcon sx={{ minWidth: 36 }}>
-              <WarningAmberIcon sx={{ color: BLUE, fontSize: 20 }} />
-            </ListItemIcon>
-            <ListItemText
-              primary={risk}
-              primaryTypographyProps={{ sx: { fontSize: '1rem', color: '#334155', lineHeight: 1.9 } }}
-            />
-          </ListItem>
-        ))}
-      </List>
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
         По вопросам, связанным с коррупционными рисками и антикоррупционным комплаенсом,
