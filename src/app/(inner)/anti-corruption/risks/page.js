@@ -59,6 +59,31 @@ export default function RisksPage() {
         </Typography>
       </Box>
 
+      {/* Реальный документ с оригинала kazniisa.kz.
+          URL скачивания на оригинале не извлекается — показываем название без href. */}
+      <Box sx={{ mb: 5 }}>
+        <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
+          Документ
+        </Typography>
+        <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2,
+            bgcolor: BLUE_LIGHT,
+            border: '1px solid ' + BORDER,
+            borderRadius: 2,
+            p: 2.5,
+          }}
+        >
+          <AssignmentIcon sx={{ color: BLUE, fontSize: 28 }} />
+          <Typography sx={{ flex: 1, fontSize: '1rem', fontWeight: 600, color: NAVY }}>
+            Перечень коррупционных рисков, выявленных по результатам анализа коррупционных рисков
+          </Typography>
+        </Box>
+      </Box>
+
       {/* Реальные документы реестра рисков из админки (если загружены) */}
       <PublicDownloadList endpoint="/api/anti-corruption/public" heading="Документ" />
 
