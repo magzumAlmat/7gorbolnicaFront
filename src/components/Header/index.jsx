@@ -229,17 +229,64 @@ const DropdownItem = styled(Box)({
   },
 });
 
+// === ЛОКАЛИЗАЦИЯ МЕНЮ (казахские метки — дословно с kazniisa.kz/qaz/;
+// пункты, которые оригинал сам оставляет по-русски, kk-метки не имеют) ===
+const KK_LABELS = {
+  '/about-us': 'Біз туралы',
+  '/about-us/governing-bodies': 'Басқару органдары',
+  '/about-us/contacts': 'Байланыс',
+  '/about-us/branches': 'Филиалдар',
+  '/about-us/news': 'Жаңалықтар',
+  '/archives/category/events': 'Оқиғалар',
+  '/archives/category/speeches': 'Сөз сөйлеулер',
+  '/about-us/corporate-documents': 'Корпоративтік құжаттар',
+  '/about-us/history-kazniisa': 'ҚазҚСҒЗИ тарихы',
+  '/about-us/vacancies': 'Бос жұмыс орындар',
+  '/about-us/awards': 'Марапаттар',
+  '/about-us/partners': 'Серіктестер',
+  '/about-us/frequently-asked-questions': 'Сұрақ Жауап',
+  '/centres': 'Орталықтар',
+  '/centres/center-for-regulation-in-construction': 'Құрылыстағы нормалау орталығы',
+  '/centres/center-for-standard-and-individual-design': 'Үлгілік және индивидуалды жобалау орталығы',
+  '/centres/center-for-seismic-resistance-inspection-of-buildings-and-structures': 'Сейсмикаға төзімділік, ғимараттар мен құрылыстарды тексеру орталығы',
+  '/centres/center-for-science-and-digitalization-of-construction/projects': 'Жобалар',
+  '/centres/corporate-university': 'Корпоративтік университет',
+  '/science': 'Ғылым',
+  '/science/journal-bulletin': '«Хабаршы» журналы',
+  '/science/personalities': 'Есімнама',
+  '/science/innovative-research': 'Инновациялық зерттеулер',
+  '/science/collections': '«ҚазҚСҒЗИ» АҚ еңбектер жинағы',
+  '/timso/international-cooperation': 'Халықаралық ынтымақтастық',
+  '/timso/regulatory-documents': 'Нормативтік құжаттар',
+  '/timso/eskks': 'БЖКЖ',
+  '/bocc': 'СҚБҰ',
+  '/bocc/about-the-boss': 'СҚБҰ туралы',
+  '/bocc/news-boss': 'СҚБҰ жаңалықтары',
+  '/bocc/meetings': 'Отырыстар',
+  '/bocc/uniform-norms-model': 'Бірыңғай нормалар моделі',
+  '/bocc/norms-of-the-cis-countries': 'ТМД елдерінің нормалары',
+  '/bocc/niokr': 'ҒЗТКЖ',
+  '/eurocode': 'Еврокодтар',
+  '/anti-corruption': 'Сыбайлас жемқорлыққа қарсы іс-қимыл',
+  '/anti-corruption/register': 'Сыбайлас жемқорлық тәуекелдеріне ұшыраған лауазымдардың тізілімі',
+  '/anti-corruption/risks': 'Сыбайлас жемқорлық тәуекелдерін талдау нәтижелері бойынша анықталған сыбайлас жемқорлық тәуекелдерінің тізбесі',
+};
+const locHref = (p, isQaz) => (!isQaz || !p || p === '#') ? p : (p === '/' ? '/qaz' : `/qaz${p}`);
+const locTitle = (item, isQaz) => (isQaz && KK_LABELS[item.path]) || item.title;
+
 // === МОБИЛЬНОЕ МЕНЮ ===
 const MobileMenuItem = ({ item, depth = 0, toggleDrawer }) => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const active = pathname === item.path;
+  const isQaz = pathname?.startsWith('/qaz');
+  const rupath = isQaz ? (pathname.replace(/^\/qaz(?=\/|$)/, '') || '/') : pathname;
+  const active = rupath === item.path;
 
   return (
     <Box>
       <ListItemButton
         component={item.submenu ? 'div' : Link}
-        href={item.submenu ? undefined : item.path}
+        href={item.submenu ? undefined : locHref(item.path, isQaz)}
         onClick={(e) => {
           if (item.submenu) { e.preventDefault(); setOpen(!open); }
           else { toggleDrawer(false)(); }
@@ -250,7 +297,7 @@ const MobileMenuItem = ({ item, depth = 0, toggleDrawer }) => {
           '&:hover': { bgcolor: '#f0f7fc' },
         }}
       >
-        <ListItemText primary={item.title} primaryTypographyProps={{ fontSize: '14px', fontWeight: active ? 700 : 500 }} />
+        <ListItemText primary={locTitle(item, isQaz)} primaryTypographyProps={{ fontSize: '14px', fontWeight: active ? 700 : 500 }} />
         {item.submenu && <KeyboardArrowDown sx={{ transform: open ? 'rotate(180deg)' : 'none', transition: '0.2s', fontSize: 20 }} />}
       </ListItemButton>
       {item.submenu && (
@@ -270,6 +317,8 @@ const MobileMenuItem = ({ item, depth = 0, toggleDrawer }) => {
 export default function Header() {
   const theme = useTheme();
   const pathname = usePathname();
+  const isQaz = pathname?.startsWith('/qaz');
+  const rupath = isQaz ? (pathname.replace(/^\/qaz(?=\/|$)/, '') || '/') : pathname;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [selectedOffice, setSelectedOffice] = useState(officesData[0]);
   const [officeOpen, setOfficeOpen] = useState(false);
@@ -352,23 +401,31 @@ export default function Header() {
                 <SearchIcon sx={{ fontSize: 16 }} />
               </IconButton>
               <Divider orientation="vertical" flexItem sx={{ borderColor: 'rgba(255,255,255,0.2)', mx: 0.5 }} />
-              {/* Языки */}
+              {/* Языки: активный по префиксу пути, переключение сохраняет текущую страницу (как WPML оригинала) */}
               <Box sx={{ display: 'flex', gap: 0.5 }}>
-                {[{ code: 'RU', href: '/' }, { code: 'QAZ', href: '/qaz/' }, { code: 'ENG', href: '/eng/' }].map(lang => (
-                  <Box
-                    key={lang.code}
-                    component={Link}
-                    href={lang.href}
-                    sx={{
-                      fontSize: '12px', fontWeight: lang.code === 'RU' ? 700 : 400,
-                      color: lang.code === 'RU' ? '#FDE428' : 'rgba(255,255,255,0.7)',
-                      textDecoration: 'none', px: 0.5,
-                      '&:hover': { color: '#FDE428' },
-                    }}
-                  >
-                    {lang.code}
-                  </Box>
-                ))}
+                {(() => {
+                  const cur = pathname?.startsWith('/qaz') ? 'QAZ' : pathname?.startsWith('/eng') ? 'ENG' : 'RU';
+                  const rest = (pathname || '/').replace(/^\/(qaz|eng)(?=\/|$)/, '') || '/';
+                  return [
+                    { code: 'RU', href: rest },
+                    { code: 'QAZ', href: rest === '/' ? '/qaz' : `/qaz${rest}` },
+                    { code: 'ENG', href: rest === '/' ? '/eng' : `/eng${rest}` },
+                  ].map(lang => (
+                    <Box
+                      key={lang.code}
+                      component={Link}
+                      href={lang.href}
+                      sx={{
+                        fontSize: '12px', fontWeight: lang.code === cur ? 700 : 400,
+                        color: lang.code === cur ? '#FDE428' : 'rgba(255,255,255,0.7)',
+                        textDecoration: 'none', px: 0.5,
+                        '&:hover': { color: '#FDE428' },
+                      }}
+                    >
+                      {lang.code}
+                    </Box>
+                  ));
+                })()}
               </Box>
             </Box>
           </Box>
@@ -418,16 +475,16 @@ export default function Header() {
               {menuData.map((item) => (
                 <NavItem
                   key={item.title}
-                  $active={pathname === item.path || (item.path !== '/' && item.path !== '#' && pathname.startsWith(item.path))}
+                  $active={rupath === item.path || (item.path !== '/' && item.path !== '#' && rupath.startsWith(item.path))}
                   onMouseEnter={() => item.submenu ? setActiveDropdown(item.title) : setActiveDropdown(null)}
                 >
                   {item.icon ? (
-                    <Link href={item.path}>
+                    <Link href={locHref(item.path, isQaz)}>
                       <HomeIcon sx={{ fontSize: 20 }} />
                     </Link>
                   ) : (
-                    <Link href={item.path}>
-                      {item.title}
+                    <Link href={locHref(item.path, isQaz)}>
+                      {locTitle(item, isQaz)}
                       {item.submenu && <KeyboardArrowDown sx={{ fontSize: 16, ml: 0.25 }} />}
                     </Link>
                   )}
@@ -437,15 +494,15 @@ export default function Header() {
                     <DropdownMenu>
                       {item.submenu.map(sub => (
                         <DropdownItem key={sub.path + sub.title}>
-                          <Link href={sub.path} onClick={() => setActiveDropdown(null)}>
-                            {sub.title}
+                          <Link href={locHref(sub.path, isQaz)} onClick={() => setActiveDropdown(null)}>
+                            {locTitle(sub, isQaz)}
                             {sub.submenu && <KeyboardArrowDown sx={{ fontSize: 14, transform: 'rotate(-90deg)', ml: 0.5, opacity: 0.5 }} />}
                           </Link>
                           {sub.submenu && (
                             <Box className="flyout">
                               {sub.submenu.map(nested => (
-                                <Link key={nested.path} href={nested.path} onClick={() => setActiveDropdown(null)}>
-                                  {nested.title}
+                                <Link key={nested.path} href={locHref(nested.path, isQaz)} onClick={() => setActiveDropdown(null)}>
+                                  {locTitle(nested, isQaz)}
                                 </Link>
                               ))}
                             </Box>
