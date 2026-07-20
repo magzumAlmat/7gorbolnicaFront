@@ -23,6 +23,53 @@ export default function AntiCorruptionPage() {
       </Typography>
       <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
+      <Table size="small" sx={{ maxWidth: 600, mb: 3, '& td': { border: 'none', py: 0.8, px: 0 } }}>
+        <TableBody>
+          <TableRow>
+            <TableCell sx={{ width: 180, color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
+              Телефон
+            </TableCell>
+            <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontWeight: 700 }}>
+              <a href="tel:+77272269411" style={{ color: NAVY, textDecoration: 'none' }}>
+                +7 (727) 226 94 11 вн: 188
+              </a>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
+              Электрондық пошта
+            </TableCell>
+            <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontWeight: 600 }}>
+              <a href="mailto:anticor_comp@kazniisa.kz" style={{ color: NAVY, textDecoration: 'none' }}>
+                anticor_comp@kazniisa.kz
+              </a>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
+              Мекенжайы
+            </TableCell>
+            <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
+              3 шағынауданы 44а Алматы қ.
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4 }}>
+        В соответствии с планом мероприятий Министерства по инвестициям и развитию Республики
+        Казахстан по противодействию коррупции и теневой экономике на 2018-2020 годы,
+        утвержденного приказом Министра по инвестициям и развитию Республики Казахстан от 03
+        июля 2018 года № 494, руководствуясь подпунктом 8) пункта 12.3 устава акционерного
+        общества «КазНИИСА», утвержденного приказом Председателя Комитета по делам
+        строительства и жилищно-коммунального хозяйства Министерства по инвестициям и развитию
+        Республики Казахстан от 9 июня 2017 года №90-НҚ, пунктом 2 статьи 10 Закона Республики
+        Казахстан «О противодействии коррупции» от 18 ноября 2015 года № 410-V, Методическими
+        рекомендациями по разработке антикоррупционных стандартов был разработан
+        антикоррупционный стандарт АО «КазНИИСА», который после согласования с общественностью,
+        был утвержден Генеральным директором Общества.
+      </Typography>
+
       <Box
         sx={{
           bgcolor: BLUE_LIGHT,
@@ -46,39 +93,6 @@ export default function AntiCorruptionPage() {
         </Typography>
       </Box>
 
-      <Table size="small" sx={{ maxWidth: 600, mb: 5, '& td': { border: 'none', py: 0.8, px: 0 } }}>
-        <TableBody>
-          <TableRow>
-            <TableCell sx={{ width: 180, color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
-              Телефон
-            </TableCell>
-            <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontWeight: 700 }}>
-              <a href="tel:+77272269411" style={{ color: NAVY, textDecoration: 'none' }}>
-                8 (727) 226 94 11 (ішкі. 188)
-              </a>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
-              Электрондық пошта
-            </TableCell>
-            <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontWeight: 600 }}>
-              <a href="mailto:anticor_comp@kazniisa.kz" style={{ color: NAVY, textDecoration: 'none' }}>
-                anticor_comp@kazniisa.kz
-              </a>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem', fontWeight: 600 }}>
-              Мекенжайы
-            </TableCell>
-            <TableCell sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
-              Алматы қ., 3 шағынауданы, 44А
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Жоспарлау және стратегия
       </Typography>
@@ -86,6 +100,7 @@ export default function AntiCorruptionPage() {
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mb: 5 }}>
         {[
+          { title: 'Антикоррупционный стандарт АО «КазНИИСА»', href: 'https://drive.google.com/open?id=1eYgfcxgMYI82vQJ95M8eLQEfAUp6DcU-' },
           { title: 'Бұйрық', href: 'https://drive.google.com/open?id=10KNdKv4WfhiOzDgnJAizgvJ0u2DymD3c' },
           { title: 'Сыбайлас жемқорлыққа қарсы комплаенс-қызмет туралы', href: 'https://drive.google.com/file/d/14mIl0y1S-YhirmVKSsnw017ww99gNzda/view?usp=sharing' },
           { title: 'Сыбайлас жемқорлыққа қарсы саясат', href: 'https://drive.google.com/file/d/1IP-tzh7GdS0WZc-suLS7CLdMlIp9GDKE/view?usp=sharing' },

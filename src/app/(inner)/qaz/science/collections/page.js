@@ -28,7 +28,7 @@ const collections = [
     href: 'https://drive.google.com/file/d/0B9cipw9EHHhlZGZUTC1iMmhzUVE/view?usp=sharing',
   },
   {
-    title: 'Журнал «Вестник АО «КазНИИСА» №1 - апрель 2020 (выпуски 1,2,3)',
+    title: 'Журнал "Вестник АО "КазНИИСА" №1 - апрель 2020 (выпуски 1,2,3)',
     href: 'https://drive.google.com/file/d/1aIMYJGG96D8SlZ6ZlmJWfYLupVdYGYEj/view',
   },
 ];
@@ -40,7 +40,7 @@ export default function CollectionsPage() {
         variant="h3"
         sx={{ fontWeight: 800, color: NAVY, mb: 1 }}
       >
-        «ҚазҚСҒЗИ» АҚ еңбектер жинағы
+        Сборники трудов АО «КазНИИСА»
       </Typography>
       <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 

@@ -18,6 +18,14 @@ export default function BuildingSmartPage() {
       </Typography>
       <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
+      {/* Welcome hero */}
+      <Typography variant="h4" sx={{ fontWeight: 800, color: NAVY, fontSize: { xs: '1.5rem', sm: '1.8rem' }, mb: 1 }}>
+        Добро пожаловать в buildingSMART Kazakhstan!
+      </Typography>
+      <Typography sx={{ fontSize: '1.05rem', color: BLUE, fontStyle: 'italic', fontWeight: 600, mb: 3 }}>
+        «Объединяем технологии для умного проектирования»
+      </Typography>
+
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 3 }}>
         buildingSMART Kazakhstan – это профессиональное сообщество, объединяющее экспертов,
         проектировщиков, строителей, разработчиков, а также государственные и образовательные
@@ -63,7 +71,7 @@ export default function BuildingSmartPage() {
           'Содействие цифровизации строительной отрасли через обучение и сотрудничество',
           'Формирование экосистемы участников BIM-сообщества — от вузов до крупных девелоперов',
           'Поддержка государственных инициатив и внедрение открытых форматов для проектирования, строительства и эксплуатации объектов',
-          'Представление интересов казахстанских специалистов на международной BIM-арене',
+          'Представление интересов казахстанских специалистов на международной BIM-арене.',
         ].map((g, i) => (
           <Box component="li" key={i} sx={{ mb: 1 }}>
             <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>{g}</Typography>
@@ -78,16 +86,27 @@ export default function BuildingSmartPage() {
       <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
       <Box component="ul" sx={{ pl: 3, m: 0, mb: 4 }}>
         {[
-          'Обеспечение локализации и практического внедрения стандартов обмена данными (IFC) с учетом национального законодательства, строительных норм и практик Республики Казахстан',
-          'Представление Казахстана в составе buildingSMART International, участие в глобальных инициативах, технических комитетах и сотрудничество с другими национальными отделениями',
-          'Подготовка квалифицированных кадров по BIM-технологиям, разработка образовательных модулей, методических рекомендаций, сертификационных программ на основе международных требований',
-          'Создание площадки для диалога между государственными органами, профессиональными ассоциациями, вузами, научно-исследовательскими организациями и бизнесом',
+          'Обеспечение локализации и практического внедрения стандартов обмена данными (IFC) с учетом национального законодательства, строительных норм и практик Республики Казахстан.',
+          'Представление Казахстана в составе buildingSMART International, участие в глобальных инициативах, технических комитетах и сотрудничество с другими национальными отделениями.',
+          'Подготовка квалифицированных кадров по BIM-технологиям, разработка образовательных модулей, методических рекомендаций, сертификационных программ на основе международных требований.',
+          'Создание площадки для диалога между государственными органами, профессиональными ассоциациями, вузами, научно-исследовательскими организациями и бизнесом.',
         ].map((t, i) => (
           <Box component="li" key={i} sx={{ mb: 1 }}>
             <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>{t}</Typography>
           </Box>
         ))}
       </Box>
+
+      {/* Value pillars */}
+      <Grid container spacing={2} sx={{ mb: 4 }}>
+        {['Управление цифровой трансформацией', 'Создание стандартов и услуг', 'Повышение производительности и устойчивости'].map((p, i) => (
+          <Grid item xs={12} sm={4} key={i}>
+            <Box sx={{ bgcolor: GRAY_BG, border: '1px solid ' + BORDER, borderRadius: '6px', p: 2.5, textAlign: 'center', height: '100%' }}>
+              <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem' }}>{p}</Typography>
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
 
       {/* Service images */}
       <Grid container spacing={2} sx={{ mb: 4 }}>
@@ -109,7 +128,16 @@ export default function BuildingSmartPage() {
         ))}
       </Grid>
 
+      {/* Community engagement */}
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
+        Взаимодействуйте с мировым сообществом
+      </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+
       {/* Certification */}
+      <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: BLUE, textTransform: 'uppercase', letterSpacing: '0.04em', mb: 0.5 }}>
+        Образовательная программа
+      </Typography>
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Онлайн-курс
       </Typography>
@@ -127,6 +155,25 @@ export default function BuildingSmartPage() {
         с международно-признанным эталоном; возможность подтверждения компетенций вашей
         организации в области BIM при участии в тендерах на проекты за счёт наличия персонала,
         сертифицированного buildingSMART.
+      </Typography>
+      <Box component="ul" sx={{ pl: 3, m: 0, mb: 2 }}>
+        {[
+          '— стандартизированный учебный контент, основанный на последних международных разработках и лучших практиках;',
+          '— всемирно признаваемая квалификация и знак гарантии качества;',
+          '— простой и быстрый процесс онлайн-тестирования и оценки квалификации;',
+          '— обучение специалистов в соответствии с международно-признанным эталоном;',
+          '— стандартизированный контент;',
+          '— возможность подтверждения компетенций вашей организации в области BIM, при участии в тендерах на проекты, за счет наличия персонала, сертифицированного buildingSMART;',
+          '— Сертификат BuildingSMART International признается в более чем 20 странах мира;',
+        ].map((b, i) => (
+          <Box component="li" key={i} sx={{ mb: 0.5 }}>
+            <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.8, color: '#334155' }}>{b}</Typography>
+          </Box>
+        ))}
+      </Box>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontWeight: 600, mb: 2 }}>
+        Сертификация BuildingSMART Professional Certification – Foundation «Basic» — это важный
+        шаг к профессиональному развитию в сфере BIM
       </Typography>
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 4 }}>
         Сертификат BuildingSMART International признаётся в более чем 20 странах мира.
@@ -160,13 +207,46 @@ export default function BuildingSmartPage() {
         работу между различными участниками строительного процесса, включая архитекторов,
         инженеров, подрядчиков и заказчиков. buildingSMART International объединяет
         национальные организации (Chapters) из различных стран по всему миру — на данный
-        момент насчитывается более 30 таких отделений.
+        момент насчитывается более 30 таких отделений, представляющих интересы внедрения
+        технологии информационного моделирования по всему миру.
       </Typography>
-      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 4 }}>
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 2 }}>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
+          Цель: Объединить глобальную индустрию для разработки и внедрения открытых цифровых
+          стандартов и сервисов, которые способствуют автоматизации и принятию решений на
+          протяжении всего жизненного цикла строительной отрасли, улучшая производительность,
+          устойчивость и прибыльность.
+        </Typography>
+      </Box>
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 2 }}>
         <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
           Видение: беспрепятственный обмен достоверной информацией в рамках строительной
           отрасли.
         </Typography>
+      </Box>
+      <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 4 }}>
+        <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontStyle: 'italic' }}>
+          Мансабымыз: Создавать и поддерживать открытые и надежные цифровые стандарты для
+          строительной отрасли и поддерживать их глобальное принятие.
+        </Typography>
+      </Box>
+
+      <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem', mb: 1.5 }}>
+        Принципы работы buildingSMART International
+      </Typography>
+      <Box component="ul" sx={{ pl: 3, m: 0, mb: 4 }}>
+        {[
+          'Мы разрабатываем стандарты и сервисы openBIM® и поддерживаем их внедрение на всех этапах жизненного цикла проекта.',
+          'Мы обеспечиваем совместимость программного обеспечения и будущее обеспечение доступа к данным.',
+          'Мы предоставляем общие глобальные основы, поддерживающие национальные и локальные расширения.',
+          'Мы открыты, нейтральны, прозрачны и некоммерческая организация.',
+          'Мы инклюзивны, сотрудничаем, проявляем уважение и профессионализм.',
+          'Мы являемся гибким сообществом, принимающим ключевые решения на основе согласия большинства.',
+        ].map((p, i) => (
+          <Box component="li" key={i} sx={{ mb: 1 }}>
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>{p}</Typography>
+          </Box>
+        ))}
       </Box>
 
       {/* Membership benefits */}
@@ -229,6 +309,10 @@ export default function BuildingSmartPage() {
         (BIM-технологиялар) енгізу жөніндегі іс-шаралар жоспарын» іске асыру шеңберінде
         2017-2018 жылдар кезеңінде әзірленді және бекітілді:
       </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        В 2019 году Центром информационного моделирования АО “КазНИИСА” были разработаны и
+        утверждены следующие нормативные технические документы:
+      </Typography>
       <Box component="ul" sx={{ pl: 0, m: 0, mb: 4, listStyle: 'none' }}>
         {[
           { code: 'СП РК 1.02-111-2017', title: 'Применение информационного моделирования в проектной организации', url: 'https://drive.google.com/open?id=1MaGqPKN5qUfyRY55nVeCqdII4E8DcW8d' },
@@ -242,8 +326,12 @@ export default function BuildingSmartPage() {
           { code: 'СП РК', title: 'Жизненный цикл строительных объектов. Часть 5. Требования к моделям на стадии эксплуатации', url: 'https://docs.google.com/document/d/1kFGhGQoleYowix98fkLdVY3-f5OAb4cNTlK9wBh0i4M/edit' },
           { code: 'СП РК', title: 'Применение информационного моделирования в строительной организации', url: 'https://docs.google.com/document/d/1_Ic6u-STvslKSmkOrCjZN39xqHArIfx2nd5FDt8J2oc/edit' },
           { code: 'СП РК', title: 'Применение информационного моделирования в эксплуатирующей организации', url: 'https://docs.google.com/document/d/1MB0kYyHDVo6FqHke9cJE2yf4naFF_nkULMmG_aIsf2s/edit?usp=sharing' },
-          { code: 'РДС РК 1.02-04-2018', title: 'Руководящий документ в строительстве', url: 'https://drive.google.com/open?id=1jaQdrSqbBoXlEWm6lVznz3udKtcrv1yC' },
-          { code: 'Концепция', title: 'Концепция внедрения информационного моделирования', url: 'https://drive.google.com/file/d/1lu5o987CaRyHkRjJrrOvd3tVZNNyBv5o/view?usp=sharing' },
+          { code: 'РДС РК 1.02-04-2018', title: '', url: 'https://drive.google.com/open?id=1jaQdrSqbBoXlEWm6lVznz3udKtcrv1yC' },
+          { code: '', title: 'Концепция', url: 'https://drive.google.com/file/d/1lu5o987CaRyHkRjJrrOvd3tVZNNyBv5o/view?usp=sharing' },
+          { code: 'ТИМСО (BIM)', title: '-ориентированный классификатор в объеме, предусмотренном на 2018 год', url: 'https://drive.google.com/open?id=1X2UPxzdKo6NloXH_PphLGO7cQy6_aJMx' },
+          { code: '', title: 'АО НЦГНТЭ', url: 'https://drive.google.com/open?id=1SO-wN17cVkDtcmG3OAtiHaPVP5i4PLIv' },
+          { code: '', title: 'Отчет о НИР по разработке ТЗ для ГБИМ', url: 'https://drive.google.com/open?id=1RubLREsPSD6gti4nuyC_wz6c_GyOD5QS' },
+          { code: '', title: 'Глобальные обязательные требования по openBIM', url: 'https://kazniisa.kz/wp-content/uploads/2023/10/Глобальные-обязательные-требования-по-openBIM.pdf' },
         ].map((doc) => (
           <Box
             component="li"
@@ -298,7 +386,7 @@ export default function BuildingSmartPage() {
         {[
           'Председатель отделения',
           'Исполнительный директор',
-          'Директор по взаимодействию с государственными органами',
+          'Директор по взаимодействую с государственными органами',
           'Технический директор',
           'Администратор программ обучения',
           'Специалист по техническим стандартам',

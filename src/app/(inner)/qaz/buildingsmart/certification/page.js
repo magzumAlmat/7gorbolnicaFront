@@ -6,6 +6,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DevicesIcon from '@mui/icons-material/Devices';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 
 const NAVY = '#0F172A';
@@ -16,12 +17,12 @@ const GRAY_TEXT = '#64748B';
 const BORDER = '#E2E8F0';
 
 const benefits = [
-  'OpenBIM саласындағы сараптамаңыз бен біліміңізді растаңыз',
-  'Құрылыс индустриясында жетістіктеріңізбен ерекшеленіп, мойындалуға қол жеткізіңіз',
-  'OpenBIM саласында жұмысқа орналасудың жаңа мүмкіндіктерін ашыңыз',
-  'OpenBIM бойынша өзекті білімдеріңіз арқылы алдыңғы қатарда болыңыз',
-  'OpenBIM жобаларында жұмыс істей отырып, алған білімдеріңізді тәжірибеде қолданыңыз',
-  'OpenBIM әдіснамалары мен қағидаттарын өз жобаларыңызға енгізіп, олардың тиімділігі мен сапасын арттырыңыз',
+  'OpenBIM саласындағы сараптамаңыз бен біліміңізді растаңыз.',
+  'Құрылыс индустриясында жетістіктеріңізбен ерекшеленіп, мойындалуға қол жеткізіңіз.',
+  'OpenBIM саласында жұмысқа орналасудың жаңа мүмкіндіктерін ашыңыз.',
+  'OpenBIM бойынша өзекті білімдеріңіз арқылы алдыңғы қатарда болыңыз.',
+  'OpenBIM жобаларында жұмыс істей отырып, алған білімдеріңізді тәжірибеде қолданыңыз.',
+  'OpenBIM әдіснамалары мен қағидаттарын өз жобаларыңызға енгізіп, олардың тиімділігі мен сапасын арттырыңыз.',
 ];
 
 const faqs = [
@@ -35,7 +36,7 @@ const faqs = [
   },
   {
     q: 'Оқу форматы қандай?',
-    a: 'Қашықтан оқыту, күндізгі оқыту.',
+    a: 'Қашықтан оқуту, күндізгі оқуту.',
   },
   {
     q: 'Құны нені қамтиды?',
@@ -94,6 +95,18 @@ export default function CertificationPage() {
         цифрлық құрылыстың жаңа перспективаларына есік ашады.
       </Typography>
 
+      {/* How to start */}
+      <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
+        Foundation оқуын қалай бастауға болады және сертификат алуға болады?
+      </Typography>
+      <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', fontWeight: 700, mb: 4 }}>
+        — Сайтта өтінім қалдырыңыз.
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: NAVY, fontWeight: 700, mb: 4 }}>
+        buildingSmart Professional Certification-Foundation халықаралық сертификаттаудан өтуге өтінім
+      </Typography>
+
       {/* Program details */}
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Параметры программы
@@ -123,6 +136,10 @@ export default function CertificationPage() {
         ))}
       </Grid>
 
+      <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem', mb: 1.5 }}>
+        buildingSmart Professional Certification - Foundation бағдарламасы бойынша оқудан өтуді
+        қалайтын кандидаттарға қойылатын талаптар
+      </Typography>
       <Box sx={{ bgcolor: BLUE_LIGHT, borderLeft: '4px solid ' + BLUE, borderRadius: '0 6px 6px 0', p: 3, mb: 4 }}>
         <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155' }}>
           Емтиханды бір рет қайта тапсыруға болады, тек бір реттік емтихан ақысын төлейді.
@@ -132,6 +149,9 @@ export default function CertificationPage() {
       </Box>
 
       {/* Benefits */}
+      <Typography sx={{ fontSize: '0.85rem', fontWeight: 700, color: BLUE, textTransform: 'uppercase', letterSpacing: '0.04em', mb: 0.5 }}>
+        BuildingSMART кәсіби сертификаттауы дегеніміз не?
+      </Typography>
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Преимущества сертификации
       </Typography>
@@ -156,6 +176,11 @@ export default function CertificationPage() {
         Координатор программы
       </Typography>
       <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        Бағдарлама және сертификаттау процесі туралы қосымша ақпарат алу үшін Қазақстан
+        Республикасындағы buildingSmart Professional Certification бағдарламасының жетекшісіне
+        хабарласыңыз.
+      </Typography>
 
       <Paper sx={{
         p: 3,
@@ -169,12 +194,20 @@ export default function CertificationPage() {
         <Typography sx={{ fontWeight: 700, color: NAVY, fontSize: '1.1rem', mb: 1 }}>Мадина Умирзакова</Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <LocationOnIcon sx={{ color: BLUE, fontSize: 18 }} />
+            <Typography sx={{ color: '#334155' }}>3 шағын аудан 44-а Алматы қ</Typography>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <PhoneIcon sx={{ color: BLUE, fontSize: 18 }} />
             <Typography sx={{ color: '#334155' }}>+7 701 816 74 81 (WhatsApp)</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <EmailIcon sx={{ color: BLUE, fontSize: 18 }} />
             <Typography sx={{ color: '#334155' }}>mumirzakova@kazniisa.kz</Typography>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <EmailIcon sx={{ color: BLUE, fontSize: 18 }} />
+            <Typography sx={{ color: '#334155' }}>zkabzhan@kazniisa / mumirzakova@kazniisa.kz</Typography>
           </Box>
         </Box>
       </Paper>
@@ -228,6 +261,13 @@ export default function CertificationPage() {
           </Grid>
         ))}
       </Grid>
+
+      <Box sx={{ mt: 5, textAlign: 'center' }}>
+        <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
+          Сұрақтар қалды ма? Бізге хабарласыңыз.
+        </Typography>
+        <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mx: 'auto' }} />
+      </Box>
     </Box>
   );
 }

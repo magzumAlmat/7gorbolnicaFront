@@ -80,6 +80,28 @@ export default function HistoryPageQaz() {
         />
       </Box>
 
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        История создания Казахского научно-исследовательского и проектного института и его построение началась 7 сентября 1931 года, тогда Совет Народных Комиссаров Казахской Автономной Советской Социалистической Республики (КАССР) принял постановление № 46 об организации первого института именно этого профиля – Научно-исследовательского института строительных материалов и учреждений. (НИИСМиС).
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        В результате ряда преобразований подразделений строительного и радиотехнического направлений НИИСМиС в 1957 году попало в состав Казахского филиала АСиА СССР. В связи с ликвидацией АСиА СССР в 1964 году они были переданы Казпромстройпроекту, который был переименован на Казпромстройпроект Госстроя СССР и научную часть института возглавил академик Т.Ж.Жунусов.
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        And in January 1990, on the basis of the scientific part of the Kazakh State Design and Research Institute (KazpromstroyNII project), the Kazakh Research and Design and Experimental Institute of Earthquake-Resistant Construction and Construction (KazNIISSA) was created.
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        Кейіннен институт республикалық мемлекеттік кәсіпорынға (РМК) айналды.
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        Since February 23, 1990, KazNIISSA has been the registrar in the republic of the leading state research and design organization on the problems of the construction complex of Kazakhstan, including areas with special structures, engineering and geological conditions and regions subject to earthquakes.
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 2 }}>
+        The first director of KazNIISSA was civil engineer, technical sciences, professor, academician Dr. Zhunusov Toleubay Zhunusovich.
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: '#334155', mb: 5 }}>
+        В соответствии с Постановлением решений Республики Казахстан №922 от 30 июля 2012 года и приказом Комитета по приватизации и приватизации Министерства финансов РК, РГП «Казахский научно-исследовательский и проектно-экспериментальный институт сейсмостойкого строительства и построения» (РГПНИИССА) реорганизовано в Акционерное общество « Казахский научно-исследовательский и проектный институт строительства и архитектуры» (далее, – АО «КазНИИСА»).
+      </Typography>
+
       {/* Timeline */}
       <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
         Хронология

@@ -114,10 +114,22 @@ const editions = [
 ];
 
 const sections = [
-  'Сейсмостойкое строительство',
-  'Информационные технологии',
-  'Ценообразование нормалау орталығы',
-  'Нормирования нормалау орталығы',
+  {
+    title: 'Сейсмостойкое строительство',
+    desc: 'Раздел гражданского строительства, специализирующийся в области изучения поведения зданий… Подробнее в текущем выпуске.',
+  },
+  {
+    title: 'Информационные технологии',
+    desc: 'ИТ в строительстве с решения расчетных задач. В настоящее время – это сложнейшие системы… Подробнее в текущем выпуске.',
+  },
+  {
+    title: 'Ценообразование нормалау орталығы',
+    desc: 'Ценообразование в строительстве — это механизм образования стоимости услуг и материалов… Подробнее в текущем выпуске.',
+  },
+  {
+    title: 'Нормирования нормалау орталығы',
+    desc: 'Нормирования в строительстве ведет разработку нормативных технических документов, сборников… Подробнее в текущем выпуске.',
+  },
 ];
 
 function SectionTitle({ children }) {
@@ -153,8 +165,9 @@ export default function JournalBulletinPage() {
 
       <Box component="ul" sx={{ pl: 3, mb: 5 }}>
         {sections.map((s) => (
-          <Box component="li" key={s} sx={{ mb: 1 }}>
-            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT }}>{s}</Typography>
+          <Box component="li" key={s.title} sx={{ mb: 2 }}>
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, fontWeight: 700 }}>{s.title}</Typography>
+            <Typography sx={{ fontSize: '0.95rem', lineHeight: 1.8, color: GRAY_TEXT }}>{s.desc}</Typography>
           </Box>
         ))}
       </Box>
@@ -164,7 +177,7 @@ export default function JournalBulletinPage() {
       {editions.map(({ year, issues }) => (
         <Box key={year} sx={{ mb: 4 }}>
           <Typography sx={{ fontWeight: 700, color: BLUE, fontSize: '1.1rem', mb: 1.5 }}>
-            {year}
+            {year === '2025' ? year : `Архив журнала за ${year} год`}
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
             {issues.map((issue) => (

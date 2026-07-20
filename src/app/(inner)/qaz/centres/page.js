@@ -14,11 +14,13 @@ const CENTRES = [
   {
     num: '01',
     title: 'Сейсмикаға төзімділік, ғимараттар мен құрылыстарды тексеру орталығы',
+    original: 'Центр сейсмостойкости, обследования зданий и сооружений',
     href: '/qaz/centres/center-for-seismic-resistance-inspection-of-buildings-and-structures',
   },
   {
     num: '02',
     title: 'Үлгілік және индивидуалды жобалау орталығы',
+    original: 'Центр типового и индивидуального проектирования',
     href: '/qaz/centres/center-for-standard-and-individual-design',
   },
   {
@@ -113,6 +115,11 @@ export default function CentresOverview() {
                     {c.title}
                   </Typography>
                 </Link>
+                {c.original && (
+                  <Typography sx={{ fontSize: '0.8rem', color: GRAY_TEXT, fontStyle: 'italic', mt: 0.5 }}>
+                    {c.original}
+                  </Typography>
+                )}
               </Box>
             </Box>
             {c.num === '03' && (

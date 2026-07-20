@@ -4,6 +4,7 @@ import { Typography, Box } from '@mui/material';
 const NAVY = '#0F172A';
 const BLUE = '#0369A1';
 const GRAY_BG = '#F8FAFC';
+const GRAY_TEXT = '#64748B';
 const TEXT = '#334155';
 
 const markerTypes = [
@@ -28,13 +29,13 @@ export default function InnovativeResearchPage() {
       <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 3 }}>
-        2015 жылғы 29 желтоқсандағы № 1558 шарт бойынша «Әртүрлі мақсаттағы жерасты
+        1. 2015 жылғы 29 желтоқсандағы № 1558 шарт бойынша «Әртүрлі мақсаттағы жерасты
         коммуникацияларының трассаларында электрондық маркерлерді салу және электрондық
         маркерлер бойынша жерасты коммуникацияларының трассаларын қабылдау бойынша зерттеулер
         жүргізу және нұсқаулық әзірлеу» тақырыбында инновациялық зерттеу орындалды.
       </Typography>
 
-      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 4 }}>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 2 }}>
         3М фирмасының инновациялық шешімін енгізу мақсатында «ҚазҚСҒЗИ» АҚ кез келген жерасты
         коммуникацияларын сенімді сәйкестендіру мақсатында электрондық маркерлерді салу
         жөніндегі негізгі ережелер баяндалған «Әртүрлі мақсаттағы жерасты коммуникацияларының
@@ -42,11 +43,20 @@ export default function InnovativeResearchPage() {
         жерасты коммуникацияларының трассаларын қабылдау жөніндегі нұсқаулық» әзірленді.
       </Typography>
 
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 4 }}>
+        Электрондық таңбалау технологиясы, электрондық маркерлерді төсеу әдістері және жерасты
+        коммуникацияларын есепке алудың электрондық жүйесінің құрылысы сипатталған, таңбаланатын
+        коммуникация түріне байланысты қолданылатын маркерлердің түрлері көрсетілген.
+      </Typography>
+
       <Typography
         variant="h5"
         sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}
       >
         3M™ 1421 XRiD - Қолдану саласы
+      </Typography>
+      <Typography sx={{ fontSize: '0.9rem', color: GRAY_TEXT, mt: 0.5 }}>
+        Ішкі жады бар бағдарламаланатын маркер-маркер түрі
       </Typography>
       <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mb: 3 }} />
 

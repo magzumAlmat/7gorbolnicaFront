@@ -105,6 +105,13 @@ export default function EventsBuildingsmartPage() {
           </Grid>
         ))}
       </Grid>
+
+      <Box sx={{ mt: 5, textAlign: 'center' }}>
+        <Typography variant="h5" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.35rem', letterSpacing: '-0.01em' }}>
+          Сұрақтар қалды ма? Бізге хабарласыңыз.
+        </Typography>
+        <Box sx={{ width: 48, height: 3, bgcolor: BLUE, borderRadius: 1, mt: 1.5, mx: 'auto' }} />
+      </Box>
     </Box>
   );
 }

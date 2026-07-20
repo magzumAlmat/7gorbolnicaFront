@@ -39,6 +39,36 @@ export default function EskksPage() {
         Құрылыс саласындағы бірыңғай жіктеу және кодтау жүйесі
       </Typography>
 
+      <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1.15rem', mb: 2 }}>
+        Единая система классификации и кодирования в строительстве (ЕСКС)
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 2 }}>
+        ЕСКС — это система, предназначенная для стандартизации и унификации информации в
+        строительной отрасли. Она включает в себя классификацию и кодирование различных
+        элементов, ресурсов и процессов, связанных со строительством.
+      </Typography>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 1, fontWeight: 700 }}>
+        Основные цели ЕСКС:
+      </Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, mb: 2 }}>
+        {[
+          'Обеспечение единого информационного пространства для всех участников строительного процесса.',
+          'Упрощение обмена данными и документацией.',
+          'Повышение эффективности управления проектами и ресурсами.',
+          'Снижение ошибок и несоответствий в проектной и строительной документации.',
+        ].map((item, i) => (
+          <Box key={i} sx={{ display: 'flex', gap: 2, alignItems: 'flex-start' }}>
+            <Box sx={{ mt: '10px', width: 8, height: 8, borderRadius: 0, bgcolor: BLUE, flexShrink: 0 }} />
+            <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT }}>{item}</Typography>
+          </Box>
+        ))}
+      </Box>
+      <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 4 }}>
+        ЕСКС является важным инструментом для внедрения технологий информационного
+        моделирования (ТИМСО) в строительстве, так как обеспечивает основу для структурирования
+        и организации данных, используемых в моделях.
+      </Typography>
+
       <Typography sx={{ fontSize: '1rem', lineHeight: 1.9, color: TEXT, mb: 3 }}>
         Бұл зерттеудің мақсаты — Қазақстан Республикасындағы Құрылыс саласындағы бірыңғай
         жіктеу және кодтау жүйесін (ҚБЖКЖ) әзірлеуді сипаттау болып табылады. Жүйе құрылыс

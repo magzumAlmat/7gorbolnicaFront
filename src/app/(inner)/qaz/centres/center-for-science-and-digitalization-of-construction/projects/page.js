@@ -71,6 +71,15 @@ export default function ProjectsPage() {
         </Box>
       ))}
 
+      <Box sx={{ bgcolor: '#F8FAFC', borderRadius: '6px', p: 3, mb: 4 }}>
+        <Typography variant="h6" sx={{ fontWeight: 700, color: NAVY, fontSize: '1rem', mb: 1 }}>
+          Кері байланыс
+        </Typography>
+        <Typography sx={{ fontSize: '0.92rem', lineHeight: 1.8, color: '#334155' }}>
+          Сұрақтарыңызға жауап таппаған болсаңыз, кері байланыс формасы арқылы сұрауыңызға болады.
+        </Typography>
+      </Box>
+
       <Box sx={{ mt: 4 }}>
         <Link
           href="/qaz/centres/center-for-science-and-digitalization-of-construction"
