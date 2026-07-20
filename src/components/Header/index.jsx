@@ -63,6 +63,8 @@ const menuData = [
       ]},
       { title: "Центр типового проектирования", path: "/centres/center-for-standard-and-individual-design" },
       { title: "Центр сейсмостойкости", path: "/centres/center-for-seismic-resistance-inspection-of-buildings-and-structures" },
+      { title: "Центр научных исследований", path: "/centres/center-for-scientific-research-of-the-construction-industry" },
+      { title: "Центр информационного моделирования", path: "/centres/information-modeling-center" },
       { title: "Корпоративный университет", path: "/centres/corporate-university" },
     ]
   },
