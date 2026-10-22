@@ -1,39 +1,64 @@
-# Editor KazNIISA
+# KazNIISA Frontend
 
-Веб приложение для редактирования документов и создание документов на основе шаблонов.
+Веб-приложение (Next.js 13) для официального портала КазНИИСА.
 
-## Demo
+## Требования
 
-![](public/gif/Screen%20Recording%20-%20Apr%2023,%202024.gif)
+- **Node.js**: v18.x или v20.x
+- **npm**: v9.x или выше
 
+---
 
-## Authors
+## Установка и запуск
 
-- [@arman](https://github.com/ArmanKalmakhambetov)
-
-
-## Run Locally
-
-Clone the project
-
+### 1. Переход в директорию фронтенда
 ```bash
-  git clone https://github.com/ArmanKalmakhambetov/editor_front_kazniisa.git
+cd frontend
 ```
 
-Go to the project directory
-
+### 2. Установка зависимостей
 ```bash
-  cd editor_front_kazniisa
+npm install
 ```
 
-Install dependencies
-
+### 3. Запуск в режиме разработки (Development)
 ```bash
-  npm i
+npm run dev
+```
+После запуска приложение доступно по адресу: [http://localhost:3000](http://localhost:3000)
+
+---
+
+### 4. Сборка и запуск в продакшн-режиме (Production)
+
+Сборка проекта:
+```bash
+npm run build
 ```
 
-Start the server
-
+Запуск собранного приложения:
 ```bash
-  npm run dev
+npm run start
+```
+Сервер запустится в продакшн-режиме на порту `3000` ([http://localhost:3000](http://localhost:3000)).
+
+---
+
+## Доступные npm-скрипты
+
+| Команда | Описание |
+| :--- | :--- |
+| `npm run dev` | Запуск локального сервера разработки с поддержкой Hot Reload |
+| `npm run build` | Компиляция и сборка оптимизированного продакшн-бандла |
+| `npm run start` | Запуск собранного продакшн-сервера Next.js |
+| `npm run lint` | Проверка кода линтером ESLint |
+
+---
+
+## Переменные окружения (.env.local)
+
+Файл `.env.local` содержит настройки подключения к API бэкенда:
+```env
+NEXT_PUBLIC_BASE_URL=http://localhost:5000/api
+NEXT_PUBLIC_FILE_URL=http://localhost:5000
 ```

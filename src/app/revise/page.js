@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import ReviseDashboard from "@/components/reviseDashboard"
 import { useRouter } from "next/navigation"
 import { useSearchParams } from 'next/navigation'
+import { useDispatch } from "react-redux";
 export default function Revise() {
     const router= useRouter()
     const searchParams = useSearchParams()

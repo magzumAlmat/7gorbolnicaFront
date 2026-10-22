@@ -1,6 +1,7 @@
 'use client' 
 import Header from "@/components/Header";
 import InspectorDashboard from "@/components/inspectorDashboard"
+import { useDispatch } from "react-redux";
 export default function Layout() {
     const dispatch = useDispatch();
     // useEffect(()=>{

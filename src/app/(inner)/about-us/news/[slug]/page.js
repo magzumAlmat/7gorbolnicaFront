@@ -6,7 +6,8 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Link from 'next/link';
 import ImageLightbox, { useImageLightbox } from '../../../../../components/ImageLightbox';
-import { getParagraphs } from '../../../../../lib/newsContent';
+import EditorJSRenderer from '../../../../../components/EditorJSRenderer';
+import { toEditorData, cleanNewsHtml } from '../../../../../lib/newsContent';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const NAVY = '#0F172A';
@@ -51,7 +52,8 @@ export default function NewsArticlePage() {
   }
 
   const title = article.title?.ru || '';
-  const paragraphs = getParagraphs(article.content?.ru);
+  const rawContent = article.content?.ru || '';
+  const editorData = toEditorData(rawContent);
 
   return (
     <Box>
@@ -79,37 +81,61 @@ export default function NewsArticlePage() {
         </Typography>
       </Box>
 
-      <Box
-        component="img"
-        src={article.image}
-        alt={title}
-        onClick={() => openLightbox(article.image, title)}
-        sx={{
-          width: '100%',
-          maxHeight: 420,
-          objectFit: 'cover',
-          borderRadius: '8px',
-          mb: 4,
-          border: '1px solid ' + BORDER,
-          cursor: 'zoom-in',
-        }}
-      />
+      {article.image && (
+        <Box
+          component="img"
+          src={article.image}
+          alt={title}
+          onClick={() => openLightbox(article.image, title)}
+          sx={{
+            width: '100%',
+            maxHeight: 420,
+            objectFit: 'cover',
+            borderRadius: '8px',
+            mb: 4,
+            border: '1px solid ' + BORDER,
+            cursor: 'zoom-in',
+          }}
+        />
+      )}
 
-      <Box sx={{ maxWidth: 760 }}>
-        {paragraphs.map((p, i) => (
-          <Typography
-            key={i}
+      <Box sx={{ maxWidth: 880 }}>
+        {editorData ? (
+          <EditorJSRenderer data={editorData} />
+        ) : (
+          <Box
             sx={{
-              fontSize: '1rem',
+              fontSize: '1.05rem',
               lineHeight: 1.85,
               color: '#334155',
-              mb: 2.5,
-              whiteSpace: 'pre-line',
+              fontFamily: 'inherit',
+              '& p': { mb: 2.2 },
+              '& h1, & h2': { fontSize: '1.6rem', fontWeight: 800, color: NAVY, mt: 3.5, mb: 1.5 },
+              '& h3, & h4': { fontSize: '1.25rem', fontWeight: 700, color: NAVY, mt: 3, mb: 1.2 },
+              '& a': { color: BLUE, textDecoration: 'none', fontWeight: 600 },
+              '& a:hover': { textDecoration: 'underline' },
+              '& img': { maxWidth: '100%', height: 'auto', borderRadius: '8px', my: 2.5, boxShadow: '0 4px 14px rgba(15,23,42,0.08)' },
+              '& ul, & ol': { pl: 3, mb: 2.5 },
+              '& li': { mb: 0.75, lineHeight: 1.7 },
+              '& blockquote': {
+                borderLeft: '4px solid ' + BLUE,
+                pl: 2.5,
+                py: 1,
+                my: 2.5,
+                bgcolor: '#F8FAFC',
+                borderRadius: '0 8px 8px 0',
+                color: '#475569',
+                fontStyle: 'italic',
+              },
+              '& table': { width: '100%', borderCollapse: 'collapse', my: 3, fontSize: '0.92rem' },
+              '& th, & td': { p: 1.5, border: '1px solid ' + BORDER },
+              '& th': { bgcolor: '#F8FAFC', fontWeight: 700, color: NAVY, textAlign: 'left' },
+              '& .vc_custom_heading': { my: 2 },
+              '& .wpb_wrapper': { width: '100%' },
             }}
-          >
-            {p}
-          </Typography>
-        ))}
+            dangerouslySetInnerHTML={{ __html: cleanNewsHtml(rawContent) }}
+          />
+        )}
       </Box>
 
       <Box sx={{ borderTop: '1px solid ' + BORDER, mt: 5, pt: 3 }}>

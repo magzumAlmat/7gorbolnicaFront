@@ -10,4 +10,5 @@ const KazakhstanMap = dynamic(
   }
 );
 
+export { KazakhstanMap as GisMap };
 export default KazakhstanMap;

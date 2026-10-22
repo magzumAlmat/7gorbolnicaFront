@@ -26,8 +26,8 @@ export default function NewsListingPage() {
   useEffect(() => {
     fetch(`${API_URL}/api/kazniisa/news`)
       .then(r => r.json())
-      .then(data => setNews(data))
-      .catch(() => {})
+      .then(data => setNews(Array.isArray(data) ? data : []))
+      .catch(() => setNews([]))
       .finally(() => setLoading(false));
   }, []);
 
@@ -45,7 +45,7 @@ export default function NewsListingPage() {
       </Typography>
 
       <Grid container spacing={3}>
-        {news.map((item) => (
+        {Array.isArray(news) && news.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item.slug}>
             <Paper
               component={Link}

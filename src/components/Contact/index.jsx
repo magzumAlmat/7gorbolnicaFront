@@ -1,7 +1,7 @@
 // app/contact/page.js или pages/contact.js
 
 import React from "react";
-import TwoGISMap from "../../components/map";
+import TwoGISMap from "../Map";
 
 export default function ContactComponent() {
   return (
